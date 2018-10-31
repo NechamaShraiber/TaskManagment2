@@ -46,6 +46,7 @@ export class HomeWorkerComponent implements OnInit {
           this.workerService.sendMsg().subscribe(res => {
             if (!res)
               alert('The email sent successfuly');
+              alert("dasf");
           })
         }
         else {
