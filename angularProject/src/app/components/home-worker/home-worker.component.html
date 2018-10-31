@@ -1,0 +1,18 @@
+<div *ngIf="isStart">
+    <p>Today is {{today | date:'fullDate'}}</p>
+    <p>You started at  {{today | date:'h:mm:ss a z'}}</p>
+  </div>
+  <div>
+    <button (click)="send()">Contact</button>
+    <button (click)="updateHours()">Start/End Task</button>
+
+  </div>
+<div>
+  <label>MY PROJECTS:</label>
+    <table>
+        <tr *ngFor="let project of projectList">
+          <td (click)="cli(project.Id)">{{ project.Name }}</td>
+          <!-- <td>{{ project.Country }}</td> -->
+        </tr>
+      </table>
+</div>

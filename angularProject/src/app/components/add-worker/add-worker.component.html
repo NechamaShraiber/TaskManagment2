@@ -1,0 +1,71 @@
+<div class="box">
+    <form [formGroup]="addWorkerGroup" (ngSubmit)="onSubmit()">
+      <div class="group">
+        <input id="Name" class="inputMaterial" formControlName="Name">
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label> Name</label>
+         <div *ngIf="addWorkerGroup.controls['Name'].errors">
+          <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['Name'].errors)" class="myAlert">{{err}}</p>
+        </div> 
+      </div>
+      <div class="group">
+        <input id="UserName" class="inputMaterial" formControlName="UserName">
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>User Name</label>
+         <div *ngIf="addWorkerGroup.controls['UserName'].errors">
+          <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['UserName'].errors)" class="myAlert">{{err}}</p>
+        </div>
+      </div>
+      <div class="group">
+          <input id="Password" type="password" class="inputMaterial" formControlName="Password">
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label>Password </label>
+           <div *ngIf="addWorkerGroup.controls['Password'].errors">
+            <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['Password'].errors)" class="myAlert">{{err}}</p>
+          </div>
+        </div>
+      <div class="group">
+          <select formControlName="JobId">
+              <option *ngFor="let job of jobList">
+                {{job["Name"]}}
+              </option>
+            </select>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>choose job type</label>
+        <label *ngIf="job"> your job is {{job}}</label>
+         <div *ngIf="addWorkerGroup.controls['JobId'].errors">
+          <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['JobId'].errors)" class="myAlert">{{err}}</p>
+        </div> 
+      </div>
+      <div class="group">
+        <input id="EMail" class="inputMaterial" formControlName="EMail">
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label >EMail</label>
+         <div *ngIf="addWorkerGroup.controls['EMail'].errors">
+          <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['EMail'].errors)" class="myAlert">{{err}}</p>
+        </div> 
+      </div>
+      <div class="group">
+          <select formControlName="ManagerId">
+              <option *ngFor="let manager of managerList">
+                {{manager["Name"]}}
+              </option>
+            </select>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>choose manager</label>
+        <label *ngIf="job"> your manager is {{manager}}</label>
+         <div *ngIf="addWorkerGroup.controls['ManagerId'].errors">
+          <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['ManagerId'].errors)" class="myAlert">{{err}}</p>
+        </div> 
+      </div>
+      <button type="submit" class="button col-md-offset-2 col-md-8" [disabled]="addWorkerGroup.invalid">{{managerService.isEdit}}</button>
+    </form>
+  </div>
+  
+  

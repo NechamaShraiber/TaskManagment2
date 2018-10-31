@@ -1,0 +1,37 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+     <div class="modal-header">
+       <button type="button" class="close" (click)="close()" >&times;</button>
+       <h4 class="modal-title">{{title || 'Confirm'}}</h4>
+     </div>
+     <div class="modal-body">
+       <p>{{message || 'Are you sure?'}}</p>
+     </div>
+     <div id="myMsg">
+        <fieldset class="contact-inner">
+          <p class="contact-input">
+            <input type="text" name="name" placeholder="Your Name…" autofocus>
+          </p>
+      
+          <p class="contact-input">
+            <label for="select" class="select">
+              <select name="subject" id="select" [(ngModel)]="title">
+                <option value="" selected>Choose Subject…</option>
+                <option value="I have a suggestion">I have a suggestion</option>
+                <option value="I found a bug">I found a bug</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+          </p>
+      
+          <p class="contact-input">
+            <textarea [(ngModel)]="message" name="message" placeholder="Your Message…"></textarea>
+          </p>
+        </fieldset>
+</div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-primary" (click)="confirm()">Send</button>
+       <button type="button" class="btn btn-default" (click)="close()" >Cancel</button>
+     </div>
+   </div>
+</div>

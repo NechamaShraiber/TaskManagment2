@@ -1,0 +1,83 @@
+<div class="box">
+  <form [formGroup]="addProjectGroup" (ngSubmit)="onSubmit()">
+    <div class="group">
+      <input id="Name" class="inputMaterial" formControlName="Name">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Project Name</label>
+       <div *ngIf="addProjectGroup.controls['Name'].errors">
+        <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['Name'].errors)" class="myAlert">{{err}}</p>
+      </div> 
+    </div>
+    <div class="group">
+      <input id="Customer" class="inputMaterial" formControlName="Customer">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Customer Name</label>
+       <div *ngIf="addProjectGroup.controls['Customer'].errors">
+        <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['Customer'].errors)" class="myAlert">{{err}}</p>
+      </div>
+    </div>
+    <div class="group">
+        <select formControlName="TeamLeaderId">
+            <option *ngFor="let team of teamLeader">
+              {{team["Name"]}}
+            </option>
+          </select>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Team Leader</label>
+       <div *ngIf="addProjectGroup.controls['TeamLeaderId'].errors">
+        <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['TeamLeaderId'].errors)" class="myAlert">{{err}}</p>
+      </div> 
+    </div>
+    <div class="group">
+      <input type="number" min="0" id="DevelopHours" class="inputMaterial" formControlName="DevelopHours">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label >Develop Houres</label>
+       <div *ngIf="addProjectGroup.controls['DevelopHours'].errors">
+        <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['DevelopHours'].errors)" class="myAlert">{{err}}</p>
+      </div> 
+    </div>
+    <div class="group">
+      <input type="number" min="0" id="QAHours" class="inputMaterial" formControlName="QAHours">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label >QA Houres</label>
+       <div *ngIf="addProjectGroup.controls['QAHours'].errors">
+        <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['QAHours'].errors)" class="myAlert">{{err}}</p>
+      </div> 
+    </div>
+    <div class="group">
+      <input type="number" min="0" id="UiUxHours" class="inputMaterial" formControlName="UiUxHours">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label >UI/UX Houres</label>
+       <div *ngIf="addProjectGroup.controls['UiUxHours'].errors">
+        <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['UiUxHours'].errors)" class="myAlert">{{err}}</p>
+      </div> 
+    </div>
+    <div class="group">
+        <input type="date" id="StartDate" class="inputMaterial" formControlName="StartDate">
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label >Start Date</label>
+         <div *ngIf="addProjectGroup.controls['StartDate'].errors">
+          <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['StartDate'].errors)" class="myAlert">{{err}}</p>
+        </div> 
+      </div>
+      <div class="group">
+          <input type="date" id="EndDate" class="inputMaterial" formControlName="EndDate">
+          <span class="highlight"></span>
+          <span class="bar"></span>
+          <label >End Date</label>
+           <div *ngIf="addProjectGroup.controls['EndDate'].errors">
+            <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['EndDate'].errors)" class="myAlert">{{err}}</p>
+          </div> 
+        </div>
+        <!-- [disabled]="addProjectGroup.invalid" -->
+    <button type="submit" class="button col-md-offset-2 col-md-8" [disabled]="addProjectGroup.invalid">Add</button>
+  </form>
+</div>
+
