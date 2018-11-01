@@ -8,6 +8,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
+using System.Text;
 using System.Windows.Forms;
 using TaskManagment.Models;
 
@@ -201,10 +203,7 @@ namespace TaskManagment.Forms
             panelControlls.Controls.Add(bt);
             bt.Click += new EventHandler(b_Click);
             l2.Click += new EventHandler(l2_click);
-
-
-
-        }
+  }
 
 
         void l2_click(object sender, EventArgs e)
@@ -349,7 +348,7 @@ namespace TaskManagment.Forms
             {
                 string json = "{" + (!isAdd ? "\"Id\":\"" + w.Id + "\"," : "") + "\"Name\":\"" + txt_name.Text + "\"," +
                    "\"UserName\":\"" + txt_user_name.Text + "\"," +
-                   "\"Password\":\"" + txt_password.Text + "\"," +
+                   "\"Password\":\"" + sha256(txt_password.Text) + "\"," +
                     "\"JobId\":\"" + IdJob + "\"," +
                    "\"EMail\":\"" + txt_email.Text + "\"," +
                    "\"ManagerId\":\"" + IdManager +
@@ -377,6 +376,18 @@ namespace TaskManagment.Forms
             {
                 MessageBox.Show($"Can not {(isAdd ? "add" : "change")} a worker");
             }
+        }
+
+        static string sha256(string password)
+        {
+            var crypt = new SHA256Managed();
+            string hash = String.Empty;
+            byte[] crypto = crypt.ComputeHash(Encoding.ASCII.GetBytes(password));
+            foreach (byte theByte in crypto)
+            {
+                hash += theByte.ToString("x2");
+            }
+            return hash;
         }
 
         #endregion

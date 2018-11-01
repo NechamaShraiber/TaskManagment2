@@ -117,6 +117,18 @@ Get - get all the details that the manager need to the report
                 Content = new ObjectContent<List<Worker>>(ManagerLogic.GetAllWorkers(), new JsonMediaTypeFormatter())
             };
         }
+        [HttpGet]
+        [Route("api/getAllJobs")]
+        public HttpResponseMessage GetAllJobs()
+        {
+
+            //curl -X GET -v http://localhost:59628/api/getAllWorkers
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<List<Job>>(ManagerLogic.GetAllJobs(), new JsonMediaTypeFormatter())
+            };
+        }
+
         /// <summary>
         /// get all managers
         /// </summary>

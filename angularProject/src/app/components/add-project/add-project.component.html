@@ -20,7 +20,7 @@
     </div>
     <div class="group">
         <select formControlName="TeamLeaderId">
-            <option *ngFor="let team of teamLeader">
+            <option *ngFor="let team of teamLeader" [ngValue]="team">
               {{team["Name"]}}
             </option>
           </select>

@@ -57,5 +57,9 @@ export class UsersManagersComponent implements OnInit {
       disposable.unsubscribe();
     }, 1000000);
   }
+  add(){
+    this.managerService.isEdit="Add";
+          this.router.navigate(['taskManagers/Addworker']);
+  }
 }
 

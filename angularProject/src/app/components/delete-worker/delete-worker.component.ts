@@ -15,6 +15,7 @@ export class DeleteWorkerComponent extends DialogComponent<ConfirmModel, boolean
   title: string;
   message: string;
   workerList: any;
+  selectUndefinedOptionValue:any;
   constructor(dialogService: DialogService,private managerService:ManagerService) {
     super(dialogService);
     

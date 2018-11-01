@@ -51,7 +51,7 @@ namespace TaskManagment
                 {
                     // sha256(txt_password.Text)!!!!!!!!!!
                     string json = "{\"userName\":\"" + txt_userName.Text + "\"," +
-                       "\"password\":\"" + txt_password.Text + "\"}";
+                       "\"password\":\"" + sha256(txt_password.Text) + "\"}";
                     streamWriter.Write(json);
                     streamWriter.Flush();
                     streamWriter.Close();
@@ -62,8 +62,6 @@ namespace TaskManagment
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 try
                 {
-
-
                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                     {
                         var result = streamReader.ReadToEnd();

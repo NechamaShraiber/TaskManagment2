@@ -105,7 +105,7 @@ namespace TaskManagment.Forms
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
-                    hoursList[index].allocatedHours = numHours;
+                    hoursList[index].AllocatedHours = numHours;
                     var result = streamReader.ReadToEnd();
                     dynamic obj = JsonConvert.DeserializeObject<Worker>(result);
                     dgv_workerHours.DataSource = hoursList;

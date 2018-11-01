@@ -135,6 +135,25 @@ namespace BLL
             return DBAccess.RunReader(query, func);
 
         }
+        public static List<Job> GetAllJobs()
+        {
+            string query = $"SELECT * FROM task_managment.jobs";
+            Func<MySqlDataReader, List<Job>> func = (reader) =>
+            {
+                List<Job> jobs = new List<Job>();
+                while (reader.Read())
+                {
+                    jobs.Add(new Job
+                    {
+                        Id = reader.GetInt32(0),
+                        Name = reader.GetString(1),
+                    });
+                }
+                return jobs;
+            };
+            return DBAccess.RunReader(query, func);
+
+        }
         public static bool RemoveWorker(int id)
         {
             //To delete an employee, it is necessary to delete it from all the tables in which it is located.

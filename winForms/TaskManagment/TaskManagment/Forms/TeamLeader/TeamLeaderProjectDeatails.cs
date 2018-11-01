@@ -84,7 +84,7 @@ namespace TaskManagment.Forms
             if (workersHours != null) { 
             foreach (var item in workersHours)
             {
-                allocatedHours.Add(item.Name, Convert.ToInt32( item.allocatedHours));
+                allocatedHours.Add(item.Name, Convert.ToInt32( item.AllocatedHours));
                     if (item.Hours != "")
                         workedHours.Add(float.Parse(item.Hours.Substring(0, 2) + "." + item.Hours.Substring(3, 2)));
                     else workedHours.Add(0);

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { WorkerService } from '../../shared/service/worker.service';
 import { validate } from '../../shared/validate';
 // import { Global, AuthenticationService, createValidatorArr } from '../../imports';
+import sha256 from 'async-sha256';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,6 @@ export class LoginComponent {
 
   loginFormGroup: FormGroup;
   isExistUser: boolean = true;
-
   //allow access 'Object' type via interpolation
   objectHolder: typeof Object = Object;
 
@@ -31,8 +31,9 @@ export class LoginComponent {
 
   //----------------METHODS-------------------
 
-  onSubmit() {
-    this.workerService.login(this.userName.value, this.password.value)
+ async onSubmit() {
+    const hash = await sha256(this.password.value);
+    this.workerService.login(this.userName.value,hash)
       .subscribe(worker => {
         if (worker != null) {
           localStorage.setItem('currentUser', JSON.stringify(worker));

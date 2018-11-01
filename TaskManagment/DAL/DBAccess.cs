@@ -61,6 +61,7 @@ namespace DAL
 
         public static List<T> RunReader<T>(string query, Func<MySqlDataReader, List<T>> func)
         {
+            lock(Connection){ 
             try
             {
                 Connection.Open();
@@ -79,7 +80,7 @@ namespace DAL
                     Connection.Close();
                 }
             }
-
+}
         }
 
     }

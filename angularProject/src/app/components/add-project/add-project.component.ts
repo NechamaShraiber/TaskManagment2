@@ -12,11 +12,10 @@ import { validate } from '../../shared/validate';
 export class AddProjectComponent implements OnInit {
   
   addProjectGroup: FormGroup;
-  //isExistUser: boolean = true;
-  teamLeader :any;
+  teamLeader :any[]=[];
   idTeam:number;
-  //allow access 'Object' type via interpolation
   objectHolder: typeof Object = Object;
+  date:any;
   constructor(private router: Router, private managerService: ManagerService) {
     let formGroupConfig = {
       Name: new FormControl('', validate.createValidatorArr("Name", 2, 25)),
@@ -25,35 +24,28 @@ export class AddProjectComponent implements OnInit {
       DevelopHours: new FormControl('', validate.createValidatorArr("DevelopHours", 2, 15)), 
       QAHours:new FormControl( '', validate.createValidatorArr("QAHours", 2, 15)),
       UiUxHours:new FormControl('', validate.createValidatorArr("UiUxHours", 2, 15)),
-      StartDate: new FormControl('', validate.createValidatorArr("StartDate", 2, 15)),
-      EndDate: new FormControl('', validate.createValidatorArr("EndDate", 2, 15)),
+      StartDate: new FormControl(''),
+      EndDate: new FormControl(''),
     };
-    this.addProjectGroup = new FormGroup(formGroupConfig);
+    this.addProjectGroup = new FormGroup(formGroupConfig,validate.createValidatorDate);
   }
-
-/* TeamLeaderId 
-
- Customer 
-
- DevelopHours 
-
- QAHours 
-
- UiUxHours 
- */
-
   ngOnInit(){
     this.managerService.getAllManagers().subscribe(
       res=>{
-        this.teamLeader=res;
+        res.forEach(p => {
+          if(p.JobId==2)
+          {
+          this.teamLeader.push(p);
+          }
+        });
     })
-  }
+ }
  
   get f() { return this.addProjectGroup.controls; }
 
   onSubmit() {
-   this.idTeam=this.teamLeader.find(p=>p.Name==this.addProjectGroup.value["TeamLeaderId"]).Id;
-   this.addProjectGroup.value["TeamLeaderId"]=this.idTeam;
+   this.idTeam=this.teamLeader.find(p=>p.Id==this.addProjectGroup.value["TeamLeaderId"].Id);
+   this.addProjectGroup.value["TeamLeaderId"]=this.idTeam["Id"];
     this.managerService.addProject(this.addProjectGroup.value)
        .subscribe(project => {
          if (project == null) {
@@ -61,7 +53,6 @@ export class AddProjectComponent implements OnInit {
            this.router.navigate(['taskManagers/home']);
          }
          else {
-          // this.isExistUser = false;
            this.router.navigate(['taskManagers/login'])
          }
        });
