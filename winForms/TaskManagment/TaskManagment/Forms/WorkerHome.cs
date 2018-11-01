@@ -112,7 +112,10 @@ namespace TaskManagment.Forms
                 {
                     allocatedHours.Add(item.Name, Convert.ToInt32(item.AllocatedHours));
                     if (item.Hours != "")
-                        workedHours.Add(float.Parse(item.Hours.Substring(0, 2) + "." + item.Hours.Substring(3, 2)));
+                {
+                    var t = item.Hours.Split(':');
+                        workedHours.Add(float.Parse(t[0])+(float.Parse(t[1])/100));
+                }
                     else workedHours.Add(0);
                 }
 

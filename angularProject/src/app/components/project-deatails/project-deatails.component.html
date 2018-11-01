@@ -12,3 +12,7 @@
       <app-hours [hour]=workerHour ></app-hours>
     </div>
   </div>
+
+  <div *ngIf="workersHours">
+<app-chart [projects]=workersHours></app-chart>
+</div>

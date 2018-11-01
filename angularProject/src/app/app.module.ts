@@ -24,20 +24,25 @@ import { HoursComponent } from './components/hours/hours.component';
 import { WorkerDeatailsComponent } from './components/worker-deatails/worker-deatails.component';
 import { SendMsgComponent } from './components/send-msg/send-msg.component';
 import {HomeWorkerComponent  } from './components/home-worker/home-worker.component';
+import { ChartComponent } from './components/chart/chart.component';
 //import { HomeWorkerComponent } from './components/worker/home-worker/home-worker.component';
 
  const  path="http://localhost:59628/api/";
 const routes: Routes = [
   { path: 'taskManagers/login', component: LoginComponent },
-  { path: 'taskManagers/home', component: HomeComponent },
-  { path: 'taskManagers/addProject', component: AddProjectComponent },
-  { path: 'taskManagers/usersManagers', component: UsersManagersComponent },
-  { path: 'taskManagers/Addworker', component: AddWorkerComponent },
-  { path: 'taskManagers/teamLeaderProjects', component: TeamLeaderProjectComponent },
-  { path: 'taskManagers/teamLeaderWorkers', component: TeamLeaderWorkersComponent },
-  { path: 'taskManagers/homeWorkerComponent', component: HomeWorkerComponent },
-  { path: 'taskManagers/projectDeatails', component: ProjectDeatailsComponent },
-{ path: 'taskManagers/WorkerDeatails', component: WorkerDeatailsComponent },
+  { path: 'taskManagers/home', component: HomeComponent ,children:[
+
+  { path: 'addProject', component: AddProjectComponent },
+  { path: 'usersManagers', component: UsersManagersComponent },
+  { path: 'Addworker', component: AddWorkerComponent },
+  { path: 'teamLeaderProjects', component: TeamLeaderProjectComponent },
+  { path: 'teamLeaderWorkers', component: TeamLeaderWorkersComponent },
+  
+  { path: 'projectDeatails', component: ProjectDeatailsComponent },
+ 
+  ]},
+  { path: 'homeWorkerComponent', component: HomeWorkerComponent },
+   { path: 'taskManagers/WorkerDeatails', component: WorkerDeatailsComponent },
   { path: '**', component: LoginComponent },
   { path: '', component: LoginComponent },
 ];
@@ -61,7 +66,8 @@ const routes: Routes = [
     HoursComponent,
     WorkerDeatailsComponent,
     HomeWorkerComponent,
-    SendMsgComponent
+    SendMsgComponent,
+    ChartComponent
     //HomeWorkerComponent,
   ],
   imports: [

@@ -109,14 +109,19 @@ namespace BLL
                 {
                      string s=reader[2].ToString();
                     int.TryParse(s,out int  x);
-                    string s2 = reader[3].ToString();
-                    unknowns.Add(new Unknown
-                    {
-                        Id = reader.GetInt32(0),
-                        Name = reader.GetString(1),
-                        AllocatedHours = x,
-                        Hours = s2
-            });
+                    string s2;
+                    try {
+                        TimeSpan t = reader.GetTimeSpan(3);
+                        s2 = (t.Hours + t.Days * 24) + ":" + t.Minutes;
+                    }
+                    catch { s2 = 0+ ":" +0; };
+                        unknowns.Add(new Unknown
+                        {
+                            Id = reader.GetInt32(0),
+                            Name = reader.GetString(1),
+                            AllocatedHours = x,
+                            Hours = s2 
+                    });
                 }
                 return unknowns;
             };

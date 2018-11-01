@@ -85,9 +85,18 @@ namespace TaskManagment.Forms
             foreach (var item in workersHours)
             {
                 allocatedHours.Add(item.Name, Convert.ToInt32( item.AllocatedHours));
+<<<<<<< HEAD
+=======
+
+>>>>>>> 42690356249dbaea5fff49bca64fb5fc093f853b
                     if (item.Hours != "")
-                        workedHours.Add(float.Parse(item.Hours.Substring(0, 2) + "." + item.Hours.Substring(3, 2)));
+                    {
+                        var t = item.Hours.Split(':');
+                        workedHours.Add(float.Parse(t[0]) + (float.Parse(t[1]) / 100));
+                    }
                     else workedHours.Add(0);
+               
+               
             }
             chart1.Series[0].Points.DataBindXY(allocatedHours.Keys, allocatedHours.Values);
             chart1.Series[1].Points.DataBindXY(allocatedHours.Keys, workedHours);}
