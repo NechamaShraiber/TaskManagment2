@@ -80,10 +80,18 @@ namespace BLL
                 List<Unknown> unknowns = new List<Unknown>();
                 while (reader.Read())
                 {
-                  
+
+                 
+                    /////////////////
                     string s = reader[3].ToString();
                     int.TryParse(s, out int x);
-                    string s2 = reader[2].ToString();
+                       string s2;
+                    try
+                    {
+                        TimeSpan t = reader.GetTimeSpan(2);
+                        s2 = (t.Hours + t.Days * 24) + ":" + t.Minutes;
+                    }
+                    catch { s2 = 0 + ":" + 0; };
                   DateTime.TryParse( reader[1].ToString(), out DateTime d);
                     unknowns.Add(new Unknown
                     {

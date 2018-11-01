@@ -3,7 +3,6 @@ import { DeleteWorkerComponent } from '../delete-worker/delete-worker.component'
 import { DialogService } from "ng2-bootstrap-modal";
 import { ManagerService } from '../../shared/service/manager.service';
 import { EditWorkerComponent } from '../edit-worker/edit-worker.component';
-import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -47,7 +46,7 @@ export class UsersManagersComponent implements OnInit {
       .subscribe((isConfirmed) => {
         if (isConfirmed) {
           this.managerService.isEdit="Edit";
-          this.router.navigate(['taskManagers/Addworker']);
+          this.router.navigate(['taskManagers/home/Addworker']);
         }
         else {
           //alert('Can not edit this worker');

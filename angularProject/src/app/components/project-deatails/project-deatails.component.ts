@@ -20,8 +20,6 @@ private workersHours:any;
       this.teamLeaderService.getWorkersHours(this.project.Id).subscribe(
         res => {
           this.workersHours = res;
-            console.log(res+"Gsdfg")
-          console.log(this.workersHours)
         })
   
       //{Id: null, Name: "Pnina", Date: "2018-10-25T00:00:00", Hours: "00:03:22", allocatedHours: 0}
