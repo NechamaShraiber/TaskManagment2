@@ -31,7 +31,7 @@ namespace BLL
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),
                         UserName = reader.GetString(2),
-                        Password = reader.GetString(3),
+                        Password = "",
                         EMail = reader.GetString(4),
                         JobId = reader.GetInt32(5),
                         ManagerId = reader[6] as int?

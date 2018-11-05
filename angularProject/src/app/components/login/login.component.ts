@@ -6,6 +6,7 @@ import { validate } from '../../shared/validate';
 // import { Global, AuthenticationService, createValidatorArr } from '../../imports';
 import sha256 from 'async-sha256';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -35,16 +36,25 @@ export class LoginComponent {
     const hash = await sha256(this.password.value);
     this.workerService.login(this.userName.value,hash)
       .subscribe(worker => {
-        if (worker != null) {
+          try {
           localStorage.setItem('currentUser', JSON.stringify(worker));
           this.router.navigate(['taskManagers/home']);
-        }
-        else {
-          this.isExistUser = false;
-          this.router.navigate(['taskManagers/login'])
-        }
+          }
+          catch (Error)
+          {
+            alert("One or more data is not correct");
+            this.isExistUser = false;
+            this.router.navigate(['taskManagers/login']);
+          }
+        
+        // else {
+        //   alert("One or more data is not correct");
+        //   this.isExistUser = false;
+        //   this.router.navigate(['taskManagers/login']);
+        // }
       });
   }
+
 
   //----------------GETTERS-------------------
 

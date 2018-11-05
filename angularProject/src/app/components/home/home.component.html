@@ -1,4 +1,4 @@
-<div class="container" *ngIf="id==1">
+<div class="container" *ngIf="workerService.idJob==1">
   <ul class="nav navbar-nav">
     <li routerLinkActive="active"><a routerLink="/taskManagers/home/addProject">Add Project</a></li>
     <li routerLinkActive="active"><a routerLink="/taskManagers/home/repotrs">Repotrs</a></li>
@@ -6,7 +6,7 @@
   </ul>
 </div>
 
- <div class="container" *ngIf="id==2">
+ <div class="container" *ngIf="workerService.idJob==2">
   <ul class="nav navbar-nav">
     <li routerLinkActive="active"><a routerLink="/taskManagers/home/teamLeaderProjects">projects</a></li>
     <li routerLinkActive="active"><a routerLink="/taskManagers/home/teamLeaderWorkers">workers</a></li>

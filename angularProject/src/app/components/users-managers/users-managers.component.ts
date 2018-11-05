@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class UsersManagersComponent implements OnInit {
 
-  constructor(private dialogService: DialogService, private managerService: ManagerService,private router:Router) { }
+  constructor(private dialogService: DialogService, private managerService: ManagerService,private router:Router) {
+   }
 
   ngOnInit() {
   }
@@ -58,7 +59,7 @@ export class UsersManagersComponent implements OnInit {
   }
   add(){
     this.managerService.isEdit="Add";
-          this.router.navigate(['taskManagers/Addworker']);
+          this.router.navigate(['taskManagers/home/Addworker']);
   }
 }
 

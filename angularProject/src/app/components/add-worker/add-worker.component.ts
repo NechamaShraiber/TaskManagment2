@@ -38,9 +38,14 @@ export class AddWorkerComponent implements OnInit {
 
   ngOnInit() {
     this.managerService.getAllJobs().subscribe(
-      res => {
-        console.log(res)
-        this.jobList = res;
+      res=>{
+        this.jobList=[];
+        res.forEach(p => {
+          if(p.Id!=1)
+          {
+          this.jobList.push(p);
+          }
+        });
         this.job = this.jobList.find(p => p.Id == this.managerService.workerToUpdate.JobId).Name;
       });
     // this.managerService.getAllManagers().subscribe(
@@ -52,7 +57,6 @@ export class AddWorkerComponent implements OnInit {
     //       this.managerList.push(p);
     //       }
     //     });
-
     //     //this.managerList = res;
     //     this.manager = this.managerList.find(p => p.Id == this.managerService.workerToUpdate.ManagerId).Name;
     //   });
@@ -63,6 +67,7 @@ export class AddWorkerComponent implements OnInit {
     this.managerService.getAllManagers().subscribe(
       res => {
         console.log(res)
+       this.managerList= [];
         res.forEach(p => {
           if (p.JobId < this.idJob["Id"]) {
             this.managerList.push(p);
