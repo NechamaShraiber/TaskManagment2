@@ -10,6 +10,7 @@ worker:Worker;
 subStr:string="";
 bodyStr:string="";
 subjectUpdateChart=new Subject();
+idJob:number;
   constructor(private http: HttpClient, private router: Router) {
     this.worker=null;
  }
@@ -20,7 +21,7 @@ subjectUpdateChart=new Subject();
  }
 
 sendMsg():any {
-  let data = { body: this.bodyStr, sub: this.subStr };
+  let data = { body: this.bodyStr, sub: this.subStr ,id:JSON.parse(localStorage.getItem('currentUser')).ManagerId};
   return this.http.post("http://localhost:59628/api/sendMsg", data)
 }
 updateStartHour(time:number, id:number, isFirst:boolean):any {

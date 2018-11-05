@@ -26,12 +26,16 @@ import { SendMsgComponent } from './components/send-msg/send-msg.component';
 import {HomeWorkerComponent  } from './components/home-worker/home-worker.component';
 import { ChartComponent } from './components/chart/chart.component';
 //import { HomeWorkerComponent } from './components/worker/home-worker/home-worker.component';
+import { AuthGuard} from '../app/shared/auth.guard';
+//import {MatDialogModule} from "@angular/material";
+
 
  const  path="http://localhost:59628/api/";
 const routes: Routes = [
   { path: 'taskManagers/login', component: LoginComponent },
   { path: 'taskManagers/home', component: HomeComponent ,children:[
 
+<<<<<<< HEAD
   { path: 'addProject', component: AddProjectComponent },
   { path: 'usersManagers', component: UsersManagersComponent },
   { path: 'Addworker', component: AddWorkerComponent },
@@ -43,6 +47,18 @@ const routes: Routes = [
    { path: 'taskManagers/projectDeatails', component: ProjectDeatailsComponent },
   { path: 'taskManagers/homeWorkerComponent', component: HomeWorkerComponent },
    { path: 'taskManagers/WorkerDeatails', component: WorkerDeatailsComponent },
+=======
+  { path: 'addProject', component: AddProjectComponent,canActivate: [AuthGuard] },
+  { path: 'usersManagers', component: UsersManagersComponent ,canActivate: [AuthGuard]},
+  { path: 'Addworker', component: AddWorkerComponent ,canActivate: [AuthGuard]},
+  { path: 'teamLeaderProjects', component: TeamLeaderProjectComponent ,canActivate: [AuthGuard] },
+  { path: 'teamLeaderWorkers', component: TeamLeaderWorkersComponent ,canActivate: [AuthGuard] },
+  { path: 'projectDeatails', component: ProjectDeatailsComponent ,canActivate: [AuthGuard] },
+ 
+  ]},
+  { path: 'taskManagers/homeWorkerComponent', component: HomeWorkerComponent ,canActivate: [AuthGuard] },
+   { path: 'taskManagers/WorkerDeatails', component: WorkerDeatailsComponent ,canActivate: [AuthGuard]  },
+>>>>>>> 961daa083a8d6ffa038e34d5775a8584c19a0ada
   { path: '**', component: LoginComponent },
   { path: '', component: LoginComponent },
 ];
@@ -79,6 +95,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     BootstrapModalModule.forRoot({container:document.body}),
+    //MatDialogModule
 
   ],
 

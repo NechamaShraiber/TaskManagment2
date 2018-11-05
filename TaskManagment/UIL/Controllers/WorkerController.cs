@@ -48,7 +48,7 @@ namespace UIL.Controllers
 
             if (ModelState.IsValid)
             {
-                return (WorkerLogic.SendMsg((string)data["sub"], (string)data["body"])) ?
+                return (WorkerLogic.SendMsg((string)data["sub"], (string)data["body"],(int)data["id"])) ?
                    new HttpResponseMessage(HttpStatusCode.OK) :
                    new HttpResponseMessage(HttpStatusCode.BadRequest)
                    {

@@ -33,11 +33,13 @@ namespace BLL
             return DBAccess.RunNonQuery(query) == 1;
         }
 
-        public static bool SendMsg(string sub, string body)
+        public static bool SendMsg(string sub, string body,int id)
         {
+            string query = $"SELECT email FROM task_managment.workers where job = {id}" ;
+           string email=(string) DBAccess.RunScalar(query);
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress("shtilimrishum2018@gmail.com");
-            msg.To.Add(new MailAddress("shtilimrishum2018@gmail.com"));
+            msg.To.Add(new MailAddress(email));
             msg.Subject = sub;
             msg.Body = body;
             SmtpClient client = new SmtpClient();
