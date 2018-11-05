@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
     this.currentWorker = JSON.parse(localStorage.getItem('currentUser'));
     this.id = this.currentWorker.JobId;
     if (this.id >= 3) {
-      this.router.navigate(['taskManagershomeWorkerComponent']);
+      this.router.navigate(['taskManagers/homeWorkerComponent']);
     }
   }
 }

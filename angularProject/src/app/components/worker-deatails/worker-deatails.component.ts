@@ -13,6 +13,7 @@ export class WorkerDeatailsComponent implements OnInit {
   private worker: Worker;
   private currentWorker: Worker;
 private numHours:number=0;
+private projectId:number;
   constructor(private route: ActivatedRoute, private teamLeaderService: TeamLeaderService) { }
 
   ngOnInit() {
@@ -30,14 +31,16 @@ private numHours:number=0;
       });
 
   }
-  setAllocatedHours(id:number){
-    console.log(id)
-    this.teamLeaderService.setAlloactedHours(this.numHours,id).subscribe(
+
+  changeHours(){
+    alert("dsafdsaf"+this.projectId);
+     this.teamLeaderService.setAlloactedHours(this.numHours,this.projectId).subscribe(
       res => {
-      
+    
        console.log(this.projectsHours);
-     console.log(this.projectsHours.find(p=>p.Id==id));
-       this.projectsHours.find(p=>p.Id==id).AllocatedHours=this.numHours;
+     console.log(this.projectsHours.find(p=>p.Id==this.projectId));
+       this.projectsHours.find(p=>p.Id==this.projectId).AllocatedHours=this.numHours;
+         this.projectId=null;
        // .forEach(element => {
 
       //    if(element.Id==id)
@@ -50,6 +53,14 @@ private numHours:number=0;
          
       //  }); 
       })
+
+  }
+  setAllocatedHours(id:number){
+ 
+   this.projectId=id;
+  // alert(this.projectId);
+   // document.querySelector('.cont_centrar').className = "cont_centrar cent_active";
+   // console.log(  document.querySelector('.cont_centrar').attributes)  ;
 
   }
 }

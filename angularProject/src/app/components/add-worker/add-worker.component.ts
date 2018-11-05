@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ManagerService } from '../../shared/service/manager.service';
 import { validate } from '../../shared/validate';
 import sha256 from 'async-sha256';
+import { GlobalService } from '../../shared/service/global.service';
 
 @Component({
   selector: 'app-add-worker',
@@ -23,7 +24,7 @@ export class AddWorkerComponent implements OnInit {
   selectUndefinedOptionValue: any;
   objectHolder: typeof Object = Object;
 
-  constructor(private router: Router, private managerService: ManagerService) {
+  constructor(private router: Router, private managerService: ManagerService, private globalService:GlobalService) {
 
     let formGroupConfig = {
       Name: new FormControl(managerService.workerToUpdate.Name, validate.createValidatorArr("Name", 2, 15)),
@@ -37,7 +38,7 @@ export class AddWorkerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.managerService.getAllJobs().subscribe(
+    this.globalService.getAllJobs().subscribe(
       res => {
         console.log(res)
         this.jobList = res;

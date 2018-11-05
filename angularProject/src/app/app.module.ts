@@ -37,11 +37,11 @@ const routes: Routes = [
   { path: 'Addworker', component: AddWorkerComponent },
   { path: 'teamLeaderProjects', component: TeamLeaderProjectComponent },
   { path: 'teamLeaderWorkers', component: TeamLeaderWorkersComponent },
-  
-  { path: 'projectDeatails', component: ProjectDeatailsComponent },
+
  
-  ]},
-  { path: 'homeWorkerComponent', component: HomeWorkerComponent },
+  ]}, 
+   { path: 'taskManagers/projectDeatails', component: ProjectDeatailsComponent },
+  { path: 'taskManagers/homeWorkerComponent', component: HomeWorkerComponent },
    { path: 'taskManagers/WorkerDeatails', component: WorkerDeatailsComponent },
   { path: '**', component: LoginComponent },
   { path: '', component: LoginComponent },

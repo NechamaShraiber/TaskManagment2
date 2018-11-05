@@ -24,9 +24,7 @@ export class ManagerService {
   getAllManagers(): any {
     return this.http.get("http://localhost:59628/api/getAllManagers");
   }
-  getAllJobs(): any {
-    return this.http.get("http://localhost:59628/api/getAllJobs");
-  }
+  
   addWorker(worker): any {
     console.log(worker);
     worker.Password=sha256(worker.Password);

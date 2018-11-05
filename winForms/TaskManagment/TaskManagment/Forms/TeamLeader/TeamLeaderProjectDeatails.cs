@@ -85,10 +85,6 @@ namespace TaskManagment.Forms
             foreach (var item in workersHours)
             {
                 allocatedHours.Add(item.Name, Convert.ToInt32( item.AllocatedHours));
-<<<<<<< HEAD
-=======
-
->>>>>>> 42690356249dbaea5fff49bca64fb5fc093f853b
                     if (item.Hours != "")
                     {
                         var t = item.Hours.Split(':');

@@ -1,18 +1,21 @@
+<h1>
+  {{project.Name}}</h1>
+<div >
+  <div class="row">
+    <div class="col-md-9 row">
+      <div class="col-md-3 " *ngFor="let workerHour of workersHours">
+        <app-hours [hour]=workerHour></app-hours>
+      </div>
+      
+    </div>
 
-<div class="row">
-  <div class="col-md-3 ">
-    <hr>
-    <app-project [project]=project></app-project>
-  </div>
-</div>
 
 
-<div class="row">
-    <div class="col-md-3 " *ngFor="let workerHour of workersHours">
-      <app-hours [hour]=workerHour ></app-hours>
+
+    <div class="col-md-3">
+      <div *ngIf="workersHours">
+        <app-chart [projects]=workersHours></app-chart>
+      </div>
     </div>
   </div>
-
-  <div *ngIf="workersHours">
-<app-chart [projects]=workersHours></app-chart>
 </div>

@@ -14,10 +14,7 @@ subjectUpdateChart=new Subject();
     this.worker=null;
  }
 
-login(userName: string, password: string): Observable<any> {
-  let data = { userName: userName, password: password };
-  return this.http.post("http://localhost:59628/api/login/", data);
-}
+
  getProject(id:number):any{
    return this.http.get("http://localhost:59628/api/getProject/"+id)
  }

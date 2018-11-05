@@ -25,6 +25,10 @@
       </div>
     </div>
     <p *ngIf="!isExistUser" class="myAlert">user name or password is not correct</p>
-    <button type="submit" class="button col-md-offset-2 col-md-8" [disabled]="loginFormGroup.invalid||isExistUser==false">Login</button>
+    <div class="submitDiv">
+
+ <button type="submit" class="button col-md-offset-2 col-md-8" [disabled]="loginFormGroup.invalid||isExistUser==false">Login</button>
+    </div>
+   
   </form>
 </div>

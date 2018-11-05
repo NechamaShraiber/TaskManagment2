@@ -230,4 +230,6 @@ form {
 	.myAlert{
 		color: red;
 	}
-	
+	.submitDiv{
+	margin-left: 25%;
+}

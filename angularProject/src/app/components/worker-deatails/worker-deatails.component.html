@@ -1,15 +1,24 @@
 
-  <div class="row">
-    <div class="col-md-3 ">
-      <hr>
-      <app-worker [worker]=worker></app-worker>
-    </div>
-  </div>
+
+  <h1>{{worker.Name}}</h1>   
   <P>click on project to change allocated hours:</P>
-  <input type="number" [(ngModel)]="numHours">
+ 
    <div class="row">
       <div class="col-md-3 " *ngFor="let projectHour of projectsHours">
-      
         <app-hours [hour]=projectHour (click)="setAllocatedHours(projectHour.Id)"></app-hours>
       </div>
+      
     </div>
+
+
+      
+    <div class="cont_centrar" *ngIf="projectId">
+      <div>
+         <p>enter allocate hours:</p>  
+      <input type="number" [(ngModel)]="numHours">
+      </div>
+        
+      <button class="btn_sign" (click)="changeHours()">change</button>
+     
+   </div>
+  
