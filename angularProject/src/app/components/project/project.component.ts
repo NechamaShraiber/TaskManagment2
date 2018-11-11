@@ -12,7 +12,7 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit() {
     
-    
+    console.log(this.project);
     
   }
 

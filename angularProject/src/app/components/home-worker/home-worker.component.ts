@@ -20,7 +20,6 @@ export class HomeWorkerComponent implements OnInit {
   startTask: any;
   time: any;
   projects: any;
-
   currentWorker: Worker
   currectProject: number;
   isStart: boolean = true;
@@ -84,6 +83,7 @@ export class HomeWorkerComponent implements OnInit {
       else {
         this.btnValue = "start";
         clearInterval(this.timer);
+        this.startTask=null;
         this.t = null;
 
 

@@ -1,6 +1,6 @@
 <div >
     <p>Today is: {{today | date:'fullDate'}}</p>
-    <p>You started at:  {{today | date:'hh:mm:ss a z'}}</p>
+    <p>You started at:  {{startTask | date:'hh:mm:ss a z'}}</p>
     <P>you work: {{ t | date:'hh:mm:ss'}}</P>
   </div>
   <div>
@@ -24,7 +24,7 @@
 
 <div class="row">
   <div class="col-md-3 " *ngFor="let project of projects">
-    <app-project [project]=(project) (click)="cli(project.Id)"></app-project>
+    <app-hours [hour]=(project) (click)="cli(project.Id)"></app-hours>
   </div>
 </div>
 <div *ngIf="projects">
