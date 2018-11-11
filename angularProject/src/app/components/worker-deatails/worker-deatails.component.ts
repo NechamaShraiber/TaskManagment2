@@ -20,25 +20,21 @@ private projectId:number;
   this.currentWorker = JSON.parse(localStorage.getItem('currentUser'));
     this.route.queryParams.subscribe(params => {
       this.worker = JSON.parse(params["worker"]);
-      console.log(this.worker);
     });
 
     this.teamLeaderService.getProjectsHours(this.currentWorker.Id, this.worker.Id).subscribe(
       res => {
         this.projectsHours = res;
-        console.log(res + "Gsdfg")
-        console.log(this.projectsHours)
+       
       });
 
   }
 
   changeHours(){
-    alert("dsafdsaf"+this.projectId);
+    if(this.numHours!=this.projectsHours.find(p=>p.Id==this.projectId).AllocatedHours)
      this.teamLeaderService.setAlloactedHours(this.numHours,this.projectId).subscribe(
       res => {
     
-       console.log(this.projectsHours);
-     console.log(this.projectsHours.find(p=>p.Id==this.projectId));
        this.projectsHours.find(p=>p.Id==this.projectId).AllocatedHours=this.numHours;
          this.projectId=null;
        // .forEach(element => {
@@ -53,15 +49,14 @@ private projectId:number;
          
       //  }); 
       })
+      else
+      this.projectId=null;
 
   }
   setAllocatedHours(id:number){
  
    this.projectId=id;
-  // alert(this.projectId);
-   // document.querySelector('.cont_centrar').className = "cont_centrar cent_active";
-   // console.log(  document.querySelector('.cont_centrar').attributes)  ;
-
+   this.numHours=this.projectsHours.find(p=>p.Id==id).AllocatedHours;
   }
 }
 

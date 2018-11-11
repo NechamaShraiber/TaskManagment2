@@ -14,13 +14,9 @@ export class HomeComponent implements OnInit {
   //id: number
   ngOnInit() {
     this.currentWorker = JSON.parse(localStorage.getItem('currentUser'));
-<<<<<<< HEAD
-    this.id = this.currentWorker.JobId;
-    if (this.id >= 3) {
-=======
+
     this.workerService.idJob = this.currentWorker.JobId;
     if (this.workerService.idJob >= 3) {
->>>>>>> 961daa083a8d6ffa038e34d5775a8584c19a0ada
       this.router.navigate(['taskManagers/homeWorkerComponent']);
     }
   }

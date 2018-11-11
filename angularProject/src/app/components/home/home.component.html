@@ -1,29 +1,33 @@
-<<<<<<< HEAD
+<nav class="navbar">
 
-<nav class="navbar" *ngIf="id==1">
-  <ul>
-=======
-<div class="container" *ngIf="workerService.idJob==1">
-  <ul class="nav navbar-nav">
->>>>>>> 961daa083a8d6ffa038e34d5775a8584c19a0ada
-    <li routerLinkActive="active"><a routerLink="/taskManagers/home/addProject">Add Project</a></li>
-    <li routerLinkActive="active"><a routerLink="/taskManagers/home/repotrs">Repotrs</a></li>
-    <li routerLinkActive="active"><a routerLink="/taskManagers/home/usersManagers">Users Managers</a></li>
-  </ul>
-<<<<<<< HEAD
+    <ul *ngIf="workerService.idJob==1">
+      <li routerLinkActive="active">
+        <a routerLink="/taskManagers/home/addProject">Add Project</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/taskManagers/home/repotrs">Repotrs</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/taskManagers/home/usersManagers">Users Managers</a>
+      </li>
+    </ul>
+
+
+
+
+
+    <ul  *ngIf="workerService.idJob==2">
+      <li routerLinkActive="active">
+        <a routerLink="/taskManagers/home/teamLeaderProjects">projects</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/taskManagers/home/teamLeaderWorkers">workers</a>
+      </li>
+    </ul>
+
+
 </nav>
-<nav class="navbar" *ngIf="id==2">
-  <ul >
-=======
-</div>
-
- <div class="container" *ngIf="workerService.idJob==2">
-  <ul class="nav navbar-nav">
->>>>>>> 961daa083a8d6ffa038e34d5775a8584c19a0ada
-    <li routerLinkActive="active"><a routerLink="/taskManagers/home/teamLeaderProjects">projects</a></li>
-    <li routerLinkActive="active"><a routerLink="/taskManagers/home/teamLeaderWorkers">workers</a></li>
-  </ul>
-</nav>
-
 
 <router-outlet class="container"></router-outlet>
+
+

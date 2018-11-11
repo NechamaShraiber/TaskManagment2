@@ -21,7 +21,6 @@ export class TeamLeaderProjectComponent implements OnInit {
     this.teamLeaderService.getAllProjects(this.currentWorker.Id).subscribe(
       res => {
         this.projects = res;
-        console.log(this.projects)
       })
 
   }

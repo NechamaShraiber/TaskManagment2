@@ -18,7 +18,6 @@ export class TeamLeaderWorkersComponent implements OnInit {
     this.teamLeaderService.getAllWorkers(this.currentWorker.Id).subscribe(
       res => {
         this.workers = res;
-        console.log(this.workers)
       })
   }
   openWorkerDeatails(worker: Worker) {
