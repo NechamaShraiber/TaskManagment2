@@ -1,30 +1,21 @@
 <div >
     <p>Today is: {{today | date:'fullDate'}}</p>
-    <p>You started at:  {{startTask | date:'hh:mm:ss a z'}}</p>
-    <P>you work: {{ t | date:'hh:mm:ss'}}</P>
+    <div *ngIf="t">
+    <p >You started at:  {{startTask | date:'hh:mm:ss a z'}}</p>
+    <P >you work: {{ t | date:'hh:mm:ss'}} at {{currectProject.Name}}</P>
+  
+  </div>
   </div>
   <div>
    
     <button (click)="send()">send email</button> 
-   <button (click)="updateHours()">{{btnValue}}</button>
-
-
   </div>
   
-<!-- <div>
-  <label>MY PROJECTS:</label>
-    <table>
-        <tr *ngFor="let project of projects">
-          <td (click)="cli(project.Id)">{{ project.Name }}</td>
-          <td>{{ project.Country }}</td>
-        <!-- </tr>
-      </table>
-</div> -->
-
 
 <div class="row">
-  <div class="col-md-3 " *ngFor="let project of projects">
-    <app-hours [hour]=(project) (click)="cli(project.Id)"></app-hours>
+  <div class="col-md-3" *ngFor="let project of projects" >
+    <app-hours  [hour]=(project) (click)="updateHours(project)"></app-hours>
+    
   </div>
 </div>
 <div *ngIf="projects">

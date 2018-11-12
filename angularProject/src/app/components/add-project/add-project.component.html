@@ -19,8 +19,8 @@
       </div>
     </div>
     <div class="group">
-        <select formControlName="TeamLeaderId">
-            <option *ngFor="let team of teamLeader" [ngValue]="team">
+        <select formControlName="TeamLeaderId" (change)="onChange($event.target.value)">
+            <option *ngFor="let team of teamLeader" [ngValue]="team.Id">
               {{team["Name"]}}
             </option>
           </select>

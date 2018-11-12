@@ -19,16 +19,16 @@ export class HomeWorkerComponent implements OnInit {
   today: any;
   startTask: any;
   time: any;
-  projects: any;
+  projects: any[];
   currentWorker: Worker
-  currectProject: number;
+  currectProject: any;
   isStart: boolean = true;
   btnValue: string = "start";
   t: any;
   timer;
 
   constructor(private workerService: WorkerService, private router: Router, private dialogService: DialogService) {
-      
+
   }
   ngOnInit() {
 
@@ -38,9 +38,6 @@ export class HomeWorkerComponent implements OnInit {
       this.projects = res;
     });
   }
-  // x = setInterval(() => {
-  //   this.today = Date.now();
-  // }, 1000)
 
   send() {
     let disposable = this.dialogService.addDialog(SendMsgComponent, {
@@ -60,54 +57,57 @@ export class HomeWorkerComponent implements OnInit {
       disposable.unsubscribe();
     }, 1000000);
   }
-  cli(e) {
-    this.currectProject = e;
-  }
+  // cli(e) {
 
-  updateHours() {
-    if (!this.currectProject)
-      alert("you must choose a project")
-    else {
-      this.time = formatDate(new Date(), 'yyyy/MM/dd hh:mm:ss', 'en');
-      if (this.isStart) {
-        this.startTask = new Date();
-        this.btnValue = "end";
-        this.timer = setInterval(() => {
-          this.t = Math.abs(new Date().getTime() - this.startTask.getTime());
-          //console.log(Math.abs(new Date().getTime() - this.startTask.getTime()));
+  //  this.updateHours();
+  //  }
 
+  updateHours(e) {
 
+    if (!this.isStart && this.currectProject != e) {
+      alert("you must end project "+ this.currectProject.Name);
+      return;
 
-        }, 1000);
-      }
-      else {
-        this.btnValue = "start";
-        clearInterval(this.timer);
-        this.startTask=null;
-        this.t = null;
-
-
-      }
-      this.workerService.updateStartHour(this.time, this.currectProject, this.isStart).subscribe(
-        res => {
-          if (!this.isStart) {
-            console.log(this.projects);
-            this.workerService.getProject(this.currentWorker.Id).subscribe(res => {
-              this.projects = res;
-              console.log(this.projects);
-              this.workerService.subjectUpdateChart.next(this.projects);
-            });
-
-
-          }
-
-
-
-          this.isStart = !this.isStart;
-
-        })
     }
+ 
+      
+    this.time = formatDate(new Date(), 'yyyy/MM/dd hh:mm:ss', 'en');
+    if (this.isStart) {
+      this.currectProject = e;
+      this.startTask = new Date();
+      this.btnValue = "end";
+      this.timer = setInterval(() => {
+        this.t = Math.abs(new Date().getTime() - this.startTask.getTime());
 
+
+
+      }, 1000);
+    }
+    else {
+      this.btnValue = "start";
+      clearInterval(this.timer);
+      this.startTask = null;
+      this.t = null;
+
+
+    }
+    this.workerService.updateStartHour(this.time, this.currectProject.Id, this.isStart).subscribe(
+      res => {
+        if (!this.isStart) {
+          this.workerService.getProject(this.currentWorker.Id).subscribe(res => {
+            this.projects = res;
+            this.workerService.subjectUpdateChart.next(this.projects);
+          });
+
+
+        }
+
+
+
+        this.isStart = !this.isStart;
+
+      })
   }
+
 }
 

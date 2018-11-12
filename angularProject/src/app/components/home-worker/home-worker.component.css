@@ -15,3 +15,6 @@ body {
   #timer span:first-child {
     margin-left: 0;
   }
+  .c{
+    background-color: red;
+  }

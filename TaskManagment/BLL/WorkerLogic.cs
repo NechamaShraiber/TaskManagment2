@@ -32,38 +32,13 @@ namespace BLL
                 $" AND END IS NULL";
             return DBAccess.RunNonQuery(query) == 1;
         }
-
+       
         public static bool SendMsg(string sub, string body,int id)
         {
             string query = $"SELECT email FROM task_managment.workers where job = {id}" ;
            string email=(string) DBAccess.RunScalar(query);
-            MailMessage msg = new MailMessage();
-            msg.From = new MailAddress("shtilimrishum2018@gmail.com");
-            msg.To.Add(new MailAddress(email));
-            msg.Subject = sub;
-            msg.Body = body;
-            SmtpClient client = new SmtpClient();
-            client.UseDefaultCredentials = true;
-            client.Host = "smtp.gmail.com";
-            client.Port = 587;
-            client.EnableSsl = true;
-
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.Credentials = new NetworkCredential("shtilimrishum2018@gmail.com", "0504190762");
-            client.Timeout = 20000;
-            try
-            {
-                client.Send(msg);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                msg.Dispose();
-            }
+            return HomeLogic.sendEmail(sub, body, email);
+          
         }
 
 

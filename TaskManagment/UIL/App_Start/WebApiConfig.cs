@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using BLL;
+using System.Web.Http;
 using System.Web.Http.Cors;
 
 namespace UIL
@@ -17,6 +18,8 @@ namespace UIL
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { controller = "Default", id = RouteParameter.Optional }
             );
+            HomeLogic.Notifications();
         }
+        
     }
 }

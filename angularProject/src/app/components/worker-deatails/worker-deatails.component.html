@@ -3,13 +3,12 @@
   <h1>{{worker.Name}}</h1>   
   <P>click on project to change allocated hours:</P>
  
-   <div class="row">
+ 
+    <div class="row">
       <div class="col-md-3 " *ngFor="let projectHour of projectsHours">
         <app-hours [hour]=projectHour (click)="setAllocatedHours(projectHour.Id)"></app-hours>
-      </div>
-      
-    </div>
 
+    </div>
 
       
     <div class="cont_centrar" *ngIf="projectId">

@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ManagerService } from '../../shared/service/manager.service';
 import { validate } from '../../shared/validate';
+import { Worker } from '../../shared/models/worker';
 
 @Component({
   selector: 'app-add-project',
@@ -16,6 +17,8 @@ export class AddProjectComponent implements OnInit {
   idTeam:number;
   objectHolder: typeof Object = Object;
   date:any;
+  workers:Worker[];
+  workersToAdd:Worker[];
   constructor(private router: Router, private managerService: ManagerService) {
     let formGroupConfig = {
       Name: new FormControl('', validate.createValidatorArr("Name", 2, 25)),
@@ -39,6 +42,11 @@ export class AddProjectComponent implements OnInit {
           }
         });
     })
+    this.managerService.getAllWorkers().subscribe(
+      res=>{
+       this.workers=res;
+      }
+    )
  }
  
   get f() { return this.addProjectGroup.controls; }
@@ -49,7 +57,7 @@ export class AddProjectComponent implements OnInit {
     this.managerService.addProject(this.addProjectGroup.value)
        .subscribe(project => {
          if (project == null) {
-           localStorage.setItem('currentProject', JSON.stringify(project));
+        //   localStorage.setItem('currentProject', JSON.stringify(project));
            this.router.navigate(['taskManagers/home']);
          }
          else {
@@ -57,4 +65,18 @@ export class AddProjectComponent implements OnInit {
          }
        });
   }
+  onChange(teamLeaderId) {
+    this.workersToAdd=[];
+ 
+   this.workers.forEach(
+     w=>{
+       
+       if(w.ManagerId!=teamLeaderId.slice(3,teamLeaderId.Length))
+       
+           this.workersToAdd.push(w); 
+       
+     
+       
+     });
+}
 }
