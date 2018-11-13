@@ -61,6 +61,19 @@ namespace BLL
             return true;
         }
 
+        public static bool addWorkersToProject(int[] ids, string name)
+        {
+            string q = $"SELECT project_id FROM projects WHERE name = '{name}'";
+            int idProject = (int)DBAccess.RunScalar(q);
+            foreach (var item in ids)
+            {
+                string query = $"INSERT INTO task_managment.project_workers ({item},{idProject}) VALUES(4,3)";
+               if( DBAccess.RunNonQuery(query)==0)
+                    return false;
+            }
+            return true;
+        }
+
         public static bool AddWorker(Worker worker)
         {
 

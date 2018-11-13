@@ -21,7 +21,7 @@
     <div class="group">
         <select formControlName="TeamLeaderId" (change)="onChange($event.target.value)">
             <option *ngFor="let team of teamLeader" [ngValue]="team.Id">
-              {{team["Name"]}}
+              {{team.Name}}
             </option>
           </select>
       <span class="highlight"></span>
@@ -76,6 +76,25 @@
             <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['EndDate'].errors)" class="myAlert">{{err}}</p>
           </div> 
         </div>
+        <div>
+
+        <p>select workers to add:</p>
+        <select (change)="addWorker($event.target.value)">
+  <option></option>
+
+          <option *ngFor="let worker of workersToSelect"  [ngValue]="worker.Id" >
+            {{worker.Name}}
+          </option>
+        </select>
+        <p>select workers to remove:</p>
+ <select (change)="removeWorker($event.target.value)">
+  <option></option>
+          <option *ngFor="let worker of workersToAdd" [ngValue]="worker.Id">
+            {{worker.Name}}
+          </option>
+        </select>
+      </div>
+
         <!-- [disabled]="addProjectGroup.invalid" -->
     <button type="submit" class="button col-md-offset-2 col-md-8" [disabled]="addProjectGroup.invalid">Add</button>
   </form>

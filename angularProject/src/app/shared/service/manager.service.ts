@@ -13,12 +13,12 @@ export class ManagerService {
   idWorkerToDelete: any;
   isEdit: string = "Add";
   str:string;
+  ids:number[];
   constructor(private http: HttpClient) {
     this.workerToUpdate = new Worker;
   }
 
   addProject(project): any {
-    console.log(project);
     return this.http.post("http://localhost:59628/api/addProject/", JSON.parse(JSON.stringify(project)))
   }
   getAllManagers(): any {
@@ -26,7 +26,6 @@ export class ManagerService {
   }
   
   addWorker(worker): any {
-    console.log(worker);
     worker.Password=sha256(worker.Password);
       return this.http.post("http://localhost:59628/api/addWorker/", JSON.parse(JSON.stringify(worker)))
 }
@@ -38,9 +37,15 @@ export class ManagerService {
   }
   updateWorker(worker): any {
     worker.Id = this.workerToUpdate.Id;
-    console.log(worker);
     return this.http.put("http://localhost:59628/api/updateWorker/", JSON.parse(JSON.stringify(worker)))
   }
+  addWorkersToProject(workers:Worker[],name):any{
+    this.ids=[];
+    workers.forEach(w => {
+      this.ids.push(w.Id);
+    });
+    return this.http.post("http://localhost:59628/api/addWorkersToProject/"+name+"/", JSON.parse(JSON.stringify(this.ids)))
 
+  }
 
 }
