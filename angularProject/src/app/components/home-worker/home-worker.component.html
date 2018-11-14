@@ -7,7 +7,7 @@
 <h1>{{currentWorker.Name}}</h1>
     <p>Today is: {{today | date:'fullDate'}}</p>
     <div *ngIf="t">
-      <p>You started at: {{startTask | date:'hh:mm:ss a z'}}</p>
+      <p>You started at: {{startTask | date:'hh:mm:ss a '}}</p>
       <P>you work: {{ t | date:'hh:mm:ss'}} at {{currectProject.Name}}</P>
     </div>
   </div>
@@ -15,7 +15,7 @@
 
   <div class="wrap">
     <!-- <a href="mailto:someone@example.com"> -->
-    <div class="circle" (click)="send()">
+    <div class="circle" (click)="send()" title="send email to team leader">
       <div class="envelope-top"></div>
       <div class="envelope"></div>
     </div>

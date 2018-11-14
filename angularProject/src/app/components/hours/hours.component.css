@@ -1,0 +1,40 @@
+.wrap {
+    margin: 2px 11px;
+    position: relative;
+  /* display: inline-block; */
+    direction: rtl;
+   /* float: right; */
+  }
+  
+  .circle {
+    height: 38px;
+    width: 38px;
+    background: #4AA0DB;
+    border: 4px solid #4AA0DB;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+  }
+  .circle:hover {
+    background: #50ADED;
+  }
+  .circle:active {
+    background: #4394CA;
+  }
+  
+  .envelope {
+    height: 0;
+    width: 0;
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-top: 15px solid #FFF;
+    margin: 7px 2px;
+    position: absolute;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+  }
+  
+ h1{
+     display: inline-block;
+ }

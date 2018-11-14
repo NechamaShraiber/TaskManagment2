@@ -12,9 +12,9 @@
   <br>
 <label>Ui/Ux hours:</label><label>{{project.UiUxHours}}</label>
  <br>
-<label>end date:</label><label>{{project.EndDate.substring(0,10)}}</label>
+<label>end date:</label><label>{{project.EndDate | date: 'dd/MM/yyyy '}}</label>
  <br>
-<label>start date:</label><label>{{project.StartDate.substring(0,10)}}</label>
+<label>start date:</label><label>{{project.StartDate| date: 'dd/MM/yyyy '}}</label>
 
     </div>
 </div>

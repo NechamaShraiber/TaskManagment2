@@ -1,9 +1,16 @@
 <div class="blog-card">
+    
   <div class="description">
+     <div class="wrap"> 
       <h1>{{hour.Name}}</h1>
+        <!-- <a href="mailto:someone@example.com"> -->
+        <div class="circle" (click)="send()" title="start the task">
+          <div class="envelope"></div>
+        </div>
+      </div>
       <hr>
       <label>date:</label>
-      <label>{{hour.Date.substring(0,10)}}</label>
+      <label>{{hour.Date| date: 'dd/MM/yyyy '}}</label>
       <br>
       <label>worked hours:</label>
       <label>{{hour.Hours}}</label>

@@ -23,7 +23,7 @@ export class HomeWorkerComponent implements OnInit {
   currentWorker: Worker
   currectProject: any;
   isStart: boolean = true;
-  btnValue: string = "start";
+ // btnValue: string = "start";
   t: any;
   timer;
 
@@ -75,7 +75,7 @@ export class HomeWorkerComponent implements OnInit {
     if (this.isStart) {
       this.currectProject = e;
       this.startTask = new Date();
-      this.btnValue = "end";
+     // this.btnValue = "end";
       this.timer = setInterval(() => {
         this.t = Math.abs(new Date().getTime() - this.startTask.getTime());
 
@@ -84,7 +84,7 @@ export class HomeWorkerComponent implements OnInit {
       }, 1000);
     }
     else {
-      this.btnValue = "start";
+    //  this.btnValue = "start";
       clearInterval(this.timer);
       this.startTask = null;
       this.t = null;
