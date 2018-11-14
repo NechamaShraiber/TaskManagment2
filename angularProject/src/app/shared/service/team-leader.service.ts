@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import{AppModule}from './../../app.module'
+import { Project } from '../models/project';
 @Injectable({
   providedIn: 'root'
 })
 export class TeamLeaderService {
-
+currentProject:Project;
+currentWorker:Worker;
   constructor(private http: HttpClient) { }
   getAllProjects(id:number): any {
     return this.http.get("http://localhost:59628/api/getProjectDeatails/"+id);

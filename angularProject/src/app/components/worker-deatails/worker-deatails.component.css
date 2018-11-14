@@ -1,6 +1,6 @@
 * {
-    margin: 0px auto;
-    padding: 0px;
+  
+   
     font-family: 'Open Sans', sans-serif;
   }
  
@@ -17,17 +17,16 @@
     margin-left: -160px;
     margin-top: -160px;
     z-index: 9999;
-  }
-  
-  .cont_centrar {
-    position: relative;
-    width: 320px;
-    float: left;
-    background-image: linear-gradient(-226deg, #FFFFFF 8%, #EEF3F5 100%);
-  
     border-radius: 8px;
-  transition: all 0.5s;
+    transition: all 0.5s;
+    background-image: linear-gradient(-226deg, #FFFFFF 8%, #EEF3F5 100%);
   }
+ p{
+  text-align: center;
+ }
+
+
+ 
   
   .btn_sign {
     background:#4568DC;

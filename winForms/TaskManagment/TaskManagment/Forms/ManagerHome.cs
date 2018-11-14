@@ -18,13 +18,34 @@ namespace TaskManagment.Forms
     public partial class ManagerHome : Form
     {
         List<Worker> manager;
+        List<Worker> workerToSelect;
+        List<Worker> workerToAdd;
         public ManagerHome()
         {
             InitializeComponent();
             AddProject();
             tab_manager.Controls.Remove(tab_workerDeatrails);
-        }
 
+        }
+        public void getAllWorkers()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(Global.path);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = client.GetAsync($"getAllWorkers").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                workerList = JsonConvert.DeserializeObject<List<Worker>>(result);
+
+            }
+            else
+            {
+
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+
+            }
+        }
         void checkVaidationLength(int min, int max, TextBox textBox)
         {
             if (textBox.Text.Length < min || textBox.Text.Length > max)
@@ -104,14 +125,47 @@ namespace TaskManagment.Forms
                 btn_addProject.Enabled = true;
             //else btn_add.Enabled = false;
         }
+
+        public void addWorkersToProject(string name)
+        {
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create($"{Global.path}addWorkersToProject/{name}");
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+            dynamic credential;
+            
+            try
+            {
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    credential = workerToAdd.Select(w=>w.Id);
+                    string credentialString = Newtonsoft.Json.JsonConvert.SerializeObject(credential, Formatting.None);
+                    streamWriter.Write(credentialString);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+
+
+                }
+            }
+            catch (WebException ex)
+            {
+                MessageBox.Show("Can not add a project");
+            }
+        }
+
         private void btn_addProject_Click(object sender, EventArgs e)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(Global.path + "addProject");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             dynamic credential;
-            Worker team = manager.Where(m => m.Name == txt_team_name.SelectedItem.ToString()).FirstOrDefault();
-            int id = team.Id;
+            int id = manager.Where(m => m.Name == txt_team_name.SelectedItem.ToString()).FirstOrDefault().Id;
+
             Project proj = new Project()
             {
                 Name = txt_projName.Text,
@@ -138,7 +192,25 @@ namespace TaskManagment.Forms
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
                     var result = streamReader.ReadToEnd();
+
+
                     MessageBox.Show($"The project {proj.Name} added successfully");
+                    addWorkersToProject(proj.Name);
+                    /*
+                     * 
+                     */
+
+                    //{
+                    //                  addWorkersToProject(workers: Worker[], name):any{
+                    //                      this.ids =[];
+                    //                      workers.forEach(w => {
+                    //                          this.ids.push(w.Id);
+                    //                      });
+                    //                      return this.http.post("http://localhost:59628/api/addWorkersToProject/" + name + "/", JSON.parse(JSON.stringify(this.ids)))
+
+                    //}
+
+                    //}
 
                 }
             }
@@ -167,25 +239,14 @@ namespace TaskManagment.Forms
         {
             panelControlls.Controls.Clear();
             panelControlls.BorderStyle = BorderStyle.FixedSingle;
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(Global.path);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.GetAsync($"getAllWorkers").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var result = response.Content.ReadAsStringAsync().Result;
-                workerList = JsonConvert.DeserializeObject<List<Worker>>(result);
-                ComboBox cb = new ComboBox() { Name = "cbWorkers" };
-                cb.Items.AddRange(workerList.Select(w => w.UserName).ToArray());
-                cb.Location = new Point(250, 50);
-                panelControlls.Controls.Add(cb);
-            }
-            else
-            {
 
-                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            ComboBox cb = new ComboBox() { Name = "cbWorkers" };
+            cb.Items.AddRange(workerList.Select(w => w.UserName).ToArray());
+            cb.Location = new Point(250, 50);
+            panelControlls.Controls.Add(cb);
+            getAllWorkers();
 
-            }
+
         }
         private void btn_delete_Click(object sender, EventArgs e)
         {
@@ -203,7 +264,7 @@ namespace TaskManagment.Forms
             panelControlls.Controls.Add(bt);
             bt.Click += new EventHandler(b_Click);
             l2.Click += new EventHandler(l2_click);
-  }
+        }
 
 
         void l2_click(object sender, EventArgs e)
@@ -263,7 +324,7 @@ namespace TaskManagment.Forms
         public void WorkerDeatails(bool isAdd, Worker w)
         {
 
-            
+
             txt_password.PasswordChar = '*';
             cmb_job.DataSource = Enum.GetValues(typeof(eJobs));
             manager = Global.GetManagers();
@@ -404,7 +465,42 @@ namespace TaskManagment.Forms
 
         private void txt_team_name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("dafds");
+
+            getAllWorkers();
+            int id = manager.Where(m => m.Name == txt_team_name.SelectedItem.ToString()).FirstOrDefault().Id;
+            workerToSelect = new List<Worker>();
+            workerToAdd = new List<Worker>();
+            workerList.ForEach(w =>
+            {
+                if (w.ManagerId != null && w.JobId > 2 && w.ManagerId != id)
+                    workerToSelect.Add(w);
+            });
+            dgvAddWorkers.DataSource = workerToSelect;
+            dgvAddWorkers.Columns["Id"].Visible = false;
+
+            //.Select(s => new { s.Id, s.Name })
+        }
+
+        private void dgvAddWorkers_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dgvAddWorkers.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Beige)
+            {
+                dgvAddWorkers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.DarkGray;
+
+                workerToAdd.Remove(workerToSelect[e.RowIndex]);
+
+            }
+            else
+            {
+                dgvAddWorkers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Beige;
+                workerToAdd.Add(workerToSelect[e.RowIndex]);
+            }
+
+        }
+
+        private void dgvAddWorkers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

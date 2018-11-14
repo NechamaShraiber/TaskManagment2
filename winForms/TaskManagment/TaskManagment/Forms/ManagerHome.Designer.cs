@@ -500,11 +500,15 @@
             // 
             // dgvAddWorkers
             // 
+            this.dgvAddWorkers.BackgroundColor = System.Drawing.Color.DarkGray;
             this.dgvAddWorkers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAddWorkers.GridColor = System.Drawing.Color.DarkGray;
             this.dgvAddWorkers.Location = new System.Drawing.Point(411, 91);
             this.dgvAddWorkers.Name = "dgvAddWorkers";
             this.dgvAddWorkers.Size = new System.Drawing.Size(185, 168);
             this.dgvAddWorkers.TabIndex = 38;
+            this.dgvAddWorkers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAddWorkers_CellContentClick);
+            this.dgvAddWorkers.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAddWorkers_RowHeaderMouseClick);
             // 
             // ManagerHome
             // 

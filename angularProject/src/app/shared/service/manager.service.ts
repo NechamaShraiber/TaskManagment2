@@ -44,6 +44,7 @@ export class ManagerService {
     workers.forEach(w => {
       this.ids.push(w.Id);
     });
+    
     return this.http.post("http://localhost:59628/api/addWorkersToProject/"+name+"/", JSON.parse(JSON.stringify(this.ids)))
 
   }

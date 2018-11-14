@@ -50,28 +50,23 @@ export class AddProjectComponent implements OnInit {
   }
 
   get f() { return this.addProjectGroup.controls; }
-  \
-///מלכי הנחמדה צריך לטפל בשורות 55-56 הוא נופל בהן
-//ואז לבדוק את הוספת הפרוייקט 
+
   onSubmit() {
-   // this.idTeam = this.teamLeader.find(p => p.Id == this.addProjectGroup.value["TeamLeaderId"].Id);
-   // this.addProjectGroup.value["TeamLeaderId"] = this.idTeam["Id"];
-    // this.managerService.addProject(this.addProjectGroup.value)
-    //   .subscribe(project => {
-    //     if (project == null) {
-    //       //   localStorage.setItem('currentProject', JSON.stringify(project));
-    //       this.router.navigate(['taskManagers/home']);
-         
-    //     }
-    //     else {
-    //       this.router.navigate(['taskManagers/login'])
-    //     }
-    //   });
+   this.idTeam = this.teamLeader.find(p => p.Id == this.addProjectGroup.value["TeamLeaderId"]);
+   this.addProjectGroup.value["TeamLeaderId"] = this.idTeam["Id"];
+    this.managerService.addProject(this.addProjectGroup.value)
+      .subscribe(project => {
+        if (project == null) {
+          //   localStorage.setItem('currentProject', JSON.stringify(project));
+          this.router.navigate(['taskManagers/home']);
+       this.managerService.addWorkersToProject(this.workersToAdd,this.addProjectGroup.value["Name"]).subscribe(res=> { }) 
+        }
+        else {
+          this.router.navigate(['taskManagers/login'])
+        }
+      });
 
-      this.managerService.addWorkersToProject(this.workersToAdd,this.addProjectGroup.value["Name"]).subscribe(res=>
-        {
-
-        }) 
+     
   }
   onChange(teamLeaderId) {
     this.workersToSelect = [];

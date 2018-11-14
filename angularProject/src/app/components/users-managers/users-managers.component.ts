@@ -10,13 +10,12 @@ import { Router } from '@angular/router';
   templateUrl: './users-managers.component.html',
   styleUrls: ['./users-managers.component.css']
 })
-export class UsersManagersComponent implements OnInit {
+export class UsersManagersComponent  {
 
   constructor(private dialogService: DialogService, private managerService: ManagerService,private router:Router) {
    }
 
-  ngOnInit() {
-  }
+
   delete() {
     let disposable = this.dialogService.addDialog(DeleteWorkerComponent, {
       title: 'Delete Worker',

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TeamLeaderService } from '../../shared/service/team-leader.service';
 import { Worker } from '../../shared/models/worker';
 import { NavigationExtras, Router } from '../../../../node_modules/@angular/router';
+import { WorkerDeatailsComponent } from '../worker-deatails/worker-deatails.component';
+import { DialogService } from '../../../../node_modules/ng2-bootstrap-modal';
 
 @Component({
   selector: 'app-team-leader-workers',
@@ -11,7 +13,7 @@ import { NavigationExtras, Router } from '../../../../node_modules/@angular/rout
 export class TeamLeaderWorkersComponent implements OnInit {
   currentWorker: Worker;
   private workers: any;
-  constructor(private teamLeaderService: TeamLeaderService, private router: Router) { }
+  constructor(private dialogService:DialogService, private teamLeaderService: TeamLeaderService, private router: Router) { }
 
   ngOnInit() {
     this.currentWorker = JSON.parse(localStorage.getItem('currentUser'));
@@ -28,6 +30,15 @@ export class TeamLeaderWorkersComponent implements OnInit {
 
       }
     };
-    this.router.navigate([`taskManagers/WorkerDeatails`], navigationExtras);
+    this.showWorker(worker); 
   }
+
+
+  showWorker(worker) {
+    this.teamLeaderService.currentWorker=worker;
+     this.dialogService.addDialog(WorkerDeatailsComponent, { 
+    })
+      .subscribe((isConfirmed) => { });
+  }
+
 }

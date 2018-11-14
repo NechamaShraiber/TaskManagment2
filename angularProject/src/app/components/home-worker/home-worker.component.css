@@ -15,6 +15,55 @@ body {
   #timer span:first-child {
     margin-left: 0;
   }
-  .c{
-    background-color: red;
+  
+  .wrapAll{
+    display: inline-block;
   }
+  .wrap {
+    margin: 0px 11px;
+    position: relative;
+   display: inline-block;
+    direction: rtl;
+   float: right;
+  }
+  
+  .circle {
+    height: 100px;
+    width: 100px;
+    background: #4AA0DB;
+    border: 4px solid #4AA0DB;
+    border-radius: 50%;
+    cursor: pointer;
+    display: block;
+  }
+  .circle:hover {
+    background: #50ADED;
+  }
+  .circle:active {
+    background: #4394CA;
+  }
+  
+  .envelope {
+ 	height: 0;
+	     width: 0;
+	     border-left: 30px solid transparent;
+	     border-right: 30px solid transparent;
+	     border-top: 20px solid #FFF;
+	     margin: 29px 17px;
+	     position: absolute;
+
+  }
+  
+  .envelope-top {
+    height: 0;
+    width: 0;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 8px;
+    border-bottom: 20px solid #FFF;
+    border-left: 30px solid #FFF;
+    border-right: 31px solid #FFF;
+    border-top: 22px solid transparent;
+    margin: 31px 16px;
+    position: absolute;
+  }
+  

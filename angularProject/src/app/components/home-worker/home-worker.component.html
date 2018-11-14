@@ -1,23 +1,35 @@
+
+
 <div >
+
+  <!-- </a> -->
+  <div class="wrapAll">
+<h1>{{currentWorker.Name}}</h1>
     <p>Today is: {{today | date:'fullDate'}}</p>
     <div *ngIf="t">
-    <p >You started at:  {{startTask | date:'hh:mm:ss a z'}}</p>
-    <P >you work: {{ t | date:'hh:mm:ss'}} at {{currectProject.Name}}</P>
-  
+      <p>You started at: {{startTask | date:'hh:mm:ss a z'}}</p>
+      <P>you work: {{ t | date:'hh:mm:ss'}} at {{currectProject.Name}}</P>
+    </div>
   </div>
-  </div>
-  <div>
-   
-    <button (click)="send()">send email</button> 
-  </div>
-  
+  <!-- <button >send email</button>  -->
 
-<div class="row">
-  <div class="col-md-3" *ngFor="let project of projects" >
-    <app-hours  [hour]=(project) (click)="updateHours(project)"></app-hours>
-    
+  <div class="wrap">
+    <!-- <a href="mailto:someone@example.com"> -->
+    <div class="circle" (click)="send()">
+      <div class="envelope-top"></div>
+      <div class="envelope"></div>
+    </div>
   </div>
 </div>
-<div *ngIf="projects">
-<app-chart [projects]=projects></app-chart>
+
+<div class="row">
+  <div class="col-md-3" *ngFor="let project of projects">
+    <app-hours [hour]=(project) (click)="updateHours(project)"></app-hours>
+
+  </div>
+</div>
+<div class="row">
+<div class="col-md-offset-3 col-md-6" *ngIf="projects">
+  <app-chart [projects]=projects></app-chart>
+</div>
 </div>

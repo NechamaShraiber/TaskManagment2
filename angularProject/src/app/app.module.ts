@@ -34,19 +34,16 @@ import { AuthGuard} from '../app/shared/auth.guard';
 const routes: Routes = [
   { path: 'taskManagers/login', component: LoginComponent },
   { path: 'taskManagers/home', component: HomeComponent ,children:[
-
-
   { path: 'addProject', component: AddProjectComponent },
   { path: 'usersManagers', component: UsersManagersComponent },
   { path: 'Addworker', component: AddWorkerComponent },
   { path: 'teamLeaderProjects', component: TeamLeaderProjectComponent },
   { path: 'teamLeaderWorkers', component: TeamLeaderWorkersComponent },
 
- 
   ]}, 
-   { path: 'taskManagers/projectDeatails', component: ProjectDeatailsComponent },
+   //{ path: 'taskManagers/projectDeatails', component: ProjectDeatailsComponent },
   { path: 'taskManagers/homeWorkerComponent', component: HomeWorkerComponent },
-   { path: 'taskManagers/WorkerDeatails', component: WorkerDeatailsComponent },
+  // { path: 'taskManagers/WorkerDeatails', component: WorkerDeatailsComponent },
   { path: '**', component: LoginComponent },
   { path: '', component: LoginComponent },
 ];
@@ -86,11 +83,8 @@ const routes: Routes = [
     //MatDialogModule
 
   ],
-
-
-
   entryComponents: [
-    DeleteWorkerComponent,EditWorkerComponent,SendMsgComponent
+    DeleteWorkerComponent,EditWorkerComponent,SendMsgComponent,ProjectDeatailsComponent,WorkerDeatailsComponent
 
   ],
   providers: [WorkerService],

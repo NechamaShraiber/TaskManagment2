@@ -1,17 +1,15 @@
-
 <div class="blog-card">
-
-        <div class="description">
-    
-            <h1>{{hour.Name}}</h1>
-            <hr>
-    <label >date:</label><label>{{hour.Date}}</label>
-        <br>
-    <label>worked hours:</label><label>{{hour.Hours}}</label>
+  <div class="description">
+      <h1>{{hour.Name}}</h1>
+      <hr>
+      <label>date:</label>
+      <label>{{hour.Date.substring(0,10)}}</label>
       <br>
-    <label>allocated hours:</label><label>{{hour.AllocatedHours}}</label>
+      <label>worked hours:</label>
+      <label>{{hour.Hours}}</label>
       <br>
-    
-        </div>
-    </div>
-    
+      <label>allocated hours:</label>
+      <label>{{hour.AllocatedHours}}</label>
+      <br>
+    </div> 
+</div>
