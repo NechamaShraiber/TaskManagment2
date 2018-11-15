@@ -11,6 +11,8 @@ subStr:string="";
 bodyStr:string="";
 subjectUpdateChart=new Subject();
 idJob:number;
+projectStart:any=null;
+
   constructor(private http: HttpClient, private router: Router) {
     this.worker=null;
  }
