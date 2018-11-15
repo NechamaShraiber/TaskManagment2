@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { WorkerService } from '../../shared/service/worker.service';
 import { Route, Router } from '../../../../node_modules/@angular/router';

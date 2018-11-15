@@ -9,15 +9,3 @@ export class Project {
     StartDate : Date;
     EndDate :Date;
 }
-
-
-/* TeamLeaderId 
-
- Customer 
-
- DevelopHours 
-
- QAHours 
-
- UiUxHours 
- */
