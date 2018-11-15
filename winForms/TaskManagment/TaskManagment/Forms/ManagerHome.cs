@@ -128,6 +128,7 @@ namespace TaskManagment.Forms
 
         public void addWorkersToProject(string name)
         {
+          
             var httpWebRequest = (HttpWebRequest)WebRequest.Create($"{Global.path}addWorkersToProject/{name}");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";

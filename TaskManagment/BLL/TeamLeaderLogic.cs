@@ -55,7 +55,7 @@ namespace BLL
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),
                         UserName = reader.GetString(2),
-                        Password = reader.GetString(3),
+                        Password = "",
                         EMail = reader.GetString(4),
                         JobId = reader.GetInt32(5),
                         ManagerId = reader[6] as int?
@@ -72,7 +72,7 @@ namespace BLL
             string query = $"SELECT  name,date,SEC_TO_TIME(SUM(TIME_TO_SEC(end) - TIME_TO_SEC(start))) AS Time, allocated_hours" +
         $" FROM workers W JOIN project_workers PW ON W.worker_id=PW.worker_id LEFT JOIN work_hours WH ON PW.project_worker_id= WH.project_work_id" +
        $" WHERE PW.project_id= {projectId}" +
-        $" GROUP BY name, allocated_hours ORDER BY name";
+        $" GROUP BY name, allocated_hours,date ORDER BY name";
            
 
             Func<MySqlDataReader, List<Unknown>> func = (reader) =>

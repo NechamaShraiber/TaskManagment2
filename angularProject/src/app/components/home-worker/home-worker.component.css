@@ -20,7 +20,7 @@ body {
     display: inline-block;
   }
   .wrap {
-    margin: 0px 11px;
+    margin: 10px 11px;
     position: relative;
    display: inline-block;
     direction: rtl;

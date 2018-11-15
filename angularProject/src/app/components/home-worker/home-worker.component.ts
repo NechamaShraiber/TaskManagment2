@@ -16,15 +16,10 @@ import { getAttrsForDirectiveMatching } from '../../../../node_modules/@angular/
 })
 export class HomeWorkerComponent implements OnInit {
   today: any;
-  startTask: any;
-  time: any;
+ 
   projects: any[];
   currentWorker: Worker
-  currectProject: any;
-  isStart: boolean = true;
-  btnValue: string = "start";
-  t: any;
-  timer;
+ 
 
   constructor(private workerService: WorkerService, private router: Router, private dialogService: DialogService) {
 
@@ -61,52 +56,6 @@ export class HomeWorkerComponent implements OnInit {
   //  this.updateHours();
   //  }
 
-  updateHours(e) {
-
-    if (!this.isStart && this.currectProject != e) {
-      alert("you must end project "+ this.currectProject.Name);
-      return;
-
-    }
  
-      
-    this.time = formatDate(new Date(), 'yyyy/MM/dd hh:mm:ss', 'en');
-    if (this.isStart) {
-      this.currectProject = e;
-      this.startTask = new Date();
-      this.btnValue = "end";
-      this.timer = setInterval(() => {
-        this.t = Math.abs(new Date().getTime() - this.startTask.getTime());
-
-
-
-      }, 1000);
-    }
-    else {
-      this.btnValue = "start";
-      clearInterval(this.timer);
-      this.startTask = null;
-      this.t = null;
-
-
-    }
-    this.workerService.updateStartHour(this.time, this.currectProject.Id, this.isStart).subscribe(
-      res => {
-        if (!this.isStart) {
-          this.workerService.getProject(this.currentWorker.Id).subscribe(res => {
-            this.projects = res;
-            this.workerService.subjectUpdateChart.next(this.projects);
-          });
-
-
-        }
-
-
-
-        this.isStart = !this.isStart;
-
-      })
-  }
-
 }
 
