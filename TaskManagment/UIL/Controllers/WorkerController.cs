@@ -76,7 +76,7 @@ namespace UIL.Controllers
             //curl -X GET -v http://localhost:59628/api/getProject/6
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new ObjectContent<List<Object>>(WorkerLogic.GetProject(id), new JsonMediaTypeFormatter())
+                Content = new ObjectContent<List<Unknown>>(WorkerLogic.GetProject(id), new JsonMediaTypeFormatter())
             };
         }
         [HttpGet]

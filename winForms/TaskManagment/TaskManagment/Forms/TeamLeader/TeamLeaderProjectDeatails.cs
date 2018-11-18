@@ -11,7 +11,7 @@ namespace TaskManagment.Forms
     public partial class TeamLeaderProjectDeatails : Form
     {
         public Project project;
-       dynamic workersHours;
+        List<Unknown> workersHours=new List<Unknown>();
         public TeamLeaderProjectDeatails(Project p)
         {
             InitializeComponent();
@@ -52,11 +52,10 @@ namespace TaskManagment.Forms
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-                workersHours = JsonConvert.DeserializeObject(result);
+                workersHours = JsonConvert.DeserializeObject<List<Unknown>>(result);
                 if (workersHours != null) { 
                     dgv_workersHours.DataSource = workersHours;
-               // dgv_workersHours.Columns["Id"].Visible = false;
-                }
+                dgv_workersHours.Columns["Id"].Visible = false; }
             }
 
             else
@@ -85,10 +84,10 @@ namespace TaskManagment.Forms
             if (workersHours != null) { 
             foreach (var item in workersHours)
             {
-                    allocatedHours.Add((String)item["Name"].Value, (Int32)item["AllocatedHours"].Value);
+                allocatedHours.Add(item.Name, Convert.ToInt32( item.AllocatedHours));
                     if (item.Hours != "")
                     {
-                        var t = item["Hours"].Value.Split(':');
+                        var t = item.Hours.Split(':');
                         workedHours.Add(float.Parse(t[0]) + (float.Parse(t[1]) / 100));
                     }
                     else workedHours.Add(0);

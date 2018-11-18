@@ -68,7 +68,7 @@ namespace BLL
             foreach (var item in ids)
             {
                 string query = $"INSERT INTO task_managment.project_workers ({item},{idProject}) VALUES(4,3)";
-                if (DBAccess.RunNonQuery(query) == 0)
+               if( DBAccess.RunNonQuery(query)==0)
                     return false;
             }
             return true;
@@ -90,12 +90,12 @@ namespace BLL
             string query;
             if (worker.Password != null)
             {
-                query = $"UPDATE task_managment.workers SET name='{worker.Name}', user_name='{worker.UserName}'" +
-                                $", password='{worker.Password}' , email='{worker.EMail}', job={worker.JobId}, manager={worker.ManagerId} WHERE worker_id={worker.Id}";
+query = $"UPDATE task_managment.workers SET name='{worker.Name}', user_name='{worker.UserName}'" +
+                $", password='{worker.Password}' , email='{worker.EMail}', job={worker.JobId}, manager={worker.ManagerId} WHERE worker_id={worker.Id}";
             }
             else
             {
-                query = $"UPDATE task_managment.workers SET name='{worker.Name}', user_name='{worker.UserName}'" +
+                query= $"UPDATE task_managment.workers SET name='{worker.Name}', user_name='{worker.UserName}'" +
                 $", email='{worker.EMail}', job={worker.JobId}, manager={worker.ManagerId} WHERE worker_id={worker.Id}";
             }
             return DBAccess.RunNonQuery(query) == 1;
@@ -119,7 +119,7 @@ namespace BLL
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),
                         UserName = reader.GetString(2),
-                        Password = "",
+                        Password ="",
                         EMail = reader.GetString(4),
                         JobId = reader.GetInt32(5),
                         ManagerId = reader[6] as int?
@@ -228,47 +228,5 @@ namespace BLL
 
         //    return DBAccess.RunReader(query, func);
         //}
-
-
-        public static List<Object> GetPresence()
-        {
-
-            string query = $"SELECT w.name, p.name, wh.date , wh.start , wh.end" +
-$" FROM workers W JOIN project_workers pw ON w.worker_id = pw.worker_id" +
-$" JOIN projects P ON pw.project_id = p.project_id JOIN work_hours wh" +
-$" ON wh.project_work_id = pw.project_worker_id" +
-$" ORDER BY w.name, p.name, wh.date , wh.start";
-
-
-            Func<MySqlDataReader, List<Object>> func = (reader) =>
-            {
-                List<Object> Presence = new List<Object>();
-                // var v = reader.GetInt32(0);
-                // var t = reader.GetString(1);
-                while (reader.Read())
-                {
-
-                    Presence.Add(new 
-                    {
-                       
-                        WorkerName = reader.GetString(0),
-                        ProjectName=reader.GetString(1),
-                        Date = reader.GetDateTime(2),
-                       Start=reader.GetString(3),
-                       End = reader.GetString(4),
-
-
-                    });
-                }
-                return Presence;
-            };
-
-            return DBAccess.RunReader(query, func);
-
-        }
-
-        /*
-         * 
-        */
     }
 }

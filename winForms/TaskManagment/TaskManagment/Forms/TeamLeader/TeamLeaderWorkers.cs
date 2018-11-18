@@ -14,7 +14,7 @@ namespace TaskManagment.Forms
     {
         int numHours = 0;
         public Worker worker;
-       dynamic hoursList;
+        List<Unknown> hoursList;
         public TeamLeaderWorkers(Worker w)
         {
             InitializeComponent();
@@ -33,7 +33,7 @@ namespace TaskManagment.Forms
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-                hoursList = JsonConvert.DeserializeObject(result);
+                hoursList = JsonConvert.DeserializeObject<List<Unknown>>(result);
                 if (hoursList != null)
                 {
                     dgv_workerHours.DataSource = hoursList;
@@ -87,7 +87,7 @@ namespace TaskManagment.Forms
             try {
                 index = dgv_workerHours.SelectedRows[0].Index;
          
-            int workerId = Convert.ToInt32(hoursList[index]["Id"].Value);
+            int workerId = Convert.ToInt32(hoursList[index].Id);
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(Global.path + "updateWorkerHours");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "PUT";
@@ -105,7 +105,7 @@ namespace TaskManagment.Forms
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
-                        hoursList[index]["AllocatedHours"].Value = numHours;
+                    hoursList[index].AllocatedHours = numHours;
                     var result = streamReader.ReadToEnd();
                     dynamic obj = JsonConvert.DeserializeObject<Worker>(result);
                     dgv_workerHours.DataSource = hoursList;

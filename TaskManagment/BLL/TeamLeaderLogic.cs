@@ -67,7 +67,7 @@ namespace BLL
 
         }
       
-        public static List<Object> getWorkersHours(int projectId)
+        public static List<Unknown> getWorkersHours(int projectId)
         {
             string query = $"SELECT  name,SEC_TO_TIME(SUM(TIME_TO_SEC(end) - TIME_TO_SEC(start))) AS Time, allocated_hours" +
         $" FROM workers W JOIN project_workers PW ON W.worker_id=PW.worker_id LEFT JOIN work_hours WH ON PW.project_worker_id= WH.project_work_id" +
@@ -75,9 +75,9 @@ namespace BLL
         $" GROUP BY name, allocated_hours ORDER BY name";
            
 
-            Func<MySqlDataReader, List<Object>> func = (reader) =>
+            Func<MySqlDataReader, List<Unknown>> func = (reader) =>
             {
-                List<Object> unknowns = new List<Object>();
+                List<Unknown> unknowns = new List<Unknown>();
                 while (reader.Read())
                 {
 
@@ -93,7 +93,7 @@ namespace BLL
                     }
                     catch { s2 = 0 + ":" + 0; };
                //  DateTime.TryParse( reader[1].ToString(), out DateTime d);
-                    unknowns.Add(new 
+                    unknowns.Add(new Unknown
                     {
 
                         Name = reader.GetString(0),
@@ -109,7 +109,7 @@ namespace BLL
             return DBAccess.RunReader(query, func);
 
         }
-        public static List<Object> getWorkerHours(int teamLeaderId, int workerId)
+        public static List<Unknown> getWorkerHours(int teamLeaderId, int workerId)
         {
             string query = $"SELECT pw.project_worker_id, p.name , allocated_hours , SEC_TO_TIME(SUM(TIME_TO_SEC(end) - TIME_TO_SEC(start)))" +
             $" FROM project_workers PW join projects p on p.project_id=pw.project_id"+
@@ -117,16 +117,16 @@ namespace BLL
             $" where p.team_leader={teamLeaderId} and pw.worker_id= {workerId}"+
             $" group by pw.project_worker_id, p.name  ,  allocated_hours";
 
-            Func<MySqlDataReader, List<Object>> func = (reader) =>
+            Func<MySqlDataReader, List<Unknown>> func = (reader) =>
             {
-                List<Object> unknowns = new List<Object>();
+                List<Unknown> unknowns = new List<Unknown>();
                 while (reader.Read())
                 {
 
                     string s = reader[2].ToString();
                     int.TryParse(s, out int x);
                     string s2 = reader[3].ToString();
-                    unknowns.Add(new 
+                    unknowns.Add(new Unknown
                     {
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),
