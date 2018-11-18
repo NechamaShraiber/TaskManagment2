@@ -49,7 +49,7 @@ namespace UIL.Controllers
         {
 
             //curl -X GET -v http://localhost:59628/api/getWorkersHours/11
-            Content = new ObjectContent<List<Unknown>>(TeamLeaderLogic.getWorkersHours(projectId), new JsonMediaTypeFormatter())
+            Content = new ObjectContent<List<Object>>(TeamLeaderLogic.getWorkersHours(projectId), new JsonMediaTypeFormatter())
         };
 
 
@@ -64,7 +64,7 @@ namespace UIL.Controllers
         {
 
             //curl -X GET -v http://localhost:59628/api/getWorkerHours/5/6
-            Content = new ObjectContent<List<Unknown>>(TeamLeaderLogic.getWorkerHours(teamLeaderId,workerId), new JsonMediaTypeFormatter())
+            Content = new ObjectContent<List<Object>>(TeamLeaderLogic.getWorkerHours(teamLeaderId,workerId), new JsonMediaTypeFormatter())
         };
         /// <summary>
         ///  get all the hours that used in current month
