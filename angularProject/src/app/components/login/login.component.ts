@@ -35,24 +35,24 @@ export class LoginComponent {
  async onSubmit() {
     const hash = await sha256(this.password.value);
     this.globalService.login(this.userName.value,hash)
-      .subscribe(worker => {
-          try {
+      .subscribe(worker => { 
+        if(worker){
+          try{
+        console.log(worker+"iiiiiiiiiiii");
           localStorage.setItem('currentUser', JSON.stringify(worker));
           this.router.navigate(['taskManagers/home']);
           }
-          catch (Error)
-          {
+          catch(Error){
+            console.log(worker+"ERROR");
+
+          }
+        }
+          else{
+            console.log("ERRORRRRRRRRRRRRRRRRR");
             alert("One or more data is not correct");
-            this.isExistUser = false;
             this.router.navigate(['taskManagers/login']);
           }
-        
-        // else {
-        //   alert("One or more data is not correct");
-        //   this.isExistUser = false;
-        //   this.router.navigate(['taskManagers/login']);
-        // }
-      });
+      })
   }
 
 

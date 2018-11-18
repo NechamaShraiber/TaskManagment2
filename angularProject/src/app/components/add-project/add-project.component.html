@@ -1,5 +1,6 @@
-<div class="box">
-  <form [formGroup]="addProjectGroup" (ngSubmit)="onSubmit()">
+
+<div class="login">
+    <form class="login-container" [formGroup]="addProjectGroup" (ngSubmit)="onSubmit()">
     <div class="group">
       <input id="Name" class="inputMaterial" formControlName="Name">
       <span class="highlight"></span>
@@ -99,4 +100,3 @@
     <button type="submit" class="button col-md-offset-2 col-md-8" [disabled]="addProjectGroup.invalid">Add</button>
   </form>
 </div>
-

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace TaskManagment.Forms
         {
             InitializeComponent();
             AddProject();
+            Reports();
             tab_manager.Controls.Remove(tab_workerDeatrails);
 
         }
@@ -454,6 +456,44 @@ namespace TaskManagment.Forms
 
         #endregion
 
+        #region addProject
+        private BindingSource bindingSource1 = new BindingSource();
+        private SqlDataAdapter dataAdapter = new SqlDataAdapter();
+
+        public void Reports()
+        {
+            dataGridView1.DataSource = bindingSource1;
+            GetData("SELECT * FROM task_managment.workers;");
+        }
+        private void GetData(string selectCommand)
+        {
+            try
+            {
+                String connectionString =
+                    "Integrated Security=SSPI;Persist Security Info=False;" +
+                    "Initial Catalog=Northwind;Data Source=localhost";
+
+                dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
+
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+
+                DataTable table = new DataTable();
+                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                dataAdapter.Fill(table);
+                bindingSource1.DataSource = table;
+
+                dataGridView1.AutoResizeColumns(
+                    DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Can not show this table");
+            }
+        }
+
+
+        #endregion
+
         private void ManagerHome_Load(object sender, EventArgs e)
         {
 
@@ -503,5 +543,7 @@ namespace TaskManagment.Forms
         {
 
         }
+
+
     }
 }

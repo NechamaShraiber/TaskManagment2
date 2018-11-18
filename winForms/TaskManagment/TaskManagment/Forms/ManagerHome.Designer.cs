@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.tab_manager = new System.Windows.Forms.TabControl();
             this.tab_addProject = new System.Windows.Forms.TabPage();
+            this.dgvAddWorkers = new System.Windows.Forms.DataGridView();
+            this.label16 = new System.Windows.Forms.Label();
             this.txt_team_name = new System.Windows.Forms.ComboBox();
             this.data_end = new System.Windows.Forms.DateTimePicker();
             this.data_start = new System.Windows.Forms.DateTimePicker();
@@ -71,14 +73,15 @@
             this.label15 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label16 = new System.Windows.Forms.Label();
-            this.dgvAddWorkers = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tab_manager.SuspendLayout();
             this.tab_addProject.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).BeginInit();
+            this.tab_reports.SuspendLayout();
             this.tab_user_managment.SuspendLayout();
             this.tab_workerDeatrails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tab_manager
@@ -124,6 +127,27 @@
             this.tab_addProject.Text = "Add project";
             this.tab_addProject.UseVisualStyleBackColor = true;
             this.tab_addProject.Click += new System.EventHandler(this.tab_addProject_Click);
+            // 
+            // dgvAddWorkers
+            // 
+            this.dgvAddWorkers.BackgroundColor = System.Drawing.Color.DarkGray;
+            this.dgvAddWorkers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAddWorkers.GridColor = System.Drawing.Color.DarkGray;
+            this.dgvAddWorkers.Location = new System.Drawing.Point(411, 91);
+            this.dgvAddWorkers.Name = "dgvAddWorkers";
+            this.dgvAddWorkers.Size = new System.Drawing.Size(185, 168);
+            this.dgvAddWorkers.TabIndex = 38;
+            this.dgvAddWorkers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAddWorkers_CellContentClick);
+            this.dgvAddWorkers.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAddWorkers_RowHeaderMouseClick);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(450, 49);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(68, 13);
+            this.label16.TabIndex = 37;
+            this.label16.Text = "add workers:";
             // 
             // txt_team_name
             // 
@@ -283,6 +307,7 @@
             // 
             // tab_reports
             // 
+            this.tab_reports.Controls.Add(this.dataGridView1);
             this.tab_reports.Location = new System.Drawing.Point(4, 22);
             this.tab_reports.Name = "tab_reports";
             this.tab_reports.Padding = new System.Windows.Forms.Padding(3);
@@ -489,26 +514,13 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // label16
+            // dataGridView1
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(450, 49);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(68, 13);
-            this.label16.TabIndex = 37;
-            this.label16.Text = "add workers:";
-            // 
-            // dgvAddWorkers
-            // 
-            this.dgvAddWorkers.BackgroundColor = System.Drawing.Color.DarkGray;
-            this.dgvAddWorkers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAddWorkers.GridColor = System.Drawing.Color.DarkGray;
-            this.dgvAddWorkers.Location = new System.Drawing.Point(411, 91);
-            this.dgvAddWorkers.Name = "dgvAddWorkers";
-            this.dgvAddWorkers.Size = new System.Drawing.Size(185, 168);
-            this.dgvAddWorkers.TabIndex = 38;
-            this.dgvAddWorkers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAddWorkers_CellContentClick);
-            this.dgvAddWorkers.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAddWorkers_RowHeaderMouseClick);
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(34, 43);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(539, 311);
+            this.dataGridView1.TabIndex = 0;
             // 
             // ManagerHome
             // 
@@ -522,11 +534,13 @@
             this.tab_manager.ResumeLayout(false);
             this.tab_addProject.ResumeLayout(false);
             this.tab_addProject.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).EndInit();
+            this.tab_reports.ResumeLayout(false);
             this.tab_user_managment.ResumeLayout(false);
             this.tab_workerDeatrails.ResumeLayout(false);
             this.tab_workerDeatrails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -576,5 +590,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.DataGridView dgvAddWorkers;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

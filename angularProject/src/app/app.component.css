@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400);
 h1, p, ul {
     margin: 0;
   }
@@ -6,7 +7,7 @@ h1, p, ul {
     background: #ffffff;
     border-top: 0.0625em solid lightgrey;
     bottom: 0; 
-    color: #000000;   
+    color:  #4568DC;
     height: 5em; 
     position: absolute; 
      
@@ -23,7 +24,7 @@ h1, p, ul {
       
       body {
         background: #ffffff;
-        color: #000000;    
+        color: #4568DC;   
         font-family: 'Open Sans', sans-serif;  
         font-size: 16px;
         font-weight: 400;
