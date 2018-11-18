@@ -65,7 +65,7 @@ namespace BLL
             };
             return DBAccess.RunReader(query, func);
         }
-        public static List<Unknown> GetProject(int id)
+        public static List<object> GetProject(int id)
         {
         //    /*SELECT PW.project_worker_id, p.name,  allocated_hours, SEC_TO_TIME(TIME_TO_SEC(end) - TIME_TO_SEC(start)) AS Time
         // FROM project_workers PW JOIN projects P ON P.project_id = PW.project_id LEFT JOIN
@@ -79,9 +79,9 @@ namespace BLL
         $" WHERE PW.worker_id = {id}" +
         $"    GROUP BY PW.project_worker_id,p.name,allocated_hours   ORDER BY project_worker_id";
       
-            Func<MySqlDataReader, List<Unknown>> func = (reader) =>
+            Func<MySqlDataReader, List<Object>> func = (reader) =>
             {
-                List<Unknown> unknowns = new List<Unknown>();
+                List<Object> unknowns = new List<Object>();
                 while (reader.Read())
                 {
                      string s=reader[2].ToString();
@@ -92,7 +92,7 @@ namespace BLL
                         s2 = (t.Hours + t.Days * 24) + ":" + t.Minutes;
                     }
                     catch { s2 = 0+ ":" +0; };
-                        unknowns.Add(new Unknown
+                        unknowns.Add(new 
                         {
                             Id = reader.GetInt32(0),
                             Name = reader.GetString(1),

@@ -67,37 +67,37 @@ namespace BLL
 
         }
       
-        public static List<Unknown> getWorkersHours(int projectId)
+        public static List<Object> getWorkersHours(int projectId)
         {
-            string query = $"SELECT  name,date,SEC_TO_TIME(SUM(TIME_TO_SEC(end) - TIME_TO_SEC(start))) AS Time, allocated_hours" +
+            string query = $"SELECT  name,SEC_TO_TIME(SUM(TIME_TO_SEC(end) - TIME_TO_SEC(start))) AS Time, allocated_hours" +
         $" FROM workers W JOIN project_workers PW ON W.worker_id=PW.worker_id LEFT JOIN work_hours WH ON PW.project_worker_id= WH.project_work_id" +
        $" WHERE PW.project_id= {projectId}" +
-        $" GROUP BY name, allocated_hours,date ORDER BY name";
+        $" GROUP BY name, allocated_hours ORDER BY name";
            
 
-            Func<MySqlDataReader, List<Unknown>> func = (reader) =>
+            Func<MySqlDataReader, List<Object>> func = (reader) =>
             {
-                List<Unknown> unknowns = new List<Unknown>();
+                List<Object> unknowns = new List<Object>();
                 while (reader.Read())
                 {
 
                  
                     /////////////////
-                    string s = reader[3].ToString();
+                    string s = reader[2].ToString();
                     int.TryParse(s, out int x);
                        string s2;
                     try
                     {
-                        TimeSpan t = reader.GetTimeSpan(2);
+                        TimeSpan t = reader.GetTimeSpan(1);
                         s2 = (t.Hours + t.Days * 24) + ":" + t.Minutes;
                     }
                     catch { s2 = 0 + ":" + 0; };
-                  DateTime.TryParse( reader[1].ToString(), out DateTime d);
-                    unknowns.Add(new Unknown
+               //  DateTime.TryParse( reader[1].ToString(), out DateTime d);
+                    unknowns.Add(new 
                     {
 
                         Name = reader.GetString(0),
-                        Date = d,
+                        //Date = d,
                        Hours = s2,
                        AllocatedHours = x
                     });
@@ -109,7 +109,7 @@ namespace BLL
             return DBAccess.RunReader(query, func);
 
         }
-        public static List<Unknown> getWorkerHours(int teamLeaderId, int workerId)
+        public static List<Object> getWorkerHours(int teamLeaderId, int workerId)
         {
             string query = $"SELECT pw.project_worker_id, p.name , allocated_hours , SEC_TO_TIME(SUM(TIME_TO_SEC(end) - TIME_TO_SEC(start)))" +
             $" FROM project_workers PW join projects p on p.project_id=pw.project_id"+
@@ -117,16 +117,16 @@ namespace BLL
             $" where p.team_leader={teamLeaderId} and pw.worker_id= {workerId}"+
             $" group by pw.project_worker_id, p.name  ,  allocated_hours";
 
-            Func<MySqlDataReader, List<Unknown>> func = (reader) =>
+            Func<MySqlDataReader, List<Object>> func = (reader) =>
             {
-                List<Unknown> unknowns = new List<Unknown>();
+                List<Object> unknowns = new List<Object>();
                 while (reader.Read())
                 {
 
                     string s = reader[2].ToString();
                     int.TryParse(s, out int x);
                     string s2 = reader[3].ToString();
-                    unknowns.Add(new Unknown
+                    unknowns.Add(new 
                     {
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),

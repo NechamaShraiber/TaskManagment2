@@ -15,12 +15,12 @@ namespace TaskManagment.Forms
     {
         bool isBegin = true;
         DateTime startdate;
-        List<Unknown> projectList;
+        dynamic projectList;
         int projectId;
         public WorkerHome()
         {
             InitializeComponent();
-             this.Text = Global.CurrentWorker.Name;
+            this.Text = Global.CurrentWorker.Name;
             GetProjects();
 
         }
@@ -35,12 +35,12 @@ namespace TaskManagment.Forms
             {
                 var result = response.Content.ReadAsStringAsync().Result;
 
-                projectList = JsonConvert.DeserializeObject<List<Unknown>>(result);
+                projectList = JsonConvert.DeserializeObject(result);
                 if (projectList != null)
                 {
                     dgv_task.DataSource = projectList;
                     dgv_task.Columns["Id"].Visible = false;
-                    dgv_task.Columns["Date"].Visible = false;
+                    // dgv_task.Columns["Date"].Visible = false;
                 }
 
             }
@@ -58,10 +58,15 @@ namespace TaskManagment.Forms
             {
                 startdate = DateTime.Now;
                 lbl_beginningTime.Text = startdate.ToString("hh:mm:ss tt");
-                try {    projectId = (int)dgv_task.SelectedRows[0].Cells[0].Value;}
-                catch {
+                try {
+                 
+                    projectId = int.Parse((String) dgv_task.SelectedRows[0].Cells[0].FormattedValue);
+                }
+                catch
+                {
                     lbl_message.Text = "choose project to start";
-                    return; }
+                    return;
+                }
                 btn_task.Text = "end Task";
             }
             else
@@ -88,7 +93,7 @@ namespace TaskManagment.Forms
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
-                    if(!isBegin)
+                    if (!isBegin)
                     {
                         GetProjects();
                         if (projectList != null)
@@ -102,31 +107,33 @@ namespace TaskManagment.Forms
 
         }
 
-       void UpdateChart()
+        void UpdateChart()
         {
 
             Dictionary<string, int> allocatedHours = new Dictionary<string, int>();
             List<float> workedHours = new List<float>();
-          
-                foreach (var item in projectList)
-                {
-                    allocatedHours.Add(item.Name, Convert.ToInt32(item.AllocatedHours));
-                    if (item.Hours != "")
-                {
-                    var t = item.Hours.Split(':');
-                        workedHours.Add(float.Parse(t[0])+(float.Parse(t[1])/100));
-                }
-                    else workedHours.Add(0);
-                }
 
-                chart1.Series[0].Points.DataBindXY(allocatedHours.Keys, allocatedHours.Values);
-                chart1.Series[1].Points.DataBindXY(allocatedHours.Keys, workedHours);
-            
+            foreach (var item in projectList)
+            {
+             
+
+                    allocatedHours.Add((String)item["Name"].Value, (Int32)item["AllocatedHours"].Value);
+                if (item.Hours != "")
+                {
+                    var t = item["Hours"].Value.Split(':');
+                    workedHours.Add(float.Parse(t[0]) + (float.Parse(t[1]) / 100));
+                }
+                else workedHours.Add(0);
+            }
+
+            chart1.Series[0].Points.DataBindXY(allocatedHours.Keys, allocatedHours.Values);
+            chart1.Series[1].Points.DataBindXY(allocatedHours.Keys, workedHours);
+
         }
         private void WorkerHome_Load(object sender, EventArgs e)
         {
-        if (projectList != null)
-            UpdateChart();
+            if (projectList != null)
+                UpdateChart();
         }
 
         private void timerClock_Tick(object sender, EventArgs e)
@@ -136,7 +143,7 @@ namespace TaskManagment.Forms
 
         private void btn_task_Click(object sender, EventArgs e)
         {
-  UpdateTime();
+            UpdateTime();
         }
         private void timer_Tick(object sender, EventArgs e)
         {

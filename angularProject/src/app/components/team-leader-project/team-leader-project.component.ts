@@ -14,7 +14,7 @@ import { ProjectDeatailsComponent } from '../project-deatails/project-deatails.c
 export class TeamLeaderProjectComponent implements OnInit {
   private projects: any;
   currentWorker: Worker;
-  constructor(private teamLeaderService: TeamLeaderService, private router: Router, private dialogService:DialogService) { }
+  constructor(private teamLeaderService: TeamLeaderService ) { }
   @Input()
   private id: number
   ngOnInit() {
@@ -26,20 +26,6 @@ export class TeamLeaderProjectComponent implements OnInit {
 
   }
 
-  openProjectDeatails(project: Project) {
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-        "project": JSON.stringify(project)
-      }
-    };
-   this.showProject(project); 
-  }
-
-  showProject(project) {
-    this.teamLeaderService.currentProject=project;
-     this.dialogService.addDialog(ProjectDeatailsComponent, { 
-    })
-      .subscribe((isConfirmed) => { });
-  }
+  
 
 }

@@ -6,13 +6,13 @@ import { Observable, } from 'rxjs';
   providedIn: 'root'
 })
 export class GlobalService {
-
+static path:string="http://localhost:59628/api/"
   constructor( private http: HttpClient) { }
   login(userName: string, password: string): Observable<any> {
     let data = { userName: userName, password: password };
-    return this.http.post("http://localhost:59628/api/login", data);
+    return this.http.post(GlobalService.path+"login", data);
   }
   getAllJobs(): any {
-    return this.http.get("http://localhost:59628/api/getAllJobs");
+    return this.http.get(GlobalService.path+"getAllJobs");
   }
 }

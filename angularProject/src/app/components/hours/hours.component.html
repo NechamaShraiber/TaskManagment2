@@ -7,11 +7,12 @@
         <div *ngIf="isProject" class="circle" title="start the task"  (click)="updateHours()"  [ngClass]="isStart ? 'startColor' : 'stopColor'">
          <div  [ngClass]="isStart ? 'start' : 'stop'"></div> 
         </div>
+        
       </div>
       <hr>
-      <label>date:</label>
+      <!-- <label>date:</label>
       <label>{{hour.Date| date: 'dd/MM/yyyy '}}</label>
-      <br>
+      <br> -->
       <label>worked hours:</label>
       <label>{{hour.Hours}}</label>
       <br>
