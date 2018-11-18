@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Worker } from '../models/worker';
 import { sha256 } from 'js-sha256';
+import { GlobalService } from './global.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,25 +20,25 @@ export class ManagerService {
   }
 
   addProject(project): any {
-    return this.http.post("http://localhost:59628/api/addProject/", JSON.parse(JSON.stringify(project)))
+    return this.http.post(GlobalService.path+"addProject/", JSON.parse(JSON.stringify(project)))
   }
   getAllManagers(): any {
-    return this.http.get("http://localhost:59628/api/getAllManagers");
+    return this.http.get(GlobalService.path+"getAllManagers");
   }
   
   addWorker(worker): any {
     worker.Password=sha256(worker.Password);
-      return this.http.post("http://localhost:59628/api/addWorker/", JSON.parse(JSON.stringify(worker)))
+      return this.http.post(GlobalService.path+"addWorker/", JSON.parse(JSON.stringify(worker)))
 }
   getAllWorkers(): any {
-    return this.http.get("http://localhost:59628/api/getAllWorkers");
+    return this.http.get(GlobalService.path+"getAllWorkers");
   }
   deleteWorker() {
-    return this.http.delete("http://localhost:59628/api/deleteWorker/" + this.idWorkerToDelete)
+    return this.http.delete(GlobalService.path+"deleteWorker/" + this.idWorkerToDelete)
   }
   updateWorker(worker): any {
     worker.Id = this.workerToUpdate.Id;
-    return this.http.put("http://localhost:59628/api/updateWorker/", JSON.parse(JSON.stringify(worker)))
+    return this.http.put(GlobalService.path+"updateWorker/", JSON.parse(JSON.stringify(worker)))
   }
   addWorkersToProject(workers:Worker[],name):any{
     this.ids=[];
@@ -45,7 +46,7 @@ export class ManagerService {
       this.ids.push(w.Id);
     });
 
-    return this.http.post("http://localhost:59628/api/addWorkersToProject/"+name+"/", JSON.parse(JSON.stringify(this.ids)))
+    return this.http.post(GlobalService.path+"addWorkersToProject/"+name+"/", JSON.parse(JSON.stringify(this.ids)))
 
   }
 

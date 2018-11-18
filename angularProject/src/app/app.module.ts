@@ -30,7 +30,7 @@ import { AuthGuard} from '../app/shared/auth.guard';
 //import {MatDialogModule} from "@angular/material";
 
 
- const  path="http://localhost:59628/api/";
+ const  globalPath:string="http://localhost:59628/api/";
 const routes: Routes = [
   { path: 'taskManagers/login', component: LoginComponent },
   { path: 'taskManagers/home', component: HomeComponent ,children:[

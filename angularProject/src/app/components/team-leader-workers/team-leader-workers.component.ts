@@ -13,7 +13,7 @@ import { DialogService } from '../../../../node_modules/ng2-bootstrap-modal';
 export class TeamLeaderWorkersComponent implements OnInit {
   currentWorker: Worker;
   private workers: any;
-  constructor(private dialogService:DialogService, private teamLeaderService: TeamLeaderService, private router: Router) { }
+  constructor(private teamLeaderService: TeamLeaderService,) { }
 
   ngOnInit() {
     this.currentWorker = JSON.parse(localStorage.getItem('currentUser'));
@@ -22,23 +22,5 @@ export class TeamLeaderWorkersComponent implements OnInit {
         this.workers = res;
       })
   }
-  openWorkerDeatails(worker: Worker) {
-
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-        "worker": JSON.stringify(worker)
-
-      }
-    };
-    this.showWorker(worker); 
-  }
-
-
-  showWorker(worker) {
-    this.teamLeaderService.currentWorker=worker;
-     this.dialogService.addDialog(WorkerDeatailsComponent, { 
-    })
-      .subscribe((isConfirmed) => { });
-  }
-
+  
 }

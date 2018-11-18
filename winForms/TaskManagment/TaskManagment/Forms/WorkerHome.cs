@@ -40,7 +40,7 @@ namespace TaskManagment.Forms
                 {
                     dgv_task.DataSource = projectList;
                     dgv_task.Columns["Id"].Visible = false;
-                    dgv_task.Columns["Date"].Visible = false;
+                   // dgv_task.Columns["Date"].Visible = false;
                 }
 
             }

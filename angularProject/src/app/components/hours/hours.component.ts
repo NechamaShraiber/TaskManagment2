@@ -5,7 +5,7 @@ import { formatDate } from '../../../../node_modules/@angular/common';
 @Component({
   selector: 'app-hours',
   templateUrl: './hours.component.html',
-  styleUrls: ['./hours.component.css','../project/project.component.css']
+  styleUrls: ['../project/project.component.css','./hours.component.css']
 })
 export class HoursComponent implements OnInit {
   @Input()

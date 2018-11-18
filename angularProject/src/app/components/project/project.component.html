@@ -1,9 +1,16 @@
 <div class="blog-card">
 
     <div class="description">
-
-        <h1>{{project.Name}}</h1>
-        <hr>
+        <div class="wrap"  > 
+            <h1>{{project.Name}}</h1>
+            
+              <div  class="circle" title="more deatails"  (click)="openProjectDeatails()"  >
+               <div><h2>+</h2></div> 
+              </div>
+              
+            </div>
+            <hr>
+       
 <label>customer:</label><label>{{project.Customer}}</label>
     <br>
 <label>develop hours:</label><label>{{project.DevelopHours}}</label>

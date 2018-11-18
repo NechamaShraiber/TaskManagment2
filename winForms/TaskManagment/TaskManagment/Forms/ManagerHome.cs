@@ -25,7 +25,7 @@ namespace TaskManagment.Forms
             InitializeComponent();
             AddProject();
             tab_manager.Controls.Remove(tab_workerDeatrails);
-
+            getAllWorkers();
         }
         public void getAllWorkers()
         {
@@ -410,7 +410,7 @@ namespace TaskManagment.Forms
             {
                 string json = "{" + (!isAdd ? "\"Id\":\"" + w.Id + "\"," : "") + "\"Name\":\"" + txt_name.Text + "\"," +
                    "\"UserName\":\"" + txt_user_name.Text + "\"," +
-                   "\"Password\":\"" + sha256(txt_password.Text) + "\"," +
+                   "\"Password\":\"" +(txt_password.Text!=""? sha256(txt_password.Text) :"")+ "\"," +
                     "\"JobId\":\"" + IdJob + "\"," +
                    "\"EMail\":\"" + txt_email.Text + "\"," +
                    "\"ManagerId\":\"" + IdManager +

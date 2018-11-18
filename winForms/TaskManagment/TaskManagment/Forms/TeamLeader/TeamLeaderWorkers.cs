@@ -37,7 +37,7 @@ namespace TaskManagment.Forms
                 if (hoursList != null)
                 {
                     dgv_workerHours.DataSource = hoursList;
-                    dgv_workerHours.Columns["Date"].Visible = false;
+                   // dgv_workerHours.Columns["Date"].Visible = false;
                     dgv_workerHours.Columns["Id"].Visible = false;
                 }
             }

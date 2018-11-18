@@ -69,10 +69,10 @@ namespace BLL
       
         public static List<Unknown> getWorkersHours(int projectId)
         {
-            string query = $"SELECT  name,date,SEC_TO_TIME(SUM(TIME_TO_SEC(end) - TIME_TO_SEC(start))) AS Time, allocated_hours" +
+            string query = $"SELECT  name,SEC_TO_TIME(SUM(TIME_TO_SEC(end) - TIME_TO_SEC(start))) AS Time, allocated_hours" +
         $" FROM workers W JOIN project_workers PW ON W.worker_id=PW.worker_id LEFT JOIN work_hours WH ON PW.project_worker_id= WH.project_work_id" +
        $" WHERE PW.project_id= {projectId}" +
-        $" GROUP BY name, allocated_hours,date ORDER BY name";
+        $" GROUP BY name, allocated_hours ORDER BY name";
            
 
             Func<MySqlDataReader, List<Unknown>> func = (reader) =>
@@ -83,21 +83,21 @@ namespace BLL
 
                  
                     /////////////////
-                    string s = reader[3].ToString();
+                    string s = reader[2].ToString();
                     int.TryParse(s, out int x);
                        string s2;
                     try
                     {
-                        TimeSpan t = reader.GetTimeSpan(2);
+                        TimeSpan t = reader.GetTimeSpan(1);
                         s2 = (t.Hours + t.Days * 24) + ":" + t.Minutes;
                     }
                     catch { s2 = 0 + ":" + 0; };
-                  DateTime.TryParse( reader[1].ToString(), out DateTime d);
+               //  DateTime.TryParse( reader[1].ToString(), out DateTime d);
                     unknowns.Add(new Unknown
                     {
 
                         Name = reader.GetString(0),
-                        Date = d,
+                        //Date = d,
                        Hours = s2,
                        AllocatedHours = x
                     });

@@ -1,9 +1,15 @@
 <div class="blog-card">
 
   <div class="description">
-
-    <h1>{{worker.Name}}</h1>
-    <hr>
+    <div class="wrap"  > 
+      <h1>{{worker.Name}}</h1>
+      
+        <div  class="circle" title="more deatails"  (click)="openWorkerDeatails()"  >
+         <div ><h2>+</h2></div> 
+        </div>
+        
+      </div>
+      <hr>
     <label>user name:</label>
     <label>{{worker.UserName}}</label>
     <br>
