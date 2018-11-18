@@ -463,31 +463,28 @@ namespace TaskManagment.Forms
         public void Reports()
         {
             dataGridView1.DataSource = bindingSource1;
-            GetData("SELECT * FROM task_managment.workers;");
+            GetData();
         }
-        private void GetData(string selectCommand)
+        private void GetData()
         {
-            try
+            List<Object> grid;
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(Global.path);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = client.GetAsync($"getPresence").Result;
+            if (response.IsSuccessStatusCode)
             {
-                String connectionString =
-                    "Integrated Security=SSPI;Persist Security Info=False;" +
-                    "Initial Catalog=Northwind;Data Source=localhost";
-
-                dataAdapter = new SqlDataAdapter(selectCommand, connectionString);
-
-                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
-
-                DataTable table = new DataTable();
-                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                dataAdapter.Fill(table);
-                bindingSource1.DataSource = table;
-
-                dataGridView1.AutoResizeColumns(
-                    DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
+                var result = response.Content.ReadAsStringAsync().Result;
+                grid = JsonConvert.DeserializeObject<List<Object>>(result);
+                dataGridView1.DataSource = grid;
+                dataGridView1.Columns["Id"].Visible = false;
+                dataGridView1.Columns["TeamLeaderId"].Visible = false;
             }
-            catch (SqlException)
+            else
             {
-                MessageBox.Show("Can not show this table");
+
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+
             }
         }
 

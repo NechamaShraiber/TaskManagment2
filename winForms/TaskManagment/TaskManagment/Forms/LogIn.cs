@@ -46,7 +46,6 @@ namespace TaskManagment
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
 
-
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
                     // sha256(txt_password.Text)!!!!!!!!!!
