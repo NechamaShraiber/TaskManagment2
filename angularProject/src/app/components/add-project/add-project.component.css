@@ -1,35 +1,16 @@
-.box {
-    background-color: #fff;
-    border-radius: 25px;
-    height: 75%;
-    width: 35%;
-    margin: auto;
-    padding: 2% 1%;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+body {
+  background: #456;
+  font-family: 'Open Sans', sans-serif;
 }
 
-    .box .button:disabled {
-        background: #cfd8dc;
-		color: #1d86da;
-		border: none;
-    }
-
-.box p {
-    font-size: 14px;
-    text-align: center;
-}
 
 form {
     padding-top: 5%;
     position: relative;
     height: 67%;
 }
-/*==============================icon-lock==============================*/
-*, *:after, *:before {
-    box-sizing: border-box;
-}
-
-
 
 .thumbur {
     width: 75px;
@@ -59,48 +40,6 @@ form {
         border-bottom-left-radius: 1px;
         border-bottom-right-radius: 1px;
     }
-
-.icon-lock {
-    position: relative;
-    width: 40px;
-    height: 30px;
-    background: #2196f3cf;
-    margin: auto;
-    -webkit-transform: translateY(60px);
-    transform: translateY(60px);
-    border-radius: 8px;
-    box-shadow: 0 0 2px #146aaf inset;
-    bottom: 30px;
-}
-
-    .icon-lock:after {
-        content: '';
-        position: absolute;
-        width: 25px;
-        height: 17px;
-        border: 4.5px solid   #2196f3cf;
-        border-bottom: none;
-        bottom: 100%;
-        left: 50%;
-        -webkit-transform: translateX(-50%);
-        transform: translateX(-50%);
-        border-top-left-radius: 25px;
-        border-top-right-radius: 25px;
-    }
-
-    .icon-lock:before {
-        content: '';
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        background-color: #efefef;
-        left: 50%;
-        top: 11px;
-        -webkit-transform: translateX(-50%);
-        transform: translateX(-50%);
-        border-radius: 100%;
-	}
-	
 	/* ============form============= */
 	.group {
 		position: relative;
@@ -228,4 +167,68 @@ form {
 	.myAlert{
 		color: red;
 	}
-	
+
+.login {
+  width: 400px;
+  margin: 16px auto;
+  font-size: 16px;
+}
+
+/* Reset top and bottom margins from certain elements */
+.login-header,
+.login p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+
+.login-container {
+  background: #ebebeb;
+  padding: 12px;
+}
+
+/* Every row inside .login-container is defined with p tags */
+.login p {
+  padding: 12px;
+}
+
+.login input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+.login input[type="email"],
+.login input[type="password"] {
+  background: #fff;
+  border-color: #bbb;
+  color: #555;
+}
+
+/* Text fields' focus effect */
+.login input[type="email"]:focus,
+.login input[type="password"]:focus {
+  border-color: #888;
+}
+
+.login input[type="submit"] {
+  background: linear-gradient(to right, #B06AB3, #4568DC);
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.login input[type="submit"]:hover {
+  background: #B06AB3;
+}
+
+/* Buttons' focus effect */
+.login input[type="submit"]:focus {
+  border-color: #05a;
+}

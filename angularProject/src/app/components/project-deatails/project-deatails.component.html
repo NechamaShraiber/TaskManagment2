@@ -1,14 +1,23 @@
-
-<div class="row">
-  <div class="col-md-3 ">
-    <hr>
-    <app-project [project]=project></app-project>
-  </div>
-</div>
-
-
-<div class="row">
-    <div class="col-md-3 " *ngFor="let workerHour of workersHours">
-      <app-hours [hour]=workerHour ></app-hours>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+    
+      <h1>{{this.teamLeaderService.currentProject.Name}}</h1>
+  <button type="button" class="close" (click)="close()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="group">
+        <div class="row">
+          <div class="col-md-6 " *ngFor="let workerHour of workersHours">
+            <app-hours [hour]=workerHour></app-hours>
+          </div>
+          
+        </div>
+      <hr/>
+        <div *ngIf="workersHours">
+            <app-chart [projects]=workersHours></app-chart>
+          </div>
+      </div>
     </div>
   </div>
+</div>

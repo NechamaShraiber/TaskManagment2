@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { WorkerService } from '../../shared/service/worker.service';
 import { validate } from '../../shared/validate';
 // import { Global, AuthenticationService, createValidatorArr } from '../../imports';
+import sha256 from 'async-sha256';
+import { GlobalService } from '../../shared/service/global.service';
+
 
 @Component({
   selector: 'app-login',
@@ -16,13 +18,12 @@ export class LoginComponent {
 
   loginFormGroup: FormGroup;
   isExistUser: boolean = true;
-
   //allow access 'Object' type via interpolation
   objectHolder: typeof Object = Object;
 
   //----------------CONSTRUCTOR------------------
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private workerService: WorkerService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private globalService: GlobalService) {
     this.loginFormGroup = this.formBuilder.group({
       userName: ['', validate.createValidatorArr("userName", 2, 10)],
       password: ['', validate.createValidatorArr("password", 6, 10)],
@@ -31,19 +32,29 @@ export class LoginComponent {
 
   //----------------METHODS-------------------
 
-  onSubmit() {
-    this.workerService.login(this.userName.value, this.password.value)
-      .subscribe(worker => {
-        if (worker != null) {
+ async onSubmit() {
+    const hash = await sha256(this.password.value);
+    this.globalService.login(this.userName.value,hash)
+      .subscribe(worker => { 
+        if(worker){
+          try{
+        console.log(worker+"iiiiiiiiiiii");
           localStorage.setItem('currentUser', JSON.stringify(worker));
           this.router.navigate(['taskManagers/home']);
+          }
+          catch(Error){
+            console.log(worker+"ERROR");
+
+          }
         }
-        else {
-          this.isExistUser = false;
-          this.router.navigate(['taskManagers/login'])
-        }
-      });
+          else{
+            console.log("ERRORRRRRRRRRRRRRRRRR");
+            alert("One or more data is not correct");
+            this.router.navigate(['taskManagers/login']);
+          }
+      })
   }
+
 
   //----------------GETTERS-------------------
 

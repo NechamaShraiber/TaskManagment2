@@ -45,6 +45,7 @@
             this.dgv_projects.Name = "dgv_projects";
             this.dgv_projects.Size = new System.Drawing.Size(751, 111);
             this.dgv_projects.TabIndex = 0;
+            this.dgv_projects.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_projects_CellContentClick);
             this.dgv_projects.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_projects_RowHeaderMouseClick);
             // 
             // label1

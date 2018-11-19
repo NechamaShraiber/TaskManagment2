@@ -3,6 +3,8 @@ import { TeamLeaderService } from '../../shared/service/team-leader.service';
 import { Worker } from '../../shared/models/worker'
 import { Project } from '../../shared/models/project';
 import { Router, NavigationExtras } from '../../../../node_modules/@angular/router';
+import { DialogService } from '../../../../node_modules/ng2-bootstrap-modal';
+import { ProjectDeatailsComponent } from '../project-deatails/project-deatails.component';
 //import { createWiresService } from '../../../node_modules/@types/selenium-webdriver/firefox';
 @Component({
   selector: 'app-team-leader-project',
@@ -12,8 +14,7 @@ import { Router, NavigationExtras } from '../../../../node_modules/@angular/rout
 export class TeamLeaderProjectComponent implements OnInit {
   private projects: any;
   currentWorker: Worker;
-  constructor(private teamLeaderService: TeamLeaderService, private router:  Router) 
-{ }
+  constructor(private teamLeaderService: TeamLeaderService ) { }
   @Input()
   private id: number
   ngOnInit() {
@@ -21,20 +22,10 @@ export class TeamLeaderProjectComponent implements OnInit {
     this.teamLeaderService.getAllProjects(this.currentWorker.Id).subscribe(
       res => {
         this.projects = res;
-        console.log(this.projects)
       })
 
   }
 
   
 
- openProjectDeatails(project: Project) {
-  let navigationExtras: NavigationExtras = {
-    queryParams: {
-        "project":JSON.stringify(project)
-      
-    }
-};
-  this.router.navigate([`taskManagers/projectDeatails`],navigationExtras );
-}
 }

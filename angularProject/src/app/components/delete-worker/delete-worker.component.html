@@ -8,6 +8,7 @@
          <p>{{message || 'Are you sure?'}}</p>
          <div class="group">
             <select (change)="onChange($event.target.value)">
+                <option disabled hidden [value]="selectUndefinedOptionValue">-- select --</option>
                 <option *ngFor="let worker of workerList">
                   {{worker["UserName"]}}
                 </option>

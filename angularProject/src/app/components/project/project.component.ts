@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Project } from '../../shared/models/project';
+import { DialogService } from '../../../../node_modules/ng2-bootstrap-modal';
+import { Router, NavigationExtras } from '../../../../node_modules/@angular/router';
+import { TeamLeaderService } from '../../shared/service/team-leader.service';
+import { ProjectDeatailsComponent } from '../project-deatails/project-deatails.component';
 
 @Component({
   selector: 'app-project',
@@ -8,11 +12,26 @@ import { Project } from '../../shared/models/project';
 })
 export class ProjectComponent implements OnInit {
   @Input() project:Project;
-  constructor() { }
+  constructor(private teamLeaderService: TeamLeaderService, private router: Router, private dialogService:DialogService) { }
 
   ngOnInit() {
     
+    console.log(this.project);
     
   }
+  openProjectDeatails() {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        "project": JSON.stringify(this.project)
+      }
+    };
+   this.showProject(); 
+  }
 
+  showProject() {
+    this.teamLeaderService.currentProject=this.project;
+     this.dialogService.addDialog(ProjectDeatailsComponent, { 
+    })
+      .subscribe((isConfirmed) => { });
+  }
 }

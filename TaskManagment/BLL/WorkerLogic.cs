@@ -32,36 +32,13 @@ namespace BLL
                 $" AND END IS NULL";
             return DBAccess.RunNonQuery(query) == 1;
         }
-
-        public static bool SendMsg(string sub, string body)
+       
+        public static bool SendMsg(string sub, string body,int id)
         {
-            MailMessage msg = new MailMessage();
-            msg.From = new MailAddress("shtilimrishum2018@gmail.com");
-            msg.To.Add(new MailAddress("shtilimrishum2018@gmail.com"));
-            msg.Subject = sub;
-            msg.Body = body;
-            SmtpClient client = new SmtpClient();
-            client.UseDefaultCredentials = true;
-            client.Host = "smtp.gmail.com";
-            client.Port = 587;
-            client.EnableSsl = true;
-
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.Credentials = new NetworkCredential("shtilimrishum2018@gmail.com", "0504190762");
-            client.Timeout = 20000;
-            try
-            {
-                client.Send(msg);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            finally
-            {
-                msg.Dispose();
-            }
+            string query = $"SELECT email FROM task_managment.workers where job = {id}" ;
+           string email=(string) DBAccess.RunScalar(query);
+            return HomeLogic.sendEmail(sub, body, email);
+          
         }
 
 
@@ -78,7 +55,7 @@ namespace BLL
                         Id = reader.GetInt32(0),
                         Name = reader.GetString(1),
                         UserName = reader.GetString(2),
-                        Password = reader.GetString(3),
+                        Password = "",
                         EMail = reader.GetString(4),
                         JobId = reader.GetInt32(5),
                         ManagerId = reader[6] as int?
@@ -88,7 +65,7 @@ namespace BLL
             };
             return DBAccess.RunReader(query, func);
         }
-        public static List<Unknown> GetProject(int id)
+        public static List<object> GetProject(int id)
         {
         //    /*SELECT PW.project_worker_id, p.name,  allocated_hours, SEC_TO_TIME(TIME_TO_SEC(end) - TIME_TO_SEC(start)) AS Time
         // FROM project_workers PW JOIN projects P ON P.project_id = PW.project_id LEFT JOIN
@@ -102,21 +79,26 @@ namespace BLL
         $" WHERE PW.worker_id = {id}" +
         $"    GROUP BY PW.project_worker_id,p.name,allocated_hours   ORDER BY project_worker_id";
       
-            Func<MySqlDataReader, List<Unknown>> func = (reader) =>
+            Func<MySqlDataReader, List<Object>> func = (reader) =>
             {
-                List<Unknown> unknowns = new List<Unknown>();
+                List<Object> unknowns = new List<Object>();
                 while (reader.Read())
                 {
                      string s=reader[2].ToString();
                     int.TryParse(s,out int  x);
-                    string s2 = reader[3].ToString();
-                    unknowns.Add(new Unknown
-                    {
-                        Id = reader.GetInt32(0),
-                        Name = reader.GetString(1),
-                        AllocatedHours = x,
-                        Hours = s2
-            });
+                    string s2;
+                    try {
+                        TimeSpan t = reader.GetTimeSpan(3);
+                        s2 = (t.Hours + t.Days * 24) + ":" + t.Minutes;
+                    }
+                    catch { s2 = 0+ ":" +0; };
+                        unknowns.Add(new 
+                        {
+                            Id = reader.GetInt32(0),
+                            Name = reader.GetString(1),
+                            AllocatedHours = x,
+                            Hours = s2 
+                    });
                 }
                 return unknowns;
             };

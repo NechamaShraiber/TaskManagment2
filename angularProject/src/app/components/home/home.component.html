@@ -1,16 +1,28 @@
-<div class="container" *ngIf="id==1">
-  <ul class="nav navbar-nav">
-    <li routerLinkActive="active"><a routerLink="/taskManagers/addProject">Add Project</a></li>
-    <li routerLinkActive="active"><a routerLink="/taskManagers/repotrs">Repotrs</a></li>
-    <li routerLinkActive="active"><a routerLink="/taskManagers/usersManagers">Users Managers</a></li>
-  </ul>
-</div>
+<nav class="navbar">
 
- <div class="container" *ngIf="id==2">
-  <ul class="nav navbar-nav">
-    <li routerLinkActive="active"><a routerLink="/taskManagers/teamLeaderProjects">projects</a></li>
-    <li routerLinkActive="active"><a routerLink="/taskManagers/teamLeaderWorkers">workers</a></li>
-  </ul>
-</div>
+    <ul *ngIf="workerService.idJob==1">
+      <li routerLinkActive="active">
+        <a routerLink="/taskManagers/home/addProject">Add Project</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/taskManagers/home/repotrs">Repotrs</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/taskManagers/home/usersManagers">Users Managers</a>
+      </li>
+    </ul>
+    <ul  *ngIf="workerService.idJob==2">
+      <li routerLinkActive="active">
+        <a routerLink="/taskManagers/home/teamLeaderProjects">projects</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/taskManagers/home/teamLeaderWorkers">workers</a>
+      </li>
+    </ul>
+
+
+</nav>
+
+<router-outlet class="container"></router-outlet>
 
 

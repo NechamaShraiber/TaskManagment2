@@ -89,6 +89,11 @@ namespace TaskManagment.Forms
         {
 
         }
+
+        private void dgv_projects_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 
 

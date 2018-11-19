@@ -30,7 +30,7 @@ namespace TaskManagment.Forms.Work
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
-                    MessageBox.Show("We should do it!!!");
+                    MessageBox.Show("Your email sent successfully!!!");
                 }
             }
             catch (WebException ex)

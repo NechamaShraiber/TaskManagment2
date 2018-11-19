@@ -6,6 +6,7 @@ namespace TaskManagment.Models
     public  class Worker
     {
         [Key]
+        [Required]
         public int Id { get; set; }
         [Required]
         [MinLength(2), MaxLength(15)]

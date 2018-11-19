@@ -16,7 +16,7 @@ namespace BOL
         [UniqeUserName]
         public string UserName { get; set; }
         [Required]
-        [MinLength(6), MaxLength(10)]
+        [MinLength(6), MaxLength(64)]
         public string Password { get; set; }
         [ForeignKey("job")]
         public int JobId { get; set; }

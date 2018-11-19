@@ -11,7 +11,7 @@ namespace TaskManagment.Forms
     public partial class TeamLeaderProjectDeatails : Form
     {
         public Project project;
-        List<Unknown> workersHours=new List<Unknown>();
+       dynamic workersHours;
         public TeamLeaderProjectDeatails(Project p)
         {
             InitializeComponent();
@@ -52,10 +52,11 @@ namespace TaskManagment.Forms
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-                workersHours = JsonConvert.DeserializeObject<List<Unknown>>(result);
+                workersHours = JsonConvert.DeserializeObject(result);
                 if (workersHours != null) { 
                     dgv_workersHours.DataSource = workersHours;
-                dgv_workersHours.Columns["Id"].Visible = false; }
+               // dgv_workersHours.Columns["Id"].Visible = false;
+                }
             }
 
             else
@@ -84,10 +85,15 @@ namespace TaskManagment.Forms
             if (workersHours != null) { 
             foreach (var item in workersHours)
             {
-                allocatedHours.Add(item.Name, Convert.ToInt32( item.allocatedHours));
+                    allocatedHours.Add((String)item["Name"].Value, (Int32)item["AllocatedHours"].Value);
                     if (item.Hours != "")
-                        workedHours.Add(float.Parse(item.Hours.Substring(0, 2) + "." + item.Hours.Substring(3, 2)));
+                    {
+                        var t = item["Hours"].Value.Split(':');
+                        workedHours.Add(float.Parse(t[0]) + (float.Parse(t[1]) / 100));
+                    }
                     else workedHours.Add(0);
+               
+               
             }
             chart1.Series[0].Points.DataBindXY(allocatedHours.Keys, allocatedHours.Values);
             chart1.Series[1].Points.DataBindXY(allocatedHours.Keys, workedHours);}

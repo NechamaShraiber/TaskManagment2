@@ -1,15 +1,28 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+        <h1>{{this.teamLeaderService.currentWorker.Name}}</h1>
 
-  <div class="row">
-    <div class="col-md-3 ">
-      <hr>
-      <app-worker [worker]=worker></app-worker>
+      <button type="button" class="close" (click)="close()">&times;</button>
     </div>
-  </div>
-  <P>click on project to change allocated hours:</P>
-  <input type="number" [(ngModel)]="numHours">
-   <div class="row">
-      <div class="col-md-3 " *ngFor="let projectHour of projectsHours">
-      
-        <app-hours [hour]=projectHour (click)="setAllocatedHours(projectHour.Id)"></app-hours>
+    <div class="modal-body">
+      <div class="group">
+        <P>click on project to change allocated hours:</P>
+        <div class="row">
+          <div class="col-md-6 " *ngFor="let projectHour of projectsHours">
+            <app-hours [hour]=projectHour (click)="setAllocatedHours(projectHour.Id)"></app-hours>
+          </div>
+        
+           
+          <div class="cont_centrar" *ngIf="projectId">
+            <div>
+              <p>enter allocate hours:</p>
+              <input type="number" [(ngModel)]="numHours">
+            </div>
+            <button class="btn_sign" (click)="changeHours()">change</button>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+</div>

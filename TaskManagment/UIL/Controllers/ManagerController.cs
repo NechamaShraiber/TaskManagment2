@@ -37,12 +37,28 @@ namespace UIL.Controllers
             return Global.ErrorList(ModelState);
          
         }
+        [HttpPost]
+        [Route("api/addWorkersToProject/{name}")]
+        public HttpResponseMessage addWorkersToProject([FromBody]int[] ids, [FromUri]string name)
+        {
+            //curl -v -X POST -H "Content-type: application/json" -d "{\"Name\":\"tryProject\", \"Customer\":\"nnn\",\"TeamLeaderId\":\"11\" , \"DevelopHours\":\"300\",\"QAHours\":\"250\", \"UiUxHours\":\"100\",\"StartDate\":\"2018-02-02\",\"EndDate\":\"2018-07-07\"}"  http://localhost:59628/api/addProject
+            // value.EndDate.tos
+            return (ManagerLogic.addWorkersToProject(ids, name)) ?
 
-           /// <summary>
-           /// add new worker
-           /// </summary>
-           /// <param name="Project">Project deatails</param>
-           /// 
+                     new HttpResponseMessage(HttpStatusCode.OK) :
+                     new HttpResponseMessage(HttpStatusCode.BadRequest)
+                     {
+                         Content = new ObjectContent<String>("Can not update in Data Base", new JsonMediaTypeFormatter())
+                     };
+
+
+        }
+
+        /// <summary>
+        /// add new worker
+        /// </summary>
+        /// <param name="Project">Project deatails</param>
+        /// 
         [HttpPost]
         [Route("api/addWorker")]
         public HttpResponseMessage AddWorker([FromBody]Worker value)
@@ -117,6 +133,33 @@ Get - get all the details that the manager need to the report
                 Content = new ObjectContent<List<Worker>>(ManagerLogic.GetAllWorkers(), new JsonMediaTypeFormatter())
             };
         }
+
+ [HttpGet]
+        [Route("api/getPresence")]
+        public HttpResponseMessage GetPresence()
+
+        {
+
+            //curl -X GET -v http://localhost:59628/api/GetPresence
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<List<Object>>(ManagerLogic.GetPresence(), new JsonMediaTypeFormatter())
+            };
+        }
+      
+
+        [HttpGet]
+        [Route("api/getAllJobs")]
+        public HttpResponseMessage GetAllJobs()
+        {
+
+            //curl -X GET -v http://localhost:59628/api/getAllWorkers
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ObjectContent<List<Job>>(ManagerLogic.GetAllJobs(), new JsonMediaTypeFormatter())
+            };
+        }
+
         /// <summary>
         /// get all managers
         /// </summary>

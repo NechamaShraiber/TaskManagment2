@@ -1,18 +1,32 @@
-<div *ngIf="isStart">
-    <p>Today is {{today | date:'fullDate'}}</p>
-    <p>You started at  {{today | date:'h:mm:ss a z'}}</p>
+
+
+<div >
+
+  <!-- </a> -->
+  <div class="wrapAll">
+<h1>{{currentWorker.Name}}</h1>
+    <p>Today is: {{today | date:'fullDate'}}</p>
+   
   </div>
-  <div>
-    <button (click)="send()">Contact</button>
-    <button (click)="updateHours()">Start/End Task</button>
+  <!-- <button >send email</button>  -->
+
+  <div class="wrap">
+    <!-- <a href="mailto:someone@example.com"> -->
+    <div class="circle" (click)="send()" title="send email to team leader">
+      <div class="envelope-top"></div>
+      <div class="envelope"></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3" *ngFor="let project of projects">
+    <app-hours [hour]=(project) [isProject]=(true) ></app-hours>
 
   </div>
-<div>
-  <label>MY PROJECTS:</label>
-    <table>
-        <tr *ngFor="let project of projectList">
-          <td (click)="cli(project.Id)">{{ project.Name }}</td>
-          <!-- <td>{{ project.Country }}</td> -->
-        </tr>
-      </table>
+</div>
+<div class="row">
+<div class="col-md-offset-3 col-md-6" *ngIf="projects">
+  <app-chart [projects]=projects></app-chart>
+</div>
 </div>

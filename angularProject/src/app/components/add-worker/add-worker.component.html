@@ -28,15 +28,15 @@
           </div>
         </div>
       <div class="group">
-          <select formControlName="JobId">
-              <option *ngFor="let job of jobList">
+          <select formControlName="JobId" (change)="manag()">
+              <option *ngFor="let job of jobList" [ngValue]="job" >
                 {{job["Name"]}}
               </option>
             </select>
         <span class="highlight"></span>
         <span class="bar"></span>
-        <label>choose job type</label>
-        <label *ngIf="job"> your job is {{job}}</label>
+        <label>choose job type </label>
+        <label *ngIf="job">  your job is {{job}}</label>
          <div *ngIf="addWorkerGroup.controls['JobId'].errors">
           <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['JobId'].errors)" class="myAlert">{{err}}</p>
         </div> 
@@ -52,14 +52,14 @@
       </div>
       <div class="group">
           <select formControlName="ManagerId">
-              <option *ngFor="let manager of managerList">
+              <option *ngFor="let manager of managerList" [ngValue]="manager">
                 {{manager["Name"]}}
               </option>
             </select>
         <span class="highlight"></span>
         <span class="bar"></span>
-        <label>choose manager</label>
-        <label *ngIf="job"> your manager is {{manager}}</label>
+        <label> choose manager  </label>
+        <label *ngIf="manager">  your manager is {{manager}}</label>
          <div *ngIf="addWorkerGroup.controls['ManagerId'].errors">
           <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['ManagerId'].errors)" class="myAlert">{{err}}</p>
         </div> 

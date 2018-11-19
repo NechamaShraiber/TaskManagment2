@@ -3,7 +3,6 @@ import { DeleteWorkerComponent } from '../delete-worker/delete-worker.component'
 import { DialogService } from "ng2-bootstrap-modal";
 import { ManagerService } from '../../shared/service/manager.service';
 import { EditWorkerComponent } from '../edit-worker/edit-worker.component';
-import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,12 +10,12 @@ import { Router } from '@angular/router';
   templateUrl: './users-managers.component.html',
   styleUrls: ['./users-managers.component.css']
 })
-export class UsersManagersComponent implements OnInit {
+export class UsersManagersComponent  {
 
-  constructor(private dialogService: DialogService, private managerService: ManagerService,private router:Router) { }
+  constructor(private dialogService: DialogService, private managerService: ManagerService,private router:Router) {
+   }
 
-  ngOnInit() {
-  }
+
   delete() {
     let disposable = this.dialogService.addDialog(DeleteWorkerComponent, {
       title: 'Delete Worker',
@@ -47,7 +46,7 @@ export class UsersManagersComponent implements OnInit {
       .subscribe((isConfirmed) => {
         if (isConfirmed) {
           this.managerService.isEdit="Edit";
-          this.router.navigate(['taskManagers/Addworker']);
+          this.router.navigate(['taskManagers/home/Addworker']);
         }
         else {
           //alert('Can not edit this worker');
@@ -56,6 +55,10 @@ export class UsersManagersComponent implements OnInit {
     setTimeout(() => {
       disposable.unsubscribe();
     }, 1000000);
+  }
+  add(){
+    this.managerService.isEdit="Add";
+          this.router.navigate(['taskManagers/home/Addworker']);
   }
 }
 
