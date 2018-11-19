@@ -28,6 +28,7 @@ import { ChartComponent } from './components/chart/chart.component';
 //import { HomeWorkerComponent } from './components/worker/home-worker/home-worker.component';
 import { AuthGuard} from '../app/shared/auth.guard';
 //import {MatDialogModule} from "@angular/material";
+import {TableModule} from 'primeng/table';
 
 
  const  globalPath:string="http://localhost:59628/api/";
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'addProject', component: AddProjectComponent },
   { path: 'usersManagers', component: UsersManagersComponent },
   { path: 'Addworker', component: AddWorkerComponent },
+  { path: 'reports', component: ReportsComponent },
   { path: 'teamLeaderProjects', component: TeamLeaderProjectComponent },
   { path: 'teamLeaderWorkers', component: TeamLeaderWorkersComponent },
 
@@ -80,6 +82,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     BootstrapModalModule.forRoot({container:document.body}),
+    TableModule,
     //MatDialogModule
 
   ],
