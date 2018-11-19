@@ -25,7 +25,6 @@ namespace TaskManagment.Forms
         {
             InitializeComponent();
             AddProject();
-          
             tab_manager.Controls.Remove(tab_workerDeatrails);
             getAllWorkers();
         }
@@ -456,22 +455,111 @@ namespace TaskManagment.Forms
 
         #endregion
 
-        #region addProject
-        private BindingSource bindingSource1 = new BindingSource();
-        private SqlDataAdapter dataAdapter = new SqlDataAdapter();
+        //#region addProject
+        //private BindingSource bindingSource1 = new BindingSource();
+        //private SqlDataAdapter dataAdapter = new SqlDataAdapter();
+
+        //public void Reports()
+        //{
+        //    dataGridView1.DataSource = bindingSource1;
+        //    GetData();
+        //}
+        //private void GetData()
+        //{
+        //    List<Object> grid;
+        //    HttpClient client = new HttpClient();
+        //    client.BaseAddress = new Uri(Global.path);
+        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //    HttpResponseMessage response = client.GetAsync($"getPresence").Result;
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var result = response.Content.ReadAsStringAsync().Result;
+        //        grid = JsonConvert.DeserializeObject<List<Object>>(result);
+        //        dataGridView1.DataSource = grid;
+        //        dataGridView1.Columns["Id"].Visible = false;
+        //        dataGridView1.Columns["TeamLeaderId"].Visible = false;
+        //    }
+        //    else
+        //    {
+
+        //        Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+
+        //    }
+        //}
+
+
+        //#endregion
+
+        #region reports
+      List<dynamic> presences;
+        public void GetPresences()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(Global.path);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = client.GetAsync($"getPresence").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+
+                presences = JsonConvert.DeserializeObject<List<dynamic>>(result);
+                SelectByWorkerName();
+
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+        }
+
+        private void SelectByWorkerName()
+        {
+
+            List<dynamic> projectsByName = new List<dynamic>();
+            var names = presences.Select(p => p["WorkerName"].Value).GroupBy(p => p).ToArray();
+
+            foreach (var n in names)
+            {
+                List<dynamic> projectsHours=new List<dynamic>();
+             var projects=presences.FindAll(p=>p["WorkerName"].Value==n.Key).Select(p=>p["ProjectName"].Value).GroupBy(p => p).ToArray();
+                foreach (var pro in projects)
+                {
+                    var hours = presences.FindAll(p => p["ProjectName"].Value == pro.Key).Select(p => new
+                    {
+                     Date=p["Date"],
+                      Start=p["Start"],
+                      End=p["End"]
+                    });
+                    projectsHours.Add(new { pro.Key, hours });
+                }
+                projectsByName.Add(new { n.Key, projectsHours });
+            }
+            foreach (var pbn in projectsByName)
+            {
+
+              TreeNode n=  treeView1.Nodes.Add(pbn.Key);
+                n.BackColor = Color.BurlyWood;
+                foreach (var prh in pbn.projectsHours)
+                {
+                    TreeNode n1= n.Nodes.Add(prh.Key);
+                    n1.BackColor = Color.Coral;
+                    foreach (var hour in prh.hours)
+                    {
+                        TreeNode n3= n1.Nodes.Add($"date:{hour.Date.Value}, start:{hour.Start.Value}, end:{hour.End.Value}");
+                        n3.BackColor = Color.Cyan;
+                        n3.ForeColor = Color.Cornsilk;
+
+                    }
+                }
+                
+            }
+           
+
+
+        }
 
 
         #endregion
-
-        private void ManagerHome_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tab_addProject_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void txt_team_name_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -508,14 +596,15 @@ namespace TaskManagment.Forms
 
         }
 
-        private void dgvAddWorkers_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
+      
         private void tab_reports_Click(object sender, EventArgs e)
         {
+            GetPresences();
 
         }
+
+       
+
+       
     }
 }

@@ -139,7 +139,8 @@ Get - get all the details that the manager need to the report
             };
         }
 
-        [HttpGet]
+ [HttpGet]
+
         [Route("api/getPresence")]
         public HttpResponseMessage GetPresence()
 
@@ -151,8 +152,6 @@ Get - get all the details that the manager need to the report
                 Content = new ObjectContent<List<Object>>(ManagerLogic.GetPresence(), new JsonMediaTypeFormatter())
             };
         }
-
-
         [HttpGet]
         [Route("api/getAllJobs")]
         public HttpResponseMessage GetAllJobs()

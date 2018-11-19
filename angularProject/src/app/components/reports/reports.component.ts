@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TreeNode } from '../../../../node_modules/@angular/router/src/utils/tree';
 import { Project } from '../../shared/models/project';
 import { ManagerService } from '../../shared/service/manager.service';
-import {TableModule} from 'primeng/table';
+import { NG_PROJECT_AS_ATTR_NAME } from '../../../../node_modules/@angular/core/src/render3/interfaces/projection';
 
 @Component({
   selector: 'app-reports',
@@ -21,8 +21,9 @@ export class ReportsComponent implements OnInit {
 
   constructor(private managerService: ManagerService) { }
 
-  ngOnInit() {
 
+
+  ngOnInit() {
     this.managerService.getPresence().subscribe(pre => {
       this.presence = pre;
       this.names = [];
@@ -93,5 +94,6 @@ this.projectNameAndHours.push({
 
 
   
+
 
 

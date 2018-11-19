@@ -25,6 +25,7 @@ export class ManagerService {
   }
   getAllManagers(): any {
     return this.http.get(GlobalService.path+"getAllManagers");
+
   }
   
   addWorker(worker): any {
@@ -65,5 +66,6 @@ export class ManagerService {
         XLSX.writeFile(workbook, ManagerService.toExportFileName("Excl"));
         const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
       } 
+
 }
 

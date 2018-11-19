@@ -69,8 +69,8 @@ namespace TaskManagment
                         {
                             case 1:
                                 {
-                                    ManagerHome manager = new ManagerHome();
-                                    manager.Show();
+                                    ManagerHome managerHome = new ManagerHome();
+                                    managerHome.Show();
                                     break;
                                 }
 
@@ -95,7 +95,7 @@ namespace TaskManagment
                     lbl_bad_request.Text = "One or more of the data is incorrect";
                 }
             }
-            catch
+            catch(Exception exe)
             {
                 lbl_bad_request.Text = "The service is not connected";
             }
