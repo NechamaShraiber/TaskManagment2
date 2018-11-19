@@ -539,12 +539,16 @@ namespace TaskManagment.Forms
             {
 
               TreeNode n=  treeView1.Nodes.Add(pbn.Key);
+                n.BackColor = Color.BurlyWood;
                 foreach (var prh in pbn.projectsHours)
                 {
                     TreeNode n1= n.Nodes.Add(prh.Key);
+                    n1.BackColor = Color.Coral;
                     foreach (var hour in prh.hours)
                     {
-                         n1.Nodes.Add($"date:{hour.Date.Value}, start:{hour.Start.Value}, end:{hour.End.Value}");
+                        TreeNode n3= n1.Nodes.Add($"date:{hour.Date.Value}, start:{hour.Start.Value}, end:{hour.End.Value}");
+                        n3.BackColor = Color.Cyan;
+                        n3.ForeColor = Color.Cornsilk;
 
                     }
                 }
