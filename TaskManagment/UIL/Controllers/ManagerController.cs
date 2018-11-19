@@ -93,7 +93,17 @@ Get - get all the details that the manager need to the report
                 Content = new ObjectContent<String>(ManagerLogic.GetDeatails(projectId,teamLeaderId,month,workerId), new JsonMediaTypeFormatter())
             };
         }
+
+
  */
+
+
+            [HttpGet]
+            [Route("api/exportToExcel")]
+            public void Expotrexcel()
+        {
+             ManagerLogic.ExportExcel();
+        }
        
         /// <summary>
         /// edit worker's details

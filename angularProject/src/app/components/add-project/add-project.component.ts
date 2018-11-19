@@ -60,6 +60,7 @@ export class AddProjectComponent implements OnInit {
           //   localStorage.setItem('currentProject', JSON.stringify(project));
           this.router.navigate(['taskManagers/home']);
        this.managerService.addWorkersToProject(this.workersToAdd,this.addProjectGroup.value["Name"]).subscribe(res=> { }) 
+       alert("The project added succesfully");
         }
         else {
           this.router.navigate(['taskManagers/login'])

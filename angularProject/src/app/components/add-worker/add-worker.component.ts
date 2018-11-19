@@ -27,11 +27,11 @@ export class AddWorkerComponent implements OnInit {
   constructor(private router: Router, private managerService: ManagerService, private globalService:GlobalService) {
 
     let formGroupConfig = {
-      Name: new FormControl(managerService.workerToUpdate.Name, validate.createValidatorArr("Name", 2, 15)),
-      UserName: new FormControl(managerService.workerToUpdate.UserName, validate.createValidatorArr("UserName", 2, 10)),
-      Password: new FormControl(managerService.workerToUpdate.Password, validate.createValidatorArr("Password", 6, 10)),
+      Name: new FormControl(managerService.workerToUpdate.Name?managerService.workerToUpdate.Name:" ", validate.createValidatorArr("Name", 2, 15)),
+      UserName: new FormControl(managerService.workerToUpdate.UserName?managerService.workerToUpdate.UserName:" ", validate.createValidatorArr("UserName", 2, 10)),
+      Password: new FormControl(managerService.workerToUpdate.Password?managerService.workerToUpdate.Password:" ", validate.createValidatorArr("Password", 6, 10)),
       JobId: new FormControl(this.job),
-      EMail: new FormControl(managerService.workerToUpdate.EMail, validate.createValidatorArr("EMail", 6, 30)),
+      EMail: new FormControl(managerService.workerToUpdate.EMail?managerService.workerToUpdate.EMail:" ", validate.createValidatorArr("EMail", 6, 30)),
       ManagerId: new FormControl(this.manager),
     };
     this.addWorkerGroup = new FormGroup(formGroupConfig);
@@ -97,7 +97,7 @@ export class AddWorkerComponent implements OnInit {
         .subscribe(worker => {
           if (worker == null) {
             alert("The worker added succesfully")
-            this.router.navigate(['taskManagers/home']);
+            this.router.navigate(['taskManagers/home/usersManagers']);
           }
           else {
             // this.isExistUser = false;

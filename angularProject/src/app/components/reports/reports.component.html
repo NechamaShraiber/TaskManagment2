@@ -15,9 +15,10 @@
       </td>
     </tr>
   </ng-template>
-</p-table>
+</p-table> 
+<button (click)="exportToExcel()">Export to Excel</button>
 <!-- <h3>Dynamic Columns</h3>
-<p-treeTable [value]="files2" [columns]="cols">
+<p-treeTable [value]="presence" [columns]="cols">
     <ng-template pTemplate="header" let-columns>
         <tr [ttRow]="rowNode">
             <th *ngFor="let col of columns">

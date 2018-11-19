@@ -3,10 +3,9 @@ using DAL;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Reflection;
+using System.Web;
 
 namespace BLL
 {
@@ -270,5 +269,91 @@ $" ORDER BY w.name, p.name, wh.date , wh.start";
         /*
          * 
         */
+
+       public static void ExportExcel()
+        {
+            //DataTable table = Connect.DB.Student();
+            List<dynamic> students;
+            //    DataTable table = ToDataTable(students);
+
+
+                HttpContext.Current.Response.Clear();
+                HttpContext.Current.Response.ClearContent();
+                HttpContext.Current.Response.ClearHeaders();
+                HttpContext.Current.Response.Buffer = true;
+                HttpContext.Current.Response.ContentType = "application/ms-excel";
+                HttpContext.Current.Response.Write(@"<!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.0 Transitional//EN"" >");
+                HttpContext.Current.Response.AddHeader("Content-Disposition", "attachment;filename=Reports.xls");
+
+                HttpContext.Current.Response.Charset = "utf-8";
+                HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.GetEncoding("Windows-1255");
+                //sets font
+                HttpContext.Current.Response.Write("<font style='font-size:10.0pt; font-family:Calibri;'>");
+                HttpContext.Current.Response.Write("<BR><BR><BR>");
+                //sets the table border, cell spacing, border color, font of the text, background, foreground, font height
+                HttpContext.Current.Response.Write("<Table border='1' bgColor='#ffffff' " +
+                  "borderColor='#000000' cellSpacing='0' cellPadding='0' " +
+                  "style='font-size:10.0pt; font-family:Calibri; background:white;'> <TR>");
+                //am getting my grid's column headers
+                //int columnscount = table.Columns.Count;
+
+                //for (int j = 0; j < columnscount; j++)
+                //{      //write in new column
+                //    HttpContext.Current.Response.Write("<Td>");
+                //    //Get column headers  and make it as bold in excel columns
+                //    HttpContext.Current.Response.Write("<B>");
+                //    HttpContext.Current.Response.Write(table.Columns[j].ToString());
+                //    HttpContext.Current.Response.Write("</B>");
+                //    HttpContext.Current.Response.Write("</Td>");
+                //}
+                HttpContext.Current.Response.Write("</TR>");
+                //foreach (DataRow row in table.Rows)
+                //{//write in new row
+                //    HttpContext.Current.Response.Write("<TR>");
+                //    for (int i = 0; i < table.Columns.Count; i++)
+                //    {
+                //        HttpContext.Current.Response.Write("<Td>");
+                //        HttpContext.Current.Response.Write(row[i].ToString());
+                //        HttpContext.Current.Response.Write("</Td>");
+                //    }
+
+                //    HttpContext.Current.Response.Write("</TR>");
+                //}
+                HttpContext.Current.Response.Write("</Table>");
+                HttpContext.Current.Response.Write("</font>");
+                HttpContext.Current.Response.Flush();
+
+                HttpContext.Current.Response.End();
+            }
+
+            public static DataTable ToDataTable(List<dynamic> items)
+            {
+            DataTable dataTable = new DataTable();
+                // Get all the properties
+                //PropertyInfo[] Props = typeof().GetProperties((BindingFlags.Public | BindingFlags.Instance));
+                //foreach (PropertyInfo prop in Props)
+                //{
+                //    // Setting column names as Property names
+                //    dataTable.Columns.Add(prop.Name);
+                //}
+
+                //foreach (Entities.Students item in items)
+                //{
+                //    List<object> values = new List<object>();
+
+                //    for (int i = 0; (i <= (Props.Length - 1)); i++)
+
+                //    {
+                //        // inserting property values to datatable rows
+                //        values.Add(Props[i].GetValue(item, null));
+                //    }
+
+                //    dataTable.Rows.Add(values.ToArray());
+                //}
+
+                // put a breakpoint here and check datatable
+                return dataTable;
+
+            }
     }
 }

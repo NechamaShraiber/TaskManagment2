@@ -9,37 +9,12 @@ body {
 form {
     padding-top: 5%;
     position: relative;
-    height: 67%;
+	height: 67%;
+	font-family: cursive;
+
 }
 
-.thumbur {
-    width: 75px;
-    height: 75px;
-    position: relative;
-    background-color: #efefef;
-    *zoom: 1;
-    filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFEFEFEF', endColorstr='#FFE1E1E1');
-    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VmZWZlZiIvPjxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjZWZlZmVmIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNlMWUxZTEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlMWUxZTEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
-    background-size: 100%;
-    background-image: linear-gradient(to right, #efefef 0%, #efefef 50%, #e1e1e1 50%, #e1e1e1 100%);
-    margin: auto;
-    border-radius: 100%;
-}
 
-    .thumbur:before {
-        content: '';
-        position: absolute;
-        width: 3px;
-        height: 12px;
-        background-color: #efefef;
-        left: 50%;
-        bottom: 22px;
-        z-index: 5;
-        -webkit-transform: translateX(-50%);
-        transform: translateX(-50%);
-        border-bottom-left-radius: 1px;
-        border-bottom-right-radius: 1px;
-    }
 	/* ============form============= */
 	.group {
 		position: relative;
@@ -92,33 +67,6 @@ form {
 			color: #2196F3;
 		}
 	
-	/* BOTTOM BARS ================================= */
-	.bar {
-		position: relative;
-		display: block;
-		width: 100%;
-	}
-	
-		.bar:before, .bar:after {
-			content: '';
-			height: 2px;
-			width: 0;
-			bottom: 1px;
-			position: absolute;
-			background: #2196f3cf;
-			transition: 0.2s ease all;
-			-moz-transition: 0.2s ease all;
-			-webkit-transition: 0.2s ease all;
-		}
-	
-		.bar:before {
-			left: 50%;
-		}
-	
-		.bar:after {
-			right: 50%;
-		}
-	
 	/* active state */
 	.inputMaterial:focus ~ .bar:before, .inputMaterial:focus ~ .bar:after {
 		width: 50%;
@@ -169,7 +117,7 @@ form {
 	}
 
 .login {
-  width: 400px;
+  width: 40%;
   margin: 16px auto;
   font-size: 16px;
 }
@@ -231,4 +179,29 @@ form {
 /* Buttons' focus effect */
 .login input[type="submit"]:focus {
   border-color: #05a;
+}
+.hours{
+	float: right;
+    margin-right: 23vh;
+}
+.details{
+	float: left;
+    margin-left: 8vh;
+}
+.dates{
+	width: 32%;
+	margin-left: 30vh;
+    margin-top: 27vh;
+}
+.addworker{
+	width: 30%;
+    margin-top: -14vh;
+}
+.button
+{
+	width: 11%;
+    float: right;
+    background-color: thistle;
+    margin-top: -5vh;
+
 }

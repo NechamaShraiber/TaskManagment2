@@ -1,102 +1,90 @@
-
 <div class="login">
-    <form class="login-container" [formGroup]="addProjectGroup" (ngSubmit)="onSubmit()">
+  <form class="login-container" [formGroup]="addProjectGroup" (ngSubmit)="onSubmit()">
+    <div class="details">
     <div class="group">
       <input id="Name" class="inputMaterial" formControlName="Name">
-      <span class="highlight"></span>
-      <span class="bar"></span>
       <label>Project Name</label>
-       <div *ngIf="Name&&addProjectGroup.controls['Name'].errors&& Name.touched">
+      <div *ngIf="Name&&addProjectGroup.controls['Name'].errors&& Name.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['Name'].errors)" class="myAlert">{{err}}</p>
-      </div> 
+      </div>
     </div>
     <div class="group">
       <input id="Customer" class="inputMaterial" formControlName="Customer">
-      <span class="highlight"></span>
-      <span class="bar"></span>
       <label>Customer Name</label>
-       <div *ngIf="Customer&&addProjectGroup.controls['Customer'].errors&& Customer.touched">
+      <div *ngIf="Customer&&addProjectGroup.controls['Customer'].errors&& Customer.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['Customer'].errors)" class="myAlert">{{err}}</p>
       </div>
     </div>
     <div class="group">
-        <select formControlName="TeamLeaderId" (change)="onChange($event.target.value)">
-            <option *ngFor="let team of teamLeader" [ngValue]="team.Id">
-              {{team.Name}}
-            </option>
-          </select>
-      <span class="highlight"></span>
-      <span class="bar"></span>
+      <select formControlName="TeamLeaderId" (change)="onChange($event.target.value)">
+        <option *ngFor="let team of teamLeader" [ngValue]="team.Id">
+          {{team.Name}}
+        </option>
+      </select>
       <label>Team Leader</label>
-       <!-- <div *ngIf="addProjectGroup.controls['TeamLeaderId'].errors">
+      <!-- <div *ngIf="addProjectGroup.controls['TeamLeaderId'].errors">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['TeamLeaderId'].errors)" class="myAlert">{{err}}</p>
       </div>  -->
     </div>
+  </div>
+    <div class="hours">
     <div class="group">
       <input type="number" min="0" id="DevelopHours" class="inputMaterial" formControlName="DevelopHours">
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label >Develop Houres</label>
-       <div *ngIf="DevelopHours&&addProjectGroup.controls['DevelopHours'].errors&& DevelopHours.touched">
+      <label>Develop Houres</label>
+      <div *ngIf="DevelopHours&&addProjectGroup.controls['DevelopHours'].errors&& DevelopHours.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['DevelopHours'].errors)" class="myAlert">{{err}}</p>
-      </div> 
+      </div>
     </div>
     <div class="group">
       <input type="number" min="0" id="QAHours" class="inputMaterial" formControlName="QAHours">
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label >QA Houres</label>
-       <div *ngIf="QAHours&&addProjectGroup.controls['QAHours'].errors&& QAHours.touched">
+      <label>QA Houres</label>
+      <div *ngIf="QAHours&&addProjectGroup.controls['QAHours'].errors&& QAHours.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['QAHours'].errors)" class="myAlert">{{err}}</p>
-      </div> 
+      </div>
     </div>
     <div class="group">
       <input type="number" min="0" id="UiUxHours" class="inputMaterial" formControlName="UiUxHours">
-      <span class="highlight"></span>
-      <span class="bar"></span>
-      <label >UI/UX Houres</label>
-       <div *ngIf="UiUxHours&&addProjectGroup.controls['UiUxHours'].errors&& UiUxHours.touched">
+      <label>UI/UX Houres</label>
+      <div *ngIf="UiUxHours&&addProjectGroup.controls['UiUxHours'].errors&& UiUxHours.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['UiUxHours'].errors)" class="myAlert">{{err}}</p>
-      </div> 
+      </div>
     </div>
-    <div class="group">
-        <input type="date" id="StartDate" class="inputMaterial" formControlName="StartDate">
-        <span class="highlight"></span>
-        <span class="bar"></span>
-        <label >Start Date</label>
-         <div *ngIf="StartDate&&addProjectGroup.controls['StartDate'].errors&& StartDate.touched">
-          <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['StartDate'].errors)" class="myAlert">{{err}}</p>
-        </div> 
-      </div>
-      <div class="group">
-          <input type="date" id="EndDate" class="inputMaterial" formControlName="EndDate">
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label >End Date</label>
-           <div *ngIf="EndDate&&addProjectGroup.controls['EndDate'].errors&& EndDate.touched">
-            <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['EndDate'].errors)" class="myAlert">{{err}}</p>
-          </div> 
-        </div>
-        <div>
+  </div>
+<div class="dates">
+  <div class="group">
+    <input type="date" id="StartDate" class="inputMaterial" formControlName="StartDate">
+    <label>Start Date</label>
+    <div *ngIf="StartDate&&addProjectGroup.controls['StartDate'].errors&& StartDate.touched">
+      <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['StartDate'].errors)" class="myAlert">{{err}}</p>
+    </div>
+  </div>
+  <div class="group">
+    <input type="date" id="EndDate" class="inputMaterial" formControlName="EndDate">
+    <label>End Date</label>
+    <div *ngIf="EndDate&&addProjectGroup.controls['EndDate'].errors&& EndDate.touched">
+      <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['EndDate'].errors)" class="myAlert">{{err}}</p>
+    </div>
+  </div>
+</div>
+<div class="addWorker">
 
-        <p>select workers to add:</p>
-        <select (change)="addWorker($event.target.value)">
-  <option></option>
+  <p>select workers to add:</p>
+  <select (change)="addWorker($event.target.value)">
+    <option></option>
+    <option *ngFor="let worker of workersToSelect" [ngValue]="worker.Id">
+      {{worker.Name}}
+    </option>
+  </select>
+  <p>select workers to remove:</p>
+  <select (change)="removeWorker($event.target.value)">
+    <option></option>
+    <option *ngFor="let worker of workersToAdd" [ngValue]="worker.Id">
+      {{worker.Name}}
+    </option>
+  </select>
+</div>
 
-          <option *ngFor="let worker of workersToSelect"  [ngValue]="worker.Id" >
-            {{worker.Name}}
-          </option>
-        </select>
-        <p>select workers to remove:</p>
- <select (change)="removeWorker($event.target.value)">
-  <option></option>
-          <option *ngFor="let worker of workersToAdd" [ngValue]="worker.Id">
-            {{worker.Name}}
-          </option>
-        </select>
-      </div>
-
-        <!-- [disabled]="addProjectGroup.invalid" -->
-    <button type="submit" class="button col-md-offset-2 col-md-8" [disabled]="addProjectGroup.invalid">Add</button>
-  </form>
+<!-- [disabled]="addProjectGroup.invalid" -->
+<button type="submit" class="button" [disabled]="addProjectGroup.invalid">Add</button>
+</form>
 </div>
