@@ -25,7 +25,7 @@ namespace TaskManagment.Forms
         {
             InitializeComponent();
             AddProject();
-            Reports();
+          //  Reports();
             tab_manager.Controls.Remove(tab_workerDeatrails);
             getAllWorkers();
         }
@@ -456,18 +456,45 @@ namespace TaskManagment.Forms
 
         #endregion
 
-        #region addProject
-        private BindingSource bindingSource1 = new BindingSource();
-        private SqlDataAdapter dataAdapter = new SqlDataAdapter();
+        //#region addProject
+        //private BindingSource bindingSource1 = new BindingSource();
+        //private SqlDataAdapter dataAdapter = new SqlDataAdapter();
 
-        public void Reports()
+        //public void Reports()
+        //{
+        //    dataGridView1.DataSource = bindingSource1;
+        //    GetData();
+        //}
+        //private void GetData()
+        //{
+        //    List<Object> grid;
+        //    HttpClient client = new HttpClient();
+        //    client.BaseAddress = new Uri(Global.path);
+        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //    HttpResponseMessage response = client.GetAsync($"getPresence").Result;
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        var result = response.Content.ReadAsStringAsync().Result;
+        //        grid = JsonConvert.DeserializeObject<List<Object>>(result);
+        //        dataGridView1.DataSource = grid;
+        //        dataGridView1.Columns["Id"].Visible = false;
+        //        dataGridView1.Columns["TeamLeaderId"].Visible = false;
+        //    }
+        //    else
+        //    {
+
+        //        Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+
+        //    }
+        //}
+
+
+        //#endregion
+
+        #region reports
+      List<dynamic> presences;
+        public void GetPresences()
         {
-            dataGridView1.DataSource = bindingSource1;
-            GetData();
-        }
-        private void GetData()
-        {
-            List<Object> grid;
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(Global.path);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -475,31 +502,57 @@ namespace TaskManagment.Forms
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-                grid = JsonConvert.DeserializeObject<List<Object>>(result);
-                dataGridView1.DataSource = grid;
-                dataGridView1.Columns["Id"].Visible = false;
-                dataGridView1.Columns["TeamLeaderId"].Visible = false;
+
+                presences = JsonConvert.DeserializeObject<List<dynamic>>(result);
+                SelectByWorkerName();
+
             }
             else
             {
-
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-
             }
+        }
+
+        private void SelectByWorkerName()
+        {
+
+            List<dynamic> projectsByName = new List<dynamic>();
+            var names = presences.Select(p => p["WorkerName"].Value).GroupBy(p => p).ToArray();
+
+            foreach (var n in names)
+            {
+                List<dynamic> projectsHours=new List<dynamic>();
+             var projects=presences.FindAll(p=>p["WorkerName"].Value==n.Key).Select(p=>p["ProjectName"].Value).GroupBy(p => p).ToArray();
+                foreach (var pro in projects)
+                {
+                    var hours = presences.FindAll(p => p["ProjectName"].Value == pro.Key).Select(p => new
+                    {
+                     date=p["Date"],
+                      Start=p["Start"],
+                      End=p["End"]
+                    });
+                    projectsHours.Add(new { pro.Key, hours });
+                }
+                projectsByName.Add(new { n.Key, projectsHours });
+            }
+            foreach (var pbn in projectsByName)
+            {
+
+              TreeNode n=  treeView1.Nodes.Add(pbn.Key);
+                foreach (var item in pbn.projectsHours)
+                {
+                    n.Nodes.Add(item.Key);
+
+                }
+                
+            }
+           
+
+
         }
 
 
         #endregion
-
-        private void ManagerHome_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tab_addProject_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void txt_team_name_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -536,11 +589,21 @@ namespace TaskManagment.Forms
 
         }
 
-        private void dgvAddWorkers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+      
+        private void tab_reports_Click(object sender, EventArgs e)
         {
+            GetPresences();
 
         }
 
+        private void tab_reports_CursorChanged(object sender, EventArgs e)
+        {
+            Console.Write("GHDFfgh");
+        }
 
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
     }
 }

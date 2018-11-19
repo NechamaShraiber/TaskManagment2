@@ -7,7 +7,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Windows.Forms;
 using TaskManagment.Forms.Work;
-
 using TaskManagment.Models;
 
 namespace TaskManagment.Forms
@@ -110,6 +109,7 @@ namespace TaskManagment.Forms
 
         void UpdateChart()
         {
+
             Dictionary<string, int> allocatedHours = new Dictionary<string, int>();
             List<float> workedHours = new List<float>();
 

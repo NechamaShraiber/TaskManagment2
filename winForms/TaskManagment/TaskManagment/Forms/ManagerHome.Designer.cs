@@ -52,8 +52,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tab_reports = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tab_user_managment = new System.Windows.Forms.TabPage();
             this.panelControlls = new System.Windows.Forms.Panel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.btn_edit = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_add_worker = new System.Windows.Forms.Button();
@@ -73,15 +75,17 @@
             this.label15 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.tab_manager.SuspendLayout();
             this.tab_addProject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).BeginInit();
             this.tab_reports.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tab_user_managment.SuspendLayout();
+            this.panelControlls.SuspendLayout();
             this.tab_workerDeatrails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tab_manager
@@ -126,7 +130,6 @@
             this.tab_addProject.TabIndex = 0;
             this.tab_addProject.Text = "Add project";
             this.tab_addProject.UseVisualStyleBackColor = true;
-            this.tab_addProject.Click += new System.EventHandler(this.tab_addProject_Click);
             // 
             // dgvAddWorkers
             // 
@@ -137,7 +140,6 @@
             this.dgvAddWorkers.Name = "dgvAddWorkers";
             this.dgvAddWorkers.Size = new System.Drawing.Size(185, 168);
             this.dgvAddWorkers.TabIndex = 38;
-            this.dgvAddWorkers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAddWorkers_CellContentClick);
             this.dgvAddWorkers.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAddWorkers_RowHeaderMouseClick);
             // 
             // label16
@@ -307,6 +309,7 @@
             // 
             // tab_reports
             // 
+            this.tab_reports.Controls.Add(this.treeView1);
             this.tab_reports.Controls.Add(this.dataGridView1);
             this.tab_reports.Location = new System.Drawing.Point(4, 22);
             this.tab_reports.Name = "tab_reports";
@@ -315,6 +318,16 @@
             this.tab_reports.TabIndex = 1;
             this.tab_reports.Text = "Reports";
             this.tab_reports.UseVisualStyleBackColor = true;
+            this.tab_reports.CursorChanged += new System.EventHandler(this.tab_reports_CursorChanged);
+            this.tab_reports.Click += new System.EventHandler(this.tab_reports_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(34, 43);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(539, 311);
+            this.dataGridView1.TabIndex = 0;
             // 
             // tab_user_managment
             // 
@@ -333,10 +346,19 @@
             // panelControlls
             // 
             this.panelControlls.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.panelControlls.Controls.Add(this.menuStrip1);
             this.panelControlls.Location = new System.Drawing.Point(50, 94);
             this.panelControlls.Name = "panelControlls";
             this.panelControlls.Size = new System.Drawing.Size(532, 218);
             this.panelControlls.TabIndex = 6;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(532, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
             // 
             // btn_edit
             // 
@@ -514,13 +536,18 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // dataGridView1
+            // contextMenuStrip1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(34, 43);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(539, 311);
-            this.dataGridView1.TabIndex = 0;
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(135, 98);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(121, 97);
+            this.treeView1.TabIndex = 1;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // ManagerHome
             // 
@@ -528,19 +555,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tab_manager);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "ManagerHome";
             this.Text = "Manager";
-            this.Load += new System.EventHandler(this.ManagerHome_Load);
             this.tab_manager.ResumeLayout(false);
             this.tab_addProject.ResumeLayout(false);
             this.tab_addProject.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).EndInit();
             this.tab_reports.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tab_user_managment.ResumeLayout(false);
+            this.panelControlls.ResumeLayout(false);
+            this.panelControlls.PerformLayout();
             this.tab_workerDeatrails.ResumeLayout(false);
             this.tab_workerDeatrails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -591,5 +620,8 @@
         private System.Windows.Forms.DataGridView dgvAddWorkers;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }

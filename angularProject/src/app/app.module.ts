@@ -28,10 +28,7 @@ import { ChartComponent } from './components/chart/chart.component';
 //import { HomeWorkerComponent } from './components/worker/home-worker/home-worker.component';
 import { AuthGuard} from '../app/shared/auth.guard';
 //import {MatDialogModule} from "@angular/material";
-<<<<<<< HEAD
-=======
-import {TableModule} from 'primeng/table';
->>>>>>> 2b3f2992ab1bba31092c3570a7b2e666776ff193
+// import {TableModule} from 'primeng/table';
 
 
  const  globalPath:string="http://localhost:59628/api/";
@@ -41,10 +38,7 @@ const routes: Routes = [
   { path: 'addProject', component: AddProjectComponent },
   { path: 'usersManagers', component: UsersManagersComponent },
   { path: 'Addworker', component: AddWorkerComponent },
-<<<<<<< HEAD
-=======
   { path: 'reports', component: ReportsComponent },
->>>>>>> 2b3f2992ab1bba31092c3570a7b2e666776ff193
   { path: 'teamLeaderProjects', component: TeamLeaderProjectComponent },
   { path: 'teamLeaderWorkers', component: TeamLeaderWorkersComponent },
 
@@ -76,7 +70,8 @@ const routes: Routes = [
     WorkerDeatailsComponent,
     HomeWorkerComponent,
     SendMsgComponent,
-    ChartComponent
+    ChartComponent,
+    
     //HomeWorkerComponent,
   ],
   imports: [
@@ -88,10 +83,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     BootstrapModalModule.forRoot({container:document.body}),
-<<<<<<< HEAD
-=======
-    TableModule,
->>>>>>> 2b3f2992ab1bba31092c3570a7b2e666776ff193
+    // TableModule,
     //MatDialogModule
 
   ],
