@@ -98,12 +98,7 @@ Get - get all the details that the manager need to the report
  */
 
 
-            [HttpGet]
-            [Route("api/exportToExcel")]
-            public void Expotrexcel()
-        {
-             ManagerLogic.ExportExcel();
-        }
+        
        
         /// <summary>
         /// edit worker's details

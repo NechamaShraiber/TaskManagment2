@@ -25,7 +25,7 @@ namespace TaskManagment.Forms
         {
             InitializeComponent();
             AddProject();
-            Reports();
+          
             tab_manager.Controls.Remove(tab_workerDeatrails);
             getAllWorkers();
         }
@@ -460,34 +460,6 @@ namespace TaskManagment.Forms
         private BindingSource bindingSource1 = new BindingSource();
         private SqlDataAdapter dataAdapter = new SqlDataAdapter();
 
-        public void Reports()
-        {
-            dataGridView1.DataSource = bindingSource1;
-            GetData();
-        }
-        private void GetData()
-        {
-            List<Object> grid;
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(Global.path);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.GetAsync($"getPresence").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var result = response.Content.ReadAsStringAsync().Result;
-                grid = JsonConvert.DeserializeObject<List<Object>>(result);
-                dataGridView1.DataSource = grid;
-                dataGridView1.Columns["Id"].Visible = false;
-                dataGridView1.Columns["TeamLeaderId"].Visible = false;
-            }
-            else
-            {
-
-                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-
-            }
-        }
-
 
         #endregion
 
@@ -541,6 +513,9 @@ namespace TaskManagment.Forms
 
         }
 
+        private void tab_reports_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

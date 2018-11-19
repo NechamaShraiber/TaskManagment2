@@ -315,6 +315,7 @@
             this.tab_reports.TabIndex = 1;
             this.tab_reports.Text = "Reports";
             this.tab_reports.UseVisualStyleBackColor = true;
+            this.tab_reports.Click += new System.EventHandler(this.tab_reports_Click);
             // 
             // tab_user_managment
             // 

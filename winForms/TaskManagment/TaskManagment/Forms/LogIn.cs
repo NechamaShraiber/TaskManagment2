@@ -87,10 +87,7 @@ namespace TaskManagment
                                     worker.Show();
                                     break;
                                 }
-
-
                         }
-
                     }
                 }
                 catch (WebException ex)
