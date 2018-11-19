@@ -527,7 +527,7 @@ namespace TaskManagment.Forms
                 {
                     var hours = presences.FindAll(p => p["ProjectName"].Value == pro.Key).Select(p => new
                     {
-                     date=p["Date"],
+                     Date=p["Date"],
                       Start=p["Start"],
                       End=p["End"]
                     });
@@ -539,10 +539,14 @@ namespace TaskManagment.Forms
             {
 
               TreeNode n=  treeView1.Nodes.Add(pbn.Key);
-                foreach (var item in pbn.projectsHours)
+                foreach (var prh in pbn.projectsHours)
                 {
-                    n.Nodes.Add(item.Key);
+                    TreeNode n1= n.Nodes.Add(prh.Key);
+                    foreach (var hour in prh.hours)
+                    {
+                         n1.Nodes.Add($"date:{hour.Date.Value}, start:{hour.Start.Value}, end:{hour.End.Value}");
 
+                    }
                 }
                 
             }
