@@ -112,7 +112,7 @@ export class AddWorkerComponent implements OnInit {
           if (worker == null) {
             alert("The worker's details edited succesfully")
             this.managerService.workerToUpdate = null;
-            this.router.navigate(['taskManagers/home']);
+            this.router.navigate(['taskManagers/home/usersManagers']);
           }
           else {
             this.router.navigate(['taskManagers/login'])

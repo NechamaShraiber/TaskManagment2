@@ -14,7 +14,7 @@ export class DeleteWorkerComponent extends DialogComponent<ConfirmModel, boolean
  
   title: string;
   message: string;
-  workerList: any;
+  workerList: any[];
   selectUndefinedOptionValue:any;
   constructor(dialogService: DialogService,private managerService:ManagerService) {
     super(dialogService);
@@ -24,9 +24,14 @@ export class DeleteWorkerComponent extends DialogComponent<ConfirmModel, boolean
     this.close();
   }
   ngOnInit(){
+    this.workerList = [];
     this.managerService.getAllWorkers().subscribe(
       res=>{
-        this.workerList=res;
+        res.forEach(
+          w => {
+            if (w.JobId  > 2)
+              this.workerList.push(w);
+          });
     })
   }
   onChange(ev){

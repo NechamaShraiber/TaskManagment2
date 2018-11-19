@@ -70,22 +70,16 @@ export class AddProjectComponent implements OnInit {
   }
   onChange(teamLeaderId) {
     this.workersToSelect = [];
-
     this.workers.forEach(
       w => {
-
         if (w.ManagerId != teamLeaderId.slice(3, teamLeaderId.Length) && w.JobId > 2)
-
           this.workersToSelect.push(w);
-
-
-
       });
 
   }
   addWorker(worker) {
-    console.log(this.workersToSelect);
-    console.log(worker);
+    //console.log(this.workersToSelect);
+    //console.log(worker);
     var w = this.workersToSelect.find(w => w.Name == worker)
     this.workersToAdd.push(w);
     var index = this.workersToSelect.indexOf(w);
