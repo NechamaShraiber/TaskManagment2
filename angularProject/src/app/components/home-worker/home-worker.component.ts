@@ -18,6 +18,10 @@ export class HomeWorkerComponent implements OnInit {
   today: any;
  
   projects: any[];
+<<<<<<< HEAD
+=======
+  names:string[];
+>>>>>>> 2b3f2992ab1bba31092c3570a7b2e666776ff193
   currentWorker: Worker
  
 
@@ -30,7 +34,20 @@ export class HomeWorkerComponent implements OnInit {
     this.currentWorker = JSON.parse(localStorage.getItem('currentUser'));
     this.workerService.getProject(this.currentWorker.Id).subscribe(res => {
       this.projects = res;
+<<<<<<< HEAD
+=======
+      this.names=this.projects.filter(p=>p["WorkerName"]);
+console.log(this.names)
+var groupByName = {};
+
+this.names.forEach(function (a) {
+    groupByName [a] = groupByName [a] || [];
+    groupByName [a].push(a);
+});
+console.log(this.names)
+>>>>>>> 2b3f2992ab1bba31092c3570a7b2e666776ff193
     });
+
   }
 
   send() {

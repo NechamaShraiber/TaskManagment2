@@ -36,6 +36,7 @@ export class LoginComponent {
     const hash = await sha256(this.password.value);
     this.globalService.login(this.userName.value,hash)
       .subscribe(worker => { 
+<<<<<<< HEAD
         if(worker){
           try{
         console.log(worker+"iiiiiiiiiiii");
@@ -52,6 +53,13 @@ export class LoginComponent {
             alert("One or more data is not correct");
             this.router.navigate(['taskManagers/login']);
           }
+=======
+          localStorage.setItem('currentUser', JSON.stringify(worker));
+          this.router.navigate(['taskManagers/home']);
+      },err=>{
+        this.isExistUser=false;
+            this.router.navigate(['taskManagers/login']);
+>>>>>>> 2b3f2992ab1bba31092c3570a7b2e666776ff193
       })
   }
 

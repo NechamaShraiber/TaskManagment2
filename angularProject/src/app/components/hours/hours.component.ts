@@ -66,6 +66,7 @@ startTask: any;
           // });
           //   this.workerService.subjectUpdateChart.next(this.projects);
           //////////////////////////////////////////////////////////////////////////////////////////////////////////לעשות כאן חשבון
+
 this.hour["Hours"]=23;
 
         }

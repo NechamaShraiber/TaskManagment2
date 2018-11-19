@@ -24,6 +24,7 @@ export class ManagerService {
   }
   getAllManagers(): any {
     return this.http.get(GlobalService.path+"getAllManagers");
+
   }
   
   addWorker(worker): any {
@@ -48,6 +49,10 @@ export class ManagerService {
 
     return this.http.post(GlobalService.path+"addWorkersToProject/"+name+"/", JSON.parse(JSON.stringify(this.ids)))
 
+  }
+ 
+  getPresence():any{
+     return this.http.get(GlobalService.path+"getPresence");
   }
 
 }
