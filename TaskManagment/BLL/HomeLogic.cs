@@ -47,6 +47,7 @@ namespace BLL
 
         public static bool UpdatePassword(string userName, string oldpassword, string newPassord)
         {
+
             string query =$" UPDATE workers SET password = '{newPassord}' WHERE user_name = '{userName}' AND password = '{oldpassword}'";
             return DBAccess.RunNonQuery(query) == 1;
         }
