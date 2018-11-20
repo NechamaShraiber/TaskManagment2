@@ -86,17 +86,10 @@ namespace BLL
 
         public static bool UpdateWorker(Worker worker)
         {
-            string query;
-            if (worker.Password != null)
-            {
-                query = $"UPDATE task_managment.workers SET name='{worker.Name}', user_name='{worker.UserName}'" +
-                                $", password='{worker.Password}' , email='{worker.EMail}', job={worker.JobId}, manager={worker.ManagerId} WHERE worker_id={worker.Id}";
-            }
-            else
-            {
-                query = $"UPDATE task_managment.workers SET name='{worker.Name}', user_name='{worker.UserName}'" +
+          
+               string  query = $"UPDATE task_managment.workers SET name='{worker.Name}', user_name='{worker.UserName}'" +
                 $", email='{worker.EMail}', job={worker.JobId}, manager={worker.ManagerId} WHERE worker_id={worker.Id}";
-            }
+            
             return DBAccess.RunNonQuery(query) == 1;
         }
 

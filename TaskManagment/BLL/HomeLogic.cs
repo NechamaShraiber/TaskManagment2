@@ -44,6 +44,13 @@ namespace BLL
                 return workers[0];
             return null;
         }
+
+        public static bool UpdatePassword(string userName, string oldpassword, string newPassord)
+        {
+            string query =$" UPDATE workers SET password = '{newPassord}' WHERE user_name = '{userName}' AND password = '{oldpassword}'";
+            return DBAccess.RunNonQuery(query) == 1;
+        }
+
         public static bool sendEmail(string sub, string body, string email)
         {
             MailMessage msg = new MailMessage();
