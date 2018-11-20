@@ -62,18 +62,18 @@
             this.cmb_manager = new System.Windows.Forms.ComboBox();
             this.cmb_job = new System.Windows.Forms.ComboBox();
             this.txt_email = new System.Windows.Forms.TextBox();
-            this.txt_password = new System.Windows.Forms.TextBox();
             this.txt_user_name = new System.Windows.Forms.TextBox();
             this.txt_name = new System.Windows.Forms.TextBox();
             this.btn_Action = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txt_password = new System.Windows.Forms.TextBox();
+            this.lblPassword = new System.Windows.Forms.Label();
             this.tab_manager.SuspendLayout();
             this.tab_addProject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).BeginInit();
@@ -121,7 +121,7 @@
             this.tab_addProject.Location = new System.Drawing.Point(4, 22);
             this.tab_addProject.Name = "tab_addProject";
             this.tab_addProject.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_addProject.Size = new System.Drawing.Size(652, 400);
+            this.tab_addProject.Size = new System.Drawing.Size(790, 424);
             this.tab_addProject.TabIndex = 0;
             this.tab_addProject.Text = "Add project";
             this.tab_addProject.UseVisualStyleBackColor = true;
@@ -308,11 +308,10 @@
             this.tab_reports.Location = new System.Drawing.Point(4, 22);
             this.tab_reports.Name = "tab_reports";
             this.tab_reports.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_reports.Size = new System.Drawing.Size(652, 400);
+            this.tab_reports.Size = new System.Drawing.Size(790, 424);
             this.tab_reports.TabIndex = 1;
             this.tab_reports.Text = "Reports";
             this.tab_reports.UseVisualStyleBackColor = true;
-            this.tab_reports.Click += new System.EventHandler(this.tab_reports_Click);
             // 
             // treeView1
             // 
@@ -377,17 +376,17 @@
             // 
             // tab_workerDeatrails
             // 
+            this.tab_workerDeatrails.Controls.Add(this.txt_password);
+            this.tab_workerDeatrails.Controls.Add(this.lblPassword);
             this.tab_workerDeatrails.Controls.Add(this.cmb_manager);
             this.tab_workerDeatrails.Controls.Add(this.cmb_job);
             this.tab_workerDeatrails.Controls.Add(this.txt_email);
-            this.tab_workerDeatrails.Controls.Add(this.txt_password);
             this.tab_workerDeatrails.Controls.Add(this.txt_user_name);
             this.tab_workerDeatrails.Controls.Add(this.txt_name);
             this.tab_workerDeatrails.Controls.Add(this.btn_Action);
             this.tab_workerDeatrails.Controls.Add(this.label10);
             this.tab_workerDeatrails.Controls.Add(this.label11);
             this.tab_workerDeatrails.Controls.Add(this.label12);
-            this.tab_workerDeatrails.Controls.Add(this.label13);
             this.tab_workerDeatrails.Controls.Add(this.label14);
             this.tab_workerDeatrails.Controls.Add(this.label15);
             this.tab_workerDeatrails.Controls.Add(this.lblTitle);
@@ -397,11 +396,13 @@
             this.tab_workerDeatrails.Size = new System.Drawing.Size(790, 424);
             this.tab_workerDeatrails.TabIndex = 3;
             this.tab_workerDeatrails.UseVisualStyleBackColor = true;
+            this.tab_workerDeatrails.Click += new System.EventHandler(this.tab_workerDeatrails_Click);
+            this.tab_workerDeatrails.Leave += new System.EventHandler(this.tab_workerDeatrails_Leave);
             // 
             // cmb_manager
             // 
             this.cmb_manager.FormattingEnabled = true;
-            this.cmb_manager.Location = new System.Drawing.Point(339, 255);
+            this.cmb_manager.Location = new System.Drawing.Point(339, 224);
             this.cmb_manager.Name = "cmb_manager";
             this.cmb_manager.Size = new System.Drawing.Size(100, 21);
             this.cmb_manager.TabIndex = 49;
@@ -409,26 +410,18 @@
             // cmb_job
             // 
             this.cmb_job.FormattingEnabled = true;
-            this.cmb_job.Location = new System.Drawing.Point(339, 227);
+            this.cmb_job.Location = new System.Drawing.Point(339, 196);
             this.cmb_job.Name = "cmb_job";
             this.cmb_job.Size = new System.Drawing.Size(100, 21);
             this.cmb_job.TabIndex = 48;
             // 
             // txt_email
             // 
-            this.txt_email.Location = new System.Drawing.Point(339, 200);
+            this.txt_email.Location = new System.Drawing.Point(339, 169);
             this.txt_email.Name = "txt_email";
             this.txt_email.Size = new System.Drawing.Size(100, 20);
             this.txt_email.TabIndex = 47;
             this.txt_email.Validated += new System.EventHandler(this.checkValidEmail);
-            // 
-            // txt_password
-            // 
-            this.txt_password.Location = new System.Drawing.Point(339, 173);
-            this.txt_password.Name = "txt_password";
-            this.txt_password.Size = new System.Drawing.Size(100, 20);
-            this.txt_password.TabIndex = 46;
-            this.txt_password.Validated += new System.EventHandler(this.checkValidPassword);
             // 
             // txt_user_name
             // 
@@ -458,7 +451,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(214, 253);
+            this.label10.Location = new System.Drawing.Point(214, 222);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(49, 13);
             this.label10.TabIndex = 42;
@@ -467,7 +460,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(214, 226);
+            this.label11.Location = new System.Drawing.Point(214, 195);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(24, 13);
             this.label11.TabIndex = 41;
@@ -476,20 +469,11 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(214, 199);
+            this.label12.Location = new System.Drawing.Point(214, 168);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(35, 13);
             this.label12.TabIndex = 40;
             this.label12.Text = "E-mail";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(214, 173);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(53, 13);
-            this.label13.TabIndex = 39;
-            this.label13.Text = "Password";
             // 
             // label14
             // 
@@ -520,6 +504,22 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // txt_password
+            // 
+            this.txt_password.Location = new System.Drawing.Point(339, 252);
+            this.txt_password.Name = "txt_password";
+            this.txt_password.Size = new System.Drawing.Size(100, 20);
+            this.txt_password.TabIndex = 51;
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Location = new System.Drawing.Point(214, 252);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(53, 13);
+            this.lblPassword.TabIndex = 50;
+            this.lblPassword.Text = "Password";
             // 
             // ManagerHome
             // 
@@ -574,19 +574,19 @@
         private System.Windows.Forms.ComboBox cmb_manager;
         private System.Windows.Forms.ComboBox cmb_job;
         private System.Windows.Forms.TextBox txt_email;
-        private System.Windows.Forms.TextBox txt_password;
         private System.Windows.Forms.TextBox txt_user_name;
         private System.Windows.Forms.TextBox txt_name;
         private System.Windows.Forms.Button btn_Action;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.DataGridView dgvAddWorkers;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TextBox txt_password;
+        private System.Windows.Forms.Label lblPassword;
     }
 }

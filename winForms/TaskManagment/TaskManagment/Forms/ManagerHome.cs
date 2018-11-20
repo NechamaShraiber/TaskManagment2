@@ -27,6 +27,7 @@ namespace TaskManagment.Forms
             AddProject();
             tab_manager.Controls.Remove(tab_workerDeatrails);
             getAllWorkers();
+            GetPresences();
         }
         public void getAllWorkers()
         {
@@ -360,7 +361,8 @@ namespace TaskManagment.Forms
         {
             txt_name.Text = w.Name;
             txt_email.Text = w.EMail;
-            txt_password.Text = w.Password;
+            lblPassword.Text = "";
+            txt_password.BorderStyle = BorderStyle.None;
             txt_user_name.Text = w.UserName;
             cmb_job.SelectedItem = (eJobs)w.JobId;
             cmb_manager.SelectedItem = manager.FirstOrDefault(m => m.Id == w.ManagerId).Name;
@@ -455,40 +457,10 @@ namespace TaskManagment.Forms
 
         #endregion
 
-        //#region addProject
-        //private BindingSource bindingSource1 = new BindingSource();
-        //private SqlDataAdapter dataAdapter = new SqlDataAdapter();
-
-        //public void Reports()
-        //{
-        //    dataGridView1.DataSource = bindingSource1;
-        //    GetData();
-        //}
-        //private void GetData()
-        //{
-        //    List<Object> grid;
-        //    HttpClient client = new HttpClient();
-        //    client.BaseAddress = new Uri(Global.path);
-        //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        //    HttpResponseMessage response = client.GetAsync($"getPresence").Result;
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        var result = response.Content.ReadAsStringAsync().Result;
-        //        grid = JsonConvert.DeserializeObject<List<Object>>(result);
-        //        dataGridView1.DataSource = grid;
-        //        dataGridView1.Columns["Id"].Visible = false;
-        //        dataGridView1.Columns["TeamLeaderId"].Visible = false;
-        //    }
-        //    else
-        //    {
-
-        //        Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-
-        //    }
-        //}
+      
 
 
-        //#endregion
+      
 
         #region reports
       List<dynamic> presences;
@@ -597,14 +569,13 @@ namespace TaskManagment.Forms
 
         }
 
-      
-        private void tab_reports_Click(object sender, EventArgs e)
+        private void tab_workerDeatrails_Leave(object sender, EventArgs e)
         {
-            GetPresences();
-
+            
+                tab_manager.Controls.Remove(tab_workerDeatrails);
         }
 
-        private void process1_Exited(object sender, EventArgs e)
+        private void tab_workerDeatrails_Click(object sender, EventArgs e)
         {
 
         }

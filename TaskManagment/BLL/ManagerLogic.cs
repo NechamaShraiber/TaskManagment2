@@ -265,11 +265,14 @@ $" ORDER BY w.name, p.name, wh.date , wh.start";
             return DBAccess.RunReader(query, func);
 
         }
-
-        /*
-         * 
-        */
-
        
+        public static string getPassword(int workerId)
+        {
+
+            string query = $"select password from workers where worker_id={workerId}";
+  
+            return DBAccess.RunScalar(query).ToString();
+        }
+
     }
 }
