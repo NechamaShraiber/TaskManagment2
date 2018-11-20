@@ -10,7 +10,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { WorkerService } from './shared/service/worker.service';
 import { AddProjectComponent } from './components/add-project/add-project.component';
 import { ReportsComponent } from './components/reports/reports.component';
-import { UsersManagersComponent } from './components/users-managers/users-managers.component';
 import { AddWorkerComponent } from './components/add-worker/add-worker.component';
 import { DeleteWorkerComponent } from './components/delete-worker/delete-worker.component';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
@@ -36,7 +35,6 @@ const routes: Routes = [
   { path: 'taskManagers/login', component: LoginComponent },
   { path: 'taskManagers/home', component: HomeComponent ,children:[
   { path: 'addProject', component: AddProjectComponent },
-  { path: 'usersManagers', component: UsersManagersComponent },
   { path: 'Addworker', component: AddWorkerComponent },
   { path: 'reports', component: ReportsComponent },
   { path: 'teamLeaderProjects', component: TeamLeaderProjectComponent },
@@ -57,7 +55,6 @@ const routes: Routes = [
     HomeComponent,
     AddProjectComponent,
     ReportsComponent,
-    UsersManagersComponent,
     AddWorkerComponent,
     DeleteWorkerComponent,
     EditWorkerComponent,
