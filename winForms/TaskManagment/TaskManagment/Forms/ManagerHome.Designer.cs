@@ -52,6 +52,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tab_reports = new System.Windows.Forms.TabPage();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tab_user_managment = new System.Windows.Forms.TabPage();
             this.panelControlls = new System.Windows.Forms.Panel();
@@ -76,7 +77,7 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.btn_excl = new System.Windows.Forms.Button();
             this.tab_manager.SuspendLayout();
             this.tab_addProject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).BeginInit();
@@ -309,6 +310,7 @@
             // 
             // tab_reports
             // 
+            this.tab_reports.Controls.Add(this.btn_excl);
             this.tab_reports.Controls.Add(this.treeView1);
             this.tab_reports.Controls.Add(this.dataGridView1);
             this.tab_reports.Location = new System.Drawing.Point(4, 22);
@@ -318,8 +320,15 @@
             this.tab_reports.TabIndex = 1;
             this.tab_reports.Text = "Reports";
             this.tab_reports.UseVisualStyleBackColor = true;
-            this.tab_reports.Click += new System.EventHandler(this.tab_reports_Click);
-            this.tab_reports.Click += new System.EventHandler(this.tab_reports_Click);
+            // 
+            // treeView1
+            // 
+            this.treeView1.AllowDrop = true;
+            this.treeView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.treeView1.Location = new System.Drawing.Point(58, 58);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(487, 281);
+            this.treeView1.TabIndex = 1;
             // 
             // dataGridView1
             // 
@@ -541,14 +550,15 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // treeView1
+            // btn_excl
             // 
-            this.treeView1.AllowDrop = true;
-            this.treeView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.treeView1.Location = new System.Drawing.Point(58, 58);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(487, 281);
-            this.treeView1.TabIndex = 1;
+            this.btn_excl.Location = new System.Drawing.Point(34, 360);
+            this.btn_excl.Name = "btn_excl";
+            this.btn_excl.Size = new System.Drawing.Size(105, 23);
+            this.btn_excl.TabIndex = 2;
+            this.btn_excl.Text = "Export to Excl";
+            this.btn_excl.UseVisualStyleBackColor = true;
+            this.btn_excl.Click += new System.EventHandler(this.btn_excl_Click);
             // 
             // ManagerHome
             // 
@@ -624,5 +634,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.Button btn_excl;
     }
 }

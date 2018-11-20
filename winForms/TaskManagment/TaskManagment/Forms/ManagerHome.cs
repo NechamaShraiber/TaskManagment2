@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -13,6 +12,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using TaskManagment.Models;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace TaskManagment.Forms
 {
@@ -27,6 +28,8 @@ namespace TaskManagment.Forms
             AddProject();
             tab_manager.Controls.Remove(tab_workerDeatrails);
             getAllWorkers();
+            GetPresences();
+
         }
         public void getAllWorkers()
         {
@@ -129,17 +132,17 @@ namespace TaskManagment.Forms
 
         public void addWorkersToProject(string name)
         {
-          
+
             var httpWebRequest = (HttpWebRequest)WebRequest.Create($"{Global.path}addWorkersToProject/{name}");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             dynamic credential;
-            
+
             try
             {
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
-                    credential = workerToAdd.Select(w=>w.Id);
+                    credential = workerToAdd.Select(w => w.Id);
                     string credentialString = Newtonsoft.Json.JsonConvert.SerializeObject(credential, Formatting.None);
                     streamWriter.Write(credentialString);
                     streamWriter.Flush();
@@ -411,7 +414,7 @@ namespace TaskManagment.Forms
             {
                 string json = "{" + (!isAdd ? "\"Id\":\"" + w.Id + "\"," : "") + "\"Name\":\"" + txt_name.Text + "\"," +
                    "\"UserName\":\"" + txt_user_name.Text + "\"," +
-                   "\"Password\":\"" +(txt_password.Text!=""? sha256(txt_password.Text) :"")+ "\"," +
+                   "\"Password\":\"" + (txt_password.Text != "" ? sha256(txt_password.Text) : "") + "\"," +
                     "\"JobId\":\"" + IdJob + "\"," +
                    "\"EMail\":\"" + txt_email.Text + "\"," +
                    "\"ManagerId\":\"" + IdManager +
@@ -491,7 +494,8 @@ namespace TaskManagment.Forms
         //#endregion
 
         #region reports
-      List<dynamic> presences;
+        List<dynamic> presences;
+
         public void GetPresences()
         {
             HttpClient client = new HttpClient();
@@ -501,34 +505,30 @@ namespace TaskManagment.Forms
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-
                 presences = JsonConvert.DeserializeObject<List<dynamic>>(result);
                 SelectByWorkerName();
-
             }
             else
             {
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
             }
         }
+        List<dynamic> projectsHours = new List<dynamic>();
+        List<dynamic> projectsByName = new List<dynamic>();
 
         private void SelectByWorkerName()
         {
-
-            List<dynamic> projectsByName = new List<dynamic>();
             var names = presences.Select(p => p["WorkerName"].Value).GroupBy(p => p).ToArray();
-
             foreach (var n in names)
             {
-                List<dynamic> projectsHours=new List<dynamic>();
-             var projects=presences.FindAll(p=>p["WorkerName"].Value==n.Key).Select(p=>p["ProjectName"].Value).GroupBy(p => p).ToArray();
+                var projects = presences.FindAll(p => p["WorkerName"].Value == n.Key).Select(p => p["ProjectName"].Value).GroupBy(p => p).ToArray();
                 foreach (var pro in projects)
                 {
                     var hours = presences.FindAll(p => p["ProjectName"].Value == pro.Key).Select(p => new
                     {
-                     Date=p["Date"],
-                      Start=p["Start"],
-                      End=p["End"]
+                        Date = p["Date"],
+                        Start = p["Start"],
+                        End = p["End"]
                     });
                     projectsHours.Add(new { pro.Key, hours });
                 }
@@ -537,25 +537,71 @@ namespace TaskManagment.Forms
             foreach (var pbn in projectsByName)
             {
 
-              TreeNode n=  treeView1.Nodes.Add(pbn.Key);
+                TreeNode n = treeView1.Nodes.Add(pbn.Key);
                 n.BackColor = Color.BurlyWood;
                 foreach (var prh in pbn.projectsHours)
                 {
-                    TreeNode n1= n.Nodes.Add(prh.Key);
+                    TreeNode n1 = n.Nodes.Add(prh.Key);
                     n1.BackColor = Color.Coral;
                     foreach (var hour in prh.hours)
                     {
-                        TreeNode n3= n1.Nodes.Add($"date:{hour.Date.Value}, start:{hour.Start.Value}, end:{hour.End.Value}");
+                        TreeNode n3 = n1.Nodes.Add($"date:{hour.Date.Value}, start:{hour.Start.Value}, end:{hour.End.Value}");
                         n3.BackColor = Color.Cyan;
                         n3.ForeColor = Color.Cornsilk;
-
                     }
                 }
-                
             }
-           
+        }
+      
 
+        private void btn_excl_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application xlApp;
+            Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
 
+            xlApp = new Microsoft.Office.Interop.Excel.Application();
+            xlWorkBook = xlApp.Workbooks.Add(misValue);
+            xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            int i = 0;
+            int j = 0;
+
+            for (i = 0; i <= dataGridView1.RowCount - 1; i++)
+            {
+                for (j = 0; j <= dataGridView1.ColumnCount - 1; j++)
+                {
+                    DataGridViewCell cell = dataGridView1[j, i];
+                    xlWorkSheet.Cells[i + 1, j + 1] = cell.Value;
+                }
+            }
+
+            xlWorkBook.SaveAs("proj.xls", Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            xlWorkBook.Close(true, misValue, misValue);
+            xlApp.Quit();
+
+            releaseObject(xlWorkSheet);
+            releaseObject(xlWorkBook);
+            releaseObject(xlApp);
+
+            MessageBox.Show("Excel file created , you can find the file c:\\csharp.net-informations.xls");
+        }
+        private void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+                MessageBox.Show("Exception Occured while releasing object " + ex.ToString());
+            }
+            finally
+            {
+                GC.Collect();
+            }
         }
 
 
@@ -595,16 +641,10 @@ namespace TaskManagment.Forms
             }
 
         }
-
-      
-        private void tab_reports_Click(object sender, EventArgs e)
-        {
-            GetPresences();
-
-        }
-
-       
-
-       
     }
 }
+    
+
+
+
+
