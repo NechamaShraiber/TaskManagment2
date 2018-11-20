@@ -31,17 +31,15 @@ namespace UIL.Controllers
             {
                 Content = new ObjectContent<String>("Can not log in", new JsonMediaTypeFormatter())
             };
-         
+
         }
         [HttpPost]
         [Route("api/updatePassword")]
         public HttpResponseMessage UpdatePassword([FromBody]JObject data)
         {
-
-            
             string userName = (string)data["userName"];
             string oldpassword = (string)data["oldpassword"];
-            string newPassord= (string)data["newPassord"];
+            string newPassord = (string)data["newPassord"];
             return (HomeLogic.UpdatePassword(userName, oldpassword, newPassord) ?
                    new HttpResponseMessage(HttpStatusCode.OK) :
                    new HttpResponseMessage(HttpStatusCode.BadRequest)
@@ -50,7 +48,5 @@ namespace UIL.Controllers
                    });
 
         }
-
-
     }
 }

@@ -52,22 +52,28 @@
   </div>
 <div class="dates">
   <div class="group">
-    <input type="date" id="StartDate" class="inputMaterial" formControlName="StartDate">
+    <input type="date" class="inputMaterial" formControlName="StartDate">
+    <!-- <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field> -->
+      
+
     <label>Start Date</label>
     <div *ngIf="StartDate&&addProjectGroup.controls['StartDate'].errors&& StartDate.touched">
       <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['StartDate'].errors)" class="myAlert">{{err}}</p>
     </div>
   </div>
   <div class="group">
-    <input type="date" id="EndDate" class="inputMaterial" formControlName="EndDate">
+    <input type="date" class="inputMaterial" formControlName="EndDate">
     <label>End Date</label>
     <div *ngIf="EndDate&&addProjectGroup.controls['EndDate'].errors&& EndDate.touched">
       <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['EndDate'].errors)" class="myAlert">{{err}}</p>
     </div>
   </div>
 </div>
-<div class="addWorker">
-
+<div class="addWorkers">
   <p>select workers to add:</p>
   <select (change)="addWorker($event.target.value)">
     <option></option>
