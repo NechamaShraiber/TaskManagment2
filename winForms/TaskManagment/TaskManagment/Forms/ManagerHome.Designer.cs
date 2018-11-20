@@ -74,7 +74,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.tab_manager.SuspendLayout();
             this.tab_addProject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).BeginInit();
@@ -82,7 +81,6 @@
             this.tab_user_managment.SuspendLayout();
             this.tab_workerDeatrails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.toolStripContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab_manager
@@ -396,7 +394,7 @@
             this.tab_workerDeatrails.Location = new System.Drawing.Point(4, 22);
             this.tab_workerDeatrails.Name = "tab_workerDeatrails";
             this.tab_workerDeatrails.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_workerDeatrails.Size = new System.Drawing.Size(652, 400);
+            this.tab_workerDeatrails.Size = new System.Drawing.Size(790, 424);
             this.tab_workerDeatrails.TabIndex = 3;
             this.tab_workerDeatrails.UseVisualStyleBackColor = true;
             // 
@@ -523,24 +521,11 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // toolStripContainer1
-            // 
-            // 
-            // toolStripContainer1.ContentPanel
-            // 
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(150, 175);
-            this.toolStripContainer1.Location = new System.Drawing.Point(8, 8);
-            this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(150, 175);
-            this.toolStripContainer1.TabIndex = 4;
-            this.toolStripContainer1.Text = "toolStripContainer1";
-            // 
             // ManagerHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.tab_manager);
             this.Name = "ManagerHome";
             this.Text = "Manager";
@@ -553,8 +538,6 @@
             this.tab_workerDeatrails.ResumeLayout(false);
             this.tab_workerDeatrails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.toolStripContainer1.ResumeLayout(false);
-            this.toolStripContainer1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -605,6 +588,5 @@
         private System.Windows.Forms.DataGridView dgvAddWorkers;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.ToolStripContainer toolStripContainer1;
     }
 }
