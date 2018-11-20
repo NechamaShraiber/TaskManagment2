@@ -20,5 +20,6 @@
       </div>
      <p *ngIf="!isExistUser" class="myAlert">user name or password is not correct</p>
     <p><input type="submit" value="Log in" [disabled]="loginFormGroup.invalid||isExistUser==false"></p>
+    <a href="/taskManagers/changePassword">change password</a>
   </form>
 </div>

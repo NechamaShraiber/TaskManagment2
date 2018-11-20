@@ -15,4 +15,8 @@ static path:string="http://localhost:59628/api/"
   getAllJobs(): any {
     return this.http.get(GlobalService.path+"getAllJobs");
   }
+  changePassword(userName:string,lastPass:string,newPass:string): Observable<any> {
+    let data = { userName: userName, lastPass: lastPass,newPass:newPass };
+    return this.http.post(GlobalService.path+"changePassword", data);
+  }
 }

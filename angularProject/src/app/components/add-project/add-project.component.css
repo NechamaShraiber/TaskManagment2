@@ -181,21 +181,23 @@ form {
   border-color: #05a;
 }
 .hours{
-	float: right;
-    margin-right: 23vh;
+	margin-right: 8vh;
+	width: 25%;
 }
 .details{
-	float: left;
-    margin-left: 8vh;
+	/* float: left; */
+	margin-right: 8vh;
+	width: 25%;
 }
 .dates{
-	width: 32%;
-	margin-left: 30vh;
-    margin-top: 27vh;
+	width: 25%;
+	margin-left: 8vh;
+	float: right; 
+    /* margin-top: 27vh; */
 }
 .addworker{
-	width: 30%;
-    margin-top: -14vh;
+	width: 25%;
+    /* margin-top: -14vh; */
 }
 .button
 {

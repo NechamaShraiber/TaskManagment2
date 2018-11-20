@@ -26,13 +26,16 @@ import {HomeWorkerComponent  } from './components/home-worker/home-worker.compon
 import { ChartComponent } from './components/chart/chart.component';
 //import { HomeWorkerComponent } from './components/worker/home-worker/home-worker.component';
 import { AuthGuard} from '../app/shared/auth.guard';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 //import {MatDialogModule} from "@angular/material";
 // import {TableModule} from 'primeng/table';
 
 
  const  globalPath:string="http://localhost:59628/api/";
 const routes: Routes = [
-  { path: 'taskManagers/login', component: LoginComponent },
+  { path: 'taskManagers/login', component: LoginComponent},
+  {path: 'taskManagers/changePassword', component: ChangePasswordComponent},
+  
   { path: 'taskManagers/home', component: HomeComponent ,children:[
   { path: 'addProject', component: AddProjectComponent },
   { path: 'Addworker', component: AddWorkerComponent },
@@ -68,6 +71,7 @@ const routes: Routes = [
     HomeWorkerComponent,
     SendMsgComponent,
     ChartComponent,
+    ChangePasswordComponent,
     
     //HomeWorkerComponent,
   ],
