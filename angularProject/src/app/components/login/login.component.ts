@@ -5,6 +5,8 @@ import { validate } from '../../shared/validate';
 // import { Global, AuthenticationService, createValidatorArr } from '../../imports';
 import sha256 from 'async-sha256';
 import { GlobalService } from '../../shared/service/global.service';
+import { DialogService } from '../../../../node_modules/ng2-bootstrap-modal';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
 
 
 @Component({
@@ -23,7 +25,7 @@ export class LoginComponent {
 
   //----------------CONSTRUCTOR------------------
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private globalService: GlobalService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private globalService: GlobalService,private dialogService: DialogService) {
     this.loginFormGroup = this.formBuilder.group({
       userName: ['', validate.createValidatorArr("userName", 2, 10)],
       password: ['', validate.createValidatorArr("password", 6, 10)],
@@ -38,7 +40,6 @@ export class LoginComponent {
       .subscribe(worker => { 
         if(worker){
           try{
-        console.log(worker+"iiiiiiiiiiii");
           localStorage.setItem('currentUser', JSON.stringify(worker));
           this.router.navigate(['taskManagers/home']);
           }
@@ -48,7 +49,6 @@ export class LoginComponent {
           }
         }
           else{
-            console.log("ERRORRRRRRRRRRRRRRRRR");
             alert("One or more data is not correct");
             this.router.navigate(['taskManagers/login']);
           }
@@ -70,5 +70,23 @@ export class LoginComponent {
   }
   get password() {
     return this.loginFormGroup.controls["password"];
+  }
+
+  changePassword(){
+    let disposable = this.dialogService.addDialog(ChangePasswordComponent, {
+      title: 'Change password',
+    })
+      .subscribe((isConfirmed) => {
+        //We get dialog result
+        if (isConfirmed) {
+          
+        }
+        else {
+          //alert('declined');
+        }
+      });
+    setTimeout(() => {
+      disposable.unsubscribe();
+    }, 1000000);
   }
 }

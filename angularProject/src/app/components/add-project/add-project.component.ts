@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ManagerService } from '../../shared/service/manager.service';
 import { validate } from '../../shared/validate';
 import { Worker } from '../../shared/models/worker';
+import 'hammerjs';
 
 @Component({
   selector: 'app-add-project',

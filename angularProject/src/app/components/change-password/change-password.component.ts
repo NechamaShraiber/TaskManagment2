@@ -4,22 +4,26 @@ import { validate } from '../../shared/validate';
 import { FormBuilder, FormGroup } from '../../../../node_modules/@angular/forms';
 import { Router } from '../../../../node_modules/@angular/router';
 import { GlobalService } from '../../shared/service/global.service';
-
+import { DialogComponent, DialogService } from '../../../../node_modules/ng2-bootstrap-modal';
+export interface ConfirmModel {
+  title: string;
+}
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.css']
 })
-export class ChangePasswordComponent {
-  loginFormGroup: FormGroup;
+export class ChangePasswordComponent extends DialogComponent<ConfirmModel, boolean> implements ConfirmModel {
+  password: FormGroup;
   isExistUser: boolean = true;
   //allow access 'Object' type via interpolation
   objectHolder: typeof Object = Object;
-
+  title: string;
   //----------------CONSTRUCTOR------------------
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private globalService: GlobalService) {
-    this.loginFormGroup = this.formBuilder.group({
+  constructor(private formBuilder: FormBuilder, private router: Router, private globalService: GlobalService, dialogService: DialogService) {
+    super(dialogService);
+    this.password = this.formBuilder.group({
       userName: ['', validate.createValidatorArr("userName", 2, 10)],
       lastPass: ['', validate.createValidatorArr("lastPass", 6, 10)],
       newPass: ['', validate.createValidatorArr("newPass", 6, 10)],
@@ -27,55 +31,37 @@ export class ChangePasswordComponent {
 
     });
   }
-
-  //----------------METHODS-------------------
-
- async onSubmit() {
+  async confirm() {
     const lastPass = await sha256(this.lastPass.value);
     const newPass = await sha256(this.newPass.value);
     const confirmPass = await sha256(this.confirmPass.value);
-if(newPass!=confirmPass)
-alert("The new pass is not correct");
-    this.globalService.changePassword(this.userName.value,lastPass,newPass)
-      .subscribe(worker => { 
-        if(worker){
-          try{
-          localStorage.setItem('currentUser', JSON.stringify(worker));
-          this.router.navigate(['taskManagers/home']);
-          }
-          catch(Error){
-            console.log(worker+"ERROR");
-
-          }
-        }
-          else{
-            console.log("ERRORRRRRRRRRRRRRRRRR");
-            alert("One or more data is not correct");
-            this.router.navigate(['taskManagers/login']);
-          }
-          localStorage.setItem('currentUser', JSON.stringify(worker));
-          this.router.navigate(['taskManagers/home']);
-      },err=>{
-        this.isExistUser=false;
-            this.router.navigate(['taskManagers/login']);
-      })
+    if (newPass != confirmPass)
+      alert("The new pass is not correct");
+    else {
+      this.globalService.updatePassword(this.userName.value, lastPass, newPass)
+      .subscribe(worker => {
+        alert("The password changed");
+        this.router.navigate(['taskManagers/login']);
+      }
+        , err => {
+          alert("Can not change the password");
+          this.router.navigate(['taskManagers/login']);
+        })
+    }
+    this.result = true;
+    this.close();
   }
-
-
-  //----------------GETTERS-------------------
-
-  //getters of the form group controls
 
   get userName() {
-    return this.loginFormGroup.controls["userName"];
+    return this.password.controls["userName"];
   }
   get lastPass() {
-    return this.loginFormGroup.controls["lastPass"];
+    return this.password.controls["lastPass"];
   }
   get newPass() {
-    return this.loginFormGroup.controls["newPass"];
+    return this.password.controls["newPass"];
   }
   get confirmPass() {
-    return this.loginFormGroup.controls["confirmPass"];
+    return this.password.controls["confirmPass"];
   }
 }

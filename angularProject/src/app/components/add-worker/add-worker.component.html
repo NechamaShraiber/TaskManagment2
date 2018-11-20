@@ -1,70 +1,64 @@
-<div class="box">
-    <form [formGroup]="addWorkerGroup" (ngSubmit)="onSubmit()">
+<div class="login">
+    <form class="login-container" [formGroup]="addWorkerGroup" (ngSubmit)="onSubmit()">
+      <div class="details">
       <div class="group">
         <input id="Name" class="inputMaterial" formControlName="Name">
-        <span class="highlight"></span>
-        <span class="bar"></span>
         <label> Name</label>
-         <div *ngIf="addWorkerGroup.controls['Name'].errors">
+         <div *ngIf="addWorkerGroup.controls['Name']&&addWorkerGroup.controls['Name'].errors&&addWorkerGroup.controls['Name'].touched">
           <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['Name'].errors)" class="myAlert">{{err}}</p>
         </div> 
       </div>
       <div class="group">
         <input id="UserName" class="inputMaterial" formControlName="UserName">
-        <span class="highlight"></span>
-        <span class="bar"></span>
         <label>User Name</label>
-         <div *ngIf="addWorkerGroup.controls['UserName'].errors">
+         <div *ngIf="addWorkerGroup.controls['UserName']&&addWorkerGroup.controls['UserName'].errors&&addWorkerGroup.controls['UserName'].touched">
           <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['UserName'].errors)" class="myAlert">{{err}}</p>
         </div>
       </div>
-      <div  class="group">
+      <div *ngIf="managerService.isEdit=='Add'" class="group">
           <input id="Password" type="password" class="inputMaterial" formControlName="Password">
-          <span class="highlight"></span>
-          <span class="bar"></span>
           <label>Password </label>
-           <div *ngIf="addWorkerGroup.controls['Password'].errors">
+           <div *ngIf="addWorkerGroup.controls['Password']&&addWorkerGroup.controls['Password'].errors&&addWorkerGroup.controls['Password'].touched">
             <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['Password'].errors)" class="myAlert">{{err}}</p>
           </div>
         </div>
+      </div>
+      <div class="dates">
       <div class="group">
           <select formControlName="JobId" (change)="manag()">
-              <option *ngFor="let job of jobList" [ngValue]="job" >
+              <option value="0" selected disabled>{{job}}</option>
+              <option *ngFor="let job of jobList" [ngValue]="job">
                 {{job["Name"]}}
               </option>
             </select>
-        <span class="highlight"></span>
-        <span class="bar"></span>
         <label>choose job type </label>
-        <label *ngIf="job">  your job is {{job}}</label>
-         <div *ngIf="addWorkerGroup.controls['JobId'].errors">
+         <div *ngIf="addWorkerGroup.controls['JobId']&&addWorkerGroup.controls['JobId'].errors&&addWorkerGroup.controls['JobId'].touched">
           <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['JobId'].errors)" class="myAlert">{{err}}</p>
         </div> 
       </div>
       <div class="group">
         <input id="EMail" class="inputMaterial" formControlName="EMail">
-        <span class="highlight"></span>
-        <span class="bar"></span>
-        <label >EMail</label>
-         <div *ngIf="addWorkerGroup.controls['EMail'].errors">
+        <label >E-mail</label>
+         <div *ngIf="addWorkerGroup.controls['EMail']&&addWorkerGroup.controls['EMail'].errors&&addWorkerGroup.controls['EMail'].touched">
           <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['EMail'].errors)" class="myAlert">{{err}}</p>
         </div> 
       </div>
+
+
       <div class="group">
           <select formControlName="ManagerId">
+              <option value="0" selected disabled>{{manager}}</option>
               <option *ngFor="let manager of managerList" [ngValue]="manager">
                 {{manager["Name"]}}
               </option>
             </select>
-        <span class="highlight"></span>
-        <span class="bar"></span>
         <label> choose manager  </label>
-        <label *ngIf="manager">  your manager is {{manager}}</label>
-         <div *ngIf="addWorkerGroup.controls['ManagerId'].errors">
+         <div *ngIf="addWorkerGroup.controls['ManagerId']&&addWorkerGroup.controls['ManagerId'].errors&&addWorkerGroup.controls['ManagerId'].touched">
           <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['ManagerId'].errors)" class="myAlert">{{err}}</p>
         </div> 
       </div>
-      <button type="submit" class="button col-md-offset-2 col-md-8" [disabled]="addWorkerGroup.invalid">{{managerService.isEdit}}</button>
+    </div>
+      <button type="submit" class="button col-md-offset-2 col-md-8" [disabled]="addWorkerGroup.invalid&&managerService.isEdit=='Add'">{{managerService.isEdit}}</button>
     </form>
   </div>
   

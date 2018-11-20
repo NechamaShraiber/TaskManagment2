@@ -24,11 +24,11 @@ import { WorkerDeatailsComponent } from './components/worker-deatails/worker-dea
 import { SendMsgComponent } from './components/send-msg/send-msg.component';
 import {HomeWorkerComponent  } from './components/home-worker/home-worker.component';
 import { ChartComponent } from './components/chart/chart.component';
-//import { HomeWorkerComponent } from './components/worker/home-worker/home-worker.component';
 import { AuthGuard} from '../app/shared/auth.guard';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
-//import {MatDialogModule} from "@angular/material";
-// import {TableModule} from 'primeng/table';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import 'hammerjs';
+import {MatDatepickerModule,MatFormFieldModule,MatInputModule} from '@angular/material';
 
 
  const  globalPath:string="http://localhost:59628/api/";
@@ -37,15 +37,15 @@ const routes: Routes = [
   {path: 'taskManagers/changePassword', component: ChangePasswordComponent},
   
   { path: 'taskManagers/home', component: HomeComponent ,children:[
-  { path: 'addProject', component: AddProjectComponent },
-  { path: 'Addworker', component: AddWorkerComponent },
-  { path: 'reports', component: ReportsComponent },
-  { path: 'teamLeaderProjects', component: TeamLeaderProjectComponent },
-  { path: 'teamLeaderWorkers', component: TeamLeaderWorkersComponent },
+  { path: 'addProject', component: AddProjectComponent, canActivate: [AuthGuard] },
+  { path: 'Addworker', component: AddWorkerComponent, canActivate: [AuthGuard] },
+  { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
+  { path: 'teamLeaderProjects', component: TeamLeaderProjectComponent, canActivate: [AuthGuard] },
+  { path: 'teamLeaderWorkers', component: TeamLeaderWorkersComponent , canActivate: [AuthGuard]},
 
   ]}, 
    //{ path: 'taskManagers/projectDeatails', component: ProjectDeatailsComponent },
-  { path: 'taskManagers/homeWorkerComponent', component: HomeWorkerComponent },
+  { path: 'taskManagers/homeWorkerComponent', component: HomeWorkerComponent, canActivate: [AuthGuard] },
   // { path: 'taskManagers/WorkerDeatails', component: WorkerDeatailsComponent },
   { path: '**', component: LoginComponent },
   { path: '', component: LoginComponent },
@@ -72,7 +72,6 @@ const routes: Routes = [
     SendMsgComponent,
     ChartComponent,
     ChangePasswordComponent,
-    
     //HomeWorkerComponent,
   ],
   imports: [
@@ -84,14 +83,17 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
     BootstrapModalModule.forRoot({container:document.body}),
-    // TableModule,
-    //MatDialogModule
-
+    [MatButtonModule, MatCheckboxModule],
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   entryComponents: [
-    DeleteWorkerComponent,EditWorkerComponent,SendMsgComponent,ProjectDeatailsComponent,WorkerDeatailsComponent
+    DeleteWorkerComponent,EditWorkerComponent,SendMsgComponent,ProjectDeatailsComponent,WorkerDeatailsComponent,ChangePasswordComponent
 
   ],
+  exports: [MatButtonModule, MatCheckboxModule],
+
   providers: [WorkerService],
   bootstrap: [AppComponent]
 })
