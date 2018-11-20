@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -13,6 +14,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using TaskManagment.Models;
+using NsExcel= Microsoft.Office.Interop.Excel;
+
 
 namespace TaskManagment.Forms
 {
@@ -130,17 +133,17 @@ namespace TaskManagment.Forms
 
         public void addWorkersToProject(string name)
         {
-          
+
             var httpWebRequest = (HttpWebRequest)WebRequest.Create($"{Global.path}addWorkersToProject/{name}");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             dynamic credential;
-            
+
             try
             {
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
-                    credential = workerToAdd.Select(w=>w.Id);
+                    credential = workerToAdd.Select(w => w.Id);
                     string credentialString = Newtonsoft.Json.JsonConvert.SerializeObject(credential, Formatting.None);
                     streamWriter.Write(credentialString);
                     streamWriter.Flush();
@@ -413,7 +416,7 @@ namespace TaskManagment.Forms
             {
                 string json = "{" + (!isAdd ? "\"Id\":\"" + w.Id + "\"," : "") + "\"Name\":\"" + txt_name.Text + "\"," +
                    "\"UserName\":\"" + txt_user_name.Text + "\"," +
-                   "\"Password\":\"" +(txt_password.Text!=""? sha256(txt_password.Text) :"")+ "\"," +
+                   "\"Password\":\"" + (txt_password.Text != "" ? sha256(txt_password.Text) : "") + "\"," +
                     "\"JobId\":\"" + IdJob + "\"," +
                    "\"EMail\":\"" + txt_email.Text + "\"," +
                    "\"ManagerId\":\"" + IdManager +
@@ -457,13 +460,13 @@ namespace TaskManagment.Forms
 
         #endregion
 
-      
 
 
-      
+
+
 
         #region reports
-      List<dynamic> presences;
+        List<dynamic> presences;
         public void GetPresences()
         {
             HttpClient client = new HttpClient();
@@ -492,15 +495,15 @@ namespace TaskManagment.Forms
 
             foreach (var n in names)
             {
-                List<dynamic> projectsHours=new List<dynamic>();
-             var projects=presences.FindAll(p=>p["WorkerName"].Value==n.Key).Select(p=>p["ProjectName"].Value).GroupBy(p => p).ToArray();
+                List<dynamic> projectsHours = new List<dynamic>();
+                var projects = presences.FindAll(p => p["WorkerName"].Value == n.Key).Select(p => p["ProjectName"].Value).GroupBy(p => p).ToArray();
                 foreach (var pro in projects)
                 {
                     var hours = presences.FindAll(p => p["ProjectName"].Value == pro.Key).Select(p => new
                     {
-                     Date=p["Date"],
-                      Start=p["Start"],
-                      End=p["End"]
+                        Date = p["Date"],
+                        Start = p["Start"],
+                        End = p["End"]
                     });
                     projectsHours.Add(new { pro.Key, hours });
                 }
@@ -510,23 +513,23 @@ namespace TaskManagment.Forms
             foreach (var pbn in projectsByName)
             {
 
-              TreeNode n=  treeView1.Nodes.Add(pbn.Key);
+                TreeNode n = treeView1.Nodes.Add(pbn.Key);
                 n.BackColor = Color.BurlyWood;
                 foreach (var prh in pbn.projectsHours)
                 {
-                    TreeNode n1= n.Nodes.Add(prh.Key);
+                    TreeNode n1 = n.Nodes.Add(prh.Key);
                     n1.BackColor = Color.Coral;
                     foreach (var hour in prh.hours)
                     {
-                        TreeNode n3= n1.Nodes.Add($"date:{hour.Date.Value}, start:{hour.Start.Value}, end:{hour.End.Value}");
+                        TreeNode n3 = n1.Nodes.Add($"date:{hour.Date.Value}, start:{hour.Start.Value}, end:{hour.End.Value}");
                         n3.BackColor = Color.Cyan;
-                    
+
 
                     }
                 }
-                
+
             }
-           
+
 
 
         }
@@ -571,12 +574,65 @@ namespace TaskManagment.Forms
 
         private void tab_workerDeatrails_Leave(object sender, EventArgs e)
         {
-            
-                tab_manager.Controls.Remove(tab_workerDeatrails);
+
+            tab_manager.Controls.Remove(tab_workerDeatrails);
         }
 
         private void tab_workerDeatrails_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            excel.Workbooks.Add();
+            Microsoft.Office.Interop.Excel._Worksheet workSheet = excel.ActiveSheet;
+            try
+            {
+                workSheet.Cells[1, "A"] = "WorkerName";
+                workSheet.Cells[1, "B"] = "ProjectName";
+                workSheet.Cells[1, "C"] = "Date";
+                workSheet.Cells[1, "D"] = "Start";
+                workSheet.Cells[1, "E"] = "End";
+                int row = 2; 
+                foreach (var car in presences)
+                {
+                    workSheet.Cells[row, "A"] = car["WorkerName"].Value;
+                    workSheet.Cells[row, "B"] = car["ProjectName"].Value;
+                    workSheet.Cells[row, "C"] = car["Date"].Value;
+                    workSheet.Cells[row, "D"] = car["Start"].Value;
+                    workSheet.Cells[row, "E"] = car["End"].Value;
+                    row++;
+                }
+                workSheet.Range["A1"].AutoFormat(Microsoft.Office.Interop.Excel.XlRangeAutoFormat.xlRangeAutoFormatClassic1);
+                string fileName = string.Format(@"{0}\Presences.xlsx", Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
+                workSheet.SaveAs(fileName);
+                MessageBox.Show(string.Format("The file '{0}' is saved successfully!", fileName));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Exception",
+                    "There was a PROBLEM saving Excel file!\n" + exception.Message,
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                excel.Quit();
+                if (excel != null)
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(excel);
+                if (workSheet != null)
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(workSheet);
+                excel = null;
+                workSheet = null;
+                GC.Collect();
+            }
 
         }
     }

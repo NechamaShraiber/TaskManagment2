@@ -43,7 +43,11 @@ export class HoursComponent implements OnInit {
       // this.btnValue = "end";
 
       this.timer = setInterval(() => {
-        this.t = Math.abs(new Date().getTime() - this.startTask.getTime());
+        console.log( this.startTask.getTime());
+        var ttt=new Date().getTime();
+        console.log(ttt)
+        this.t="00";
+        this.t +=  ttt-this.startTask.getTime() ;
 
 
 
