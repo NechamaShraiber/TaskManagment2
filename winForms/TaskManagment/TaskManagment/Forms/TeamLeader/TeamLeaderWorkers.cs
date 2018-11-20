@@ -51,7 +51,6 @@ namespace TaskManagment.Forms
         {
             lbl_workerName.Text = worker.Name;
             lbl_workerUserName.Text = worker.UserName;
-            lbl_workerPassword.Text = worker.Password;
             lbl_workerEmail.Text = worker.EMail;
         }
 

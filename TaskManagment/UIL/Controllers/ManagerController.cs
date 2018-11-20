@@ -109,8 +109,10 @@ Get - get all the details that the manager need to the report
         [Route("api/updateWorker")]
         public HttpResponseMessage UpdateWorker([FromBody]Worker value)
         {
+
+            value.Password = (ManagerLogic.getPassword(value.Id)); 
             //curl -v -X PUT -H "Content-type: application/json" -d "{\"Id\":\"7\",\"Name\":\"Malki\", \"UserName\":\"ggggg\",\"Password\":\"mmmggg\" , \"JobId\":\"3\",\"EMail\":\"sjafjkl@dfaf\", \"ManagerId\":\"5\"}"  http://localhost:59628/api/UpdateWorker
-             if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 return (ManagerLogic.UpdateWorker(value)) ?
                     new HttpResponseMessage(HttpStatusCode.OK) :

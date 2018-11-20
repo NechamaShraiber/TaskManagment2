@@ -53,10 +53,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tab_reports = new System.Windows.Forms.TabPage();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tab_user_managment = new System.Windows.Forms.TabPage();
             this.panelControlls = new System.Windows.Forms.Panel();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.btn_edit = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_add_worker = new System.Windows.Forms.Button();
@@ -64,27 +62,23 @@
             this.cmb_manager = new System.Windows.Forms.ComboBox();
             this.cmb_job = new System.Windows.Forms.ComboBox();
             this.txt_email = new System.Windows.Forms.TextBox();
-            this.txt_password = new System.Windows.Forms.TextBox();
             this.txt_user_name = new System.Windows.Forms.TextBox();
             this.txt_name = new System.Windows.Forms.TextBox();
             this.btn_Action = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btn_excl = new System.Windows.Forms.Button();
+            this.txt_password = new System.Windows.Forms.TextBox();
+            this.lblPassword = new System.Windows.Forms.Label();
             this.tab_manager.SuspendLayout();
             this.tab_addProject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).BeginInit();
             this.tab_reports.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tab_user_managment.SuspendLayout();
-            this.panelControlls.SuspendLayout();
             this.tab_workerDeatrails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -95,10 +89,10 @@
             this.tab_manager.Controls.Add(this.tab_reports);
             this.tab_manager.Controls.Add(this.tab_user_managment);
             this.tab_manager.Controls.Add(this.tab_workerDeatrails);
-            this.tab_manager.Location = new System.Drawing.Point(41, 12);
+            this.tab_manager.Location = new System.Drawing.Point(3, 1);
             this.tab_manager.Name = "tab_manager";
             this.tab_manager.SelectedIndex = 0;
-            this.tab_manager.Size = new System.Drawing.Size(660, 426);
+            this.tab_manager.Size = new System.Drawing.Size(798, 450);
             this.tab_manager.TabIndex = 3;
             this.tab_manager.ClientSizeChanged += new System.EventHandler(this.btn_add_worker_Click);
             // 
@@ -127,7 +121,7 @@
             this.tab_addProject.Location = new System.Drawing.Point(4, 22);
             this.tab_addProject.Name = "tab_addProject";
             this.tab_addProject.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_addProject.Size = new System.Drawing.Size(652, 400);
+            this.tab_addProject.Size = new System.Drawing.Size(790, 424);
             this.tab_addProject.TabIndex = 0;
             this.tab_addProject.Text = "Add project";
             this.tab_addProject.UseVisualStyleBackColor = true;
@@ -310,13 +304,11 @@
             // 
             // tab_reports
             // 
-            this.tab_reports.Controls.Add(this.btn_excl);
             this.tab_reports.Controls.Add(this.treeView1);
-            this.tab_reports.Controls.Add(this.dataGridView1);
             this.tab_reports.Location = new System.Drawing.Point(4, 22);
             this.tab_reports.Name = "tab_reports";
             this.tab_reports.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_reports.Size = new System.Drawing.Size(652, 400);
+            this.tab_reports.Size = new System.Drawing.Size(790, 424);
             this.tab_reports.TabIndex = 1;
             this.tab_reports.Text = "Reports";
             this.tab_reports.UseVisualStyleBackColor = true;
@@ -325,18 +317,10 @@
             // 
             this.treeView1.AllowDrop = true;
             this.treeView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.treeView1.Location = new System.Drawing.Point(58, 58);
+            this.treeView1.Location = new System.Drawing.Point(3, 0);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(487, 281);
+            this.treeView1.Size = new System.Drawing.Size(646, 397);
             this.treeView1.TabIndex = 1;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(34, 43);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(539, 311);
-            this.dataGridView1.TabIndex = 0;
             // 
             // tab_user_managment
             // 
@@ -347,7 +331,7 @@
             this.tab_user_managment.Location = new System.Drawing.Point(4, 22);
             this.tab_user_managment.Name = "tab_user_managment";
             this.tab_user_managment.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_user_managment.Size = new System.Drawing.Size(652, 400);
+            this.tab_user_managment.Size = new System.Drawing.Size(790, 424);
             this.tab_user_managment.TabIndex = 2;
             this.tab_user_managment.Text = "Users managment";
             this.tab_user_managment.UseVisualStyleBackColor = true;
@@ -355,19 +339,10 @@
             // panelControlls
             // 
             this.panelControlls.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panelControlls.Controls.Add(this.menuStrip1);
             this.panelControlls.Location = new System.Drawing.Point(50, 94);
             this.panelControlls.Name = "panelControlls";
             this.panelControlls.Size = new System.Drawing.Size(532, 218);
             this.panelControlls.TabIndex = 6;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(532, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // btn_edit
             // 
@@ -401,31 +376,33 @@
             // 
             // tab_workerDeatrails
             // 
+            this.tab_workerDeatrails.Controls.Add(this.txt_password);
+            this.tab_workerDeatrails.Controls.Add(this.lblPassword);
             this.tab_workerDeatrails.Controls.Add(this.cmb_manager);
             this.tab_workerDeatrails.Controls.Add(this.cmb_job);
             this.tab_workerDeatrails.Controls.Add(this.txt_email);
-            this.tab_workerDeatrails.Controls.Add(this.txt_password);
             this.tab_workerDeatrails.Controls.Add(this.txt_user_name);
             this.tab_workerDeatrails.Controls.Add(this.txt_name);
             this.tab_workerDeatrails.Controls.Add(this.btn_Action);
             this.tab_workerDeatrails.Controls.Add(this.label10);
             this.tab_workerDeatrails.Controls.Add(this.label11);
             this.tab_workerDeatrails.Controls.Add(this.label12);
-            this.tab_workerDeatrails.Controls.Add(this.label13);
             this.tab_workerDeatrails.Controls.Add(this.label14);
             this.tab_workerDeatrails.Controls.Add(this.label15);
             this.tab_workerDeatrails.Controls.Add(this.lblTitle);
             this.tab_workerDeatrails.Location = new System.Drawing.Point(4, 22);
             this.tab_workerDeatrails.Name = "tab_workerDeatrails";
             this.tab_workerDeatrails.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_workerDeatrails.Size = new System.Drawing.Size(652, 400);
+            this.tab_workerDeatrails.Size = new System.Drawing.Size(790, 424);
             this.tab_workerDeatrails.TabIndex = 3;
             this.tab_workerDeatrails.UseVisualStyleBackColor = true;
+            this.tab_workerDeatrails.Click += new System.EventHandler(this.tab_workerDeatrails_Click);
+            this.tab_workerDeatrails.Leave += new System.EventHandler(this.tab_workerDeatrails_Leave);
             // 
             // cmb_manager
             // 
             this.cmb_manager.FormattingEnabled = true;
-            this.cmb_manager.Location = new System.Drawing.Point(339, 255);
+            this.cmb_manager.Location = new System.Drawing.Point(339, 224);
             this.cmb_manager.Name = "cmb_manager";
             this.cmb_manager.Size = new System.Drawing.Size(100, 21);
             this.cmb_manager.TabIndex = 49;
@@ -433,26 +410,18 @@
             // cmb_job
             // 
             this.cmb_job.FormattingEnabled = true;
-            this.cmb_job.Location = new System.Drawing.Point(339, 227);
+            this.cmb_job.Location = new System.Drawing.Point(339, 196);
             this.cmb_job.Name = "cmb_job";
             this.cmb_job.Size = new System.Drawing.Size(100, 21);
             this.cmb_job.TabIndex = 48;
             // 
             // txt_email
             // 
-            this.txt_email.Location = new System.Drawing.Point(339, 200);
+            this.txt_email.Location = new System.Drawing.Point(339, 169);
             this.txt_email.Name = "txt_email";
             this.txt_email.Size = new System.Drawing.Size(100, 20);
             this.txt_email.TabIndex = 47;
             this.txt_email.Validated += new System.EventHandler(this.checkValidEmail);
-            // 
-            // txt_password
-            // 
-            this.txt_password.Location = new System.Drawing.Point(339, 173);
-            this.txt_password.Name = "txt_password";
-            this.txt_password.Size = new System.Drawing.Size(100, 20);
-            this.txt_password.TabIndex = 46;
-            this.txt_password.Validated += new System.EventHandler(this.checkValidPassword);
             // 
             // txt_user_name
             // 
@@ -482,7 +451,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(214, 253);
+            this.label10.Location = new System.Drawing.Point(214, 222);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(49, 13);
             this.label10.TabIndex = 42;
@@ -491,7 +460,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(214, 226);
+            this.label11.Location = new System.Drawing.Point(214, 195);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(24, 13);
             this.label11.TabIndex = 41;
@@ -500,20 +469,11 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(214, 199);
+            this.label12.Location = new System.Drawing.Point(214, 168);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(35, 13);
             this.label12.TabIndex = 40;
             this.label12.Text = "E-mail";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(214, 173);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(53, 13);
-            this.label13.TabIndex = 39;
-            this.label13.Text = "Password";
             // 
             // label14
             // 
@@ -545,20 +505,21 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // contextMenuStrip1
+            // txt_password
             // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.txt_password.Location = new System.Drawing.Point(339, 252);
+            this.txt_password.Name = "txt_password";
+            this.txt_password.Size = new System.Drawing.Size(100, 20);
+            this.txt_password.TabIndex = 51;
             // 
-            // btn_excl
+            // lblPassword
             // 
-            this.btn_excl.Location = new System.Drawing.Point(34, 360);
-            this.btn_excl.Name = "btn_excl";
-            this.btn_excl.Size = new System.Drawing.Size(105, 23);
-            this.btn_excl.TabIndex = 2;
-            this.btn_excl.Text = "Export to Excl";
-            this.btn_excl.UseVisualStyleBackColor = true;
-            this.btn_excl.Click += new System.EventHandler(this.btn_excl_Click);
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Location = new System.Drawing.Point(214, 252);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(53, 13);
+            this.lblPassword.TabIndex = 50;
+            this.lblPassword.Text = "Password";
             // 
             // ManagerHome
             // 
@@ -566,7 +527,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tab_manager);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "ManagerHome";
             this.Text = "Manager";
             this.tab_manager.ResumeLayout(false);
@@ -574,10 +534,7 @@
             this.tab_addProject.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).EndInit();
             this.tab_reports.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tab_user_managment.ResumeLayout(false);
-            this.panelControlls.ResumeLayout(false);
-            this.panelControlls.PerformLayout();
             this.tab_workerDeatrails.ResumeLayout(false);
             this.tab_workerDeatrails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -617,23 +574,19 @@
         private System.Windows.Forms.ComboBox cmb_manager;
         private System.Windows.Forms.ComboBox cmb_job;
         private System.Windows.Forms.TextBox txt_email;
-        private System.Windows.Forms.TextBox txt_password;
         private System.Windows.Forms.TextBox txt_user_name;
         private System.Windows.Forms.TextBox txt_name;
         private System.Windows.Forms.Button btn_Action;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.DataGridView dgvAddWorkers;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.Button btn_excl;
+        private System.Windows.Forms.TextBox txt_password;
+        private System.Windows.Forms.Label lblPassword;
     }
 }

@@ -7,9 +7,10 @@ h1, p, ul {
     background: #ffffff;
     border-top: 0.0625em solid lightgrey;
     bottom: 0; 
-    color:  #4568DC;
+    
     height: 5em; 
     position: absolute; 
+    color: #9a6abb;
      
   }
   p {
@@ -32,3 +33,4 @@ h1, p, ul {
         margin-bottom: 5em; 
         text-align: center;
       }
+     

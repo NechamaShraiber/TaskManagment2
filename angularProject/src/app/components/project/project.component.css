@@ -72,11 +72,11 @@
       cursor: pointer;
       display: inline-block;
       float: right;
-      background-color:violet;
-      border-color: violet;
+      background-color:#a06aba;
+      border-color: #a06aba;
     }
     .circle:hover {
-      background: #50ADED;
+      background: #7667c7;
     }
     /* .circle:active {
       background: #4394CA;
