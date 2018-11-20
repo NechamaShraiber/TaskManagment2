@@ -46,8 +46,8 @@ namespace UIL.Controllers
                    new HttpResponseMessage(HttpStatusCode.OK) :
                    new HttpResponseMessage(HttpStatusCode.BadRequest)
                    {
-                       Content = new ObjectContent<String>("The password dont currect", new JsonMediaTypeFormatter());
-                   }
+                       Content = new ObjectContent<String>("The password dont currect", new JsonMediaTypeFormatter())
+                   });
 
         }
 
