@@ -8,7 +8,7 @@ export interface ConfirmModel {
 @Component({  
   selector: 'app-edit-worker',
   templateUrl: './edit-worker.component.html',
-  styleUrls: ['./edit-worker.component.css']
+  styleUrls: ['./edit-worker.component.css','../delete-worker/delete-worker.component.css']
 })
 export class EditWorkerComponent extends DialogComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
  

@@ -52,10 +52,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tab_reports = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.tab_user_managment = new System.Windows.Forms.TabPage();
             this.panelControlls = new System.Windows.Forms.Panel();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.btn_edit = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_add_worker = new System.Windows.Forms.Button();
@@ -75,17 +74,15 @@
             this.label15 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.tab_manager.SuspendLayout();
             this.tab_addProject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).BeginInit();
             this.tab_reports.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tab_user_managment.SuspendLayout();
-            this.panelControlls.SuspendLayout();
             this.tab_workerDeatrails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.toolStripContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab_manager
@@ -94,10 +91,10 @@
             this.tab_manager.Controls.Add(this.tab_reports);
             this.tab_manager.Controls.Add(this.tab_user_managment);
             this.tab_manager.Controls.Add(this.tab_workerDeatrails);
-            this.tab_manager.Location = new System.Drawing.Point(41, 12);
+            this.tab_manager.Location = new System.Drawing.Point(3, 1);
             this.tab_manager.Name = "tab_manager";
             this.tab_manager.SelectedIndex = 0;
-            this.tab_manager.Size = new System.Drawing.Size(660, 426);
+            this.tab_manager.Size = new System.Drawing.Size(798, 450);
             this.tab_manager.TabIndex = 3;
             this.tab_manager.ClientSizeChanged += new System.EventHandler(this.btn_add_worker_Click);
             // 
@@ -310,7 +307,6 @@
             // tab_reports
             // 
             this.tab_reports.Controls.Add(this.treeView1);
-            this.tab_reports.Controls.Add(this.dataGridView1);
             this.tab_reports.Location = new System.Drawing.Point(4, 22);
             this.tab_reports.Name = "tab_reports";
             this.tab_reports.Padding = new System.Windows.Forms.Padding(3);
@@ -319,15 +315,15 @@
             this.tab_reports.Text = "Reports";
             this.tab_reports.UseVisualStyleBackColor = true;
             this.tab_reports.Click += new System.EventHandler(this.tab_reports_Click);
-            this.tab_reports.Click += new System.EventHandler(this.tab_reports_Click);
             // 
-            // dataGridView1
+            // treeView1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(34, 43);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(539, 311);
-            this.dataGridView1.TabIndex = 0;
+            this.treeView1.AllowDrop = true;
+            this.treeView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.treeView1.Location = new System.Drawing.Point(3, 0);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(646, 397);
+            this.treeView1.TabIndex = 1;
             // 
             // tab_user_managment
             // 
@@ -338,7 +334,7 @@
             this.tab_user_managment.Location = new System.Drawing.Point(4, 22);
             this.tab_user_managment.Name = "tab_user_managment";
             this.tab_user_managment.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_user_managment.Size = new System.Drawing.Size(652, 400);
+            this.tab_user_managment.Size = new System.Drawing.Size(790, 424);
             this.tab_user_managment.TabIndex = 2;
             this.tab_user_managment.Text = "Users managment";
             this.tab_user_managment.UseVisualStyleBackColor = true;
@@ -346,19 +342,10 @@
             // panelControlls
             // 
             this.panelControlls.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panelControlls.Controls.Add(this.menuStrip1);
             this.panelControlls.Location = new System.Drawing.Point(50, 94);
             this.panelControlls.Name = "panelControlls";
             this.panelControlls.Size = new System.Drawing.Size(532, 218);
             this.panelControlls.TabIndex = 6;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(532, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // btn_edit
             // 
@@ -536,27 +523,25 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // contextMenuStrip1
+            // toolStripContainer1
             // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // treeView1
+            // toolStripContainer1.ContentPanel
             // 
-            this.treeView1.AllowDrop = true;
-            this.treeView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.treeView1.Location = new System.Drawing.Point(58, 58);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(487, 281);
-            this.treeView1.TabIndex = 1;
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(150, 175);
+            this.toolStripContainer1.Location = new System.Drawing.Point(8, 8);
+            this.toolStripContainer1.Name = "toolStripContainer1";
+            this.toolStripContainer1.Size = new System.Drawing.Size(150, 175);
+            this.toolStripContainer1.TabIndex = 4;
+            this.toolStripContainer1.Text = "toolStripContainer1";
             // 
             // ManagerHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.tab_manager);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "ManagerHome";
             this.Text = "Manager";
             this.tab_manager.ResumeLayout(false);
@@ -564,13 +549,12 @@
             this.tab_addProject.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).EndInit();
             this.tab_reports.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tab_user_managment.ResumeLayout(false);
-            this.panelControlls.ResumeLayout(false);
-            this.panelControlls.PerformLayout();
             this.tab_workerDeatrails.ResumeLayout(false);
             this.tab_workerDeatrails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.toolStripContainer1.ResumeLayout(false);
+            this.toolStripContainer1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -620,9 +604,7 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.DataGridView dgvAddWorkers;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer1;
     }
 }

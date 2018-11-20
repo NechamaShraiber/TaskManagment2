@@ -57,22 +57,26 @@ namespace TaskManagment.Forms
             if (isBegin)
             {
                 startdate = DateTime.Now;
-                lbl_beginningTime.Text = startdate.ToString("hh:mm:ss tt");
+                
                 try {
                  
                     projectId = int.Parse((String) dgv_task.SelectedRows[0].Cells[0].FormattedValue);
+                    lbl_beginningTime.Text = startdate.ToString("hh:mm:ss tt");
+                    btn_task.Text = "end Task";
                 }
                 catch
                 {
                     lbl_message.Text = "choose project to start";
                     return;
                 }
-                btn_task.Text = "end Task";
+             
             }
             else
             {
                 btn_task.Text = "Start Task";
                 lbl_beginningTime.Text = "";
+                lbl_timer.Text = "";
+                
             }
             timer.Enabled = !timer.Enabled;
             var httpWebRequest = (HttpWebRequest)WebRequest.Create($"{Global.path}updateStartHour");
@@ -165,6 +169,11 @@ namespace TaskManagment.Forms
         }
 
         private void dgv_task_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void lbl_timer_Click(object sender, EventArgs e)
         {
 
         }

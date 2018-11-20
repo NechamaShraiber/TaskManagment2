@@ -534,6 +534,7 @@ namespace TaskManagment.Forms
                 }
                 projectsByName.Add(new { n.Key, projectsHours });
             }
+            treeView1.BorderStyle = BorderStyle.None;
             foreach (var pbn in projectsByName)
             {
 
@@ -547,7 +548,7 @@ namespace TaskManagment.Forms
                     {
                         TreeNode n3= n1.Nodes.Add($"date:{hour.Date.Value}, start:{hour.Start.Value}, end:{hour.End.Value}");
                         n3.BackColor = Color.Cyan;
-                        n3.ForeColor = Color.Cornsilk;
+                    
 
                     }
                 }
@@ -603,8 +604,9 @@ namespace TaskManagment.Forms
 
         }
 
-       
+        private void process1_Exited(object sender, EventArgs e)
+        {
 
-       
+        }
     }
 }

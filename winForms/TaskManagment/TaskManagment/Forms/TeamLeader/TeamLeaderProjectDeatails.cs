@@ -19,29 +19,10 @@ namespace TaskManagment.Forms
             this.Text = $"{Global.CurrentWorker.Name}: {project.Name}";
             UpdateProjectDeatails();
             getWorkersHours();
-            getSumHours();
+           
         }
 
-        private void getSumHours()
-        {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(Global.path);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = client.GetAsync($"GetHours/{project.Id}").Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var result = response.Content.ReadAsStringAsync().Result;
-              
-                lbl_hours.Text = JsonConvert.DeserializeObject<string>(result);
-            }
-
-            else
-            {
-
-                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-
-            }
-        }
+      
 
         private void getWorkersHours()
         {
@@ -100,6 +81,11 @@ namespace TaskManagment.Forms
         }
 
         private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
         }

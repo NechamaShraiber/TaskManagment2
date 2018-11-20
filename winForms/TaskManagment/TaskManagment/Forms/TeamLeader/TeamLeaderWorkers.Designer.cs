@@ -30,7 +30,6 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbl_workerEmail = new System.Windows.Forms.Label();
-            this.lbl_workerPassword = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.lbl_workerUserName = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -52,7 +51,6 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.lbl_workerEmail);
-            this.panel1.Controls.Add(this.lbl_workerPassword);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.lbl_workerUserName);
             this.panel1.Controls.Add(this.label8);
@@ -69,21 +67,11 @@
             // 
             this.lbl_workerEmail.AutoSize = true;
             this.lbl_workerEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lbl_workerEmail.Location = new System.Drawing.Point(130, 75);
+            this.lbl_workerEmail.Location = new System.Drawing.Point(130, 59);
             this.lbl_workerEmail.Name = "lbl_workerEmail";
             this.lbl_workerEmail.Size = new System.Drawing.Size(12, 17);
             this.lbl_workerEmail.TabIndex = 1;
             this.lbl_workerEmail.Text = " ";
-            // 
-            // lbl_workerPassword
-            // 
-            this.lbl_workerPassword.AutoSize = true;
-            this.lbl_workerPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lbl_workerPassword.Location = new System.Drawing.Point(130, 58);
-            this.lbl_workerPassword.Name = "lbl_workerPassword";
-            this.lbl_workerPassword.Size = new System.Drawing.Size(12, 17);
-            this.lbl_workerPassword.TabIndex = 1;
-            this.lbl_workerPassword.Text = " ";
             // 
             // label12
             // 
@@ -108,7 +96,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label8.Location = new System.Drawing.Point(12, 74);
+            this.label8.Location = new System.Drawing.Point(12, 58);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(45, 17);
             this.label8.TabIndex = 0;
@@ -130,9 +118,8 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label6.Location = new System.Drawing.Point(12, 57);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 17);
+            this.label6.Size = new System.Drawing.Size(0, 17);
             this.label6.TabIndex = 0;
-            this.label6.Text = "password:";
             // 
             // label2
             // 
@@ -250,7 +237,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lbl_workerEmail;
-        private System.Windows.Forms.Label lbl_workerPassword;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lbl_workerUserName;
         private System.Windows.Forms.Label label8;

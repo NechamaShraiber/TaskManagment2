@@ -17,14 +17,8 @@ export class ChartComponent implements OnInit {
     this.workerService.subjectUpdateChart.subscribe(
       {
         //dont work
-        next: (pro:any[]) => {
-          alert("1");
-          this.projects = pro;
-       this.creatChart();
-        }
+        next: () => alert("1")
       });
-    
-    
   }
 
   ngOnInit() {
@@ -51,6 +45,7 @@ export class ChartComponent implements OnInit {
       data: [{
         type: "column",
         dataPoints: this.projectDeatails,
+      color:"#b498e6",
 
         name: "allocated hours",
         showInLegend: true,
@@ -59,6 +54,7 @@ export class ChartComponent implements OnInit {
         type: "column",
         dataPoints: this.projectDeatails2,
         name: "worked hours",
+        color:"#758ee6",
         showInLegend: true,
 
       }],
