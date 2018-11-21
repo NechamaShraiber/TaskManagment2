@@ -28,7 +28,7 @@ import { AuthGuard} from '../app/shared/auth.guard';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import {MatButtonModule, MatCheckboxModule, MatNativeDateModule,MatTreeModule,MatIconModule} from '@angular/material';
 import 'hammerjs';
-import {MatDatepickerModule,MatFormFieldModule,MatInputModule} from '@angular/material';
+import {MatDatepickerModule,MatFormFieldModule,MatInputModule,MatSelectModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 
@@ -86,7 +86,7 @@ const routes: Routes = [
     [MatButtonModule, MatCheckboxModule],
     MatDatepickerModule,
     MatFormFieldModule,
-    MatInputModule,MatNativeDateModule,BrowserAnimationsModule,MatTreeModule,MatIconModule,
+    MatInputModule,MatNativeDateModule,BrowserAnimationsModule,MatTreeModule,MatIconModule,MatSelectModule,
   
   ],
   entryComponents: [

@@ -1,57 +1,4 @@
-<!-- <p-treeTable [value]="filterd">
-        <ng-template pTemplate="header">
-            <tr>
-                <th *ngFor="let col of cols">
-                    {{col.header}}
-                </th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-rowNode let-rowData="projectsByName">
-            <tr>
-                <td *ngFor="let col of cols; let i = index">
-                    <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0">
-
-<!
-<h3>Dynamic Columns</h3>
-
-<! <h3>Dynamic Columns</h3>
-<p-table [columns]="cols" [value]="presence">
-  <ng-template pTemplate="header" let-columns>
-    <tr>
-      <th *ngFor="let col of columns">
-          {{col.header}}
-      </th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-rowData let-columns="columns">
-    <tr>
-      <td *ngFor="let col of columns">
-          {{rowData[col.field]}}
-      </td>
-    </tr>
-  </ng-template>
-</p-table>  -->
-<button (click)="exportToExcel()">Export to Excel</button>
-<!-- <h3>Dynamic Columns</h3>
-<p-treeTable [value]="presence" [columns]="cols">
-    <ng-template pTemplate="header" let-columns>
-        <tr [ttRow]="rowNode">
-            <th *ngFor="let col of columns">
-                {{col.header}}
-            </th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
-        <tr>
-            <td *ngFor="let col of columns; let i = index">
-                <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
-                {{rowData[col.field]}}
-            </td>
-        </tr>
-    </ng-template>
-</p-treeTable> -->
-
-
+<input type="text" (blur)="search($event.target.value)" name="input">search
 <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="example-tree">
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
       <li class="mat-tree-node">
@@ -78,11 +25,4 @@
     </mat-nested-tree-node>
   </mat-tree>
 
-                    </p-treeTableToggler>
-                    <span>{{rowData[col.field]}}</span>    
-                </td>
-    
-            </tr>
-        </ng-template>
-    </p-treeTable>
-<button (click)="exportToExcel()">Export to Excel</button> 
+<button (click)="exportToExcel()">Export to Excel</button>
