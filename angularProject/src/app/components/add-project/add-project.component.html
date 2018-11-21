@@ -51,23 +51,22 @@
     </div>
   </div>
 <div class="dates">
-  <div class="group">
-    <input type="date" class="inputMaterial" formControlName="StartDate">
-    <!-- <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field> -->
-      
-
-    <label>Start Date</label>
+  <div>
+    <mat-form-field>
+        <input formControlName="StartDate" ngDefaultControl matInput [min]="minStartDate" [matDatepicker]="picker1" placeholder="Start Date">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
     <div *ngIf="StartDate&&addProjectGroup.controls['StartDate'].errors&& StartDate.touched">
       <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['StartDate'].errors)" class="myAlert">{{err}}</p>
     </div>
   </div>
-  <div class="group">
-    <input type="date" class="inputMaterial" formControlName="EndDate">
-    <label>End Date</label>
+  <div>
+      <mat-form-field >
+          <input formControlName="EndDate" ngDefaultControl matInput [min]="minEndDate" [matDatepicker]="picker2" placeholder="End Date">
+          <mat-datepicker-toggle matSuffix [for]="picker2" ></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>   
     <div *ngIf="EndDate&&addProjectGroup.controls['EndDate'].errors&& EndDate.touched">
       <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['EndDate'].errors)" class="myAlert">{{err}}</p>
     </div>

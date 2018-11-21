@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
 
         switch (this.workerService.idJob) {
             case 1:
-                {                    
+                {
                     if (state.url == "/taskManagers/home" || state.url == "/taskManagers/home/addProject" || state.url == "/taskManagers/home/reports" || state.url == "/taskManagers/home/AddWorker")
                         return true;
                     break;
