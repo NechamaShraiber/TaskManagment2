@@ -74,6 +74,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.txt_password = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.tab_manager.SuspendLayout();
             this.tab_addProject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).BeginInit();
@@ -304,6 +305,7 @@
             // 
             // tab_reports
             // 
+            this.tab_reports.Controls.Add(this.button1);
             this.tab_reports.Controls.Add(this.treeView1);
             this.tab_reports.Location = new System.Drawing.Point(4, 22);
             this.tab_reports.Name = "tab_reports";
@@ -321,6 +323,7 @@
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(646, 397);
             this.treeView1.TabIndex = 1;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // tab_user_managment
             // 
@@ -521,6 +524,16 @@
             this.lblPassword.TabIndex = 50;
             this.lblPassword.Text = "Password";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(668, 50);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(112, 88);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // ManagerHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -588,5 +601,6 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.TextBox txt_password;
         private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.Button button1;
     }
 }

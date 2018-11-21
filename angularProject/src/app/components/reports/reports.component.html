@@ -1,5 +1,17 @@
+<!-- <p-treeTable [value]="filterd">
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let col of cols">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowNode let-rowData="projectsByName">
+            <tr>
+                <td *ngFor="let col of cols; let i = index">
+                    <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0">
 
-<!-- 
+<!
 <h3>Dynamic Columns</h3>
 
 <! <h3>Dynamic Columns</h3>
@@ -65,3 +77,12 @@
       </li>
     </mat-nested-tree-node>
   </mat-tree>
+
+                    </p-treeTableToggler>
+                    <span>{{rowData[col.field]}}</span>    
+                </td>
+    
+            </tr>
+        </ng-template>
+    </p-treeTable>
+<button (click)="exportToExcel()">Export to Excel</button> 

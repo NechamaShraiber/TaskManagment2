@@ -14,7 +14,7 @@
       <label>{{hour.Date| date: 'dd/MM/yyyy '}}</label>
       <br> -->
       <div class="row">
-        <div class="col-md-6">
+        <div [ngClass]="t ? 'col-md-6' : ''">
       <label>worked hours:</label>
       <label>{{hour.Hours}}</label>
       <br>
@@ -27,7 +27,7 @@
           <label> {{startTask | date:'hh:mm:ss a '}}</label>
           <br>
           <label>you work:</label>
-          <label> {{ t | date:'hh:mm:ss'}}</label>
+          <label> {{ t | date:'hh:mm:ss '}}</label>
         </div>
       </div>
     </div> 
