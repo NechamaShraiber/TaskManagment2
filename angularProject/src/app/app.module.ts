@@ -26,16 +26,16 @@ import {HomeWorkerComponent  } from './components/home-worker/home-worker.compon
 import { ChartComponent } from './components/chart/chart.component';
 import { AuthGuard} from '../app/shared/auth.guard';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
-import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatNativeDateModule,MatTreeModule,MatIconModule} from '@angular/material';
 import 'hammerjs';
 import {MatDatepickerModule,MatFormFieldModule,MatInputModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 
  const  globalPath:string="http://localhost:59628/api/";
 const routes: Routes = [
   { path: 'taskManagers/login', component: LoginComponent},
   {path: 'taskManagers/changePassword', component: ChangePasswordComponent},
-  
   { path: 'taskManagers/home', component: HomeComponent ,children:[
   { path: 'addProject', component: AddProjectComponent, canActivate: [AuthGuard] },
   { path: 'Addworker', component: AddWorkerComponent, canActivate: [AuthGuard] },
@@ -86,7 +86,8 @@ const routes: Routes = [
     [MatButtonModule, MatCheckboxModule],
     MatDatepickerModule,
     MatFormFieldModule,
-    MatInputModule,
+    MatInputModule,MatNativeDateModule,BrowserAnimationsModule,MatTreeModule,MatIconModule,
+  
   ],
   entryComponents: [
     DeleteWorkerComponent,EditWorkerComponent,SendMsgComponent,ProjectDeatailsComponent,WorkerDeatailsComponent,ChangePasswordComponent

@@ -12,7 +12,8 @@ import 'hammerjs';
   styleUrls: ['./add-project.component.css']
 })
 export class AddProjectComponent implements OnInit {
-
+  minStartDate = new Date();
+  minEndDate = this.minStartDate;
   addProjectGroup: FormGroup;
   teamLeader: any[] = [];
   idTeam: number;
@@ -29,8 +30,8 @@ export class AddProjectComponent implements OnInit {
       DevelopHours: new FormControl('', validate.createValidatorArr("DevelopHours", 2, 15)),
       QAHours: new FormControl('', validate.createValidatorArr("QAHours", 2, 15)),
       UiUxHours: new FormControl('', validate.createValidatorArr("UiUxHours", 2, 15)),
-      StartDate: new FormControl(''),
-      EndDate: new FormControl(''),
+      StartDate: new FormControl('this.minStartDate'),
+      EndDate: new FormControl('this.minEndDate'),
     };
     this.addProjectGroup = new FormGroup(formGroupConfig, validate.createValidatorDate);
   }
