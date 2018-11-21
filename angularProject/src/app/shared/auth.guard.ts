@@ -11,8 +11,8 @@ export class AuthGuard implements CanActivate {
 
         switch (this.workerService.idJob) {
             case 1:
-                {
-                    if (state.url == "/taskManagers/home" || state.url == "/taskManagers/home/addProject" || state.url == "/taskManagers/home/Addworker")
+                {                    
+                    if (state.url == "/taskManagers/home" || state.url == "/taskManagers/home/addProject" || state.url == "/taskManagers/home/reports" || state.url == "/taskManagers/home/AddWorker")
                         return true;
                     break;
                 }
@@ -21,21 +21,22 @@ export class AuthGuard implements CanActivate {
                     return true;
                 break;
             }
-            case 3: {
-                if (state.url == "/taskManagers/homeWorkerComponent" || state.url == "/taskManagers/WorkerDeatails")
+            default: {
+                if (state.url == "/taskManagers/home/homeWorker" || state.url == "/taskManagers/home/workerChart")
                     return true;
                 break;
             } 
-            case 4: {
-                if (state.url == "/taskManagers/homeWorkerComponent" || state.url == "/taskManagers/WorkerDeatails")
-                    return true;
-                break;
-            }
-            case 5: {
-                if (state.url == "/taskManagers/homeWorkerComponent" || state.url == "/taskManagers/WorkerDeatails")
-                    return true;
-                break;
-            }
+            // case 4: {
+            //     if (state.url == "/taskManagers/home/homeWorker" || state.url == "/taskManagers/home/workerChart")
+            //         return true;
+            //     break;
+            // }
+            // case 5: {
+            //     if (state.url == "/taskManagers/home/homeWorker" || state.url == "/taskManagers/home/workerChart")
+
+            //         return true;
+            //     break;
+            // }
         }
         this.router.navigate(['/login']);
         return false;

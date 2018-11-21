@@ -31,15 +31,15 @@ export class HomeWorkerComponent implements OnInit {
     this.currentWorker = JSON.parse(localStorage.getItem('currentUser'));
     this.workerService.getProject(this.currentWorker.Id).subscribe(res => {
       this.projects = res;
-      this.names=this.projects.filter(p=>p["WorkerName"]);
-console.log(this.names)
-var groupByName = {};
+//       this.names=this.projects.filter(p=>p["WorkerName"]);
+// console.log(this.names)
+// var groupByName = {};
 
-this.names.forEach(function (a) {
-    groupByName [a] = groupByName [a] || [];
-    groupByName [a].push(a);
-});
-console.log(this.names)
+// this.names.forEach(function (a) {
+//     groupByName [a] = groupByName [a] || [];
+//     groupByName [a].push(a);
+// });
+// console.log(this.names)
     });
 
   }
