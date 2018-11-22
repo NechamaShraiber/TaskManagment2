@@ -52,6 +52,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tab_reports = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.tab_user_managment = new System.Windows.Forms.TabPage();
             this.panelControlls = new System.Windows.Forms.Panel();
@@ -59,6 +60,8 @@
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_add_worker = new System.Windows.Forms.Button();
             this.tab_workerDeatrails = new System.Windows.Forms.TabPage();
+            this.txt_password = new System.Windows.Forms.TextBox();
+            this.lblPassword = new System.Windows.Forms.Label();
             this.cmb_manager = new System.Windows.Forms.ComboBox();
             this.cmb_job = new System.Windows.Forms.ComboBox();
             this.txt_email = new System.Windows.Forms.TextBox();
@@ -72,9 +75,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txt_password = new System.Windows.Forms.TextBox();
-            this.lblPassword = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.tab_manager.SuspendLayout();
             this.tab_addProject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).BeginInit();
@@ -315,6 +315,16 @@
             this.tab_reports.Text = "Reports";
             this.tab_reports.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(668, 50);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(112, 88);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // treeView1
             // 
             this.treeView1.AllowDrop = true;
@@ -402,6 +412,23 @@
             this.tab_workerDeatrails.Click += new System.EventHandler(this.tab_workerDeatrails_Click);
             this.tab_workerDeatrails.Leave += new System.EventHandler(this.tab_workerDeatrails_Leave);
             // 
+            // txt_password
+            // 
+            this.txt_password.Location = new System.Drawing.Point(339, 252);
+            this.txt_password.Name = "txt_password";
+            this.txt_password.Size = new System.Drawing.Size(100, 20);
+            this.txt_password.TabIndex = 51;
+            this.txt_password.TextChanged += new System.EventHandler(this.checkValidPassword);
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Location = new System.Drawing.Point(214, 252);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(53, 13);
+            this.lblPassword.TabIndex = 50;
+            this.lblPassword.Text = "Password";
+            // 
             // cmb_manager
             // 
             this.cmb_manager.FormattingEnabled = true;
@@ -424,6 +451,7 @@
             this.txt_email.Name = "txt_email";
             this.txt_email.Size = new System.Drawing.Size(100, 20);
             this.txt_email.TabIndex = 47;
+            this.txt_email.TextChanged += new System.EventHandler(this.checkValidEmail);
             this.txt_email.Validated += new System.EventHandler(this.checkValidEmail);
             // 
             // txt_user_name
@@ -432,6 +460,7 @@
             this.txt_user_name.Name = "txt_user_name";
             this.txt_user_name.Size = new System.Drawing.Size(100, 20);
             this.txt_user_name.TabIndex = 45;
+            this.txt_user_name.TextChanged += new System.EventHandler(this.checkValidUserName);
             this.txt_user_name.Validated += new System.EventHandler(this.checkValidUserName);
             // 
             // txt_name
@@ -507,32 +536,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // txt_password
-            // 
-            this.txt_password.Location = new System.Drawing.Point(339, 252);
-            this.txt_password.Name = "txt_password";
-            this.txt_password.Size = new System.Drawing.Size(100, 20);
-            this.txt_password.TabIndex = 51;
-            // 
-            // lblPassword
-            // 
-            this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(214, 252);
-            this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(53, 13);
-            this.lblPassword.TabIndex = 50;
-            this.lblPassword.Text = "Password";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(668, 50);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 88);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ManagerHome
             // 

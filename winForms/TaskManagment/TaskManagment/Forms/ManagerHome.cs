@@ -375,9 +375,9 @@ namespace TaskManagment.Forms
         public void checkValidName(object sender, EventArgs e)
         {
             checkVaidationLength(2, 15, (sender as TextBox));
-            bbb();
+            EbleButton();
         }
-        void bbb()
+        void EbleButton()
         {
             if ((txt_user_name.Text.Length >= 2 && txt_user_name.Text.Length <= 10) &&
                               (txt_password.Text.Length >= 6 && txt_password.Text.Length <= 10) &&
@@ -387,17 +387,17 @@ namespace TaskManagment.Forms
         public void checkValidUserName(object sender, EventArgs e)
         {
             checkVaidationLength(2, 10, (sender as TextBox));
-            bbb();
+            EbleButton();
         }
         public void checkValidPassword(object sender, EventArgs e)
         {
             checkVaidationLength(6, 10, (sender as TextBox));
-            bbb();
+            EbleButton();
         }
         public void checkValidEmail(object sender, EventArgs e)
         {
             checkVaidationLength(2, 30, (sender as TextBox));
-            bbb();
+            EbleButton();
         }
 
         private void btn_add_Click(object sender, EventArgs e)
@@ -635,5 +635,7 @@ namespace TaskManagment.Forms
             }
 
         }
+
+      
     }
 }

@@ -22,11 +22,4 @@
 <div class="row">
   <div class="col-md-3" *ngFor="let project of projects">
     <app-hours [hour]=(project) [isProject]=(true) ></app-hours>
-
-  </div>
-</div>
-<div class="row">
-<div class="col-md-offset-3 col-md-6" *ngIf="projects">
-  <app-chart [projects]=projects></app-chart>
-</div>
 </div>

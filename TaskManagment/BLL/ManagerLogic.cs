@@ -66,7 +66,7 @@ namespace BLL
             int idProject = (int)DBAccess.RunScalar(q);
             foreach (var item in ids)
             {
-                string query = $"INSERT INTO task_managment.project_workers ({item},{idProject}) VALUES(4,3)";
+                string query = $"INSERT INTO task_managment.project_workers (worker_id,project_id) VALUES({item},{idProject})";
                 if (DBAccess.RunNonQuery(query) == 0)
                     return false;
             }
@@ -80,8 +80,33 @@ namespace BLL
                 $"(name,user_name,password,email,job,manager)" +
                 $" VALUES ('{worker.Name}','{worker.UserName}'," +
                 $"'{worker.Password}','{worker.EMail}',{worker.JobId},{worker.ManagerId})";
-            return DBAccess.RunNonQuery(query) == 1;
+          if (DBAccess.RunNonQuery(query) == 1)
+            {
+                int id =(int)DBAccess.RunScalar( $" SELECT worker_id FROM workers WHERE user_name = '{worker.UserName}'");
+                string query2 = $" SELECT project_id FROM task_managment.projects WHERE team_leader={worker.ManagerId}";
+                Func<MySqlDataReader, List<int>> func = (reader) =>
+                {
+                    List<int> projectsId = new List<int>();
+                    // var v = reader.GetInt32(0);
+                    // var t = reader.GetString(1);
+                    while (reader.Read())
+                    {
 
+                        projectsId.Add(reader.GetInt32(0));
+                    }
+                    return projectsId;
+                };
+
+                List<int> projectsIds= DBAccess.RunReader(query2, func);
+                projectsIds.ForEach(p =>
+                {
+                    string query3 = $"INSERT INTO task_managment.project_workers (worker_id,project_id) VALUES ({id},{p})";
+                    DBAccess.RunNonQuery(query3);
+                });
+                return true;
+                
+            }
+            return false;
         }
 
         public static bool UpdateWorker(Worker worker)

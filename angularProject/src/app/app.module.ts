@@ -22,30 +22,38 @@ import { ProjectDeatailsComponent } from './components/project-deatails/project-
 import { HoursComponent } from './components/hours/hours.component';
 import { WorkerDeatailsComponent } from './components/worker-deatails/worker-deatails.component';
 import { SendMsgComponent } from './components/send-msg/send-msg.component';
-import {HomeWorkerComponent  } from './components/home-worker/home-worker.component';
+import { HomeWorkerComponent } from './components/home-worker/home-worker.component';
 import { ChartComponent } from './components/chart/chart.component';
-import { AuthGuard} from '../app/shared/auth.guard';
+import { AuthGuard } from '../app/shared/auth.guard';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import 'hammerjs';
+import { WorkerChartComponent } from './components/worker-chart/worker-chart.component';
 import {MatButtonModule, MatCheckboxModule, MatNativeDateModule,MatTreeModule,MatIconModule} from '@angular/material';
 import 'hammerjs';
 import {MatDatepickerModule,MatFormFieldModule,MatInputModule,MatSelectModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 
- const  globalPath:string="http://localhost:59628/api/";
+const globalPath: string = "http://localhost:59628/api/";
 const routes: Routes = [
-  { path: 'taskManagers/login', component: LoginComponent},
-  {path: 'taskManagers/changePassword', component: ChangePasswordComponent},
-  { path: 'taskManagers/home', component: HomeComponent ,children:[
-  { path: 'addProject', component: AddProjectComponent, canActivate: [AuthGuard] },
-  { path: 'Addworker', component: AddWorkerComponent, canActivate: [AuthGuard] },
-  { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
-  { path: 'teamLeaderProjects', component: TeamLeaderProjectComponent, canActivate: [AuthGuard] },
-  { path: 'teamLeaderWorkers', component: TeamLeaderWorkersComponent , canActivate: [AuthGuard]},
+  { path: 'taskManagers/login', component: LoginComponent },
+  { path: 'taskManagers/changePassword', component: ChangePasswordComponent },
 
-  ]}, 
-   //{ path: 'taskManagers/projectDeatails', component: ProjectDeatailsComponent },
-  { path: 'taskManagers/homeWorkerComponent', component: HomeWorkerComponent, canActivate: [AuthGuard] },
+  {
+    path: 'taskManagers/home', component: HomeComponent, children: [
+      { path: 'addProject', component: AddProjectComponent, canActivate: [AuthGuard] },
+      { path: 'Addworker', component: AddWorkerComponent, canActivate: [AuthGuard] },
+      { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
+      { path: 'teamLeaderProjects', component: TeamLeaderProjectComponent, canActivate: [AuthGuard] },
+      { path: 'teamLeaderWorkers', component: TeamLeaderWorkersComponent, canActivate: [AuthGuard] },
+      { path: 'teamLeaderWorkers', component: TeamLeaderWorkersComponent, canActivate: [AuthGuard] },
+      { path: 'homeWorker', component: HomeWorkerComponent, canActivate: [AuthGuard] },
+      { path: 'workerChart', component: WorkerChartComponent, canActivate: [AuthGuard] },
+
+    ]
+  },
+  //{ path: 'taskManagers/projectDeatails', component: ProjectDeatailsComponent },
+  // { path: 'taskManagers/homeWorkerComponent', component: HomeWorkerComponent, canActivate: [AuthGuard] },
   // { path: 'taskManagers/WorkerDeatails', component: WorkerDeatailsComponent },
   { path: '**', component: LoginComponent },
   { path: '', component: LoginComponent },
@@ -72,6 +80,7 @@ const routes: Routes = [
     SendMsgComponent,
     ChartComponent,
     ChangePasswordComponent,
+    WorkerChartComponent,
     //HomeWorkerComponent,
   ],
   imports: [
@@ -82,7 +91,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    BootstrapModalModule.forRoot({container:document.body}),
+    BootstrapModalModule.forRoot({ container: document.body }),
     [MatButtonModule, MatCheckboxModule],
     MatDatepickerModule,
     MatFormFieldModule,
@@ -90,7 +99,7 @@ const routes: Routes = [
   
   ],
   entryComponents: [
-    DeleteWorkerComponent,EditWorkerComponent,SendMsgComponent,ProjectDeatailsComponent,WorkerDeatailsComponent,ChangePasswordComponent
+    DeleteWorkerComponent, EditWorkerComponent, SendMsgComponent, ProjectDeatailsComponent, WorkerDeatailsComponent, ChangePasswordComponent
 
   ],
   exports: [MatButtonModule, MatCheckboxModule],

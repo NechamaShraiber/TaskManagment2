@@ -16,11 +16,8 @@ export class FileNode {
   type: any;
 }
 
-
-
 @Injectable()
  export class FileDatabase {
-
   presence: any[];
   cols: any[];
   names: string[];
@@ -84,14 +81,122 @@ export class FileNode {
         })
       });
       console.log(this.projectsByName);
-      this.initialize();
+       this.initialize();
+    this.filterByProjectsThenNames();
+  })
+}
+filterByNamesThenProjects(){
+  this.managerService.getPresence().subscribe(pre => {
+    this.presence = pre;
+    this.names = [];
+    this.projectsByName = [];
+    console.log(this.presence);
+    //filter all names
+    this.presence.forEach(p => {
+      if (!this.names.find(n => n == p.WorkerName))
+        this.names.push(p.WorkerName);
+      // root.children.push(p.WorkerName)
     });
-  }
+    console.log(this.names);
+    ;
+    //about every name filter project name and hours
+    this.names.forEach(n => {
+      this.projects = [];
 
+      this.presence.forEach(p => {
+        if (p.WorkerName == n) {
+          if (!this.projects.find(pro => pro == p.ProjectName))
+            this.projects.push(p.ProjectName)
+        }
+      })
+      console.log(this.projects);
+      this.projectNameAndHours = [];
+      this.projects.forEach(p => {
+        this.projectHours = [];
+        this.presence.forEach(pre => {
+          if (pre.ProjectName == p&&pre.WorkerName==n)
+            this.projectHours.push({
+              Date: pre.Date,
+              Start: pre.Start,
+              End: pre.End
+
+            })
+        })
+        console.log(this.projectHours);
+
+        this.projectNameAndHours.push({
+          projectName: p,
+          hours: this.projectHours
+        })
+      })
+
+      console.log(this.projectNameAndHours)
+      this.projectsByName.push({
+        name: n,
+        projects: this.projectNameAndHours
+      })
+    });
+    console.log(this.projectsByName);
+    this.initialize();
+  });
+}
+filterByProjectsThenNames(){
+  this.managerService.getPresence().subscribe(pre => {
+    this.presence = pre;
+    this.projects = [];
+    this.projectsByName = [];
+    console.log(this.presence);
+    //filter all names
+    this.presence.forEach(p => {
+      if (!this.projects.find(n => n == p.ProjectName))
+        this.projects.push(p.ProjectName);
+      // root.children.push(p.WorkerName)
+    });
+    console.log(this.projects);
+    ;
+    //about every name filter project name and hours
+    this.projects.forEach(n => {
+      this.names = [];
+      this.presence.forEach(p => {
+        if (p.ProjectName == n) {
+          if (!this.names.find(pro => pro == p.WorkerName))
+            this.names.push(p.WorkerName)
+        }
+      })
+      console.log(this.names);
+      this.projectNameAndHours = [];
+      this.names.forEach(p => {
+        this.projectHours = [];
+        this.presence.forEach(pre => {
+          if (pre.WorkerName == p&&pre.ProjectName==n)
+            this.projectHours.push({
+              Date: pre.Date,
+              Start: pre.Start,
+              End: pre.End
+
+            })
+        })
+        console.log(this.projectHours);
+
+        this.projectNameAndHours.push({
+          workerName: p,
+          hours: this.projectHours
+        })
+      })
+
+      console.log(this.projectNameAndHours)
+      this.projectsByName.push({
+        name: n,
+        workers: this.projectNameAndHours
+      })
+    });
+    console.log(this.projectsByName);
+    this.initialize();
+  });
+}
   initialize() {
     // Parse the string to json object.
     const dataObject = JSON.parse(JSON.stringify(this.projectsByName));
-
     // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
     //     file node as children.
     const data = this.buildFileTree(dataObject, 0);
@@ -125,9 +230,7 @@ export class FileNode {
   exportAsExcelFile() {
       this.managerService.exportAsExcelFile(this.projectsByName);
    }
-   getFilterList(type:string){
-this.projectsByName.forEach(p=>p.concat(type));
-   }
+
 }
 
 @Component({
@@ -154,9 +257,11 @@ export class ReportsComponent {
   private _getChildren = (node: FileNode) => node.children;
 
   search(type) {
-    this.database.getFilterList(type);
+    //this.database.getFilterList(type);
   }
-}
+  }
+
+
 /*
 
 getProjectInfo(project: TreeTable) {
@@ -294,4 +399,8 @@ getProjectInfo(project: TreeTable) {
 */
 
 
+
+  // exportToExcel1() {
+  //   FileDatabase.exportToExcel()
+  // }
 
