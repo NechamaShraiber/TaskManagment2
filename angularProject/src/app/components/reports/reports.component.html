@@ -1,3 +1,4 @@
+<input type="text" (blur)="search($event.target.value)" name="input">search
 <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="example-tree">
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
       <li class="mat-tree-node">
@@ -24,4 +25,5 @@
     </mat-nested-tree-node>
   </mat-tree>
 
-<button (click)="exportToExcel1()">Export to Excel</button>
+<button (click)="exportToExcel()">Export to Excel</button>
+
