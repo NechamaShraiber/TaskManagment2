@@ -5,6 +5,7 @@ import { ManagerService } from '../../shared/service/manager.service';
 import { validate } from '../../shared/validate';
 import sha256 from 'async-sha256';
 import { GlobalService } from '../../shared/service/global.service';
+import { Job } from '../../shared/models/job';
 
 @Component({
   selector: 'app-add-worker',
@@ -15,9 +16,9 @@ export class AddWorkerComponent implements OnInit {
 
   addWorkerGroup: FormGroup;
   managerList: any[] = [];
-  jobList: any[] = [];
+  jobList: Job[] = [];
   idManager: number;
-  idJob: number;
+  idJob: any;
   manager: string;
   job: string;
   selectUndefinedOptionValue: any;
@@ -29,7 +30,7 @@ export class AddWorkerComponent implements OnInit {
       Name: new FormControl(managerService.workerToUpdate.Name?managerService.workerToUpdate.Name:" ", validate.createValidatorArr("Name", 2, 15)),
       UserName: new FormControl(managerService.workerToUpdate.UserName, validate.createValidatorArr("UserName", 2, 10)),
       Password: new FormControl("", validate.createValidatorArr("Password", 6, 10)),
-      JobId: new FormControl(this.job),
+      JobId: new FormControl(this.jobList["Id"]),
       EMail: new FormControl(managerService.workerToUpdate.EMail?managerService.workerToUpdate.EMail:" ", validate.createValidatorArr("EMail", 6, 30)),
       ManagerId: new FormControl(this.manager),
     };
@@ -42,6 +43,7 @@ export class AddWorkerComponent implements OnInit {
         console.log(res)
         this.jobList = res;
         this.job = this.jobList.find(p => p.Id == this.managerService.workerToUpdate.JobId).Name;
+        alert(this.job);
       });
   }
 

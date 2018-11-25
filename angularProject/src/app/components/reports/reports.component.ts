@@ -55,7 +55,7 @@ export class FileNode {
         this.projects.forEach(p => {
           this.projectHours = [];
           this.presence.forEach(pre => {
-            if (pre.ProjectName == p)
+            if (pre.ProjectName == p&&pre.WorkerName==n)
               this.projectHours.push(
                 pre.Date+" "+
                 pre.Start+" "+
@@ -237,6 +237,5 @@ export class ReportsComponent {
     //this.database.getFilterList(type);
   }
   }
-
 
 

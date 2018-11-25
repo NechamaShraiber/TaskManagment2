@@ -63,6 +63,15 @@
             this.btn_addProject = new System.Windows.Forms.Button();
             this.pnl_report = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.pnl_delete = new System.Windows.Forms.Panel();
             this.panelControlls = new System.Windows.Forms.Panel();
@@ -81,6 +90,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.pnl_add_project.SuspendLayout();
@@ -387,6 +397,7 @@
             this.pnl_report.Size = new System.Drawing.Size(1125, 529);
             this.pnl_report.TabIndex = 6;
             this.pnl_report.Visible = false;
+          
             // 
             // button1
             // 
@@ -647,5 +658,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Button btnExportToExecl;
     }
 }

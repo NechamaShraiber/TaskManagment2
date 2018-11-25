@@ -7,11 +7,9 @@ h1, p, ul {
     background: #ffffff;
     border-top: 0.0625em solid lightgrey;
     bottom: 0; 
-    
     height: 7vh; 
     position: absolute; 
     color: #9a6abb;
-     
   }
   p {
       text-align: center;
