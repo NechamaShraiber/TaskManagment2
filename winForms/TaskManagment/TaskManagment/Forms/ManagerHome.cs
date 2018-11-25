@@ -478,7 +478,8 @@ namespace TaskManagment.Forms
                 var result = response.Content.ReadAsStringAsync().Result;
 
                 presences = JsonConvert.DeserializeObject<List<dynamic>>(result);
-                SelectByWorkerName();
+              //  SelectByWorkerName();
+                SelectByProjectName();
 
             }
             else
@@ -499,7 +500,7 @@ namespace TaskManagment.Forms
                 var projects = presences.FindAll(p => p["WorkerName"].Value == n.Key).Select(p => p["ProjectName"].Value).GroupBy(p => p).ToArray();
                 foreach (var pro in projects)
                 {
-                    var hours = presences.FindAll(p => p["ProjectName"].Value == pro.Key).Select(p => new
+                    var hours = presences.FindAll(p => p["ProjectName"].Value == pro.Key&& p["WorkerName"].Value == n.Key).Select(p => new
                     {
                         Date = p["Date"],
                         Start = p["Start"],
@@ -533,7 +534,52 @@ namespace TaskManagment.Forms
 
 
         }
+        private void SelectByProjectName()
+        {
 
+            List<dynamic> projectsByName = new List<dynamic>();
+            var projects = presences.Select(p => p["ProjectName"].Value).GroupBy(p => p).ToArray();
+
+            foreach (var n in projects)
+            {
+                List<dynamic> projectsHours = new List<dynamic>();
+                var names = presences.FindAll(p => p["ProjectName"].Value == n.Key).Select(p => p["WorkerName"].Value).GroupBy(p => p).ToArray();
+                foreach (var pro in names)
+                {
+                    var hours = presences.FindAll(p => p["WorkerName"].Value == pro.Key&& p["ProjectName"].Value == n.Key).Select(p => new
+                    {
+                        Date = p["Date"],
+                        Start = p["Start"],
+                        End = p["End"]
+                    });
+                    projectsHours.Add(new { pro.Key, hours });
+                }
+                projectsByName.Add(new { n.Key, projectsHours });
+            }
+            treeView1.BorderStyle = BorderStyle.None;
+            foreach (var pbn in projectsByName)
+            {
+
+                TreeNode n = treeView1.Nodes.Add(pbn.Key);
+                n.BackColor = Color.BurlyWood;
+                foreach (var prh in pbn.projectsHours)
+                {
+                    TreeNode n1 = n.Nodes.Add(prh.Key);
+                    n1.BackColor = Color.Coral;
+                    foreach (var hour in prh.hours)
+                    {
+                        TreeNode n3 = n1.Nodes.Add($"date:{hour.Date.Value}, start:{hour.Start.Value}, end:{hour.End.Value}");
+                        n3.BackColor = Color.Cyan;
+
+
+                    }
+                }
+
+            }
+
+
+
+        }
 
         #endregion
 
@@ -583,13 +629,8 @@ namespace TaskManagment.Forms
 
         }
 
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-        {
 
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnExportToExecl_Click(object sender, EventArgs e)
         {
             Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
             excel.Workbooks.Add();
@@ -601,7 +642,7 @@ namespace TaskManagment.Forms
                 workSheet.Cells[1, "C"] = "Date";
                 workSheet.Cells[1, "D"] = "Start";
                 workSheet.Cells[1, "E"] = "End";
-                int row = 2; 
+                int row = 2;
                 foreach (var car in presences)
                 {
                     workSheet.Cells[row, "A"] = car["WorkerName"].Value;
@@ -635,7 +676,5 @@ namespace TaskManagment.Forms
             }
 
         }
-
-      
     }
 }

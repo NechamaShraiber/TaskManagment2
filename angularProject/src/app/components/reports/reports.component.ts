@@ -129,12 +129,9 @@ filterByNamesThenProjects(){
         this.projectHours = [];
         this.presence.forEach(pre => {
           if (pre.ProjectName == p&&pre.WorkerName==n)
-            this.projectHours.push({
-              Date: pre.Date,
-              Start: pre.Start,
-              End: pre.End
-
-            })
+            this.projectHours.push( pre.Date+" "+
+            pre.Start+" "+
+           pre.End)
         })
         console.log(this.projectHours);
 
@@ -184,12 +181,12 @@ filterByProjectsThenNames(){
         this.projectHours = [];
         this.presence.forEach(pre => {
           if (pre.WorkerName == p&&pre.ProjectName==n)
-            this.projectHours.push({
-              Date: pre.Date,
-              Start: pre.Start,
-              End: pre.End
+            this.projectHours.push(
+              pre.Date+" "+
+              pre.Start+" "+
+             pre.End
 
-            })
+            )
         })
         console.log(this.projectHours);
         this.projectNameAndHours.push({
