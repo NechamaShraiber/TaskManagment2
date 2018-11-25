@@ -4,19 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TaskManagment.Models;
 
 namespace TaskManagment
 {
-  // public enum eJobs {Manager=1,TeamLeader,QA,UxUi, Developer}      
-   static class Global
+    // public enum eJobs {Manager=1,TeamLeader,QA,UxUi, Developer}      
+    static class Global
     {
-        static  Global()
+        static Global()
         {
             getAllJobs();
         }
+        static ErrorProvider errorProvider1 = new ErrorProvider();
         public static string path = "http://localhost:59628/api/";
         public static Worker worker = new Worker();
         public static Worker CurrentWorker;
@@ -48,6 +52,71 @@ namespace TaskManagment
 
             }
         }
+        public static string sha256(string password)
+        {
+            var crypt = new SHA256Managed();
+            string hash = String.Empty;
+            byte[] crypto = crypt.ComputeHash(Encoding.ASCII.GetBytes(password));
+            foreach (byte theByte in crypto)
+            {
+                hash += theByte.ToString("x2");
+            }
+            return hash;
+        }
+        #region Validatiion
+        public static bool checkVaidationLength(int min, int max, TextBox textBox)
+        {
+            if (textBox.Text.Length < min || textBox.Text.Length > max)
+            {
+                errorProvider1.SetError(textBox, $" must be between {min}-{max}");
+                return false;
+            }
+            else
+            {
+                errorProvider1.Clear();
+                return true;
+                //checkValidButton();
+            }
+        }
 
+        public static bool checkVaidationNumber(int min, int max, TextBox textBox)
+        {
+
+            if (textBox.Text.Length == 0 || Convert.ToInt32(textBox.Text) < min)
+                errorProvider1.SetError(textBox, $"must be greater than {min}");
+            else
+            {
+                errorProvider1.Clear();
+                return true;
+            }
+            return false;
+        }
+        public static bool checkValidEmail(TextBox textBox)
+        {
+            string strRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
+      @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
+      @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
+            Regex re = new Regex(strRegex);
+            if (!re.IsMatch(textBox.Text))
+            {
+                errorProvider1.SetError(textBox, $" email must be valid address");
+                return false;
+            }
+            return true;
+
+        }
+
+        public static void onlyNumbers(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) == true || e.KeyChar == (Char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+            else
+                e.Handled = true;
+
+        }
+        #endregion
     }
+
 }

@@ -19,7 +19,7 @@ namespace TaskManagment.Forms
             InitializeComponent();
             this.Text = Global.CurrentWorker.Name;
             getProject();
-           // getWorkers();
+          
 
         }
         
@@ -107,6 +107,8 @@ namespace TaskManagment.Forms
 
             getWorkers();
         }
+
+       
     }
 
 
