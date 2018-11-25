@@ -116,7 +116,6 @@
             this.lbl_timer.Size = new System.Drawing.Size(22, 20);
             this.lbl_timer.TabIndex = 1;
             this.lbl_timer.Text = "0 ";
-            this.lbl_timer.Click += new System.EventHandler(this.lbl_timer_Click);
             // 
             // btn_sendEmail
             // 
@@ -135,7 +134,6 @@
             this.dgv_task.Name = "dgv_task";
             this.dgv_task.Size = new System.Drawing.Size(462, 191);
             this.dgv_task.TabIndex = 4;
-            this.dgv_task.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_task_CellContentClick);
             // 
             // chart1
             // 

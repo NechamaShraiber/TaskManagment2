@@ -11,7 +11,7 @@ namespace TaskManagment.Forms
     public partial class TeamLeaderProjectDeatails : Form
     {
         public Project project;
-       dynamic workersHours;
+        dynamic workersHours;
         public TeamLeaderProjectDeatails(Project p)
         {
             InitializeComponent();
@@ -19,11 +19,17 @@ namespace TaskManagment.Forms
             this.Text = $"{Global.CurrentWorker.Name}: {project.Name}";
             UpdateProjectDeatails();
             getWorkersHours();
-           
+
         }
 
-      
+        private void ProjectDeatails_Load(object sender, EventArgs e)
+        {
+            UpdateChart();
+        }
 
+        /// <summary>
+        /// show all the hours for the project
+        /// </summary>
         private void getWorkersHours()
         {
             HttpClient client = new HttpClient();
@@ -34,19 +40,20 @@ namespace TaskManagment.Forms
             {
                 var result = response.Content.ReadAsStringAsync().Result;
                 workersHours = JsonConvert.DeserializeObject(result);
-                if (workersHours != null) { 
+                if (workersHours != null)
+                {
                     dgv_workersHours.DataSource = workersHours;
-               // dgv_workersHours.Columns["Id"].Visible = false;
                 }
             }
 
             else
             {
-
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-
             }
         }
+        /// <summary>
+        /// show project deatails
+        /// </summary>
         private void UpdateProjectDeatails()
         {
             lbl_projectName.Text = project.Name;
@@ -59,13 +66,19 @@ namespace TaskManagment.Forms
 
         }
 
-        private void ProjectDeatails_Load(object sender, EventArgs e)
+      
+
+        /// <summary>
+        /// show project  chatr
+        /// </summary>
+        public void UpdateChart()
         {
             Dictionary<string, int> allocatedHours = new Dictionary<string, int>();
             List<float> workedHours = new List<float>();
-            if (workersHours != null) { 
-            foreach (var item in workersHours)
+            if (workersHours != null)
             {
+                foreach (var item in workersHours)
+                {
                     allocatedHours.Add((String)item["Name"].Value, (Int32)item["AllocatedHours"].Value);
                     if (item.Hours != "")
                     {
@@ -73,21 +86,12 @@ namespace TaskManagment.Forms
                         workedHours.Add(float.Parse(t[0]) + (float.Parse(t[1]) / 100));
                     }
                     else workedHours.Add(0);
-               
-               
+
+
+                }
+                chart1.Series[0].Points.DataBindXY(allocatedHours.Keys, allocatedHours.Values);
+                chart1.Series[1].Points.DataBindXY(allocatedHours.Keys, workedHours);
             }
-            chart1.Series[0].Points.DataBindXY(allocatedHours.Keys, allocatedHours.Values);
-            chart1.Series[1].Points.DataBindXY(allocatedHours.Keys, workedHours);}
-        }
-
-        private void chart1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

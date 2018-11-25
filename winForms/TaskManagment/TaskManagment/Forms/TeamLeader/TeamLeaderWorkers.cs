@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -24,6 +23,9 @@ namespace TaskManagment.Forms
             getWorkerHours();
         }
 
+        /// <summary>
+        /// show worker's hours
+        /// </summary>
         private void getWorkerHours()
         {
             HttpClient client = new HttpClient();
@@ -37,7 +39,6 @@ namespace TaskManagment.Forms
                 if (hoursList != null)
                 {
                     dgv_workerHours.DataSource = hoursList;
-                   // dgv_workerHours.Columns["Date"].Visible = false;
                     dgv_workerHours.Columns["Id"].Visible = false;
                 }
             }
@@ -46,14 +47,20 @@ namespace TaskManagment.Forms
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
             }
         }
-
+        /// <summary>
+        /// shou worker deatails
+        /// </summary>
         private void UpdateWorkerDeatails()
         {
             lbl_workerName.Text = worker.Name;
             lbl_workerUserName.Text = worker.UserName;
             lbl_workerEmail.Text = worker.EMail;
+            lbl_job.Text = Global.jobs.Find(j => j.Id == worker.JobId).Name;
         }
 
+        /// <summary>
+        /// validation for txtNumHours
+        /// </summary>
         private void txtNumHours_TextChanged(object sender, EventArgs e)
         {
             lblMessage.Text = "";
@@ -64,28 +71,16 @@ namespace TaskManagment.Forms
             }
         }
 
-        private void dgv_workerHours_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            
-        }
-
-        private void TeamLeaderWorkers_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgv_workerHours_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// change allocated Hours
+        /// </summary>
+       
         private void btn_change_Click(object sender, EventArgs e)
         {
             lblMessage.Text = "";
             int index;
             try {
                 index = dgv_workerHours.SelectedRows[0].Index;
-         
             int workerId = Convert.ToInt32(hoursList[index]["Id"].Value);
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(Global.path + "updateWorkerHours");
             httpWebRequest.ContentType = "application/json";
@@ -121,9 +116,5 @@ namespace TaskManagment.Forms
             }
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -14,7 +14,6 @@ namespace TaskManagment.Forms
         List<Project> projectList;
         List<Worker> workerList;
 
-
         public TeamLeaderHome()
         {
             InitializeComponent();
@@ -23,7 +22,10 @@ namespace TaskManagment.Forms
             getWorkers();
 
         }
-
+        
+        /// <summary>
+        /// show all teamLeader's workers
+        /// </summary>
         private void getWorkers()
         {
             HttpClient client = new HttpClient();
@@ -38,18 +40,22 @@ namespace TaskManagment.Forms
                 dgv_workers.DataSource = workerList;
                 dgv_workers.Columns["Id"].Visible = false;
                 dgv_workers.Columns["ManagerId"].Visible = false;
-                //לסדר job
-                //dgvProjects.Columns["jobId",0].Value = "fds";
+                dgv_workers.Columns[3].HeaderText = "Job";
+                for (int i = 0; i < workerList.Count; i++)
+                {
+                   dgv_workers.Rows[i].Cells[3].Value = Global.jobs.Find(j => j.Id == (int)dgv_workers.Rows[i].Cells[4].Value).Name;
+                }
+                dgv_workers.Columns["JobId"].Visible = false;
             }
             else
             {
-
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-
             }
 
         }
-
+        /// <summary>
+        /// show all teamLeader's projects
+        /// </summary>
         private void getProject()
         {
             HttpClient client = new HttpClient();
@@ -66,9 +72,7 @@ namespace TaskManagment.Forms
             }
             else
             {
-
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-
             }
 
         }
@@ -85,15 +89,7 @@ namespace TaskManagment.Forms
             w.Show();
         }
 
-        private void TeamLeaderHome_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgv_projects_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
     }
 
 

@@ -61,7 +61,8 @@ export class ManagerService {
       }
          
     public exportAsExcelFile(json: any[]): void {
-        const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+    
+        const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet( JSON.parse( JSON.stringify(json)));
         const workbook: XLSX.WorkBook = {Sheets: {'data': worksheet}, SheetNames: ['data']};
         XLSX.writeFile(workbook, ManagerService.toExportFileName("Excl"));
         const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });

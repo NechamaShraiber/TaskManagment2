@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -14,7 +12,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using TaskManagment.Models;
-using NsExcel= Microsoft.Office.Interop.Excel;
 
 
 namespace TaskManagment.Forms
@@ -24,14 +21,18 @@ namespace TaskManagment.Forms
         List<Worker> manager;
         List<Worker> workerToSelect;
         List<Worker> workerToAdd;
+        Panel currentPanel;
         public ManagerHome()
         {
             InitializeComponent();
             AddProject();
-            tab_manager.Controls.Remove(tab_workerDeatrails);
+            //tab_manager.Controls.Remove(tab_workerDeatrails);
             getAllWorkers();
-            GetPresences();
+            currentPanel = pnl_add_project;
+            currentPanel.Visible = true;
         }
+
+
         public void getAllWorkers()
         {
             HttpClient client = new HttpClient();
@@ -42,15 +43,14 @@ namespace TaskManagment.Forms
             {
                 var result = response.Content.ReadAsStringAsync().Result;
                 workerList = JsonConvert.DeserializeObject<List<Worker>>(result);
-
             }
             else
             {
-
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
 
             }
         }
+
         void checkVaidationLength(int min, int max, TextBox textBox)
         {
             if (textBox.Text.Length < min || textBox.Text.Length > max)
@@ -63,6 +63,7 @@ namespace TaskManagment.Forms
                 checkValidButton();
             }
         }
+
         void checkVaidationNumber(int min, int max, TextBox textBox)
         {
             if (!int.TryParse(textBox.Text, out int num))
@@ -75,6 +76,7 @@ namespace TaskManagment.Forms
 
             }
         }
+
         #region addProject
 
         public void AddProject()
@@ -87,7 +89,6 @@ namespace TaskManagment.Forms
             data_start.CustomFormat = "yyyy-MM-dd";
             manager = Global.GetManagers();
             manager.ForEach(t => { txt_team_name.Items.Add(t.Name); });
-            // txt_team_name.DataSource = manager.Select(m => m.Name);
         }
 
         public void checkValidProjName(object sender, EventArgs e)
@@ -154,8 +155,6 @@ namespace TaskManagment.Forms
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
                     var result = streamReader.ReadToEnd();
-
-
                 }
             }
             catch (WebException ex)
@@ -202,21 +201,6 @@ namespace TaskManagment.Forms
 
                     MessageBox.Show($"The project {proj.Name} added successfully");
                     addWorkersToProject(proj.Name);
-                    /*
-                     * 
-                     */
-
-                    //{
-                    //                  addWorkersToProject(workers: Worker[], name):any{
-                    //                      this.ids =[];
-                    //                      workers.forEach(w => {
-                    //                          this.ids.push(w.Id);
-                    //                      });
-                    //                      return this.http.post("http://localhost:59628/api/addWorkersToProject/" + name + "/", JSON.parse(JSON.stringify(this.ids)))
-
-                    //}
-
-                    //}
 
                 }
             }
@@ -234,8 +218,8 @@ namespace TaskManagment.Forms
         HttpClient httpClient = new HttpClient();
         private void btn_add_worker_Click(object sender, EventArgs e)
         {
-            tab_manager.Controls.Add(tab_workerDeatrails);
-            tab_manager.SelectedTab = tab_workerDeatrails;
+            //tab_manager.Controls.Add(tab_workerDeatrails);
+            //tab_manager.SelectedTab = tab_workerDeatrails;
             WorkerDeatails(true, null);
             //WorkerDeatails addWorker = new WorkerDeatails(true, null);
             //addWorker.Show();
@@ -250,15 +234,15 @@ namespace TaskManagment.Forms
             cb.Items.AddRange(workerList.Select(w => w.UserName).ToArray());
             cb.Location = new Point(250, 50);
             panelControlls.Controls.Add(cb);
-            getAllWorkers();
+        //    getAllWorkers();
 
 
         }
-        private void btn_delete_Click(object sender, EventArgs e)
+        private void btn_delete_Click(string s)
         {
             GetAllWorker();
-            btn_delete.Enabled = false;
-            string s = (sender as Button).Text == "Delete worker" ? "delete" : "edit";
+       //     btn_delete.Enabled = false;
+           // string s = (sender as Button).Text == "Delete worker" ? "delete" : "edit";
             Label l = new Label() { Text = $"Chooose worker to {s}:" };
             Label l2 = new Label() { Text = "X" };
             Button bt = new Button() { Text = s };
@@ -277,8 +261,8 @@ namespace TaskManagment.Forms
         {
             panelControlls.Controls.Clear();
             panelControlls.BorderStyle = BorderStyle.None;
-            btn_delete.Enabled = true;
-            btn_edit.Enabled = true;
+            //btn_delete.Enabled = true;
+            //btn_edit.Enabled = true;
         }
 
         void b_Click(object sender, EventArgs e)
@@ -307,8 +291,7 @@ namespace TaskManagment.Forms
             else
             {
                 l2_click(sender, e);
-                tab_manager.Controls.Add(tab_workerDeatrails);
-                tab_manager.SelectedTab = tab_workerDeatrails;
+                ShowPanel(pnl_add_worker);
                 WorkerDeatails(false, w1);
                 //MessageBox.Show("edit");
                 //WorkerDeatails add = new WorkerDeatails(false, w1);
@@ -329,15 +312,13 @@ namespace TaskManagment.Forms
         public Worker w;
         public void WorkerDeatails(bool isAdd, Worker w)
         {
-
-
             txt_password.PasswordChar = '*';
-            cmb_job.DataSource = Enum.GetValues(typeof(eJobs));
+            cmb_job.DataSource = Global.jobs.Select(j => j.Name).ToList();
             manager = Global.GetManagers();
             cmb_manager.Items.Clear();
             cmb_manager.Items.AddRange(manager.Select(m => m.Name).ToArray());
             this.isAdd = isAdd;
-            tab_workerDeatrails.Text = isAdd ? "Add worker" : "Edit worker";
+            //tab_workerDeatrails.Text = isAdd ? "Add worker" : "Edit worker";
             lblTitle.Text = isAdd ? "add worker" : "edit worker";
             btn_Action.Text = isAdd ? "Add" : "Edit ";
             this.w = w;
@@ -349,7 +330,7 @@ namespace TaskManagment.Forms
             else
             {
                 btn_Action.Enabled = false;
-                foreach (Control c in tab_workerDeatrails.Controls)
+                foreach (Control c in pnl_add_worker.Controls)
                 {
                     if (c is TextBox)
                     {
@@ -367,7 +348,7 @@ namespace TaskManagment.Forms
             lblPassword.Text = "";
             txt_password.BorderStyle = BorderStyle.None;
             txt_user_name.Text = w.UserName;
-            cmb_job.SelectedItem = (eJobs)w.JobId;
+            cmb_job.SelectedItem = Global.jobs.Find(j => j.Id == w.JobId).Name;
             cmb_manager.SelectedItem = manager.FirstOrDefault(m => m.Id == w.ManagerId).Name;
 
         }
@@ -402,9 +383,8 @@ namespace TaskManagment.Forms
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            eJobs job;
-            Enum.TryParse(cmb_job.SelectedValue.ToString(), out job);
-            int IdJob = (int)job;
+
+            int IdJob = Global.jobs.Find(j => j.Name == cmb_job.SelectedValue.ToString()).Id;
             int IdManager = manager.FirstOrDefault(m => m.Name == cmb_manager.Text).Id; //SelectedIndex
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(Global.path + (isAdd ? "addWorker" : "updateWorker"));
@@ -437,7 +417,7 @@ namespace TaskManagment.Forms
                     var result = streamReader.ReadToEnd();
 
                     MessageBox.Show($"The worker {txt_name.Text} {(isAdd ? "added" : "changed")} successfully");
-                    tab_manager.Controls.Remove(tab_workerDeatrails);
+                    //tab_manager.Controls.Remove(tab_workerDeatrails);
                 }
             }
             catch (WebException ex)
@@ -460,15 +440,11 @@ namespace TaskManagment.Forms
 
         #endregion
 
-
-
-
-
-
         #region reports
         List<dynamic> presences;
-        public void GetPresences()
+        public void GetPresences(int i)
         {
+
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(Global.path);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -478,8 +454,29 @@ namespace TaskManagment.Forms
                 var result = response.Content.ReadAsStringAsync().Result;
 
                 presences = JsonConvert.DeserializeObject<List<dynamic>>(result);
-              //  SelectByWorkerName();
-                SelectByProjectName();
+                switch (i)
+                {
+                    case 1:
+                        {
+                            SelectByWorkerName();
+                            break;
+                        }
+                    case 2:
+                        {
+                            SelectByProjectName();
+
+                            break;
+                        }
+                    case 3:
+                        {
+                            //////////////////////////////////////////////////
+
+                            break;
+
+
+                        }
+                }
+                 
 
             }
             else
@@ -490,7 +487,6 @@ namespace TaskManagment.Forms
 
         private void SelectByWorkerName()
         {
-
             List<dynamic> projectsByName = new List<dynamic>();
             var names = presences.Select(p => p["WorkerName"].Value).GroupBy(p => p).ToArray();
 
@@ -500,7 +496,7 @@ namespace TaskManagment.Forms
                 var projects = presences.FindAll(p => p["WorkerName"].Value == n.Key).Select(p => p["ProjectName"].Value).GroupBy(p => p).ToArray();
                 foreach (var pro in projects)
                 {
-                    var hours = presences.FindAll(p => p["ProjectName"].Value == pro.Key&& p["WorkerName"].Value == n.Key).Select(p => new
+                    var hours = presences.FindAll(p => p["ProjectName"].Value == pro.Key && p["WorkerName"].Value == n.Key).Select(p => new
                     {
                         Date = p["Date"],
                         Start = p["Start"],
@@ -510,6 +506,7 @@ namespace TaskManagment.Forms
                 }
                 projectsByName.Add(new { n.Key, projectsHours });
             }
+            treeView1.Nodes.Clear();
             treeView1.BorderStyle = BorderStyle.None;
             foreach (var pbn in projectsByName)
             {
@@ -524,15 +521,9 @@ namespace TaskManagment.Forms
                     {
                         TreeNode n3 = n1.Nodes.Add($"date:{hour.Date.Value}, start:{hour.Start.Value}, end:{hour.End.Value}");
                         n3.BackColor = Color.Cyan;
-
-
                     }
                 }
-
             }
-
-
-
         }
         private void SelectByProjectName()
         {
@@ -546,7 +537,7 @@ namespace TaskManagment.Forms
                 var names = presences.FindAll(p => p["ProjectName"].Value == n.Key).Select(p => p["WorkerName"].Value).GroupBy(p => p).ToArray();
                 foreach (var pro in names)
                 {
-                    var hours = presences.FindAll(p => p["WorkerName"].Value == pro.Key&& p["ProjectName"].Value == n.Key).Select(p => new
+                    var hours = presences.FindAll(p => p["WorkerName"].Value == pro.Key && p["ProjectName"].Value == n.Key).Select(p => new
                     {
                         Date = p["Date"],
                         Start = p["Start"],
@@ -556,6 +547,7 @@ namespace TaskManagment.Forms
                 }
                 projectsByName.Add(new { n.Key, projectsHours });
             }
+            treeView1.Nodes.Clear();
             treeView1.BorderStyle = BorderStyle.None;
             foreach (var pbn in projectsByName)
             {
@@ -618,17 +610,8 @@ namespace TaskManagment.Forms
 
         }
 
-        private void tab_workerDeatrails_Leave(object sender, EventArgs e)
-        {
-
-            tab_manager.Controls.Remove(tab_workerDeatrails);
-        }
-
-        private void tab_workerDeatrails_Click(object sender, EventArgs e)
-        {
-
-        }
-
+     
+      
 
         private void btnExportToExecl_Click(object sender, EventArgs e)
         {
@@ -675,6 +658,62 @@ namespace TaskManagment.Forms
                 GC.Collect();
             }
 
+        }
+
+        private void add_project_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("addProject");
+        }
+
+     
+      
+
+        private void ShowPanel(Panel p)
+        {
+            currentPanel.Visible = false;
+           p.Visible = true;
+            currentPanel = p;
+
+        }
+
+       
+
+        private void byWorkerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GetPresences(1);
+            ShowPanel(pnl_report);
+
+        }
+
+        private void byProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GetPresences(2);
+          
+            ShowPanel(pnl_report);
+        }
+
+        private void addProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnl_add_project);
+        }
+
+        private void updateWorkerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnl_delete);
+            btn_delete_Click("edit");
+        }
+
+        private void deleteWorkerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnl_delete);
+            btn_delete_Click("delete");
+        }
+
+        private void addWorkerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            ShowPanel(pnl_add_worker);
+            WorkerDeatails(true, null);
         }
     }
 }

@@ -21,6 +21,7 @@ namespace TaskManagment
             txtConfirmPassword.PasswordChar = '*';
         }
 
+        #region validations
         public void checkValidate(object sender, EventArgs e)
         {
             lbl_bad_request.Text = "";
@@ -64,6 +65,7 @@ namespace TaskManagment
             }
 
         }
+        #endregion
         private void btn_logIn_Click(object sender, EventArgs e)
         {
             try
@@ -74,7 +76,6 @@ namespace TaskManagment
 
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
-                    // sha256(txt_password.Text)!!!!!!!!!!
                     string json = "{\"userName\":\"" + txt_userName.Text + "\"," +
                        "\"password\":\"" + sha256(txt_password.Text) + "\"}";
                     streamWriter.Write(json);
@@ -126,6 +127,7 @@ namespace TaskManagment
                 lbl_bad_request.Text = "The service is not connected";
             }
         }
+
         static string sha256(string password)
         {
             var crypt = new SHA256Managed();
@@ -138,17 +140,13 @@ namespace TaskManagment
             return hash;
         }
 
-        private void LogIn_Load(object sender, EventArgs e)
-        {
 
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            changeControler(true);
-
-        }
-       void changeControler(bool b)
+       
+        /// <summary>
+        /// change controls from login to change password
+        /// </summary>
+        /// <param name="b"></param>
+       void changeControls(bool b)
         {
             lblPassword.Text = b?"oldPassword":"password";
             lblConfirmPassword.Visible =b;
@@ -157,17 +155,14 @@ namespace TaskManagment
             txtConfirmPassword.Visible = b;
             btn_logIn.Visible = !b;
             btnChange.Visible = b;
+            lbl_closeChangePasswod.Visible=b;
         }
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnChange_Validated(object sender, EventArgs e)
-        {
-
-        }
-
+     
+        /// <summary>
+        /// change password
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnChange_Click(object sender, EventArgs e)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(Global.path +"updatePassword");
@@ -194,9 +189,9 @@ namespace TaskManagment
 
                     var result = streamReader.ReadToEnd();
 
-                    MessageBox.Show($"change");
+                    MessageBox.Show($"the password changed");
                     txt_password.Text = txtNewPassword.Text;
-                    changeControler(false);
+                    changeControls(false);
 
                 }
             }
@@ -205,6 +200,18 @@ namespace TaskManagment
                 lbl_bad_request.Text = "One or more of the data is incorrect";
 
             }
+        }
+
+        private void lblChangePassword_Click(object sender, EventArgs e)
+        {
+            changeControls(true);
+
+        }
+
+        private void lbl_closeChangePasswod_Click(object sender, EventArgs e)
+        {
+            changeControls(false);
+
         }
     }
    

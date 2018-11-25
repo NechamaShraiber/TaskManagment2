@@ -7,7 +7,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Windows.Forms;
 using TaskManagment.Forms.Work;
-using TaskManagment.Models;
 
 namespace TaskManagment.Forms
 {
@@ -17,6 +16,7 @@ namespace TaskManagment.Forms
         DateTime startdate;
         dynamic projectList;
         int projectId;
+
         public WorkerHome()
         {
             InitializeComponent();
@@ -24,7 +24,9 @@ namespace TaskManagment.Forms
             GetProjects();
 
         }
-
+      /// <summary>
+      /// get the worker's projects and show them in dataGridView
+      /// </summary>
         private void GetProjects()
         {
             HttpClient client = new HttpClient();
@@ -50,10 +52,14 @@ namespace TaskManagment.Forms
             }
         }
 
+        /// <summary>
+        ///update presence for project
+        /// </summary>
         private void UpdateTime()
         {
             lbl_message.Text = "";
             DateTime time = DateTime.Now;
+            //if the worker start work
             if (isBegin)
             {
                 startdate = DateTime.Now;
@@ -71,6 +77,7 @@ namespace TaskManagment.Forms
                 }
              
             }
+            //if is finish
             else
             {
                 btn_task.Text = "Start Task";
@@ -111,6 +118,9 @@ namespace TaskManagment.Forms
 
         }
 
+        /// <summary>
+        /// show project-chart
+        /// </summary>
         void UpdateChart()
         {
 
@@ -134,6 +144,7 @@ namespace TaskManagment.Forms
             chart1.Series[1].Points.DataBindXY(allocatedHours.Keys, workedHours);
 
         }
+
         private void WorkerHome_Load(object sender, EventArgs e)
         {
             if (projectList != null)
@@ -149,6 +160,7 @@ namespace TaskManagment.Forms
         {
             UpdateTime();
         }
+
         private void timer_Tick(object sender, EventArgs e)
         {
             var d = (DateTime.Now - startdate);
@@ -160,22 +172,16 @@ namespace TaskManagment.Forms
             WorkEmail w = new WorkEmail();
             w.Show();
         }
+
         private void WorkerHome_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //When closing the page,  finish the project
             if (!isBegin)
             {
                 UpdateTime();
             }
         }
 
-        private void dgv_task_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void lbl_timer_Click(object sender, EventArgs e)
-        {
-
-        }
+   
     }
 }

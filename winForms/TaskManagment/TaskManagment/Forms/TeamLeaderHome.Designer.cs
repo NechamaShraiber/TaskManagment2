@@ -45,7 +45,6 @@
             this.dgv_projects.Name = "dgv_projects";
             this.dgv_projects.Size = new System.Drawing.Size(751, 111);
             this.dgv_projects.TabIndex = 0;
-            this.dgv_projects.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_projects_CellContentClick);
             this.dgv_projects.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_projects_RowHeaderMouseClick);
             // 
             // label1
@@ -110,7 +109,6 @@
             this.Controls.Add(this.dgv_projects);
             this.Name = "TeamLeaderHome";
             this.Text = "TeamLeaderHome";
-            this.Load += new System.EventHandler(this.TeamLeaderHome_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_projects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_workers)).EndInit();
             this.ResumeLayout(false);
