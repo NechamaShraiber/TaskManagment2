@@ -127,7 +127,7 @@
             this.txtNewPassword.Size = new System.Drawing.Size(100, 20);
             this.txtNewPassword.TabIndex = 1;
             this.txtNewPassword.Visible = false;
-            this.txtNewPassword.TextChanged += new System.EventHandler(this.checkValidateNewPassword);
+            this.txtNewPassword.TextChanged += new System.EventHandler(this.checkValidate);
             this.txtNewPassword.MouseLeave += new System.EventHandler(this.checkValidate);
             // 
             // lblNewPassword
@@ -147,7 +147,7 @@
             this.txtConfirmPassword.Size = new System.Drawing.Size(100, 20);
             this.txtConfirmPassword.TabIndex = 1;
             this.txtConfirmPassword.Visible = false;
-            this.txtConfirmPassword.TextChanged += new System.EventHandler(this.checkValidateNewPassword);
+            this.txtConfirmPassword.TextChanged += new System.EventHandler(this.checkValidate);
             this.txtConfirmPassword.MouseLeave += new System.EventHandler(this.checkValidate);
             // 
             // lblConfirmPassword

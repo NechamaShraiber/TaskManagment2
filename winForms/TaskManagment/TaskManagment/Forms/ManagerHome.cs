@@ -8,8 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Cryptography;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using TaskManagment.Models;
 
@@ -26,12 +25,15 @@ namespace TaskManagment.Forms
         {
             InitializeComponent();
             AddProject();
-            //tab_manager.Controls.Remove(tab_workerDeatrails);
-            getAllWorkers();
             currentPanel = pnl_add_project;
             currentPanel.Visible = true;
         }
 
+        private  void onlyNumbers(object sender, KeyPressEventArgs e)
+        {
+            Global.onlyNumbers(sender, e);
+
+        }
 
         public void getAllWorkers()
         {
@@ -50,33 +52,7 @@ namespace TaskManagment.Forms
 
             }
         }
-
-        void checkVaidationLength(int min, int max, TextBox textBox)
-        {
-            if (textBox.Text.Length < min || textBox.Text.Length > max)
-            {
-                errorProvider1.SetError(textBox, $" must be between {min}-{max}");
-            }
-            else
-            {
-                errorProvider1.Clear();
-                checkValidButton();
-            }
-        }
-
-        void checkVaidationNumber(int min, int max, TextBox textBox)
-        {
-            if (!int.TryParse(textBox.Text, out int num))
-                errorProvider1.SetError(txt_QI_houers, $"must be number");
-            if (textBox.Text.Length == 0 || num < min)
-                errorProvider1.SetError(txt_QI_houers, $"must be greater than {min}");
-            else
-            {
-                errorProvider1.Clear();
-
-            }
-        }
-
+       
         #region addProject
 
         public void AddProject()
@@ -89,47 +65,60 @@ namespace TaskManagment.Forms
             data_start.CustomFormat = "yyyy-MM-dd";
             manager = Global.GetManagers();
             manager.ForEach(t => { txt_team_name.Items.Add(t.Name); });
+            getAllWorkers();
+        }
+      
+        public void checkProjectValidation(object sender, EventArgs e)
+        {
+               
+            btn_addProject.Enabled =
+                 Global.checkVaidationLength(2, 25, txt_projName) &&
+                 Global.checkVaidationLength(2, 15, txt_customer_name) &&
+                 Global.checkVaidationNumber(0, 0, txt_developer_hours) &&
+                 Global.checkVaidationNumber(0, 0, txt_QI_houers) &&
+                 Global.checkVaidationNumber(0, 0, txt_UIUX_hours);
+
+
         }
 
-        public void checkValidProjName(object sender, EventArgs e)
+        private void data_start_ValueChanged(object sender, EventArgs e)
         {
-            checkVaidationLength(2, 25, (sender as TextBox));
-            checkValidButton();
+
+            data_end.MinDate = (sender as DateTimePicker).Value;
         }
-        public void checkValidCustomerName(object sender, EventArgs e)
+        private void txt_team_name_SelectedIndexChanged(object sender, EventArgs e)
         {
-            checkVaidationLength(2, 15, (sender as TextBox));
-            checkValidButton();
+
+            getAllWorkers();
+            int id = manager.Where(m => m.Name == txt_team_name.SelectedItem.ToString()).FirstOrDefault().Id;
+            workerToSelect = new List<Worker>();
+            workerToAdd = new List<Worker>();
+            workerList.ForEach(w =>
+            {
+                if (w.ManagerId != null && w.JobId > 2 && w.ManagerId != id)
+                    workerToSelect.Add(w);
+            });
+            dgvAddWorkers.DataSource = workerToSelect;
+            dgvAddWorkers.Columns["Id"].Visible = false;
+
+            //.Select(s => new { s.Id, s.Name })
         }
 
-        public void checkValidQAHours(object sender, EventArgs e)
+        private void dgvAddWorkers_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            checkVaidationNumber(0, 0, (sender as TextBox));
-            checkValidButton();
-        }
-        public void checkValidDeveloperHours(object sender, EventArgs e)
-        {
-            checkVaidationNumber(0, 0, (sender as TextBox));
-            checkValidButton();
-        }
-        public void checkValidUIUXHours(object sender, EventArgs e)
-        {
-            checkVaidationNumber(0, 0, (sender as TextBox));
-            checkValidButton();
-        }
-        /// <summary>
-        /// //////////////////////////////////////////////////////////////////
-        /// </summary>
-        public void checkValidButton()
-        {
-            if ((txt_customer_name.Text.Length > 2 && txt_customer_name.Text.Length < 15) &&
-                    (txt_team_name.Text.Length > 2 && txt_team_name.Text.Length < 15) &&
-                    (txt_QI_houers.Text.Length != 0 && (Convert.ToInt32(txt_QI_houers.Text) > 0)) &&
-                    (txt_developer_hours.Text.Length != 0 && (Convert.ToInt32(txt_developer_hours.Text) > 0)) &&
-                    (txt_UIUX_hours.Text.Length != 0 && (Convert.ToInt32(txt_UIUX_hours.Text) > 0)) &&
-                    (txt_projName.Text.Length > 2 && txt_projName.Text.Length < 25))
-                btn_addProject.Enabled = true;
-            //else btn_add.Enabled = false;
+            if (dgvAddWorkers.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Beige)
+            {
+                dgvAddWorkers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.DarkGray;
+
+                workerToAdd.Remove(workerToSelect[e.RowIndex]);
+
+            }
+            else
+            {
+                dgvAddWorkers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Beige;
+                workerToAdd.Add(workerToSelect[e.RowIndex]);
+            }
+
         }
 
         public void addWorkersToProject(string name)
@@ -214,58 +203,40 @@ namespace TaskManagment.Forms
         #region UserManagment
 
         List<Worker> workerList;
-
         HttpClient httpClient = new HttpClient();
-        private void btn_add_worker_Click(object sender, EventArgs e)
-        {
-            //tab_manager.Controls.Add(tab_workerDeatrails);
-            //tab_manager.SelectedTab = tab_workerDeatrails;
-            WorkerDeatails(true, null);
-            //WorkerDeatails addWorker = new WorkerDeatails(true, null);
-            //addWorker.Show();
-        }
-
         void GetAllWorker()
         {
             panelControlls.Controls.Clear();
             panelControlls.BorderStyle = BorderStyle.FixedSingle;
-
             ComboBox cb = new ComboBox() { Name = "cbWorkers" };
             cb.Items.AddRange(workerList.Select(w => w.UserName).ToArray());
             cb.Location = new Point(250, 50);
             panelControlls.Controls.Add(cb);
-        //    getAllWorkers();
-
-
         }
         private void btn_delete_Click(string s)
         {
             GetAllWorker();
-       //     btn_delete.Enabled = false;
-           // string s = (sender as Button).Text == "Delete worker" ? "delete" : "edit";
             Label l = new Label() { Text = $"Chooose worker to {s}:" };
-            Label l2 = new Label() { Text = "X" };
-            Button bt = new Button() { Text = s };
+            Label lbl_close = new Label() { Text = "X" };
+            Button btn_delete_edit = new Button() { Text = s };
             l.Location = new Point(50, 50);
-            l2.Location = new Point(30, 30);
-            bt.Location = new Point(150, 90);
+            lbl_close.Location = new Point(30, 30);
+            btn_delete_edit.Location = new Point(150, 90);
             panelControlls.Controls.Add(l);
-            panelControlls.Controls.Add(l2);
-            panelControlls.Controls.Add(bt);
-            bt.Click += new EventHandler(b_Click);
-            l2.Click += new EventHandler(l2_click);
+            panelControlls.Controls.Add(lbl_close);
+            panelControlls.Controls.Add(btn_delete_edit);
+            btn_delete_edit.Click += new EventHandler(btn_delete_edit_Click);
+            lbl_close.Click += new EventHandler(lbl_close_click);
         }
 
 
-        void l2_click(object sender, EventArgs e)
+        void lbl_close_click(object sender, EventArgs e)
         {
             panelControlls.Controls.Clear();
             panelControlls.BorderStyle = BorderStyle.None;
-            //btn_delete.Enabled = true;
-            //btn_edit.Enabled = true;
         }
 
-        void b_Click(object sender, EventArgs e)
+        void btn_delete_edit_Click(object sender, EventArgs e)
         {
             Worker w1 = new Worker();
             int id = workerList.FirstOrDefault(w => w.UserName == (panelControlls.Controls["cbWorkers"] as ComboBox).Text).Id;
@@ -290,12 +261,9 @@ namespace TaskManagment.Forms
             }
             else
             {
-                l2_click(sender, e);
+                lbl_close_click(sender, e);
                 ShowPanel(pnl_add_worker);
                 WorkerDeatails(false, w1);
-                //MessageBox.Show("edit");
-                //WorkerDeatails add = new WorkerDeatails(false, w1);
-                //add.Show();
             }
 
         }
@@ -307,7 +275,6 @@ namespace TaskManagment.Forms
 
         #region WorkerDeatails
 
-
         bool isAdd;
         public Worker w;
         public void WorkerDeatails(bool isAdd, Worker w)
@@ -318,7 +285,6 @@ namespace TaskManagment.Forms
             cmb_manager.Items.Clear();
             cmb_manager.Items.AddRange(manager.Select(m => m.Name).ToArray());
             this.isAdd = isAdd;
-            //tab_workerDeatrails.Text = isAdd ? "Add worker" : "Edit worker";
             lblTitle.Text = isAdd ? "add worker" : "edit worker";
             btn_Action.Text = isAdd ? "Add" : "Edit ";
             this.w = w;
@@ -346,39 +312,20 @@ namespace TaskManagment.Forms
             txt_name.Text = w.Name;
             txt_email.Text = w.EMail;
             lblPassword.Text = "";
-            txt_password.BorderStyle = BorderStyle.None;
+            txt_password.Visible = false;
             txt_user_name.Text = w.UserName;
             cmb_job.SelectedItem = Global.jobs.Find(j => j.Id == w.JobId).Name;
             cmb_manager.SelectedItem = manager.FirstOrDefault(m => m.Id == w.ManagerId).Name;
 
         }
-
-        public void checkValidName(object sender, EventArgs e)
+        public void checkWorkerValidation(object sender, EventArgs e)
         {
-            checkVaidationLength(2, 15, (sender as TextBox));
-            EbleButton();
-        }
-        void EbleButton()
-        {
-            if ((txt_user_name.Text.Length >= 2 && txt_user_name.Text.Length <= 10) &&
-                              (txt_password.Text.Length >= 6 && txt_password.Text.Length <= 10) &&
-                              ((txt_email.Text.Length >= 6 && txt_email.Text.Length <= 30)))
-                btn_Action.Enabled = true;
-        }
-        public void checkValidUserName(object sender, EventArgs e)
-        {
-            checkVaidationLength(2, 10, (sender as TextBox));
-            EbleButton();
-        }
-        public void checkValidPassword(object sender, EventArgs e)
-        {
-            checkVaidationLength(6, 10, (sender as TextBox));
-            EbleButton();
-        }
-        public void checkValidEmail(object sender, EventArgs e)
-        {
-            checkVaidationLength(2, 30, (sender as TextBox));
-            EbleButton();
+            btn_Action.Enabled =Global.checkVaidationLength(2, 15, txt_name) &&
+                Global.checkVaidationLength(2, 10, txt_user_name) &&
+                (isAdd ? Global.checkVaidationLength(6, 10, txt_password) : true) &&
+                Global.checkVaidationLength(2, 30, txt_email) &&
+                Global.checkValidEmail(txt_email);
+        
         }
 
         private void btn_add_Click(object sender, EventArgs e)
@@ -396,7 +343,7 @@ namespace TaskManagment.Forms
             {
                 string json = "{" + (!isAdd ? "\"Id\":\"" + w.Id + "\"," : "") + "\"Name\":\"" + txt_name.Text + "\"," +
                    "\"UserName\":\"" + txt_user_name.Text + "\"," +
-                   "\"Password\":\"" + (txt_password.Text != "" ? sha256(txt_password.Text) : "") + "\"," +
+                   "\"Password\":\"" + (txt_password.Text != "" ?Global.sha256(txt_password.Text) : "") + "\"," +
                     "\"JobId\":\"" + IdJob + "\"," +
                    "\"EMail\":\"" + txt_email.Text + "\"," +
                    "\"ManagerId\":\"" + IdManager +
@@ -426,17 +373,7 @@ namespace TaskManagment.Forms
             }
         }
 
-        static string sha256(string password)
-        {
-            var crypt = new SHA256Managed();
-            string hash = String.Empty;
-            byte[] crypto = crypt.ComputeHash(Encoding.ASCII.GetBytes(password));
-            foreach (byte theByte in crypto)
-            {
-                hash += theByte.ToString("x2");
-            }
-            return hash;
-        }
+       
 
         #endregion
 
@@ -469,11 +406,8 @@ namespace TaskManagment.Forms
                         }
                     case 3:
                         {
-                            //////////////////////////////////////////////////
-
+                            ShowPresences();
                             break;
-
-
                         }
                 }
                  
@@ -483,6 +417,13 @@ namespace TaskManagment.Forms
             {
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
             }
+        }
+
+        private void ShowPresences()
+        {
+            dgv_presence.DataSource = presences;
+            treeView1.Visible = false;
+            dgv_presence.Visible = true;
         }
 
         private void SelectByWorkerName()
@@ -524,6 +465,8 @@ namespace TaskManagment.Forms
                     }
                 }
             }
+            treeView1.Visible = true;
+            dgv_presence.Visible = false;
         }
         private void SelectByProjectName()
         {
@@ -568,51 +511,11 @@ namespace TaskManagment.Forms
                 }
 
             }
-
+            treeView1.Visible = true;
+            dgv_presence.Visible = false;
 
 
         }
-
-        #endregion
-
-        private void txt_team_name_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            getAllWorkers();
-            int id = manager.Where(m => m.Name == txt_team_name.SelectedItem.ToString()).FirstOrDefault().Id;
-            workerToSelect = new List<Worker>();
-            workerToAdd = new List<Worker>();
-            workerList.ForEach(w =>
-            {
-                if (w.ManagerId != null && w.JobId > 2 && w.ManagerId != id)
-                    workerToSelect.Add(w);
-            });
-            dgvAddWorkers.DataSource = workerToSelect;
-            dgvAddWorkers.Columns["Id"].Visible = false;
-
-            //.Select(s => new { s.Id, s.Name })
-        }
-
-        private void dgvAddWorkers_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (dgvAddWorkers.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Beige)
-            {
-                dgvAddWorkers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.DarkGray;
-
-                workerToAdd.Remove(workerToSelect[e.RowIndex]);
-
-            }
-            else
-            {
-                dgvAddWorkers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Beige;
-                workerToAdd.Add(workerToSelect[e.RowIndex]);
-            }
-
-        }
-
-     
-      
-
         private void btnExportToExecl_Click(object sender, EventArgs e)
         {
             Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
@@ -660,13 +563,8 @@ namespace TaskManagment.Forms
 
         }
 
-        private void add_project_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("addProject");
-        }
 
-     
-      
+        #endregion
 
         private void ShowPanel(Panel p)
         {
@@ -675,8 +573,10 @@ namespace TaskManagment.Forms
             currentPanel = p;
 
         }
-
-       
+        private void addProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPanel(pnl_add_project);
+        }
 
         private void byWorkerToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -688,23 +588,25 @@ namespace TaskManagment.Forms
         private void byProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GetPresences(2);
-          
             ShowPanel(pnl_report);
         }
-
-        private void addProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        private void preToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowPanel(pnl_add_project);
+            GetPresences(3);
+            ShowPanel(pnl_report);
         }
+      
 
         private void updateWorkerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            getAllWorkers();
             ShowPanel(pnl_delete);
             btn_delete_Click("edit");
         }
 
         private void deleteWorkerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            getAllWorkers();
             ShowPanel(pnl_delete);
             btn_delete_Click("delete");
         }
@@ -715,5 +617,7 @@ namespace TaskManagment.Forms
             ShowPanel(pnl_add_worker);
             WorkerDeatails(true, null);
         }
+
+      
     }
 }

@@ -20,7 +20,8 @@ namespace TaskManagment.Forms.Work
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 string json = "{\"sub\":\"" + txt_subject.Text + "\"," +
-                   "\"body\":\"" + txt_contact.Text + "\"}";
+                   "\"body\":\"" + txt_contact.Text + "\"," +
+                   "\"id\":\"" + Global.CurrentWorker.Id + "\"}";
                 streamWriter.Write(json);
                 streamWriter.Flush();
                 streamWriter.Close();
