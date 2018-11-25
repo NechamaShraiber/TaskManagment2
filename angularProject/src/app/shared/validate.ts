@@ -9,13 +9,13 @@ export class validate {
       f => f.value && f.value.length < min ? { "val": `${cntName} must be min ${min} chars` } : null,
     ];
   }
-  public static createValidatorDate(group: FormGroup): Array<ValidatorFn> {
-    var sd = group.controls['StartDate'];
-    var ed = group.controls['EndDate'];
-    //sd.value < Date.now() ? sd.setErrors({ validateDatesConfirmation: "The start-date must be after today " }) : null;
-    sd.value > ed.value ? ed.setErrors({ validateDatesConfirmation: "The end-date must be after start-date " }) : null;
-    return null;
-  }
+   public static createValidatorDate(group: FormGroup): Array<ValidatorFn> {
+     var sd = group.controls['StartDate'];
+     var ed = group.controls['EndDate'];
+     //sd.value < Date.now() ? sd.setErrors({ validateDatesConfirmation: "The start-date must be after today " }) : null;
+     sd.value > ed.value ? ed.setErrors({ validateDatesConfirmation: "The end-date must be after start-date " }) : null;
+     return null;
+   }
 
 
 }

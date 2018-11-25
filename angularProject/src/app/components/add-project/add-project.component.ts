@@ -1,19 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ManagerService } from '../../shared/service/manager.service';
 import { validate } from '../../shared/validate';
 import { Worker } from '../../shared/models/worker';
 import 'hammerjs';
-
+import { MatDatepickerInputEvent } from '../../../../node_modules/@angular/material';
+// @Output()
+//   dateChange(): EventEmitter<MatDatepickerInputEvent<D>>
 @Component({
   selector: 'app-add-project',
   templateUrl: './add-project.component.html',
   styleUrls: ['./add-project.component.css']
 })
+
 export class AddProjectComponent implements OnInit {
-  minStartDate = new Date();
-  minEndDate = this.minStartDate;
+  
+  minStartDate=new Date();
+  minEndDate=this.minStartDate;
   addProjectGroup: FormGroup;
   teamLeader: any[] = [];
   idTeam: number;
@@ -30,8 +34,8 @@ export class AddProjectComponent implements OnInit {
       DevelopHours: new FormControl('', validate.createValidatorArr("DevelopHours", 2, 15)),
       QAHours: new FormControl('', validate.createValidatorArr("QAHours", 2, 15)),
       UiUxHours: new FormControl('', validate.createValidatorArr("UiUxHours", 2, 15)),
-      StartDate: new FormControl('this.minStartDate'),
-      EndDate: new FormControl('this.minEndDate'),
+      StartDate: new FormControl('this.minStartDate',validate.createValidatorDate(this.addProjectGroup)),
+      EndDate: new FormControl('this.minEndDate',validate.createValidatorDate(this.addProjectGroup)),
     };
     this.addProjectGroup = new FormGroup(formGroupConfig, validate.createValidatorDate);
   }
@@ -51,6 +55,10 @@ export class AddProjectComponent implements OnInit {
     )
   }
 
+  changedate(event){
+    this.minStartDate=event.value;
+    this.minEndDate=this.minStartDate;
+  }
   get f() { return this.addProjectGroup.controls; }
 
   onSubmit() {

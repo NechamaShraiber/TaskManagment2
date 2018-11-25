@@ -84,7 +84,7 @@
 <div class="dates">
   <div>
     <mat-form-field>
-        <input formControlName="StartDate" ngDefaultControl matInput [min]="minStartDate" [matDatepicker]="picker1" placeholder="Start Date">
+        <input formControlName="StartDate" ngDefaultControl matInput [min]="minStartDate" [matDatepicker]="picker1" placeholder="Start Date" (dateChange)="changedate($event)">
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
