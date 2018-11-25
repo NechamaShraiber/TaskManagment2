@@ -28,89 +28,72 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgv_projects = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dgv_workers = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_projects)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_workers)).BeginInit();
+            this.dgv_Deatails = new System.Windows.Forms.DataGridView();
+            this.lbl_click = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.projectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.workersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Deatails)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dgv_projects
+            // dgv_Deatails
             // 
-            this.dgv_projects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_projects.Location = new System.Drawing.Point(31, 54);
-            this.dgv_projects.Name = "dgv_projects";
-            this.dgv_projects.Size = new System.Drawing.Size(751, 111);
-            this.dgv_projects.TabIndex = 0;
-            this.dgv_projects.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_projects_RowHeaderMouseClick);
+            this.dgv_Deatails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Deatails.Location = new System.Drawing.Point(24, 54);
+            this.dgv_Deatails.Name = "dgv_Deatails";
+            this.dgv_Deatails.Size = new System.Drawing.Size(758, 363);
+            this.dgv_Deatails.TabIndex = 0;
+            this.dgv_Deatails.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_projects_RowHeaderMouseClick);
             // 
-            // label1
+            // lbl_click
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label1.Location = new System.Drawing.Point(40, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(146, 26);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "you\'r projects:";
+            this.lbl_click.AutoSize = true;
+            this.lbl_click.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lbl_click.Location = new System.Drawing.Point(21, 35);
+            this.lbl_click.Name = "lbl_click";
+            this.lbl_click.Size = new System.Drawing.Size(0, 16);
+            this.lbl_click.TabIndex = 4;
             // 
-            // label2
+            // menuStrip1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label2.Location = new System.Drawing.Point(30, 177);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(146, 26);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "you\'r workers:";
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.projectsToolStripMenuItem,
+            this.workersToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // dgv_workers
+            // projectsToolStripMenuItem
             // 
-            this.dgv_workers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_workers.Location = new System.Drawing.Point(31, 206);
-            this.dgv_workers.Name = "dgv_workers";
-            this.dgv_workers.Size = new System.Drawing.Size(751, 111);
-            this.dgv_workers.TabIndex = 2;
-            this.dgv_workers.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_workers_RowHeaderMouseClick);
+            this.projectsToolStripMenuItem.Name = "projectsToolStripMenuItem";
+            this.projectsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.projectsToolStripMenuItem.Text = "projects";
+            this.projectsToolStripMenuItem.Click += new System.EventHandler(this.projectsToolStripMenuItem_Click);
             // 
-            // label3
+            // workersToolStripMenuItem
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label3.Location = new System.Drawing.Point(192, 31);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(178, 16);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "click project to show deatails";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label4.Location = new System.Drawing.Point(182, 184);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(177, 16);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "click worker to show deatails";
+            this.workersToolStripMenuItem.Name = "workersToolStripMenuItem";
+            this.workersToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.workersToolStripMenuItem.Text = "workers";
+            this.workersToolStripMenuItem.Click += new System.EventHandler(this.workersToolStripMenuItem_Click);
             // 
             // TeamLeaderHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.dgv_workers);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.dgv_projects);
+            this.Controls.Add(this.lbl_click);
+            this.Controls.Add(this.dgv_Deatails);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "TeamLeaderHome";
             this.Text = "TeamLeaderHome";
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_projects)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_workers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Deatails)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -118,11 +101,10 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgv_projects;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dgv_workers;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridView dgv_Deatails;
+        private System.Windows.Forms.Label lbl_click;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem projectsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem workersToolStripMenuItem;
     }
 }

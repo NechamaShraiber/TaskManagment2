@@ -19,7 +19,7 @@ namespace TaskManagment.Forms
             InitializeComponent();
             this.Text = Global.CurrentWorker.Name;
             getProject();
-            getWorkers();
+           // getWorkers();
 
         }
         
@@ -28,6 +28,7 @@ namespace TaskManagment.Forms
         /// </summary>
         private void getWorkers()
         {
+            lbl_click.Text = "click on worker to show deatails";
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(Global.path);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -36,16 +37,19 @@ namespace TaskManagment.Forms
             {
                 var result = response.Content.ReadAsStringAsync().Result;
                 workerList = JsonConvert.DeserializeObject<List<Worker>>(result);
-
-                dgv_workers.DataSource = workerList;
-                dgv_workers.Columns["Id"].Visible = false;
-                dgv_workers.Columns["ManagerId"].Visible = false;
-                dgv_workers.Columns[3].HeaderText = "Job";
+                dgv_Deatails.DataSource = workerList;
+                dgv_Deatails.Columns["Id"].Visible = false;
+                dgv_Deatails.Columns["ManagerId"].Visible = false;
+                dgv_Deatails.Columns[3].HeaderText = "Job";
                 for (int i = 0; i < workerList.Count; i++)
                 {
-                   dgv_workers.Rows[i].Cells[3].Value = Global.jobs.Find(j => j.Id == (int)dgv_workers.Rows[i].Cells[4].Value).Name;
+                   dgv_Deatails.Rows[i].Cells[3].Value = Global.jobs.Find(j => j.Id == (int)dgv_Deatails.Rows[i].Cells[4].Value).Name;
                 }
-                dgv_workers.Columns["JobId"].Visible = false;
+                dgv_Deatails.Columns["JobId"].Visible = false;
+                dgv_Deatails.RowHeaderMouseClick -= dgv_projects_RowHeaderMouseClick;
+                dgv_Deatails.RowHeaderMouseClick -= dgv_Deatails_RowHeaderMouseClick;
+                dgv_Deatails.RowHeaderMouseClick += dgv_Deatails_RowHeaderMouseClick;
+
             }
             else
             {
@@ -58,6 +62,7 @@ namespace TaskManagment.Forms
         /// </summary>
         private void getProject()
         {
+            lbl_click.Text = "click on project to show deatails";
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(Global.path);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -66,9 +71,12 @@ namespace TaskManagment.Forms
             {
                 var result = response.Content.ReadAsStringAsync().Result;
                 projectList = JsonConvert.DeserializeObject<List<Project>>(result);
-                dgv_projects.DataSource = projectList;
-                dgv_projects.Columns["Id"].Visible = false;
-                dgv_projects.Columns["TeamLeaderId"].Visible = false;
+                dgv_Deatails.DataSource = projectList;
+                dgv_Deatails.Columns["Id"].Visible = false;
+                dgv_Deatails.Columns["TeamLeaderId"].Visible = false;
+                dgv_Deatails.RowHeaderMouseClick -= dgv_Deatails_RowHeaderMouseClick;
+                dgv_Deatails.RowHeaderMouseClick -= dgv_projects_RowHeaderMouseClick;
+                dgv_Deatails.RowHeaderMouseClick += dgv_projects_RowHeaderMouseClick;
             }
             else
             {
@@ -83,13 +91,22 @@ namespace TaskManagment.Forms
             p.Show();
         }
 
-        private void dgv_workers_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void dgv_Deatails_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             TeamLeaderWorkers w = new TeamLeaderWorkers(workerList[e.RowIndex]);
             w.Show();
         }
 
-        
+        private void projectsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            getProject();
+        }
+
+        private void workersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            getWorkers();
+        }
     }
 
 

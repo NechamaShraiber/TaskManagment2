@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using TaskManagment.Models;
 
@@ -27,7 +28,7 @@ namespace TaskManagment.Forms
             InitializeComponent();
             AddProject();
             //tab_manager.Controls.Remove(tab_workerDeatrails);
-            getAllWorkers();
+           // getAllWorkers();
             currentPanel = pnl_add_project;
             currentPanel.Visible = true;
         }
@@ -50,7 +51,6 @@ namespace TaskManagment.Forms
 
             }
         }
-
         void checkVaidationLength(int min, int max, TextBox textBox)
         {
             if (textBox.Text.Length < min || textBox.Text.Length > max)
@@ -68,6 +68,7 @@ namespace TaskManagment.Forms
         {
             if (!int.TryParse(textBox.Text, out int num))
                 errorProvider1.SetError(txt_QI_houers, $"must be number");
+            
             if (textBox.Text.Length == 0 || num < min)
                 errorProvider1.SetError(txt_QI_houers, $"must be greater than {min}");
             else
@@ -89,7 +90,9 @@ namespace TaskManagment.Forms
             data_start.CustomFormat = "yyyy-MM-dd";
             manager = Global.GetManagers();
             manager.ForEach(t => { txt_team_name.Items.Add(t.Name); });
+            getAllWorkers();
         }
+        #region validation
 
         public void checkValidProjName(object sender, EventArgs e)
         {
@@ -127,11 +130,27 @@ namespace TaskManagment.Forms
                     (txt_QI_houers.Text.Length != 0 && (Convert.ToInt32(txt_QI_houers.Text) > 0)) &&
                     (txt_developer_hours.Text.Length != 0 && (Convert.ToInt32(txt_developer_hours.Text) > 0)) &&
                     (txt_UIUX_hours.Text.Length != 0 && (Convert.ToInt32(txt_UIUX_hours.Text) > 0)) &&
-                    (txt_projName.Text.Length > 2 && txt_projName.Text.Length < 25))
+                    (txt_projName.Text.Length >= 2 && txt_projName.Text.Length < 25))
                 btn_addProject.Enabled = true;
             //else btn_add.Enabled = false;
         }
+        private void txt_QI_houers_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) == false)
+            {
+                e.Handled = true;
+            }
+            else
+                e.Handled = false;
 
+        }
+
+        private void data_start_ValueChanged(object sender, EventArgs e)
+        {
+
+            data_end.MinDate = (sender as DateTimePicker).Value;
+        }
+        #endregion
         public void addWorkersToProject(string name)
         {
 
@@ -218,31 +237,22 @@ namespace TaskManagment.Forms
         HttpClient httpClient = new HttpClient();
         private void btn_add_worker_Click(object sender, EventArgs e)
         {
-            //tab_manager.Controls.Add(tab_workerDeatrails);
-            //tab_manager.SelectedTab = tab_workerDeatrails;
+            getAllWorkers();
             WorkerDeatails(true, null);
-            //WorkerDeatails addWorker = new WorkerDeatails(true, null);
-            //addWorker.Show();
         }
 
         void GetAllWorker()
         {
             panelControlls.Controls.Clear();
             panelControlls.BorderStyle = BorderStyle.FixedSingle;
-
             ComboBox cb = new ComboBox() { Name = "cbWorkers" };
             cb.Items.AddRange(workerList.Select(w => w.UserName).ToArray());
             cb.Location = new Point(250, 50);
             panelControlls.Controls.Add(cb);
-        //    getAllWorkers();
-
-
         }
         private void btn_delete_Click(string s)
         {
             GetAllWorker();
-       //     btn_delete.Enabled = false;
-           // string s = (sender as Button).Text == "Delete worker" ? "delete" : "edit";
             Label l = new Label() { Text = $"Chooose worker to {s}:" };
             Label l2 = new Label() { Text = "X" };
             Button bt = new Button() { Text = s };
@@ -261,8 +271,6 @@ namespace TaskManagment.Forms
         {
             panelControlls.Controls.Clear();
             panelControlls.BorderStyle = BorderStyle.None;
-            //btn_delete.Enabled = true;
-            //btn_edit.Enabled = true;
         }
 
         void b_Click(object sender, EventArgs e)
@@ -293,9 +301,6 @@ namespace TaskManagment.Forms
                 l2_click(sender, e);
                 ShowPanel(pnl_add_worker);
                 WorkerDeatails(false, w1);
-                //MessageBox.Show("edit");
-                //WorkerDeatails add = new WorkerDeatails(false, w1);
-                //add.Show();
             }
 
         }
@@ -318,7 +323,6 @@ namespace TaskManagment.Forms
             cmb_manager.Items.Clear();
             cmb_manager.Items.AddRange(manager.Select(m => m.Name).ToArray());
             this.isAdd = isAdd;
-            //tab_workerDeatrails.Text = isAdd ? "Add worker" : "Edit worker";
             lblTitle.Text = isAdd ? "add worker" : "edit worker";
             btn_Action.Text = isAdd ? "Add" : "Edit ";
             this.w = w;
@@ -346,7 +350,7 @@ namespace TaskManagment.Forms
             txt_name.Text = w.Name;
             txt_email.Text = w.EMail;
             lblPassword.Text = "";
-            txt_password.BorderStyle = BorderStyle.None;
+            txt_password.Visible = false;
             txt_user_name.Text = w.UserName;
             cmb_job.SelectedItem = Global.jobs.Find(j => j.Id == w.JobId).Name;
             cmb_manager.SelectedItem = manager.FirstOrDefault(m => m.Id == w.ManagerId).Name;
@@ -378,6 +382,12 @@ namespace TaskManagment.Forms
         public void checkValidEmail(object sender, EventArgs e)
         {
             checkVaidationLength(2, 30, (sender as TextBox));
+            string strRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
+      @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
+      @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
+            Regex re = new Regex(strRegex);
+            if (!re.IsMatch((sender as TextBox).Text))
+                errorProvider1.SetError((sender as TextBox), $" email must be valid address");
             EbleButton();
         }
 
@@ -470,7 +480,7 @@ namespace TaskManagment.Forms
                     case 3:
                         {
                             //////////////////////////////////////////////////
-
+                            ShowPresences();
                             break;
 
 
@@ -483,6 +493,13 @@ namespace TaskManagment.Forms
             {
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
             }
+        }
+
+        private void ShowPresences()
+        {
+            dgv_presence.DataSource = presences;
+            treeView1.Visible = false;
+            dgv_presence.Visible = true;
         }
 
         private void SelectByWorkerName()
@@ -524,6 +541,8 @@ namespace TaskManagment.Forms
                     }
                 }
             }
+            treeView1.Visible = true;
+            dgv_presence.Visible = false;
         }
         private void SelectByProjectName()
         {
@@ -568,7 +587,8 @@ namespace TaskManagment.Forms
                 }
 
             }
-
+            treeView1.Visible = true;
+            dgv_presence.Visible = false;
 
 
         }
@@ -660,11 +680,6 @@ namespace TaskManagment.Forms
 
         }
 
-        private void add_project_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("addProject");
-        }
-
      
       
 
@@ -691,20 +706,28 @@ namespace TaskManagment.Forms
           
             ShowPanel(pnl_report);
         }
+        private void preToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GetPresences(3);
 
+            ShowPanel(pnl_report);
+        }
         private void addProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+           
             ShowPanel(pnl_add_project);
         }
 
         private void updateWorkerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            getAllWorkers();
             ShowPanel(pnl_delete);
             btn_delete_Click("edit");
         }
 
         private void deleteWorkerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            getAllWorkers();
             ShowPanel(pnl_delete);
             btn_delete_Click("delete");
         }
@@ -715,5 +738,7 @@ namespace TaskManagment.Forms
             ShowPanel(pnl_add_worker);
             WorkerDeatails(true, null);
         }
+
+      
     }
 }

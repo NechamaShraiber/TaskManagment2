@@ -63,15 +63,6 @@
             this.btn_addProject = new System.Windows.Forms.Button();
             this.pnl_report = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.pnl_delete = new System.Windows.Forms.Panel();
             this.panelControlls = new System.Windows.Forms.Panel();
@@ -90,7 +81,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.dgv_presence = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.pnl_add_project.SuspendLayout();
@@ -98,6 +89,7 @@
             this.pnl_report.SuspendLayout();
             this.pnl_delete.SuspendLayout();
             this.pnl_add_worker.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_presence)).BeginInit();
             this.SuspendLayout();
             // 
             // errorProvider1
@@ -121,6 +113,7 @@
             this.addProjectToolStripMenuItem.Name = "addProjectToolStripMenuItem";
             this.addProjectToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.addProjectToolStripMenuItem.Text = "Add project";
+            this.addProjectToolStripMenuItem.Click += new System.EventHandler(this.addProjectToolStripMenuItem_Click);
             // 
             // reportToolStripMenuItem
             // 
@@ -135,22 +128,23 @@
             // byWorkerToolStripMenuItem
             // 
             this.byWorkerToolStripMenuItem.Name = "byWorkerToolStripMenuItem";
-            this.byWorkerToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.byWorkerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.byWorkerToolStripMenuItem.Text = "by worker";
             this.byWorkerToolStripMenuItem.Click += new System.EventHandler(this.byWorkerToolStripMenuItem_Click);
             // 
             // byProjectToolStripMenuItem
             // 
             this.byProjectToolStripMenuItem.Name = "byProjectToolStripMenuItem";
-            this.byProjectToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.byProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.byProjectToolStripMenuItem.Text = "by project";
             this.byProjectToolStripMenuItem.Click += new System.EventHandler(this.byProjectToolStripMenuItem_Click);
             // 
             // preToolStripMenuItem
             // 
             this.preToolStripMenuItem.Name = "preToolStripMenuItem";
-            this.preToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.preToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.preToolStripMenuItem.Text = "presence";
+            this.preToolStripMenuItem.Click += new System.EventHandler(this.preToolStripMenuItem_Click);
             // 
             // userManagmentToolStripMenuItem
             // 
@@ -205,9 +199,9 @@
             this.pnl_add_project.Controls.Add(this.label9);
             this.pnl_add_project.Controls.Add(this.txt_projName);
             this.pnl_add_project.Controls.Add(this.btn_addProject);
-            this.pnl_add_project.Location = new System.Drawing.Point(12, 30);
+            this.pnl_add_project.Location = new System.Drawing.Point(21, 36);
             this.pnl_add_project.Name = "pnl_add_project";
-            this.pnl_add_project.Size = new System.Drawing.Size(1122, 523);
+            this.pnl_add_project.Size = new System.Drawing.Size(1113, 517);
             this.pnl_add_project.TabIndex = 5;
             this.pnl_add_project.Visible = false;
             // 
@@ -291,6 +285,7 @@
             this.data_start.Name = "data_start";
             this.data_start.Size = new System.Drawing.Size(200, 20);
             this.data_start.TabIndex = 34;
+            this.data_start.ValueChanged += new System.EventHandler(this.data_start_ValueChanged);
             // 
             // label5
             // 
@@ -308,6 +303,7 @@
             this.txt_UIUX_hours.Size = new System.Drawing.Size(100, 20);
             this.txt_UIUX_hours.TabIndex = 33;
             this.txt_UIUX_hours.TextChanged += new System.EventHandler(this.checkValidUIUXHours);
+            this.txt_UIUX_hours.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_QI_houers_KeyPress);
             // 
             // label6
             // 
@@ -325,6 +321,7 @@
             this.txt_developer_hours.Size = new System.Drawing.Size(100, 20);
             this.txt_developer_hours.TabIndex = 32;
             this.txt_developer_hours.TextChanged += new System.EventHandler(this.checkValidDeveloperHours);
+            this.txt_developer_hours.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_QI_houers_KeyPress);
             // 
             // label7
             // 
@@ -342,6 +339,7 @@
             this.txt_QI_houers.Size = new System.Drawing.Size(100, 20);
             this.txt_QI_houers.TabIndex = 31;
             this.txt_QI_houers.TextChanged += new System.EventHandler(this.checkValidQAHours);
+            this.txt_QI_houers.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_QI_houers_KeyPress);
             // 
             // label8
             // 
@@ -390,14 +388,14 @@
             // pnl_report
             // 
             this.pnl_report.BackColor = System.Drawing.SystemColors.Control;
+            this.pnl_report.Controls.Add(this.dgv_presence);
             this.pnl_report.Controls.Add(this.button1);
             this.pnl_report.Controls.Add(this.treeView1);
-            this.pnl_report.Location = new System.Drawing.Point(12, 27);
+            this.pnl_report.Location = new System.Drawing.Point(18, 39);
             this.pnl_report.Name = "pnl_report";
-            this.pnl_report.Size = new System.Drawing.Size(1125, 529);
+            this.pnl_report.Size = new System.Drawing.Size(1119, 517);
             this.pnl_report.TabIndex = 6;
             this.pnl_report.Visible = false;
-          
             // 
             // button1
             // 
@@ -417,14 +415,15 @@
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(1050, 424);
             this.treeView1.TabIndex = 2;
+            this.treeView1.Visible = false;
             // 
             // pnl_delete
             // 
             this.pnl_delete.BackColor = System.Drawing.SystemColors.Control;
             this.pnl_delete.Controls.Add(this.panelControlls);
-            this.pnl_delete.Location = new System.Drawing.Point(15, 33);
+            this.pnl_delete.Location = new System.Drawing.Point(34, 55);
             this.pnl_delete.Name = "pnl_delete";
-            this.pnl_delete.Size = new System.Drawing.Size(1116, 517);
+            this.pnl_delete.Size = new System.Drawing.Size(1097, 495);
             this.pnl_delete.TabIndex = 40;
             this.pnl_delete.Visible = false;
             // 
@@ -473,7 +472,7 @@
             this.txt_email.Name = "txt_email";
             this.txt_email.Size = new System.Drawing.Size(100, 20);
             this.txt_email.TabIndex = 61;
-            this.txt_email.TabIndexChanged += new System.EventHandler(this.checkValidEmail);
+            this.txt_email.TextChanged += new System.EventHandler(this.checkValidEmail);
             // 
             // txt_user_name
             // 
@@ -578,16 +577,25 @@
             this.lblTitle.Size = new System.Drawing.Size(0, 13);
             this.lblTitle.TabIndex = 52;
             // 
+            // dgv_presence
+            // 
+            this.dgv_presence.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_presence.Location = new System.Drawing.Point(32, 65);
+            this.dgv_presence.Name = "dgv_presence";
+            this.dgv_presence.Size = new System.Drawing.Size(1045, 421);
+            this.dgv_presence.TabIndex = 4;
+            this.dgv_presence.Visible = false;
+            // 
             // ManagerHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1149, 592);
+            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.pnl_report);
             this.Controls.Add(this.pnl_add_worker);
             this.Controls.Add(this.pnl_delete);
-            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnl_add_project);
-            this.Controls.Add(this.pnl_report);
             this.Name = "ManagerHome";
             this.Text = "Manager";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -600,6 +608,7 @@
             this.pnl_delete.ResumeLayout(false);
             this.pnl_add_worker.ResumeLayout(false);
             this.pnl_add_worker.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_presence)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -660,5 +669,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button btnExportToExecl;
+        private System.Windows.Forms.DataGridView dgv_presence;
     }
 }
