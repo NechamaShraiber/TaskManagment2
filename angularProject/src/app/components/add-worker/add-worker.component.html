@@ -25,10 +25,10 @@
       </div>
       <div class="dates">
       <div>
-          <select formControlName="JobId" (change)="manag()" selected>
+          <select formControlName="JobId" (change)="manag()" [value]="job">
               <!-- <option selected >{{job}}</option> -->
-              <option *ngFor="let job of jobList" [ngValue]="job.id">
-                {{job["Name"]}}
+              <option *ngFor="let job1 of jobList">
+                {{job1["Name"]}}
               </option>
             </select>
         <label>choose job type </label>
@@ -37,19 +37,19 @@
         </div> 
       </div>
       <div class="group">
-        <input id="EMail" class="inputMaterial" formControlName="EMail">
+        <input type="email" id="EMail" class="inputMaterial" formControlName="EMail" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
         <label >E-mail</label>
          <div *ngIf="addWorkerGroup.controls['EMail']&&addWorkerGroup.controls['EMail'].errors&&addWorkerGroup.controls['EMail'].touched">
-          <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['EMail'].errors)" class="myAlert">{{err}}</p>
+          <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['EMail'].errors)" class="myAlert">The e-mail adress is not in a correct syntax</p>
         </div> 
       </div>
 
 
       <div class="group">
-          <select formControlName="ManagerId">
-              <option value="0" selected disabled>{{manager}}</option>
-              <option *ngFor="let manager of managerList" [ngValue]="manager">
-                {{manager["Name"]}}
+          <select formControlName="ManagerId" [value]="manager">
+              <!-- <option value="0" selected disabled>{{manager}}</option> -->
+              <option *ngFor="let manager1 of managerList">
+                {{manager1["Name"]}}
               </option>
             </select>
         <label> choose manager  </label>

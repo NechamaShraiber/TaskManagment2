@@ -18,19 +18,19 @@ export class AddWorkerComponent implements OnInit {
   managerList: any[] = [];
   jobList: Job[] = [];
   idManager: number;
-  idJob: any;
-  manager: string;
-  job: string;
+  manager: any;
+  //jobForEdit: Job; 
+  idJob:any;
+  job:any;
   selectUndefinedOptionValue: any;
   objectHolder: typeof Object = Object;
-
   constructor(private router: Router, private managerService: ManagerService, private globalService:GlobalService) {
 
     let formGroupConfig = {
       Name: new FormControl(managerService.workerToUpdate.Name?managerService.workerToUpdate.Name:" ", validate.createValidatorArr("Name", 2, 15)),
       UserName: new FormControl(managerService.workerToUpdate.UserName, validate.createValidatorArr("UserName", 2, 10)),
       Password: new FormControl("", validate.createValidatorArr("Password", 6, 10)),
-      JobId: new FormControl(this.jobList["Id"]),
+      JobId: new FormControl(this.job),
       EMail: new FormControl(managerService.workerToUpdate.EMail?managerService.workerToUpdate.EMail:" ", validate.createValidatorArr("EMail", 6, 30)),
       ManagerId: new FormControl(this.manager),
     };
@@ -40,35 +40,49 @@ export class AddWorkerComponent implements OnInit {
   ngOnInit() {
     this.globalService.getAllJobs().subscribe(
       res => {
-        console.log(res)
         this.jobList = res;
-        this.job = this.jobList.find(p => p.Id == this.managerService.workerToUpdate.JobId).Name;
-        alert(this.job);
+        this.job = this.jobList.find(p => p.Id == this.managerService.workerToUpdate["JobId"]).Name;
+        this.idJob = this.jobList.find(p => p.Id == this.managerService.workerToUpdate["JobId"]).Id;
+        this.managerService.getAllManagers().subscribe(res => {
+          this.managerList= [];
+           res.forEach(p => {
+               this.managerList.push(p);
+           });
+           this.manager = this.managerList.find(p=>p.Id== this.managerService.workerToUpdate["ManagerId"]).Name;
+           this.idManager = this.managerList.find(p=>p.Id== this.managerService.workerToUpdate["ManagerId"]).Id;
+         });
       });
   }
 
   manag() {
-    this.idJob = this.jobList.find(p => p.Id == this.addWorkerGroup.value["JobId"].Id);
+    this.idJob = this.jobList.find(p => p.Id == this.addWorkerGroup.value["JobId"]).Id;
+    // this.jobForEdit["Id"] = this.jobList.find(p => p.Name == this.addWorkerGroup.value["JobId"]).Id;
     this.managerService.getAllManagers().subscribe(
       res => {
        this.managerList= [];
         res.forEach(p => {
-          if (p.JobId < this.idJob["Id"]) {
+          if (p.JobId < this.idJob) {
             this.managerList.push(p);
           }
         });
       });
-    this.manager = this.managerList.find(p => p.Id == this.managerService.workerToUpdate.ManagerId).Name;
+      //this.job["Name"]=this.jobList.find(p=>p.Id==this.addWorkerGroup.value["JobId"].Name)
+    this.manager = this.managerList.find(p => p.Id == this.managerService.workerToUpdate["ManagerId"]).Name;
   }
 
   get f() { return this.addWorkerGroup.controls; }
 
   onSubmit() {
-    this.idManager = this.managerList.find(p => p.Id == this.addWorkerGroup.value["ManagerId"].Id);
-    this.addWorkerGroup.value["ManagerId"] = this.idManager["Id"];
-    // this.idJob = this.jobList.find(p => p.Id == this.addWorkerGroup.value["JobId"].Id);
-    this.addWorkerGroup.value["JobId"] = this.idJob["Id"];
+    // this.idManager = this.managerList.find(p => p.Id == this.addWorkerGroup.value["ManagerId"].Id);
+    
     if (this.managerService.isEdit == "Add") {
+
+      this.idManager =this.managerList.find(p=>p.Name==this.addWorkerGroup.value["ManagerId"]).Id; 
+    this.addWorkerGroup.value["ManagerId"] = this.idManager;
+    //  this.idJob = this.jobList.find(p => p.Id == this.addWorkerGroup.value["JobId"].Id);
+    this.idJob=this.jobList.find(p=>p.Name==this.addWorkerGroup.value["JobId"]).Id ;
+    this.addWorkerGroup.value["JobId"] = this.idJob;
+
       this.managerService.addWorker(this.addWorkerGroup.value)
         .subscribe(worker => {
           if (worker == null) {
@@ -82,7 +96,9 @@ export class AddWorkerComponent implements OnInit {
         })
     }
     else {
-      this.managerService.isEdit = "Add"
+     this.managerService.isEdit = "Add"
+     this.addWorkerGroup.value["ManagerId"]?this.addWorkerGroup.value["ManagerId"]=this.managerList.find(p=>p.Id== this.addWorkerGroup.value["ManagerId"]).Id:this.addWorkerGroup.value["ManagerId"] =this.idManager;
+     this.addWorkerGroup.value["JobId"]?this.addWorkerGroup.value["JobId"]=(this.jobList.find(p=>p.Id== this.addWorkerGroup.value.JobId).Id):this.addWorkerGroup.value["JobId"] =this.idJob;
       this.managerService.updateWorker(this.addWorkerGroup.value)
         .subscribe(worker => {
           if (worker == null) {

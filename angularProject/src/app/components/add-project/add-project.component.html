@@ -2,23 +2,23 @@
   <form class="login-container" [formGroup]="addProjectGroup" (ngSubmit)="onSubmit()">
     <div class="details">
     <div class="group">
-      <!-- <input id="Name" class="inputMaterial" formControlName="Name"> -->
-      <mat-form-field class="example-full-width">
+      <input id="Name" class="inputMaterial" formControlName="Name">
+      <!-- <mat-form-field class="example-full-width">
           <input matInput formControlName="Name" #message maxlength="15" minlength="2" placeholder="Project Name">
           <mat-hint align="end">{{message.value.length}} / 15</mat-hint>
-        </mat-form-field>
-      <!-- <label>Project Name</label> -->
+        </mat-form-field> -->
+      <label>Project Name</label>
       <div *ngIf="Name&&addProjectGroup.controls['Name'].errors&& Name.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['Name'].errors)" class="myAlert">{{err}}</p>
       </div>
     </div>
     <div class="group">
-      <!-- <input id="Customer" class="inputMaterial" formControlName="Customer"> -->
-      <!-- <label>Customer Name</label> -->
-      <mat-form-field class="example-full-width">
+      <input id="Customer" class="inputMaterial" formControlName="Customer">
+      <label>Customer Name</label>
+      <!-- <mat-form-field class="example-full-width">
           <input matInput formControlName="Customer" #message1 maxlength="10" minlength="2" placeholder="Customer Name">
           <mat-hint align="end">{{message1.value.length}} / 10</mat-hint>
-        </mat-form-field>
+        </mat-form-field> -->
       <div *ngIf="Customer&&addProjectGroup.controls['Customer'].errors&& Customer.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['Customer'].errors)" class="myAlert">{{err}}</p>
       </div>
@@ -40,41 +40,42 @@
         </option>
       </select>
       <label>Team Leader</label> 
-      <!-- <div *ngIf="addProjectGroup.controls['TeamLeaderId'].errors">
+       <!-- <div *ngIf="addProjectGroup.controls['TeamLeaderId'].errors">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['TeamLeaderId'].errors)" class="myAlert">{{err}}</p>
-      </div> 
+      </div>  -->
     </div>
   </div>
+
     <div class="hours">
     <div class="group">
-      <!-- <input type="number" min="0" id="DevelopHours" class="inputMaterial" formControlName="DevelopHours">
-      <label>Develop Houres</label> -->
+     <input type="number" min="0" id="DevelopHours" class="inputMaterial" formControlName="DevelopHours">
+      <label>Develop Houres</label>
 
-      <mat-form-field>
+      <!-- <mat-form-field>
           <input matInput type="number" placeholder="Develop Houres" formControlName="DevelopHours" min="0">
-        </mat-form-field>
+        </mat-form-field> -->
       <div *ngIf="DevelopHours&&addProjectGroup.controls['DevelopHours'].errors&& DevelopHours.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['DevelopHours'].errors)" class="myAlert">{{err}}</p>
       </div>
     </div>
     <div class="group">
-      <!-- <input type="number" min="0" id="QAHours" class="inputMaterial" formControlName="QAHours">
-      <label>QA Houres</label> -->
+      <input type="number" min="0" id="QAHours" class="inputMaterial" formControlName="QAHours">
+      <label>QA Houres</label>
       
-      <mat-form-field>
+      <!-- <mat-form-field>
           <input matInput type="number" placeholder="QA Houres" formControlName="QAHours" min="0">
-        </mat-form-field>
+        </mat-form-field> -->
       <div *ngIf="QAHours&&addProjectGroup.controls['QAHours'].errors&& QAHours.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['QAHours'].errors)" class="myAlert">{{err}}</p>
       </div>
     </div>
     <div class="group">
-      <!-- <input type="number" min="0" id="UiUxHours" class="inputMaterial" formControlName="UiUxHours">
-      <label>UI/UX Houres</label> -->
+      <input type="number" min="0" id="UiUxHours" class="inputMaterial" formControlName="UiUxHours">
+      <label>UI/UX Houres</label>
       
-      <mat-form-field>
+      <!-- <mat-form-field>
           <input matInput type="number" placeholder="UI/UX Houres" formControlName="UiUxHours" min="0">
-        </mat-form-field>
+        </mat-form-field> -->
       <div *ngIf="UiUxHours&&addProjectGroup.controls['UiUxHours'].errors&& UiUxHours.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['UiUxHours'].errors)" class="myAlert">{{err}}</p>
       </div>
@@ -83,7 +84,7 @@
 <div class="dates">
   <div>
     <mat-form-field>
-        <input formControlName="StartDate" ngDefaultControl matInput [min]="minStartDate" [matDatepicker]="picker1" placeholder="Start Date">
+        <input formControlName="StartDate" ngDefaultControl matInput [min]="minStartDate" [matDatepicker]="picker1" placeholder="Start Date" (dateChange)="changedate($event)">
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
