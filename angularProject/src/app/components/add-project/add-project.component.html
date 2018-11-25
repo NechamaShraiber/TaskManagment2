@@ -25,24 +25,24 @@
     </div>
     <div class="group">
 
-        <mat-form-field>
-            <mat-select formControlName="TeamLeaderId" placeholder="Team Leader" [(ngModel)]="selectedValue" name="food" (change)="onChange($event.target.value)">
+        <!-- <mat-form-field>
+            <mat-select formControlName="TeamLeaderId" placeholder="Team Leader" (change)="onChange($event.target.value)">
               <mat-option *ngFor="let team of teamLeader" [value]="team.Id">
                   {{team.Name}}
               </mat-option>
             </mat-select>
-          </mat-form-field>
+          </mat-form-field>  -->
 
-<!-- 
+ 
       <select formControlName="TeamLeaderId" (change)="onChange($event.target.value)">
         <option *ngFor="let team of teamLeader" [ngValue]="team.Id">
           {{team.Name}}
         </option>
       </select>
-      <label>Team Leader</label> -->
+      <label>Team Leader</label> 
       <!-- <div *ngIf="addProjectGroup.controls['TeamLeaderId'].errors">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['TeamLeaderId'].errors)" class="myAlert">{{err}}</p>
-      </div>  -->
+      </div> 
     </div>
   </div>
     <div class="hours">
@@ -73,7 +73,7 @@
       <label>UI/UX Houres</label> -->
       
       <mat-form-field>
-          <input matInput type="number" placeholder=">UI/UX Houres" formControlName="UiUxHours" min="0">
+          <input matInput type="number" placeholder="UI/UX Houres" formControlName="UiUxHours" min="0">
         </mat-form-field>
       <div *ngIf="UiUxHours&&addProjectGroup.controls['UiUxHours'].errors&& UiUxHours.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['UiUxHours'].errors)" class="myAlert">{{err}}</p>
@@ -103,37 +103,37 @@
   </div>
 </div>
 <div class="addWorkers">
-  <!-- <p>select workers to add:</p>
+   <p>select workers to add:</p>
   <select (change)="addWorker($event.target.value)">
     <option></option>
     <option *ngFor="let worker of workersToSelect" [ngValue]="worker.Id">
       {{worker.Name}}
     </option>
-  </select> -->
-
+  </select> 
+<!-- 
   <mat-form-field>
       <mat-select placeholder="select workers to add:" name="worker" (change)="addWorker($event.target.value)">
         <mat-option *ngFor="let worker of workersToSelect" [value]="worker.Id">
             {{worker.Name}}
           </mat-option>
       </mat-select>
-    </mat-form-field>
+    </mat-form-field> -->
 
-  <!-- <p>select workers to remove:</p>
+   <p>select workers to remove:</p>
   <select (change)="removeWorker($event.target.value)">
     <option></option>
     <option *ngFor="let worker of workersToAdd" [ngValue]="worker.Id">
       {{worker.Name}}
     </option>
-  </select> -->
+  </select>
 
-  <mat-form-field>
+  <!-- <mat-form-field>
       <mat-select placeholder="select workers to remove:" name="worker1" (change)="removeWorker($event.target.value)">
         <mat-option *ngFor="let worker of workersToAdd" [value]="worker.Id">
             {{worker.Name}}
           </mat-option>
       </mat-select>
-    </mat-form-field>
+    </mat-form-field> -->
 
 </div>
 

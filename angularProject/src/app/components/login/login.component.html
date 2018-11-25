@@ -19,7 +19,7 @@
         <p *ngFor="let err of objectHolder.values(password.errors)" class="myAlert">{{err}}</p>
       </div>
      <p *ngIf="!isExistUser" class="myAlert">user name or password is not correct</p>
-    <p><input type="submit" value="Log in" [disabled]="loginFormGroup.invalid||isExistUser==false"></p>
+    <p><input type="submit" value="Log in" [disabled]="loginFormGroup.invalid"></p>
     <a (click)="changePassword()">change password</a>
   </form>
 </div>

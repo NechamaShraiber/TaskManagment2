@@ -18,3 +18,15 @@
   background-color: #bec6e47a;
   border: 2px solid #8d919c;
 }
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }

@@ -75,6 +75,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tab_manager.SuspendLayout();
             this.tab_addProject.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAddWorkers)).BeginInit();
@@ -537,6 +538,11 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // ManagerHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -605,5 +611,6 @@
         private System.Windows.Forms.TextBox txt_password;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

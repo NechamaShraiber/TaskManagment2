@@ -30,7 +30,7 @@ import 'hammerjs';
 import { WorkerChartComponent } from './components/worker-chart/worker-chart.component';
 import {MatButtonModule, MatCheckboxModule, MatNativeDateModule,MatTreeModule,MatIconModule} from '@angular/material';
 import 'hammerjs';
-import {MatDatepickerModule,MatFormFieldModule,MatInputModule,MatSelectModule} from '@angular/material';
+import {MatDatepickerModule,MatFormFieldModule,MatInputModule,MatSelectModule,MatTableModule,MatPaginatorModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 
@@ -43,7 +43,7 @@ const routes: Routes = [
     path: 'taskManagers/home', component: HomeComponent, children: [
       { path: 'addProject', component: AddProjectComponent, canActivate: [AuthGuard] },
       { path: 'Addworker', component: AddWorkerComponent, canActivate: [AuthGuard] },
-      { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
+      { path: 'reports/:id', component: ReportsComponent  },
       { path: 'teamLeaderProjects', component: TeamLeaderProjectComponent, canActivate: [AuthGuard] },
       { path: 'teamLeaderWorkers', component: TeamLeaderWorkersComponent, canActivate: [AuthGuard] },
       { path: 'teamLeaderWorkers', component: TeamLeaderWorkersComponent, canActivate: [AuthGuard] },
@@ -95,7 +95,7 @@ const routes: Routes = [
     [MatButtonModule, MatCheckboxModule],
     MatDatepickerModule,
     MatFormFieldModule,
-    MatInputModule,MatNativeDateModule,BrowserAnimationsModule,MatTreeModule,MatIconModule,MatSelectModule,
+    MatInputModule,MatNativeDateModule,BrowserAnimationsModule,MatTreeModule,MatIconModule,MatSelectModule,MatTableModule,MatPaginatorModule
   
   ],
   entryComponents: [
