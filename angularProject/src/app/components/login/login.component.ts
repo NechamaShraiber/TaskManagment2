@@ -30,6 +30,10 @@ export class LoginComponent {
       userName: ['', validate.createValidatorArr("userName", 2, 10)],
       password: ['', validate.createValidatorArr("password", 6, 10)],
     });
+    if(localStorage.getItem('currentUser')!=null)
+    {
+      this.router.navigate(['taskManagers/home']);
+    }
   }
 
   //----------------METHODS-------------------

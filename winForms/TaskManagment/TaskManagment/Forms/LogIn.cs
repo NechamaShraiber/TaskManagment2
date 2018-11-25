@@ -1,8 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 using TaskManagment.Forms;
 using TaskManagment.Models;
 
@@ -10,6 +13,7 @@ namespace TaskManagment
 {
     public partial class LogIn : Form
     {
+
         public LogIn()
         {
             InitializeComponent();
@@ -17,6 +21,16 @@ namespace TaskManagment
             txt_password.PasswordChar = '*';
             txtNewPassword.PasswordChar = '*';
             txtConfirmPassword.PasswordChar = '*';
+            var doc = XDocument.Load("user.xml");
+            //foreach (var u in doc.Descendants("userName"))
+            //{
+            //    txt_userName.Text = u.Value;
+            //}
+            //foreach (var u in doc.Descendants("password"))
+            //{
+            //    txt_password.Text = "******";
+
+            //}
         }
 
         #region validations
@@ -29,17 +43,19 @@ namespace TaskManagment
             btnChange.Enabled = Global.checkVaidationLength(6, 10, txtNewPassword) &&
                 Global.checkVaidationLength(6, 10, txtConfirmPassword) &&
              btn_logIn.Enabled;
-            if (txtConfirmPassword.Text!=txtNewPassword.Text)
+            if (txtConfirmPassword.Text != txtNewPassword.Text)
             {
                 errorProvider1.SetError(txtConfirmPassword, "confirm password must be same new password");
                 btnChange.Enabled = false;
             }
 
         }
-        
+
         #endregion
         private void btn_logIn_Click(object sender, EventArgs e)
         {
+
+
             try
             {
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(Global.path + "login");
@@ -64,6 +80,12 @@ namespace TaskManagment
                     {
                         var result = streamReader.ReadToEnd();
                         Global.CurrentWorker = JsonConvert.DeserializeObject<Worker>(result);
+                        new XDocument(
+   new XElement("CurrentWorker",
+     Global.CurrentWorker)
+
+)
+.Save("user.xml");
                         switch (Global.CurrentWorker.JobId)
                         {
                             case 1:
@@ -85,7 +107,7 @@ namespace TaskManagment
                                     WorkerHome worker = new WorkerHome();
                                     worker.Show();
                                     break;
-                                } 
+                                }
                         }
                     }
                 }
@@ -94,33 +116,36 @@ namespace TaskManagment
                     lbl_bad_request.Text = "One or more of the data is incorrect";
                 }
             }
-            catch(Exception exe)
+            catch (Exception exe)
             {
                 lbl_bad_request.Text = "The service is not connected";
             }
         }
 
-       
+        public void OpenCurrectPage()
+        {
+
+        }
 
 
 
-       
+
         /// <summary>
         /// change controls from login to change password
         /// </summary>
         /// <param name="b"></param>
-       void changeControls(bool b)
+        void changeControls(bool b)
         {
-            lblPassword.Text = b?"oldPassword":"password";
-            lblConfirmPassword.Visible =b;
+            lblPassword.Text = b ? "oldPassword" : "password";
+            lblConfirmPassword.Visible = b;
             lblNewPassword.Visible = b;
             txtNewPassword.Visible = b;
             txtConfirmPassword.Visible = b;
             btn_logIn.Visible = !b;
             btnChange.Visible = b;
-            lbl_closeChangePasswod.Visible=b;
+            lbl_closeChangePasswod.Visible = b;
         }
-     
+
         /// <summary>
         /// change password
         /// </summary>
@@ -128,17 +153,17 @@ namespace TaskManagment
         /// <param name="e"></param>
         private void btnChange_Click(object sender, EventArgs e)
         {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(Global.path +"updatePassword");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(Global.path + "updatePassword");
             httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method =  "POST";
+            httpWebRequest.Method = "POST";
 
 
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 string json = "{\"userName\":\"" + txt_userName.Text + "\"," +
-                       "\"oldpassword\":\"" +Global.sha256(txt_password.Text) +  "\"," +
+                       "\"oldpassword\":\"" + Global.sha256(txt_password.Text) + "\"," +
                        "\"newPassord\":\"" + Global.sha256(txtNewPassword.Text) + "\"}";
-        streamWriter.Write(json);
+                streamWriter.Write(json);
                 streamWriter.Flush();
                 streamWriter.Close();
             }
@@ -177,7 +202,7 @@ namespace TaskManagment
 
         }
     }
-   
+
 }
 
 

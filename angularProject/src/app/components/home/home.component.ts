@@ -6,6 +6,7 @@ import { ManagerService } from '../../shared/service/manager.service';
 import { DialogService } from '../../../../node_modules/ng2-bootstrap-modal';
 import { DeleteWorkerComponent } from '../delete-worker/delete-worker.component';
 import { EditWorkerComponent } from '../edit-worker/edit-worker.component';
+import { GlobalService } from '../../shared/service/global.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,7 +14,8 @@ import { EditWorkerComponent } from '../edit-worker/edit-worker.component';
 })
 export class HomeComponent implements OnInit {
   currentWorker: Worker
-  constructor(private workerService:WorkerService,private dialogService: DialogService, private managerService: ManagerService,private router:Router) {
+  constructor(private workerService:WorkerService,private dialogService: DialogService, private managerService: ManagerService,
+    private router:Router, private globalService:GlobalService) {
   }
   //id: number
   ngOnInit() {
@@ -70,6 +72,8 @@ export class HomeComponent implements OnInit {
     this.managerService.isEdit="Add";
           this.router.navigate(['taskManagers/home/Addworker']);
   }
-
+  logOut(){
+    this.globalService.logOut();
+  }
 }
 
