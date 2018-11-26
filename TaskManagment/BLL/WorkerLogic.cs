@@ -35,14 +35,14 @@ namespace BLL
        
         public static bool SendMsg(string sub, string body,int id)
         {
-            string query = $"SELECT email FROM task_managment.workers where job = {id}" ;
+            string query = $"SELECT email FROM task_managment.workers where worker_id = {id}" ;
            string email=(string) DBAccess.RunScalar(query);
             return HomeLogic.sendEmail(sub, body, email);
           
         }
 
 
-        public static List<Worker> GetWorkerDetails(int id)
+        public static Worker GetWorkerDetails(int id)
         {
             string query = $"SELECT * FROM task_managment.workers WHERE worker_id={id}";
             Func<MySqlDataReader, List<Worker>> func = (reader) =>
@@ -63,7 +63,10 @@ namespace BLL
                 }
                 return workers;
             };
-            return DBAccess.RunReader(query, func);
+            List<Worker> workers2 = DBAccess.RunReader(query, func);
+            if (workers2 != null && workers2.Count > 0)
+                return workers2[0];
+            return null;
         }
         public static List<object> GetProject(int id)
         {

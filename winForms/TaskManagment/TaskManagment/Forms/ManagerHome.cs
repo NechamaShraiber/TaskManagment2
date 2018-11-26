@@ -619,5 +619,10 @@ namespace TaskManagment.Forms
         {
 
         }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Global.LogOut();
+        }
     }
 }

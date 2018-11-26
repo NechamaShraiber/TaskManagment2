@@ -3,6 +3,8 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
@@ -21,16 +23,23 @@ namespace TaskManagment
             txt_password.PasswordChar = '*';
             txtNewPassword.PasswordChar = '*';
             txtConfirmPassword.PasswordChar = '*';
+            try { 
             var doc = XDocument.Load("user.xml");
-            //foreach (var u in doc.Descendants("userName"))
-            //{
-            //    txt_userName.Text = u.Value;
-            //}
-            //foreach (var u in doc.Descendants("password"))
-            //{
-            //    txt_password.Text = "******";
-
-            //}
+            foreach (var u in doc.Descendants("CurrentWorker"))
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(Global.path);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage response = client.GetAsync($"getWorkerDetails/{u.Value}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = response.Content.ReadAsStringAsync().Result;
+                    Global.CurrentWorker = JsonConvert.DeserializeObject<Worker>(result);
+                    OpenCurrectPage();
+                }
+            }
+           }
+            catch { }
         }
 
         #region validations
@@ -55,7 +64,7 @@ namespace TaskManagment
         private void btn_logIn_Click(object sender, EventArgs e)
         {
 
-
+           
             try
             {
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(Global.path + "login");
@@ -81,34 +90,13 @@ namespace TaskManagment
                         var result = streamReader.ReadToEnd();
                         Global.CurrentWorker = JsonConvert.DeserializeObject<Worker>(result);
                         new XDocument(
-   new XElement("CurrentWorker",
-     Global.CurrentWorker)
-
+    new XElement("root",
+        new XElement("CurrentWorker", Global.CurrentWorker.Id)
+    )
 )
 .Save("user.xml");
-                        switch (Global.CurrentWorker.JobId)
-                        {
-                            case 1:
-                                {
-                                    ManagerHome managerHome = new ManagerHome();
-                                    managerHome.Show();
-                                    break;
-                                }
-
-                            case 2:
-                                {
-                                    TeamLeaderHome teamLeader = new TeamLeaderHome();
-                                    teamLeader.Show();
-                                    break;
-                                }
-
-                            default:
-                                {
-                                    WorkerHome worker = new WorkerHome();
-                                    worker.Show();
-                                    break;
-                                }
-                        }
+                        //  new XDocument(new XElement("CurrentWorker",Global.CurrentWorker.Id)).Save("user.xml");
+                        OpenCurrectPage();
                     }
                 }
                 catch (WebException ex)
@@ -124,7 +112,29 @@ namespace TaskManagment
 
         public void OpenCurrectPage()
         {
+            switch (Global.CurrentWorker.JobId)
+            {
+                case 1:
+                    {
+                        ManagerHome managerHome = new ManagerHome();
+                        managerHome.Show();
+                        break;
+                    }
 
+                case 2:
+                    {
+                        TeamLeaderHome teamLeader = new TeamLeaderHome();
+                        teamLeader.Show();
+                        break;
+                    }
+
+                default:
+                    {
+                        WorkerHome worker = new WorkerHome();
+                        worker.Show();
+                        break;
+                    }
+            }
         }
 
 

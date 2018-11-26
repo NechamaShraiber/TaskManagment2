@@ -46,6 +46,7 @@
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lbl_message = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.btn_logOut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_task)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
@@ -172,11 +173,22 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "choose project to start:";
             // 
+            // btn_logOut
+            // 
+            this.btn_logOut.Location = new System.Drawing.Point(562, 411);
+            this.btn_logOut.Name = "btn_logOut";
+            this.btn_logOut.Size = new System.Drawing.Size(183, 38);
+            this.btn_logOut.TabIndex = 8;
+            this.btn_logOut.Text = "Log Out";
+            this.btn_logOut.UseVisualStyleBackColor = true;
+            this.btn_logOut.Click += new System.EventHandler(this.btn_logOut_Click);
+            // 
             // WorkerHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_logOut);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lbl_message);
             this.Controls.Add(this.chart1);
@@ -214,5 +226,6 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Label lbl_message;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btn_logOut;
     }
 }

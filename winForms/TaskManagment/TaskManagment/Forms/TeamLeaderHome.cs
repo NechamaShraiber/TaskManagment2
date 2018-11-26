@@ -108,7 +108,10 @@ namespace TaskManagment.Forms
             getWorkers();
         }
 
-       
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Global.LogOut();
+        }
     }
 
 

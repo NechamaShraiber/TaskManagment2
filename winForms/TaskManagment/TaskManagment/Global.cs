@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -117,6 +118,26 @@ namespace TaskManagment
 
         }
         #endregion
+        public static void LogOut()
+        {
+            File.Delete("user.xml");
+            CurrentWorker = null;
+            List<Form> openForms = new List<Form>();
+
+            foreach (Form f in Application.OpenForms)
+                openForms.Add(f);
+
+            foreach (Form f in openForms)
+            {
+                if (f.Name != "LogIn")
+                    f.Close();
+                else
+                {
+                    f.Controls["txt_userName"].Text = "";
+f.Controls["txt_password"].Text = "";
+                }
+            }
+        }
     }
 
 }
