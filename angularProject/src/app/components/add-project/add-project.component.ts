@@ -5,9 +5,6 @@ import { ManagerService } from '../../shared/service/manager.service';
 import { validate } from '../../shared/validate';
 import { Worker } from '../../shared/models/worker';
 import 'hammerjs';
-import { MatDatepickerInputEvent } from '../../../../node_modules/@angular/material';
-// @Output()
-//   dateChange(): EventEmitter<MatDatepickerInputEvent<D>>
 @Component({
   selector: 'app-add-project',
   templateUrl: './add-project.component.html',
@@ -26,6 +23,7 @@ export class AddProjectComponent implements OnInit {
   workers: Worker[];
   workersToSelect: Worker[];
   workersToAdd: Worker[] = [];
+
   constructor(private router: Router, private managerService: ManagerService) {
     let formGroupConfig = {
       Name: new FormControl('', validate.createValidatorArr("Name", 2, 25)),
@@ -37,8 +35,10 @@ export class AddProjectComponent implements OnInit {
       StartDate: new FormControl('this.minStartDate',validate.createValidatorDate(this.addProjectGroup)),
       EndDate: new FormControl('this.minEndDate',validate.createValidatorDate(this.addProjectGroup)),
     };
+
     this.addProjectGroup = new FormGroup(formGroupConfig, validate.createValidatorDate);
   }
+
   ngOnInit() {
     this.managerService.getAllManagers().subscribe(
       res => {
@@ -48,6 +48,7 @@ export class AddProjectComponent implements OnInit {
           }
         });
       })
+      
     this.managerService.getAllWorkers().subscribe(
       res => {
         this.workers = res;
@@ -67,7 +68,6 @@ export class AddProjectComponent implements OnInit {
     this.managerService.addProject(this.addProjectGroup.value)
       .subscribe(project => {
         if (project == null) {
-          //   localStorage.setItem('currentProject', JSON.stringify(project));
           this.router.navigate(['taskManagers/home']);
        this.managerService.addWorkersToProject(this.workersToAdd,this.addProjectGroup.value["Name"]).subscribe(res=> { }) 
        alert("The project added succesfully");
@@ -76,9 +76,8 @@ export class AddProjectComponent implements OnInit {
           this.router.navigate(['taskManagers/login'])
         }
       });
-
-     
   }
+
   onChange(teamLeaderId) {
     this.workersToSelect = [];
     this.workers.forEach(
@@ -86,20 +85,15 @@ export class AddProjectComponent implements OnInit {
         if (w.ManagerId != teamLeaderId.slice(3, teamLeaderId.Length) && w.JobId > 2)
           this.workersToSelect.push(w);
       });
-
   }
+
   addWorker(worker) {
-    //console.log(this.workersToSelect);
-    //console.log(worker);
     var w = this.workersToSelect.find(w => w.Name == worker)
     this.workersToAdd.push(w);
     var index = this.workersToSelect.indexOf(w);
-    console.log(index);
     this.workersToSelect.splice(index, 1);
-    console.log(this.workersToSelect);
-
-
   }
+  
   removeWorker(worker) {
     var w = this.workersToAdd.find(w => w.Name == worker)
     this.workersToSelect.push(w);

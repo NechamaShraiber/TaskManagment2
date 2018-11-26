@@ -16,7 +16,6 @@ export interface ConfirmModel {
 export class ChangePasswordComponent extends DialogComponent<ConfirmModel, boolean> implements ConfirmModel {
   password: FormGroup;
   isExistUser: boolean = true;
-  //allow access 'Object' type via interpolation
   objectHolder: typeof Object = Object;
   title: string;
   //----------------CONSTRUCTOR------------------
@@ -28,9 +27,9 @@ export class ChangePasswordComponent extends DialogComponent<ConfirmModel, boole
       lastPass: ['', validate.createValidatorArr("lastPass", 6, 10)],
       newPass: ['', validate.createValidatorArr("newPass", 6, 10)],
       confirmPass: ['', validate.createValidatorArr("confirmPass", 6, 10)],
-
     });
   }
+  
   async confirm() {
     const lastPass = await sha256(this.lastPass.value);
     const newPass = await sha256(this.newPass.value);

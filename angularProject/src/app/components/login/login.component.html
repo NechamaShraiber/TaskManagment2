@@ -5,7 +5,6 @@
     <p>
         <input formControlName="userName" id="userName" name="user" placeholder="UserName" (keyup)="isExistUser = true">
         <label for="username" [ngClass]="{'label':true,'full':userName.value!=''}"></label>
-       
     </p>
      <div *ngIf="userName.errors&& userName.touched">
           <p *ngFor="let err of objectHolder.values(userName.errors)" class="myAlert">{{err}}</p>

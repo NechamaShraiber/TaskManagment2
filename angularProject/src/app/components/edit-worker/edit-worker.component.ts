@@ -19,10 +19,12 @@ export class EditWorkerComponent extends DialogComponent<ConfirmModel, boolean> 
   constructor(dialogService: DialogService,private managerService:ManagerService) {
     super(dialogService);
   }
+  
   confirm() {
     this.result= true;
     this.close();
   }
+
   ngOnInit(){
     this.managerService.getAllWorkers().subscribe(
       res=>{
@@ -30,6 +32,7 @@ export class EditWorkerComponent extends DialogComponent<ConfirmModel, boolean> 
         console.log(this.workerList);
     })
   }
+
   onChange(ev){
     this.managerService.workerToUpdate.Id=this.workerList.find(p=>p.UserName==ev).Id;
     this.managerService.workerToUpdate.Name=this.workerList.find(p=>p.UserName==ev).Name;

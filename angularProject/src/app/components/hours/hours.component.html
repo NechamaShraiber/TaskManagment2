@@ -1,18 +1,12 @@
 <div class="blog-card">
-    
   <div class="description">
      <div class="wrap"  > 
       <h1>{{hour.Name}}</h1>
-      
         <div *ngIf="isProject" class="circle" title="start the task"  (click)="updateHours()"  [ngClass]="isStart ? 'startColor' : 'stopColor'">
          <div  [ngClass]="isStart ? 'start' : 'stop'"></div> 
         </div>
-        
       </div>
       <hr>
-      <!-- <label>date:</label>
-      <label>{{hour.Date| date: 'dd/MM/yyyy '}}</label>
-      <br> -->
       <div class="row">
         <div [ngClass]="t ? 'col-md-6' : ''">
       <label>worked hours:</label>

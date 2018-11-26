@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component,  Input } from '@angular/core';
 import { Project } from '../../shared/models/project';
 import { DialogService } from '../../../../node_modules/ng2-bootstrap-modal';
 import { Router, NavigationExtras } from '../../../../node_modules/@angular/router';
@@ -10,15 +10,10 @@ import { ProjectDeatailsComponent } from '../project-deatails/project-deatails.c
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.css']
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent   {
   @Input() project:Project;
   constructor(private teamLeaderService: TeamLeaderService, private router: Router, private dialogService:DialogService) { }
 
-  ngOnInit() {
-    
-    console.log(this.project);
-    
-  }
   openProjectDeatails() {
     let navigationExtras: NavigationExtras = {
       queryParams: {
@@ -27,7 +22,7 @@ export class ProjectComponent implements OnInit {
     };
    this.showProject(); 
   }
-
+  
   showProject() {
     this.teamLeaderService.currentProject=this.project;
      this.dialogService.addDialog(ProjectDeatailsComponent, { 

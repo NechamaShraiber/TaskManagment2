@@ -52,9 +52,6 @@ const routes: Routes = [
 
     ]
   },
-  //{ path: 'taskManagers/projectDeatails', component: ProjectDeatailsComponent },
-  // { path: 'taskManagers/homeWorkerComponent', component: HomeWorkerComponent, canActivate: [AuthGuard] },
-  // { path: 'taskManagers/WorkerDeatails', component: WorkerDeatailsComponent },
   { path: '**', component: LoginComponent },
   { path: '', component: LoginComponent },
 ];
@@ -81,7 +78,6 @@ const routes: Routes = [
     ChartComponent,
     ChangePasswordComponent,
     WorkerChartComponent,
-    //HomeWorkerComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,14 +91,26 @@ const routes: Routes = [
     [MatButtonModule, MatCheckboxModule],
     MatDatepickerModule,
     MatFormFieldModule,
-    MatInputModule,MatNativeDateModule,BrowserAnimationsModule,MatTreeModule,MatIconModule,MatSelectModule,MatTableModule,MatPaginatorModule
+    MatInputModule,MatNativeDateModule,
+    BrowserAnimationsModule,
+    MatTreeModule,
+    MatIconModule,
+    MatSelectModule,
+    MatTableModule,
+    MatPaginatorModule
   
   ],
   entryComponents: [
-    DeleteWorkerComponent, EditWorkerComponent, SendMsgComponent, ProjectDeatailsComponent, WorkerDeatailsComponent, ChangePasswordComponent
+    DeleteWorkerComponent,
+     EditWorkerComponent,
+      SendMsgComponent,
+       ProjectDeatailsComponent,
+        WorkerDeatailsComponent,
+         ChangePasswordComponent
 
   ],
-  exports: [MatButtonModule, MatCheckboxModule],
+  exports: [MatButtonModule,
+     MatCheckboxModule],
 
   providers: [WorkerService],
   bootstrap: [AppComponent]

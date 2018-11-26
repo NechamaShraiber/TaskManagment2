@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Project } from '../models/project';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
 import { Worker } from '../models/worker';
 import { sha256 } from 'js-sha256';
 import { GlobalService } from './global.service';

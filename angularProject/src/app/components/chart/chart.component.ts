@@ -1,24 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as CanvasJS from '../../../canvasjs.min.js';
 import { WorkerService } from '../../shared/service/worker.service.js';
-//import {} from '../../../../'
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
+
 export class ChartComponent implements OnInit {
   @Input()
   private projects: any[];
   projectDeatails = new Array();
   projectDeatails2 = new Array();
   chart: any;
-  constructor(private workerService: WorkerService) {
-    this.workerService.subjectUpdateChart.subscribe(
-      {
-        //dont work
-        next: () => alert("1")
-      });
+  constructor() {
   }
 
   ngOnInit() {
@@ -35,10 +30,10 @@ export class ChartComponent implements OnInit {
         y: parseInt(t[0]) + (parseInt(t[1]) / 100), label: this.projects[index].Name
       })
     };
+
     this.chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       exportEnabled: true,
-
       title: {
         text: "project hours"
       },
@@ -46,7 +41,6 @@ export class ChartComponent implements OnInit {
         type: "column",
         dataPoints: this.projectDeatails,
       color:"#b498e6",
-
         name: "allocated hours",
         showInLegend: true,
       },
@@ -56,12 +50,8 @@ export class ChartComponent implements OnInit {
         name: "worked hours",
         color:"#758ee6",
         showInLegend: true,
-
       }],
-
     });
-
     this.chart.render();
   }
-
 }

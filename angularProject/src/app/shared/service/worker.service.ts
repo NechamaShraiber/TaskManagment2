@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { of, Subject, Observable } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
+import {  Subject  } from 'rxjs';
+import { Router  } from '@angular/router';
 import { GlobalService } from './global.service';
 @Injectable({
   providedIn: 'root'
@@ -31,8 +31,4 @@ updateStartHour(time:number, id:number, isFirst:boolean):any {
   let data = { hour:time , idProjectWorker:id,isFirst:isFirst };
   return this.http.post(GlobalService.path+"updateStartHour", data)
 }
-// getProject( id:number):any {
-//   return this.http.get(GlobalService.path+"getProject/"+id)
-// }
-
 }

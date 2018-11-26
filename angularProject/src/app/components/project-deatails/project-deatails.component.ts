@@ -13,7 +13,6 @@ export interface ConfirmModel {
   styleUrls: ['./project-deatails.component.css']
 })
 export class ProjectDeatailsComponent  extends DialogComponent<ConfirmModel, boolean> implements ConfirmModel,OnInit {
-private project:Project;
 private workersHours:any;
 title: string;
   message: string;
@@ -24,17 +23,10 @@ title: string;
    }
 
   ngOnInit() {
-    console.log(this.teamLeaderService.currentProject+  "IN MODAL")
-    // this.route.queryParams.subscribe(params => {
-    //   this.project=JSON.parse(params["project"]) ;
       this.teamLeaderService.getWorkersHours(this.teamLeaderService.currentProject.Id).subscribe(
         res => {
           this.workersHours = res;
         })
-  
-      //{Id: null, Name: "Pnina", Date: "2018-10-25T00:00:00", Hours: "00:03:22", allocatedHours: 0}
-//1: {Id: null, Name: "Rachel", Date: "2018-10-25T00:00:00", Hours: "00:12:20", allocatedHours: 1}
-// });
 }
   confirm() { 
     this.result= true;

@@ -1,10 +1,8 @@
 <nav class="navbar">
-
     <ul *ngIf="workerService.idJob==1">
       <li routerLinkActive="active">
         <a routerLink="/taskManagers/home/addProject">Add Project</a>
       </li>
-      
       <div class="dropdown">
           <button class="dropbtn">Reports
               <i class="fa fa-caret-down"></i>
@@ -14,10 +12,7 @@
               <a routerLink="/taskManagers/home/reports/{{2}}">projects</a>
               <a routerLink="/taskManagers/home/reports/{{3}}">presence</a>
       </div>
-      <!-- routerLink="/taskManagers/home/reports" -->
 </div>
-
-
     <div class="dropdown">
       <button class="dropbtn">Users Managers
         <i class="fa fa-caret-down"></i>
@@ -58,8 +53,5 @@
 </svg>
 logOut
     </div> 
-
-  
-  <!-- <button >log out</button> -->
 </nav>
 <router-outlet class="container"></router-outlet>

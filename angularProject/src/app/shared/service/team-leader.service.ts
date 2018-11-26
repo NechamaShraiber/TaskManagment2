@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import{AppModule}from './../../app.module'
 import { Project } from '../models/project';
 import { Worker } from '../models/worker';
 import { GlobalService } from './global.service';
@@ -14,18 +13,20 @@ currentWorker:Worker;
   getAllProjects(id:number): any {
     return this.http.get(GlobalService.path+"getProjectDeatails/"+id);
   }
+
   getAllWorkers(id:number): any {
     return this.http.get(GlobalService.path+"getWorkersDeatails/"+id);
   }
+
   getWorkersHours(id:number):any{
      return this.http.get(GlobalService.path+"getWorkersHours/"+id);
   }
+
   getProjectsHours(idTeamLeader:number,id:number):any{
      return this.http.get(GlobalService.path+"getWorkerHours/"+idTeamLeader+"/"+id);
   }
-
-  setAlloactedHours(numHours:number, id:number):any{
   
+  setAlloactedHours(numHours:number, id:number):any{
      return this.http.put(GlobalService.path+"updateWorkerHours",{
       "numHours":numHours,
       "projectWorkerId":id

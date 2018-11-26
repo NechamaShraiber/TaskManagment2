@@ -70,17 +70,11 @@ export class AddWorkerComponent implements OnInit {
   get f() { return this.addWorkerGroup.controls; }
 
   onSubmit() {
-    // this.idManager = this.managerList.find(p => p.Id == this.addWorkerGroup.value["ManagerId"].Id);
-    
     if (this.managerService.isEdit == "Add") {
     this.addWorkerGroup.value["ManagerId"]?this.idManager =this.managerList.find(p=>p.Name==this.addWorkerGroup.value["ManagerId"]).Id:this.idManager=this.managerList[0].Id;
     this.addWorkerGroup.value["ManagerId"] = this.idManager;
     this.addWorkerGroup.value["JobId"]?this.idJob =this.jobList.find(p=>p.Name==this.addWorkerGroup.value["JobId"]).Id:this.idJob=this.jobList[0].Id;
-
-    //  this.idJob = this.jobList.find(p => p.Id == this.addWorkerGroup.value["JobId"].Id);
-    // this.idJob=this.jobList.find(p=>p.Name==this.addWorkerGroup.value["JobId"]).Id ;
     this.addWorkerGroup.value["JobId"] = this.idJob;
-
       this.managerService.addWorker(this.addWorkerGroup.value)
         .subscribe(worker => {
           if (worker == null) {

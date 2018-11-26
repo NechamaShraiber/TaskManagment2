@@ -3,10 +3,6 @@
     <div class="details">
     <div class="group">
       <input id="Name" class="inputMaterial" formControlName="Name">
-      <!-- <mat-form-field class="example-full-width">
-          <input matInput formControlName="Name" #message maxlength="15" minlength="2" placeholder="Project Name">
-          <mat-hint align="end">{{message.value.length}} / 15</mat-hint>
-        </mat-form-field> -->
       <label>Project Name</label>
       <div *ngIf="Name&&addProjectGroup.controls['Name'].errors&& Name.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['Name'].errors)" class="myAlert">{{err}}</p>
@@ -15,34 +11,17 @@
     <div class="group">
       <input id="Customer" class="inputMaterial" formControlName="Customer">
       <label>Customer Name</label>
-      <!-- <mat-form-field class="example-full-width">
-          <input matInput formControlName="Customer" #message1 maxlength="10" minlength="2" placeholder="Customer Name">
-          <mat-hint align="end">{{message1.value.length}} / 10</mat-hint>
-        </mat-form-field> -->
       <div *ngIf="Customer&&addProjectGroup.controls['Customer'].errors&& Customer.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['Customer'].errors)" class="myAlert">{{err}}</p>
       </div>
     </div>
     <div class="group">
-
-        <!-- <mat-form-field>
-            <mat-select formControlName="TeamLeaderId" placeholder="Team Leader" (change)="onChange($event.target.value)">
-              <mat-option *ngFor="let team of teamLeader" [value]="team.Id">
-                  {{team.Name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>  -->
-
- 
       <select formControlName="TeamLeaderId" (change)="onChange($event.target.value)">
         <option *ngFor="let team of teamLeader" [ngValue]="team.Id">
           {{team.Name}}
         </option>
       </select>
       <label>Team Leader</label> 
-       <!-- <div *ngIf="addProjectGroup.controls['TeamLeaderId'].errors">
-        <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['TeamLeaderId'].errors)" class="myAlert">{{err}}</p>
-      </div>  -->
     </div>
   </div>
 
@@ -50,10 +29,6 @@
     <div class="group">
      <input type="number" min="0" id="DevelopHours" class="inputMaterial" formControlName="DevelopHours">
       <label>Develop Houres</label>
-
-      <!-- <mat-form-field>
-          <input matInput type="number" placeholder="Develop Houres" formControlName="DevelopHours" min="0">
-        </mat-form-field> -->
       <div *ngIf="DevelopHours&&addProjectGroup.controls['DevelopHours'].errors&& DevelopHours.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['DevelopHours'].errors)" class="myAlert">{{err}}</p>
       </div>
@@ -61,10 +36,6 @@
     <div class="group">
       <input type="number" min="0" id="QAHours" class="inputMaterial" formControlName="QAHours">
       <label>QA Houres</label>
-      
-      <!-- <mat-form-field>
-          <input matInput type="number" placeholder="QA Houres" formControlName="QAHours" min="0">
-        </mat-form-field> -->
       <div *ngIf="QAHours&&addProjectGroup.controls['QAHours'].errors&& QAHours.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['QAHours'].errors)" class="myAlert">{{err}}</p>
       </div>
@@ -72,10 +43,6 @@
     <div class="group">
       <input type="number" min="0" id="UiUxHours" class="inputMaterial" formControlName="UiUxHours">
       <label>UI/UX Houres</label>
-      
-      <!-- <mat-form-field>
-          <input matInput type="number" placeholder="UI/UX Houres" formControlName="UiUxHours" min="0">
-        </mat-form-field> -->
       <div *ngIf="UiUxHours&&addProjectGroup.controls['UiUxHours'].errors&& UiUxHours.touched">
         <p *ngFor="let err of objectHolder.values(addProjectGroup.controls['UiUxHours'].errors)" class="myAlert">{{err}}</p>
       </div>
@@ -111,15 +78,6 @@
       {{worker.Name}}
     </option>
   </select> 
-<!-- 
-  <mat-form-field>
-      <mat-select placeholder="select workers to add:" name="worker" (change)="addWorker($event.target.value)">
-        <mat-option *ngFor="let worker of workersToSelect" [value]="worker.Id">
-            {{worker.Name}}
-          </mat-option>
-      </mat-select>
-    </mat-form-field> -->
-
    <p>select workers to remove:</p>
   <select (change)="removeWorker($event.target.value)">
     <option></option>
@@ -127,15 +85,6 @@
       {{worker.Name}}
     </option>
   </select>
-
-  <!-- <mat-form-field>
-      <mat-select placeholder="select workers to remove:" name="worker1" (change)="removeWorker($event.target.value)">
-        <mat-option *ngFor="let worker of workersToAdd" [value]="worker.Id">
-            {{worker.Name}}
-          </mat-option>
-      </mat-select>
-    </mat-form-field> -->
-
 </div>
 
 <button type="submit" class="button" [disabled]="addProjectGroup.invalid">Add</button>

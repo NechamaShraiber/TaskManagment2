@@ -2,13 +2,10 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { validate } from '../../shared/validate';
-// import { Global, AuthenticationService, createValidatorArr } from '../../imports';
 import sha256 from 'async-sha256';
 import { GlobalService } from '../../shared/service/global.service';
 import { DialogService } from '../../../../node_modules/ng2-bootstrap-modal';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,7 +17,6 @@ export class LoginComponent {
 
   loginFormGroup: FormGroup;
   isExistUser: boolean = true;
-  //allow access 'Object' type via interpolation
   objectHolder: typeof Object = Object;
 
   //----------------CONSTRUCTOR------------------
@@ -68,12 +64,9 @@ export class LoginComponent {
       title: 'Change password',
     })
       .subscribe((isConfirmed) => {
-        //We get dialog result
         if (isConfirmed) {
-          
         }
         else {
-          //alert('declined');
         }
       });
     setTimeout(() => {

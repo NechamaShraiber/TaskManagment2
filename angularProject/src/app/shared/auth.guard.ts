@@ -26,17 +26,7 @@ export class AuthGuard implements CanActivate {
                     return true;
                 break;
             } 
-            // case 4: {
-            //     if (state.url == "/taskManagers/home/homeWorker" || state.url == "/taskManagers/home/workerChart")
-            //         return true;
-            //     break;
-            // }
-            // case 5: {
-            //     if (state.url == "/taskManagers/home/homeWorker" || state.url == "/taskManagers/home/workerChart")
-
-            //         return true;
-            //     break;
-            // }
+           
         }
         this.router.navigate(['/login']);
         return false;

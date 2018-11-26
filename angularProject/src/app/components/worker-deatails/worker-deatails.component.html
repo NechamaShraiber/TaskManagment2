@@ -2,7 +2,6 @@
   <div class="modal-content">
     <div class="modal-header">
         <h1>{{this.teamLeaderService.currentWorker.Name}}</h1>
-
       <button type="button" class="close" (click)="close()">&times;</button>
     </div>
     <div class="modal-body">
@@ -12,8 +11,6 @@
           <div class="col-md-6 " *ngFor="let projectHour of projectsHours">
             <app-hours [hour]=projectHour (click)="setAllocatedHours(projectHour.Id)"></app-hours>
           </div>
-        
-           
           <div class="cont_centrar" *ngIf="projectId">
             <div>
               <p>enter allocate hours:</p>
