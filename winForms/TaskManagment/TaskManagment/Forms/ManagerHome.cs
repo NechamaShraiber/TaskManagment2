@@ -78,7 +78,6 @@ namespace TaskManagment.Forms
                  Global.checkVaidationNumber(0, 0, txt_QI_houers) &&
                  Global.checkVaidationNumber(0, 0, txt_UIUX_hours);
 
-
         }
 
         private void data_start_ValueChanged(object sender, EventArgs e)
@@ -100,8 +99,6 @@ namespace TaskManagment.Forms
             });
             dgvAddWorkers.DataSource = workerToSelect;
             dgvAddWorkers.Columns["Id"].Visible = false;
-
-            //.Select(s => new { s.Id, s.Name })
         }
 
         private void dgvAddWorkers_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -618,6 +615,14 @@ namespace TaskManagment.Forms
             WorkerDeatails(true, null);
         }
 
-      
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Global.LogOut();
+        }
     }
 }

@@ -67,7 +67,7 @@ namespace UIL.Controllers
             //curl -X GET -v http://localhost:59628/api/getWorkerDetails/6
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new ObjectContent<List<Worker>>(WorkerLogic.GetWorkerDetails(id), new JsonMediaTypeFormatter())
+                Content = new ObjectContent<Worker>(WorkerLogic.GetWorkerDetails(id), new JsonMediaTypeFormatter())
             };
         }
         [HttpGet]

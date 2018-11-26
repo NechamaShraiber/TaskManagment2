@@ -182,6 +182,9 @@ namespace TaskManagment.Forms
             }
         }
 
-   
+        private void btn_logOut_Click(object sender, EventArgs e)
+        {
+            Global.LogOut();
+        }
     }
 }

@@ -16,6 +16,7 @@
               <a routerLink="/taskManagers/home/reports/{{1}}">workers</a>
               <a routerLink="/taskManagers/home/reports/{{2}}">projects</a>
               <a routerLink="/taskManagers/home/reports/{{3}}">presence</a>
+              <a routerLink="/taskManagers/home/reports/{{3}}">presence</a>
       </div>
       <!-- routerLink="/taskManagers/home/reports" -->
 </div>
@@ -31,6 +32,9 @@
         <a (click)="add()">Add worker</a>
       </div>
     </div>
+    <li routerLinkActive="active">
+        <a (click)="logOut()">log out</a>
+      </li>
   </ul>
   <ul *ngIf="workerService.idJob==2">
     <li routerLinkActive="active">
@@ -39,6 +43,9 @@
     <li routerLinkActive="active">
       <a routerLink="/taskManagers/home/teamLeaderWorkers">workers</a>
     </li>
+    <li routerLinkActive="active">
+        <a (click)="logOut()">log out</a>
+      </li>
   </ul>
   <ul *ngIf="workerService.idJob>2">
     <li routerLinkActive="active">
@@ -47,7 +54,9 @@
     <li routerLinkActive="active">
         <a routerLink="/taskManagers/home/workerChart">chart</a>
     </li>
-   
+      <li routerLinkActive="active">
+        <a (click)="logOut()">log out</a>
+      </li>
   </ul>
 </nav>
 <router-outlet class="container"></router-outlet>
