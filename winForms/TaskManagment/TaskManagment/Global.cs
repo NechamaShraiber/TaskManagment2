@@ -134,7 +134,7 @@ namespace TaskManagment
                 else
                 {
                     f.Controls["txt_userName"].Text = "";
-f.Controls["txt_password"].Text = "";
+                    f.Controls["txt_password"].Text = "";
                 }
             }
         }
