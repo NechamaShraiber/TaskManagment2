@@ -219,6 +219,9 @@ filterByProjectsThenNames(){
 })
 export class ReportsComponent {
 
+  displayedColumns: string[] = ['WorkerName', 'ProjectName', 'Date', 'Start','End'];
+  dataSource;
+
   nestedTreeControl: NestedTreeControl<FileNode>;
   nestedDataSource: MatTreeNestedDataSource<FileNode>;
 
@@ -226,6 +229,7 @@ export class ReportsComponent {
     this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
     database.dataChange.subscribe(data => this.nestedDataSource.data = data);
+    managerService.getPresence().subscribe(res=>this.dataSource=res)
   }
    exportToExcel() {
     this.database.exportAsExcelFile();
@@ -234,5 +238,4 @@ export class ReportsComponent {
   private _getChildren = (node: FileNode) => node.children;
 
   }
-
 
