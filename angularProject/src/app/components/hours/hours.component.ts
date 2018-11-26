@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WorkerService } from '../../shared/service/worker.service';
 import { formatDate } from '../../../../node_modules/@angular/common';
+import { forEach } from '../../../../node_modules/@angular/router/src/utils/collection';
+
 @Component({
   selector: 'app-hours',
   templateUrl: './hours.component.html',
   styleUrls: ['../project/project.component.css', './hours.component.css']
 })
-
 export class HoursComponent implements OnInit {
   @Input()
   private hour: any;
@@ -14,6 +15,7 @@ export class HoursComponent implements OnInit {
   private isProject: boolean = false;
   currectProject: any;
   isStart: boolean = true;
+  // btnValue: string = "start";
   t: any;
   timer;
   time: any;
@@ -29,6 +31,7 @@ export class HoursComponent implements OnInit {
     if (this.workerService.projectStart != null && this.workerService.projectStart != this.hour) {
       alert("you must end project " + this.workerService.projectStart.Name);
       return;
+
     }
 
 
@@ -37,15 +40,27 @@ export class HoursComponent implements OnInit {
       this.currectProject = this.hour;
       this.workerService.projectStart = this.hour;
       this.startTask = new Date();
+      // this.btnValue = "end";
+
       this.timer = setInterval(() => {
-        this.t +=  new Date().getTime()-this.startTask.getTime() ;
+        console.log( this.startTask.getTime());
+        var ttt=new Date().getTime();
+        console.log(ttt)
+        this.t="00";
+        this.t +=  ttt-this.startTask.getTime() ;
+
+
+
       }, 1000);
     }
     else {
+      //  this.btnValue = "start";
       clearInterval(this.timer);
       this.startTask = null;
       this.sumTime = this.t;
+
       this.t = null;
+
     }
     this.workerService.updateStartHour(this.time, this.currectProject.Id, this.isStart).subscribe(
       res => {
@@ -61,7 +76,11 @@ export class HoursComponent implements OnInit {
           }
           this.hour["Hours"] = hours + ":" + eval(x1[1] + "+" + minute);
         }
+
+
+
         this.isStart = !this.isStart;
+
       })
   }
 

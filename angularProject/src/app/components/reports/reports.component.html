@@ -26,3 +26,63 @@
     </mat-nested-tree-node>
   </mat-tree>
 </div>
+<div>
+ 
+    <label>worker name</label> <input [(ngModel)]="searchByWorker" type="text">
+    <label>project name</label> <input [(ngModel)]="searchByProject" type="text">
+    <label>month</label> 
+    <select [(ngModel)]="searchByMonth">
+            <option value="null">all month </option>
+
+        <option value="0">January </option>
+        <option value="1">February </option>
+        <option value="2">March </option>
+        <option value="3">April</option>
+        <option value="4">May </option>
+        <option value="5">June </option>
+        <option value="6">July </option>
+        <option value="7">August </option>
+        <option value="8">September </option>
+        <option value="9">October </option>
+        <option value="10">November </option>
+        <option value="11">December </option>
+    </select>
+    <input [(ngModel)]="searchBy" type="text">
+    <button (click)="search()">search</button>
+<table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="WorkerName">
+      <th mat-header-cell *matHeaderCellDef> WorkerName </th>
+      <td mat-cell *matCellDef="let element"> {{element.WorkerName}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="ProjectName">
+      <th mat-header-cell *matHeaderCellDef> ProjectName </th>
+      <td mat-cell *matCellDef="let element"> {{element.ProjectName}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.Date}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="Start">
+      <th mat-header-cell *matHeaderCellDef> Start </th>
+      <td mat-cell *matCellDef="let element"> {{element.Start}} </td>
+    </ng-container>
+
+    
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="End">
+        <th mat-header-cell *matHeaderCellDef> End </th>
+        <td mat-cell *matCellDef="let element"> {{element.End}} </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

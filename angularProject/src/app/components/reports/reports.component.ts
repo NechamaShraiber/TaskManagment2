@@ -11,7 +11,9 @@ export class FileNode {
 
 @Injectable()
  export class FileDatabase {
+ 
   presence: any[];
+ // filterPresence: any[];
   cols: any[];
   names: string[];
   public projectsByName: any[];
@@ -23,6 +25,7 @@ export class FileNode {
   constructor(private managerService: ManagerService) {
     this.managerService.getPresence().subscribe(pre => {
       this.presence = pre;
+     // this.filterPresence=pre;
       this.names = [];
       this.projectsByName = [];
       //filter all names
@@ -190,20 +193,49 @@ filterByProjectsThenNames(){
 
 })
 export class ReportsComponent {
+  parameter
+  searchByWorker:string;
+  searchByProject:string;
+  searchByMonth:string;
+  displayedColumns: string[] = ['WorkerName', 'ProjectName', 'Date', 'Start','End'];
+  dataSource;
+  filterDataSource;
   nestedTreeControl: NestedTreeControl<FileNode>;
   nestedDataSource: MatTreeNestedDataSource<FileNode>;
   constructor(private database: FileDatabase, private managerService: ManagerService) {
     this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
     database.dataChange.subscribe(data => this.nestedDataSource.data = data);
+   managerService.getPresence().subscribe(res=>{this.dataSource=res;this.filterDataSource=res})
   }
   
    exportToExcel() {
     this.database.exportAsExcelFile();
    }
+   month(month)
+   {
+    var x =new Date(month);
+    var t=x.getMonth()
+    var x2= t.toString();
+    return x2;
+   
+   }
+search(){
 
+ this.dataSource=this.filterDataSource;
+ if(this.searchByWorker!=null &&this.searchByWorker!="")
+ this.dataSource=this.dataSource.filter(f=>f.WorkerName==this.searchByWorker);
+ if(this.searchByProject!=null&&this.searchByProject!="")
+ this.dataSource=this.dataSource.filter(f=>f.ProjectName==this.searchByProject);
+  if(this.searchByMonth!=null &&this.searchByMonth!="null")
+  {
+    this.dataSource=this.dataSource.filter(f=>
+     this.month(f.Date)==this.searchByMonth
+    );
+  }
+}
   hasNestedChild = (_: number, nodeData: FileNode) => !nodeData.type;
   private _getChildren = (node: FileNode) => node.children;
   }
 
-
+  
