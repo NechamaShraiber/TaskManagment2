@@ -46,3 +46,144 @@ table {
   td, th {
     width: 25%;
   }
+
+    .searchButton {
+    position: relative;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    height: 40px;
+    width: 130px;
+    font: 15px/40px 'Open Sans', 'trebuchet MS', 'Tahoma';
+    color: #fff;
+    text-transform: uppercase;
+    background:#b007f3;
+    border-radius: 0 3px 3px 0;
+    box-shadow: rgba(0, 0, 0, 0.14902) 0px 0px 6px 0px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+    }
+       
+    .searchButton:hover {     
+        background: #ba2ff1;
+    }   
+       
+    .searchButton:active,
+    .searchButton:focus{   
+        background: #ba2ff1;
+        outline: 0;   
+    }
+     
+    .searchButton:before {
+        content: '';
+        position: absolute;
+        border-width: 8px 8px 8px 0;
+        border-style: solid solid solid none;
+        border-color: transparent #ba2ff1 transparent;
+        top: 12px;
+        left: -6px;
+    }
+     
+    .searchButton:hover:before {
+        border-right-color: #ba2ff1;
+    }
+     
+    .searchButton:focus:before,
+    .searchButton:active:before {
+            border-right-color: #ba2ff1;
+    } 
+
+
+
+
+    .input {
+        position: relative;
+        font-size: 1.5em;
+        background: linear-gradient(21deg, #bd7ee7, #5325f8);
+        padding: 3px;
+        display: inline-block;
+        /* border-radius: 9999em; */
+      }
+      .input *:not(span) {
+        position: relative;
+        display: inherit;
+        border-radius: inherit;
+        margin: 0;
+        border: none;
+        outline: none;
+        padding: 0 .325em;
+        z-index: 1;
+      }
+      .input *:not(span):focus + span {
+        opacity: 1;
+        -webkit-transform: scale(1);
+                transform: scale(1);
+      }
+      .input span {
+        -webkit-transform: scale(0.993, 0.94);
+                transform: scale(0.993, 0.94);
+        transition: opacity .25s, -webkit-transform .5s;
+        transition: transform .5s, opacity .25s;
+        transition: transform .5s, opacity .25s, -webkit-transform .5s;
+        opacity: 0;
+        position: absolute;
+        z-index: 0;
+        margin: 4px;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        box-shadow: inset 0 0 0 3px #fff, 0 0 0 4px #fff, 3px -3px 30px #bd7ee7,  -3px 3px 30px #5325f8;
+      }
+      
+      html {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        line-height: 1.5;
+        font-size: 1em;
+      }
+      
+      body {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      html, body {
+        height: 100%;
+      }
+      
+      input {
+        font-family: inherit;
+        line-height: inherit;
+        color: #2e3750;
+        min-width: 12em;
+      }
+      
+      ::-webkit-input-placeholder {
+        color: #cbd0d5;
+      }
+      
+      :-ms-input-placeholder {
+        color: #cbd0d5;
+      }
+      
+      ::-ms-input-placeholder {
+        color: #cbd0d5;
+      }
+      
+      ::placeholder {
+        color: #cbd0d5;
+      }
+      
+      html::after {
+        content: '';
+        background: linear-gradient(21deg, #5325f8, #bd7ee7);
+        height: 3px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      

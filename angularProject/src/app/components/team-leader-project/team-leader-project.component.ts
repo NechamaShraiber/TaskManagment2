@@ -19,9 +19,5 @@ export class TeamLeaderProjectComponent implements OnInit {
       res => {
         this.projects = res;
       })
-
   }
-
-  
-
 }
