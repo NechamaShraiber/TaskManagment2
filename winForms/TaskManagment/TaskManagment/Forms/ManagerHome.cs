@@ -425,6 +425,8 @@ namespace TaskManagment.Forms
             dgv_presence.DataSource = presences;
             treeView1.Visible = false;
             dgv_presence.Visible = true;
+            pnl_search.Visible = true;
+
         }
 
         private void SelectByWorkerName()
@@ -468,6 +470,8 @@ namespace TaskManagment.Forms
             }
             treeView1.Visible = true;
             dgv_presence.Visible = false;
+            pnl_search.Visible = false;
+
         }
         private void SelectByProjectName()
         {
@@ -514,6 +518,7 @@ namespace TaskManagment.Forms
             }
             treeView1.Visible = true;
             dgv_presence.Visible = false;
+            pnl_search.Visible = false;
 
 
         }
@@ -563,8 +568,30 @@ namespace TaskManagment.Forms
             }
 
         }
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            List<dynamic> FilterPrecences = presences;
+            if (txt_workerName.Text != "")
+            {
+                FilterPrecences = FilterPrecences.FindAll(f => f["WorkerName"].Value == txt_workerName.Text);
+               
+            }
+            if (txt_projectName.Text != "")
+            {
+                FilterPrecences = FilterPrecences.FindAll(f => f["ProjectName"].Value == txt_projectName.Text);
 
+            }
+            var x = cmb_month.SelectedIndex;
+            FilterPrecences = FilterPrecences.FindAll(f => month(f["Date"]) == x);
+            dgv_presence.DataSource = FilterPrecences;
 
+        }
+     private int   month(dynamic date)
+        {
+           DateTime d= (DateTime)date;
+           
+            return d.Month;
+        }
         #endregion
 
         private void ShowPanel(Panel p)
@@ -629,6 +656,6 @@ namespace TaskManagment.Forms
             Global.LogOut();
         }
 
-        
+      
     }
 }

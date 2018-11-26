@@ -84,6 +84,14 @@
             this.pnl_report = new System.Windows.Forms.Panel();
             this.pnl_delete = new System.Windows.Forms.Panel();
             this.panelControlls = new System.Windows.Forms.Panel();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.lbl_workerName = new System.Windows.Forms.Label();
+            this.txt_workerName = new System.Windows.Forms.TextBox();
+            this.txt_projectName = new System.Windows.Forms.TextBox();
+            this.lbl_projectName = new System.Windows.Forms.Label();
+            this.lbl_month = new System.Windows.Forms.Label();
+            this.cmb_month = new System.Windows.Forms.ComboBox();
+            this.pnl_search = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.pnl_add_project.SuspendLayout();
@@ -92,6 +100,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_presence)).BeginInit();
             this.pnl_report.SuspendLayout();
             this.pnl_delete.SuspendLayout();
+            this.pnl_search.SuspendLayout();
             this.SuspendLayout();
             // 
             // errorProvider1
@@ -189,6 +198,7 @@
             // 
             // pnl_add_project
             // 
+            this.pnl_add_project.Controls.Add(this.pnl_add_worker);
             this.pnl_add_project.Controls.Add(this.dgvAddWorkers);
             this.pnl_add_project.Controls.Add(this.label16);
             this.pnl_add_project.Controls.Add(this.label1);
@@ -209,9 +219,9 @@
             this.pnl_add_project.Controls.Add(this.label9);
             this.pnl_add_project.Controls.Add(this.txt_projName);
             this.pnl_add_project.Controls.Add(this.btn_addProject);
-            this.pnl_add_project.Location = new System.Drawing.Point(156, 119);
+            this.pnl_add_project.Location = new System.Drawing.Point(19, 55);
             this.pnl_add_project.Name = "pnl_add_project";
-            this.pnl_add_project.Size = new System.Drawing.Size(981, 443);
+            this.pnl_add_project.Size = new System.Drawing.Size(1099, 519);
             this.pnl_add_project.TabIndex = 5;
             this.pnl_add_project.Visible = false;
             // 
@@ -412,7 +422,7 @@
             this.pnl_add_worker.Controls.Add(this.label14);
             this.pnl_add_worker.Controls.Add(this.label15);
             this.pnl_add_worker.Controls.Add(this.lblTitle);
-            this.pnl_add_worker.Location = new System.Drawing.Point(55, 52);
+            this.pnl_add_worker.Location = new System.Drawing.Point(5, 3);
             this.pnl_add_worker.Name = "pnl_add_worker";
             this.pnl_add_worker.Size = new System.Drawing.Size(1085, 498);
             this.pnl_add_worker.TabIndex = 42;
@@ -542,9 +552,9 @@
             this.treeView1.AllowDrop = true;
             this.treeView1.BackColor = System.Drawing.SystemColors.Control;
             this.treeView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.treeView1.Location = new System.Drawing.Point(28, 63);
+            this.treeView1.Location = new System.Drawing.Point(28, 87);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(1050, 424);
+            this.treeView1.Size = new System.Drawing.Size(1050, 400);
             this.treeView1.TabIndex = 2;
             this.treeView1.Visible = false;
             // 
@@ -561,9 +571,9 @@
             // dgv_presence
             // 
             this.dgv_presence.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_presence.Location = new System.Drawing.Point(32, 65);
+            this.dgv_presence.Location = new System.Drawing.Point(32, 87);
             this.dgv_presence.Name = "dgv_presence";
-            this.dgv_presence.Size = new System.Drawing.Size(1045, 421);
+            this.dgv_presence.Size = new System.Drawing.Size(1045, 399);
             this.dgv_presence.TabIndex = 4;
             this.dgv_presence.Visible = false;
             // 
@@ -572,13 +582,13 @@
             this.lbl_report.AutoSize = true;
             this.lbl_report.Location = new System.Drawing.Point(268, 27);
             this.lbl_report.Name = "lbl_report";
-            this.lbl_report.Size = new System.Drawing.Size(41, 13);
+            this.lbl_report.Size = new System.Drawing.Size(0, 13);
             this.lbl_report.TabIndex = 5;
-            this.lbl_report.Text = "label13";
             // 
             // pnl_report
             // 
             this.pnl_report.BackColor = System.Drawing.SystemColors.Control;
+            this.pnl_report.Controls.Add(this.pnl_search);
             this.pnl_report.Controls.Add(this.lbl_report);
             this.pnl_report.Controls.Add(this.dgv_presence);
             this.pnl_report.Controls.Add(this.btn_export_excel);
@@ -591,6 +601,7 @@
             // 
             // pnl_delete
             // 
+            this.pnl_delete.Controls.Add(this.pnl_add_project);
             this.pnl_delete.Controls.Add(this.panelControlls);
             this.pnl_delete.Location = new System.Drawing.Point(31, 46);
             this.pnl_delete.Name = "pnl_delete";
@@ -605,16 +616,102 @@
             this.panelControlls.Size = new System.Drawing.Size(724, 271);
             this.panelControlls.TabIndex = 0;
             // 
+            // btn_search
+            // 
+            this.btn_search.Location = new System.Drawing.Point(762, 26);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(118, 23);
+            this.btn_search.TabIndex = 6;
+            this.btn_search.Text = "search";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // lbl_workerName
+            // 
+            this.lbl_workerName.AutoSize = true;
+            this.lbl_workerName.Location = new System.Drawing.Point(19, 30);
+            this.lbl_workerName.Name = "lbl_workerName";
+            this.lbl_workerName.Size = new System.Drawing.Size(71, 13);
+            this.lbl_workerName.TabIndex = 7;
+            this.lbl_workerName.Text = "worker name:";
+            // 
+            // txt_workerName
+            // 
+            this.txt_workerName.Location = new System.Drawing.Point(96, 28);
+            this.txt_workerName.Name = "txt_workerName";
+            this.txt_workerName.Size = new System.Drawing.Size(120, 20);
+            this.txt_workerName.TabIndex = 8;
+            // 
+            // txt_projectName
+            // 
+            this.txt_projectName.Location = new System.Drawing.Point(328, 28);
+            this.txt_projectName.Name = "txt_projectName";
+            this.txt_projectName.Size = new System.Drawing.Size(120, 20);
+            this.txt_projectName.TabIndex = 10;
+            // 
+            // lbl_projectName
+            // 
+            this.lbl_projectName.AutoSize = true;
+            this.lbl_projectName.Location = new System.Drawing.Point(251, 29);
+            this.lbl_projectName.Name = "lbl_projectName";
+            this.lbl_projectName.Size = new System.Drawing.Size(71, 13);
+            this.lbl_projectName.TabIndex = 9;
+            this.lbl_projectName.Text = "project name:";
+            // 
+            // lbl_month
+            // 
+            this.lbl_month.AutoSize = true;
+            this.lbl_month.Location = new System.Drawing.Point(500, 34);
+            this.lbl_month.Name = "lbl_month";
+            this.lbl_month.Size = new System.Drawing.Size(39, 13);
+            this.lbl_month.TabIndex = 9;
+            this.lbl_month.Text = "month:";
+            // 
+            // cmb_month
+            // 
+            this.cmb_month.FormattingEnabled = true;
+            this.cmb_month.Items.AddRange(new object[] {
+            "All Month",
+            "January ",
+            "February ",
+            "March",
+            "April",
+            "May",
+            "June ",
+            "July ",
+            "August",
+            "September",
+            "October ",
+            "November",
+            "December"});
+            this.cmb_month.Location = new System.Drawing.Point(557, 28);
+            this.cmb_month.Name = "cmb_month";
+            this.cmb_month.Size = new System.Drawing.Size(157, 21);
+            this.cmb_month.TabIndex = 11;
+            // 
+            // pnl_search
+            // 
+            this.pnl_search.Controls.Add(this.txt_projectName);
+            this.pnl_search.Controls.Add(this.cmb_month);
+            this.pnl_search.Controls.Add(this.lbl_month);
+            this.pnl_search.Controls.Add(this.btn_search);
+            this.pnl_search.Controls.Add(this.lbl_projectName);
+            this.pnl_search.Controls.Add(this.txt_workerName);
+            this.pnl_search.Controls.Add(this.lbl_workerName);
+            this.pnl_search.Location = new System.Drawing.Point(149, 23);
+            this.pnl_search.Name = "pnl_search";
+            this.pnl_search.Size = new System.Drawing.Size(930, 59);
+            this.pnl_search.TabIndex = 12;
+            this.pnl_search.Visible = false;
+            // 
             // ManagerHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1149, 592);
-            this.Controls.Add(this.pnl_delete);
-            this.Controls.Add(this.pnl_add_project);
-            this.Controls.Add(this.pnl_add_worker);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnl_report);
+            this.Controls.Add(this.pnl_delete);
             this.Name = "ManagerHome";
             this.Text = "Manager";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -629,6 +726,8 @@
             this.pnl_report.ResumeLayout(false);
             this.pnl_report.PerformLayout();
             this.pnl_delete.ResumeLayout(false);
+            this.pnl_search.ResumeLayout(false);
+            this.pnl_search.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -692,5 +791,13 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Panel pnl_delete;
         private System.Windows.Forms.Panel panelControlls;
+        private System.Windows.Forms.Button btn_search;
+        private System.Windows.Forms.ComboBox cmb_month;
+        private System.Windows.Forms.TextBox txt_projectName;
+        private System.Windows.Forms.Label lbl_month;
+        private System.Windows.Forms.Label lbl_projectName;
+        private System.Windows.Forms.TextBox txt_workerName;
+        private System.Windows.Forms.Label lbl_workerName;
+        private System.Windows.Forms.Panel pnl_search;
     }
 }
