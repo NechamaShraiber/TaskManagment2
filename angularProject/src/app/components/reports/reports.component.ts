@@ -233,9 +233,6 @@ export class ReportsComponent {
   hasNestedChild = (_: number, nodeData: FileNode) => !nodeData.type;
   private _getChildren = (node: FileNode) => node.children;
 
-  search(type) {
-    //this.database.getFilterList(type);
-  }
   }
 
 

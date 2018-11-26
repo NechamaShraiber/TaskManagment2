@@ -4,10 +4,7 @@
       <li routerLinkActive="active">
         <a routerLink="/taskManagers/home/addProject">Add Project</a>
       </li>
-      <!-- <li routerLinkActive="active">
-        <a routerLink="/taskManagers/home/reports">Repotrs</a>
-      </li> -->
-
+      
       <div class="dropdown">
           <button class="dropbtn">Reports
               <i class="fa fa-caret-down"></i>
@@ -15,7 +12,6 @@
           <div class="dropdown-content">
               <a routerLink="/taskManagers/home/reports/{{1}}">workers</a>
               <a routerLink="/taskManagers/home/reports/{{2}}">projects</a>
-              <a routerLink="/taskManagers/home/reports/{{3}}">presence</a>
               <a routerLink="/taskManagers/home/reports/{{3}}">presence</a>
       </div>
       <!-- routerLink="/taskManagers/home/reports" -->
@@ -32,9 +28,6 @@
         <a (click)="add()">Add worker</a>
       </div>
     </div>
-    <li routerLinkActive="active">
-        <a (click)="logOut()">log out</a>
-      </li>
   </ul>
   <ul *ngIf="workerService.idJob==2">
     <li routerLinkActive="active">
@@ -43,9 +36,6 @@
     <li routerLinkActive="active">
       <a routerLink="/taskManagers/home/teamLeaderWorkers">workers</a>
     </li>
-    <li routerLinkActive="active">
-        <a (click)="logOut()">log out</a>
-      </li>
   </ul>
   <ul *ngIf="workerService.idJob>2">
     <li routerLinkActive="active">
@@ -54,9 +44,22 @@
     <li routerLinkActive="active">
         <a routerLink="/taskManagers/home/workerChart">chart</a>
     </li>
-      <li routerLinkActive="active">
-        <a (click)="logOut()">log out</a>
-      </li>
   </ul>
+  <div class="element-container" (click)="logOut()">
+      <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.68 15.887" id="icon--logout">
+  <g id="icon--logout" transform="translate(0.5 0.501)">
+  <line id="Line_7" data-name="Line 7"   class="cls-1" x1="8.04" transform="translate(7.64 6.782)"/>
+  <path id="Path_16" data-name="Path 16" class="cls-1" d="M0,0,2.3,2.183,0,4.365" transform="translate(13.379 4.6)"/>
+  <path id="Path_17" data-name="Path 17" class="cls-2" d="M0,3.733H5.422V0" transform="translate(4.929 8.362)"/>
+  <path id="Path_18" data-name="Path 18" class="cls-2" d="M10.35,5.2V0H0" transform="translate(0 0)"/>
+  <path id="Path_19" data-name="Path 19" class="cls-2" d="M0,0" transform="translate(10.35 4.6)"/>
+  <path id="Path_20" data-name="Path 20" class="cls-2" d="M0,0V12.051l4.929,2.836V2.836Z" transform="translate(0 0)"/>
+</g>
+</svg>
+logOut
+    </div> 
+
+  
+  <!-- <button >log out</button> -->
 </nav>
 <router-outlet class="container"></router-outlet>

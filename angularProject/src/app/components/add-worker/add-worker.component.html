@@ -26,7 +26,7 @@
       <div class="dates">
       <div>
           <select formControlName="JobId" (change)="manag()" [value]="job">
-              <!-- <option selected >{{job}}</option> -->
+                <option></option>  
               <option *ngFor="let job1 of jobList">
                 {{job1["Name"]}}
               </option>
@@ -44,10 +44,9 @@
         </div> 
       </div>
 
-
       <div class="group">
           <select formControlName="ManagerId" [value]="manager">
-              <!-- <option value="0" selected disabled>{{manager}}</option> -->
+            <!-- <option></option> -->
               <option *ngFor="let manager1 of managerList">
                 {{manager1["Name"]}}
               </option>

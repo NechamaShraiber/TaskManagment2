@@ -142,3 +142,46 @@ border-bottom: 2px solid linear-gradient(to right, #B06AB3, #4568DC);
 	}
 
 
+	  section#master-icons-container {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+	  }
+	  
+	  div.parent-container {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		align-items: center;
+		align-content: flex-center;
+	  }
+	  
+	  div.element-container {
+		height: 100px;
+		width: 100px;
+		border: 1px solid;
+		transition: border 0.3s ease-out;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	  }
+	  
+	  div.element-container:hover {
+		border: 1px solid #b4b2b2;
+	  }
+
+	  
+	  /* Icon Logout */
+	  #icon--logout {
+		width: 15.68px;
+	  }
+	  .cls-1,
+	  .cls-2 {
+		fill: none;
+		stroke: #554f4f;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	  }
+	  .cls-1 {
+		stroke-miterlimit: 10;
+	  }

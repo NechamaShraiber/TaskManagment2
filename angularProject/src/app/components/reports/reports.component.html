@@ -1,4 +1,3 @@
-<input type="text" (blur)="search($event.target.value)" name="input">search
 <div class="report container">
         <button (click)="exportToExcel()" class="btn_sign">Export to Excel</button>
 <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="example-tree">
@@ -28,17 +27,7 @@
   </mat-tree>
 </div>
 
-  <!-- <div>
-      <table>
-              <tr *ngFor="let pre of this.presence">
-                <td>{{ pre[0].WorkerName }} dsfaf</td>
-                 <td>{{ pre["WorkerName"] }} sdf</td> 
-              </tr>
-            </table>
-            
-</div> -->
-
-<div *ngIf="id=='3'">
+<!-- <div>
 <h1>TABLE</h1>
 
 <mat-form-field>
@@ -46,32 +35,27 @@
   </mat-form-field>
   
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
-      <!-- WorkerName Column -->
+    <table mat-table [dataSource]="nestedDataSource.data" matSort>
       <ng-container matColumnDef="WorkerName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> WorkerName </th>
         <td mat-cell *matCellDef="let row"> {{row.WorkerName}} </td>
       </ng-container>
   
-      <!-- ProjectName Column -->
       <ng-container matColumnDef="ProjectName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> ProjectName </th>
         <td mat-cell *matCellDef="let row"> {{row.ProjectName}}</td>
       </ng-container>
   
-      <!-- Date Column -->
       <ng-container matColumnDef="Date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
         <td mat-cell *matCellDef="let row"> {{row.Date}} </td>
       </ng-container>
   
-      <!-- Start Column -->
       <ng-container matColumnDef="Start">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Start </th>
         <td mat-cell *matCellDef="let row"> {{row.Start}} </td>
       </ng-container>
   
-        <!-- End Column -->
         <ng-container matColumnDef="End">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> End </th>
             <td mat-cell *matCellDef="let row"> {{row.End}} </td>
@@ -83,7 +67,6 @@
     </table>
   
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-  </div>
-</div>
-<button (click)="exportToExcel()">Export to Excel</button>
+  </div> 
+</div>-->
 
