@@ -43,8 +43,9 @@ export class LoginComponent {
     this.globalService.login(this.userName.value,hash)
       .subscribe(worker => { 
           localStorage.setItem('currentUser', JSON.stringify(worker));
-          this.router.navigate(['taskManagers/home']);
-        },err=>{
+          this.router.navigate(['taskManagers/home'])
+        },
+        err=>{
         this.isExistUser=false;
             this.router.navigate(['taskManagers/login']);
       })
