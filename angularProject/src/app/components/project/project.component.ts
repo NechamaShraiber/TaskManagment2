@@ -10,15 +10,10 @@ import { ProjectDeatailsComponent } from '../project-deatails/project-deatails.c
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.css']
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent  {
   @Input() project:Project;
   constructor(private teamLeaderService: TeamLeaderService, private router: Router, private dialogService:DialogService) { }
 
-  ngOnInit() {
-    
-    console.log(this.project);
-    
-  }
   openProjectDeatails() {
     let navigationExtras: NavigationExtras = {
       queryParams: {

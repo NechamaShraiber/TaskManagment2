@@ -3,18 +3,13 @@ using DAL;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Reflection;
-using System.Web;
 
 namespace BLL
 {
     public class ManagerLogic
     {
-
         public static bool AddProject(Project project)
         {
-
             string query = $"INSERT INTO task_managment.projects  " +
                 $"(name,customer,team_leader,develop_houres,qa_houres,ui_ux_houres,start_date,end_date)" +
                 $" VALUES ('{project.Name}','{project.Customer}'," +
@@ -23,25 +18,20 @@ namespace BLL
             if (DBAccess.RunNonQuery(query) == 1)
             {
                 return AddWorkersToProject(project);
-
             }
-
             return false;
-
         }
 
         private static bool AddWorkersToProject(Project project)
         {
             var query = $"SELECT project_id FROM projects WHERE name = '{project.Name}'";
             int idProject = (int)DBAccess.RunScalar(query);
-
             query = $"SELECT worker_id FROM workers" +
                     $" WHERE manager ={project.TeamLeaderId}";
             List<int> workersId = new List<int>();
             Func<MySqlDataReader, List<int>> func = (reader) =>
             {
                 List<int> workers = new List<int>();
-
                 while (reader.Read())
                 {
                     //Add all the teamLeadr's worker to the project
@@ -51,7 +41,6 @@ namespace BLL
             };
 
             workersId = DBAccess.RunReader(query, func);
-
             workersId.ForEach(idWorker =>
             {
                 var q = $"INSERT INTO project_workers (worker_id,project_id) VALUES({idWorker},{idProject})";
@@ -75,7 +64,6 @@ namespace BLL
 
         public static bool AddWorker(Worker worker)
         {
-
             string query = $"INSERT INTO task_managment.workers  " +
                 $"(name,user_name,password,email,job,manager)" +
                 $" VALUES ('{worker.Name}','{worker.UserName}'," +
@@ -87,11 +75,8 @@ namespace BLL
                 Func<MySqlDataReader, List<int>> func = (reader) =>
                 {
                     List<int> projectsId = new List<int>();
-                    // var v = reader.GetInt32(0);
-                    // var t = reader.GetString(1);
                     while (reader.Read())
                     {
-
                         projectsId.Add(reader.GetInt32(0));
                     }
                     return projectsId;
@@ -104,33 +89,25 @@ namespace BLL
                     DBAccess.RunNonQuery(query3);
                 });
                 return true;
-                
             }
             return false;
         }
 
         public static bool UpdateWorker(Worker worker)
         {
-          
                string  query = $"UPDATE task_managment.workers SET name='{worker.Name}', user_name='{worker.UserName}'" +
                 $", email='{worker.EMail}', job={worker.JobId}, manager={worker.ManagerId} WHERE worker_id={worker.Id}";
-            
             return DBAccess.RunNonQuery(query) == 1;
         }
 
         public static List<Worker> GetAllWorkers()
         {
-
             string query = $"SELECT * FROM task_managment.workers";
-
             Func<MySqlDataReader, List<Worker>> func = (reader) =>
             {
                 List<Worker> workers = new List<Worker>();
-                // var v = reader.GetInt32(0);
-                // var t = reader.GetString(1);
                 while (reader.Read())
                 {
-
                     workers.Add(new Worker
                     {
                         Id = reader.GetInt32(0),
@@ -145,9 +122,7 @@ namespace BLL
                 }
                 return workers;
             };
-
             return DBAccess.RunReader(query, func);
-
         }
         public static List<Worker> GetAllManagers()
         {
@@ -171,8 +146,8 @@ namespace BLL
                 return managers;
             };
             return DBAccess.RunReader(query, func);
-
         }
+
         public static List<Job> GetAllJobs()
         {
             string query = $"SELECT * FROM task_managment.jobs";
@@ -200,7 +175,6 @@ namespace BLL
             Func<MySqlDataReader, List<int>> func = (reader) =>
             {
                 List<int> projects = new List<int>();
-
                 while (reader.Read())
                 {
                     //Add all the teamLeadr's worker to the project
@@ -222,73 +196,37 @@ namespace BLL
 
         }
 
-        // GetDeatails()
-
-        //    public static List<User> GetDeatails(int? projectId, int? teamLeaderId, string month, int? workerId)
-        //{
-        //    string query = $"SELECT * FROM [dbo].[Users]";
-
-        //    Func<SqlDataReader, List<User>> func = (reader) => {
-        //        List<User> users = new List<User>();
-        //        while (reader.Read())
-        //        {
-        //            users.Add(new User
-        //            {
-        //                Id = reader.GetInt32(0),
-        //                UserName = reader.GetString(1),
-        //                IsMale = reader.GetBoolean(3),
-        //                Age = reader.GetInt32(2)
-        //            });
-        //        }
-        //        return users;
-        //    };
-
-        //    return DBAccess.RunReader(query, func);
-        //}
-
-
         public static List<Object> GetPresence()
         {
-
             string query = $"SELECT w.name, p.name, wh.date , wh.start , wh.end" +
 $" FROM workers W JOIN project_workers pw ON w.worker_id = pw.worker_id" +
 $" JOIN projects P ON pw.project_id = p.project_id JOIN work_hours wh" +
 $" ON wh.project_work_id = pw.project_worker_id" +
 $" ORDER BY w.name, p.name, wh.date , wh.start";
 
-
             Func<MySqlDataReader, List<Object>> func = (reader) =>
             {
                 List<Object> Presence = new List<Object>();
-                // var v = reader.GetInt32(0);
-                // var t = reader.GetString(1);
                 while (reader.Read())
                 {
-
                     Presence.Add(new 
                     {
-                       
                         WorkerName = reader.GetString(0),
                         ProjectName=reader.GetString(1),
                         Date = reader.GetDateTime(2),
                        Start=reader.GetString(3),
                        End = reader.GetString(4),
-
-
                     });
                 }
                 return Presence;
             };
 
             return DBAccess.RunReader(query, func);
-
         }
        
         public static string getPassword(int workerId)
         {
-
             string query = $"select password from workers where worker_id={workerId}";
-  
             return DBAccess.RunScalar(query).ToString();
         }
 

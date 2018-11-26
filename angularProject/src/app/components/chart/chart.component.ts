@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as CanvasJS from '../../../canvasjs.min.js';
 import { WorkerService } from '../../shared/service/worker.service.js';
-//import {} from '../../../../'
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
@@ -16,7 +15,6 @@ export class ChartComponent implements OnInit {
   constructor(private workerService: WorkerService) {
     this.workerService.subjectUpdateChart.subscribe(
       {
-        //dont work
         next: () => alert("1")
       });
   }

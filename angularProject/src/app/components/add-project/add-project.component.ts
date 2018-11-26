@@ -1,13 +1,11 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ManagerService } from '../../shared/service/manager.service';
 import { validate } from '../../shared/validate';
 import { Worker } from '../../shared/models/worker';
 import 'hammerjs';
-import { MatDatepickerInputEvent } from '../../../../node_modules/@angular/material';
-// @Output()
-//   dateChange(): EventEmitter<MatDatepickerInputEvent<D>>
+
 @Component({
   selector: 'app-add-project',
   templateUrl: './add-project.component.html',
@@ -54,7 +52,7 @@ export class AddProjectComponent implements OnInit {
       }
     )
   }
-
+//EndDate validate
   changedate(event){
     this.minStartDate=event.value;
     this.minEndDate=this.minStartDate;
@@ -67,7 +65,6 @@ export class AddProjectComponent implements OnInit {
     this.managerService.addProject(this.addProjectGroup.value)
       .subscribe(project => {
         if (project == null) {
-          //   localStorage.setItem('currentProject', JSON.stringify(project));
           this.router.navigate(['taskManagers/home']);
        this.managerService.addWorkersToProject(this.workersToAdd,this.addProjectGroup.value["Name"]).subscribe(res=> { }) 
        alert("The project added succesfully");
@@ -86,20 +83,15 @@ export class AddProjectComponent implements OnInit {
         if (w.ManagerId != teamLeaderId.slice(3, teamLeaderId.Length) && w.JobId > 2)
           this.workersToSelect.push(w);
       });
-
   }
+  //Add worker to project that not bellow the teamleader
   addWorker(worker) {
-    //console.log(this.workersToSelect);
-    //console.log(worker);
     var w = this.workersToSelect.find(w => w.Name == worker)
     this.workersToAdd.push(w);
     var index = this.workersToSelect.indexOf(w);
-    console.log(index);
     this.workersToSelect.splice(index, 1);
-    console.log(this.workersToSelect);
-
-
   }
+  //Remove worker from project that not bellow the teamleader
   removeWorker(worker) {
     var w = this.workersToAdd.find(w => w.Name == worker)
     this.workersToSelect.push(w);

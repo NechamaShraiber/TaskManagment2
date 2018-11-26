@@ -17,16 +17,10 @@ export class HomeComponent implements OnInit {
   constructor(private workerService:WorkerService,private dialogService: DialogService, private managerService: ManagerService,
     private router:Router, private globalService:GlobalService) {
   }
-  //id: number
   ngOnInit() {
     this.currentWorker = JSON.parse(localStorage.getItem('currentUser'));
-
     this.workerService.idJob = this.currentWorker.JobId;
-    // if (this.workerService.idJob >= 3) {
-    //   this.router.navigate(['taskManagers/homeWorkerComponent']);
-    // }
   }
-
 
   delete() {
     let disposable = this.dialogService.addDialog(DeleteWorkerComponent, {
@@ -37,14 +31,8 @@ export class HomeComponent implements OnInit {
         //We get dialog result
         if (isConfirmed) {
           this.managerService.deleteWorker().subscribe(res => {
-            if (!res)
-              alert('The worker deleted')
-              else alert('Can not delete')
-          })
-        }
-        else {
-          //alert('declined');
-        }
+              alert('The worker deleted')},err=>
+               alert('Can not delete'))}
       });
     setTimeout(() => {
       disposable.unsubscribe();
@@ -60,9 +48,7 @@ export class HomeComponent implements OnInit {
           this.managerService.isEdit="Edit";
           this.router.navigate(['taskManagers/home/Addworker']);
         }
-        else {
-          //alert('Can not edit this worker');
-        }
+        
       });
     setTimeout(() => {
       disposable.unsubscribe();

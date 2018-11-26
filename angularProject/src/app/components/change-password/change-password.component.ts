@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { sha256 } from '../../../../node_modules/js-sha256';
 import { validate } from '../../shared/validate';
 import { FormBuilder, FormGroup } from '../../../../node_modules/@angular/forms';
@@ -16,10 +16,8 @@ export interface ConfirmModel {
 export class ChangePasswordComponent extends DialogComponent<ConfirmModel, boolean> implements ConfirmModel {
   password: FormGroup;
   isExistUser: boolean = true;
-  //allow access 'Object' type via interpolation
   objectHolder: typeof Object = Object;
   title: string;
-  //----------------CONSTRUCTOR------------------
 
   constructor(private formBuilder: FormBuilder, private router: Router, private globalService: GlobalService, dialogService: DialogService) {
     super(dialogService);

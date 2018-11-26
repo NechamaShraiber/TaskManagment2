@@ -16,14 +16,10 @@ import { ChangePasswordComponent } from '../change-password/change-password.comp
 })
 export class LoginComponent {
 
-  //----------------PROPERTIRS-------------------
-
   loginFormGroup: FormGroup;
   isExistUser: boolean = true;
   //allow access 'Object' type via interpolation
   objectHolder: typeof Object = Object;
-
-  //----------------CONSTRUCTOR------------------
 
   constructor(private formBuilder: FormBuilder, private router: Router, private globalService: GlobalService,private dialogService: DialogService) {
     this.loginFormGroup = this.formBuilder.group({
@@ -36,7 +32,6 @@ export class LoginComponent {
     }
   }
 
-  //----------------METHODS-------------------
 
  async onSubmit() {
     const hash = await sha256(this.password.value);
@@ -51,11 +46,6 @@ export class LoginComponent {
       })
   }
 
-
-  //----------------GETTERS-------------------
-
-  //getters of the form group controls
-
   get userName() {
     return this.loginFormGroup.controls["userName"];
   }
@@ -66,16 +56,7 @@ export class LoginComponent {
   changePassword(){
     let disposable = this.dialogService.addDialog(ChangePasswordComponent, {
       title: 'Change password',
-    })
-      .subscribe((isConfirmed) => {
-        //We get dialog result
-        if (isConfirmed) {
-          
-        }
-        else {
-          //alert('declined');
-        }
-      });
+    }).subscribe();
     setTimeout(() => {
       disposable.unsubscribe();
     }, 1000000);

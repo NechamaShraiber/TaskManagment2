@@ -1,11 +1,9 @@
-import { Component, OnInit, Injectable } from '@angular/core';
-import { TreeNode } from '../../../../node_modules/@angular/router/src/utils/tree';
-import { Project } from '../../shared/models/project';
+import { Component, Injectable } from '@angular/core';
 import { ManagerService } from '../../shared/service/manager.service';
-import { NG_PROJECT_AS_ATTR_NAME } from '../../../../node_modules/@angular/core/src/render3/interfaces/projection';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
+import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 
 /**
  * Json node data with nested structure. Each node has a filename and a value or a list of children
@@ -17,7 +15,8 @@ export class FileNode {
 }
 
 @Injectable()
- export class FileDatabase {
+ export class FileDatabase{
+ 
   presence: any[];
   cols: any[];
   names: string[];
@@ -26,10 +25,18 @@ export class FileNode {
   projectHours: string[];
   projectNameAndHours: any[];
   dataChange = new BehaviorSubject<FileNode[]>([]);
-
+  paramsId:any;
   get data(): FileNode[] { return this.dataChange.value; }
 
-  constructor(private managerService: ManagerService) {
+  constructor(private managerService: ManagerService,private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.params.subscribe(params => {
+      this.paramsId = params['id'];
+      if(this.paramsId==1)
+      this.filterByNamesThenProjects();
+      else if(this.paramsId==2)
+      this.filterByProjectsThenNames();
+      
+      });
     this.managerService.getPresence().subscribe(pre => {
       this.presence = pre;
       this.names = [];
@@ -74,9 +81,11 @@ export class FileNode {
         })
       });
        this.initialize();
-    this.filterByProjectsThenNames();
+    
   })
+    
 }
+
 filterByNamesThenProjects(){
   this.managerService.getPresence().subscribe(pre => {
     this.presence = pre;
@@ -219,8 +228,9 @@ filterByProjectsThenNames(){
 })
 export class ReportsComponent {
 
-  displayedColumns: string[] = ['WorkerName', 'ProjectName', 'Date', 'Start','End'];
-  dataSource;
+  //Params for basic table
+   displayedColumns: string[] = ['WorkerName', 'ProjectName', 'Date', 'Start','End'];
+   dataSource;
 
   nestedTreeControl: NestedTreeControl<FileNode>;
   nestedDataSource: MatTreeNestedDataSource<FileNode>;
@@ -229,11 +239,12 @@ export class ReportsComponent {
     this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
     database.dataChange.subscribe(data => this.nestedDataSource.data = data);
-    managerService.getPresence().subscribe(res=>this.dataSource=res)
+     managerService.getPresence().subscribe(res=>this.dataSource=res)
   }
    exportToExcel() {
     this.database.exportAsExcelFile();
    }
+
   hasNestedChild = (_: number, nodeData: FileNode) => !nodeData.type;
   private _getChildren = (node: FileNode) => node.children;
 

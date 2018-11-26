@@ -18,15 +18,8 @@ jobList: any[] = []; job: string;
   constructor(private globalService:GlobalService,private dialogService:DialogService, private teamLeaderService: TeamLeaderService, private router: Router) { }
 
   ngOnInit() {
-    console.log(this.worker);
-//     this.globalService.getAllJobs().subscribe(
-//       res=>{
-// console.log(res);
-//       })
-     
      this.globalService.getAllJobs().subscribe(
        res => {
-         console.log(res)
          this.jobList = res;
          this.job = this.jobList.find(p => p.Id == this.worker.JobId).Name;
        });

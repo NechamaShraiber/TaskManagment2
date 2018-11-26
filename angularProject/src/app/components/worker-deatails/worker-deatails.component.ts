@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { TeamLeaderService } from '../../shared/service/team-leader.service';
 import { Worker } from '../../shared/models/worker';
@@ -40,17 +40,7 @@ private projectId:number;
      this.teamLeaderService.setAlloactedHours(this.numHours,this.projectId).subscribe(
       res => {
        this.projectsHours.find(p=>p.Id==this.projectId).AllocatedHours=this.numHours;
-         this.projectId=null;
-       // .forEach(element => {
-      //    if(element.Id==id)
-      //    {
-      //      console.log(element.AlloactedHours)
-      //    element.AlloactedHours=this.numHours;
-      //    }
-         
-      
-         
-      //  }); 
+         this.projectId=null; 
       })
       else
       this.projectId=null;
