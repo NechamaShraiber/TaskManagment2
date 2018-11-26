@@ -13,7 +13,12 @@ export class ChartComponent implements OnInit {
   projectDeatails = new Array();
   projectDeatails2 = new Array();
   chart: any;
-  constructor() {
+ 
+  constructor(private workerService: WorkerService) {
+    this.workerService.subjectUpdateChart.subscribe(
+      {
+        next: () => alert("1")
+      });
   }
 
   ngOnInit() {

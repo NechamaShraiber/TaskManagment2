@@ -1,10 +1,11 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ManagerService } from '../../shared/service/manager.service';
 import { validate } from '../../shared/validate';
 import { Worker } from '../../shared/models/worker';
 import 'hammerjs';
+
 @Component({
   selector: 'app-add-project',
   templateUrl: './add-project.component.html',
@@ -55,7 +56,7 @@ export class AddProjectComponent implements OnInit {
       }
     )
   }
-
+//EndDate validate
   changedate(event){
     this.minStartDate=event.value;
     this.minEndDate=this.minStartDate;
@@ -87,6 +88,7 @@ export class AddProjectComponent implements OnInit {
       });
   }
 
+  //Add worker to project that not bellow the teamleader
   addWorker(worker) {
     var w = this.workersToSelect.find(w => w.Name == worker)
     this.workersToAdd.push(w);
@@ -94,6 +96,7 @@ export class AddProjectComponent implements OnInit {
     this.workersToSelect.splice(index, 1);
   }
   
+  //Remove worker from project that not bellow the teamleader
   removeWorker(worker) {
     var w = this.workersToAdd.find(w => w.Name == worker)
     this.workersToSelect.push(w);

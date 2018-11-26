@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { sha256 } from '../../../../node_modules/js-sha256';
 import { validate } from '../../shared/validate';
 import { FormBuilder, FormGroup } from '../../../../node_modules/@angular/forms';
@@ -18,7 +18,6 @@ export class ChangePasswordComponent extends DialogComponent<ConfirmModel, boole
   isExistUser: boolean = true;
   objectHolder: typeof Object = Object;
   title: string;
-  //----------------CONSTRUCTOR------------------
 
   constructor(private formBuilder: FormBuilder, private router: Router, private globalService: GlobalService, dialogService: DialogService) {
     super(dialogService);

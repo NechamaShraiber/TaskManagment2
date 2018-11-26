@@ -10,7 +10,7 @@ import { ProjectDeatailsComponent } from '../project-deatails/project-deatails.c
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.css']
 })
-export class ProjectComponent   {
+export class ProjectComponent  {
   @Input() project:Project;
   constructor(private teamLeaderService: TeamLeaderService, private router: Router, private dialogService:DialogService) { }
 

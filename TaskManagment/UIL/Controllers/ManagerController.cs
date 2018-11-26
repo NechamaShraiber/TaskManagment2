@@ -11,8 +11,6 @@ namespace UIL.Controllers
 {
     public class ManagerController : ApiController
     {
-        
-
         /// <summary>
         /// add new project
         /// </summary>
@@ -23,10 +21,8 @@ namespace UIL.Controllers
         public HttpResponseMessage AddProject([FromBody]Project value)
         {
             //curl -v -X POST -H "Content-type: application/json" -d "{\"Name\":\"tryProject\", \"Customer\":\"nnn\",\"TeamLeaderId\":\"11\" , \"DevelopHours\":\"300\",\"QAHours\":\"250\", \"UiUxHours\":\"100\",\"StartDate\":\"2018-02-02\",\"EndDate\":\"2018-07-07\"}"  http://localhost:59628/api/addProject
-           // value.EndDate.tos
             if (ModelState.IsValid)
             {
-             
                 return (ManagerLogic.AddProject(value)) ?
                    new HttpResponseMessage(HttpStatusCode.Created) :
                    new HttpResponseMessage(HttpStatusCode.BadRequest)
@@ -35,23 +31,19 @@ namespace UIL.Controllers
                    };
             }
             return Global.ErrorList(ModelState);
-         
+
         }
         [HttpPost]
         [Route("api/addWorkersToProject/{name}")]
         public HttpResponseMessage addWorkersToProject([FromBody]int[] ids, [FromUri]string name)
         {
             //curl -v -X POST -H "Content-type: application/json" -d "{\"Name\":\"tryProject\", \"Customer\":\"nnn\",\"TeamLeaderId\":\"11\" , \"DevelopHours\":\"300\",\"QAHours\":\"250\", \"UiUxHours\":\"100\",\"StartDate\":\"2018-02-02\",\"EndDate\":\"2018-07-07\"}"  http://localhost:59628/api/addProject
-            // value.EndDate.tos
             return (ManagerLogic.addWorkersToProject(ids, name)) ?
-
                      new HttpResponseMessage(HttpStatusCode.OK) :
                      new HttpResponseMessage(HttpStatusCode.BadRequest)
                      {
                          Content = new ObjectContent<String>("Can not update in Data Base", new JsonMediaTypeFormatter())
                      };
-
-
         }
 
         /// <summary>
@@ -75,31 +67,8 @@ namespace UIL.Controllers
                    };
             }
             return Global.ErrorList(ModelState);
-
         }
 
-
-        /*
-        ●	ניהול דוחות - מנוע הפקת דוחות לפי חודש/עובד/ראש צוות/פרויקט.
-o	חובה שיהיה ייצוא לאקסל.
-Get - get all the details that the manager need to the report
-        
-         [HttpGet]
-        [Route("api/addDeatails/{projectId}/{teamLeaderId}/{month}/{workerId}")]
-        public HttpResponseMessage GetDeatails(int? projectId, int? teamLeaderId, string month, int? workerId)
-        {
-            return new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new ObjectContent<String>(ManagerLogic.GetDeatails(projectId,teamLeaderId,month,workerId), new JsonMediaTypeFormatter())
-            };
-        }
-
-
- */
-
-
-        
-       
         /// <summary>
         /// edit worker's details
         /// </summary>
@@ -120,7 +89,7 @@ Get - get all the details that the manager need to the report
                     };
             };
 
-           return Global.ErrorList(ModelState);
+            return Global.ErrorList(ModelState);
         }
         /// <summary>
         /// get all workers
@@ -131,7 +100,6 @@ Get - get all the details that the manager need to the report
         [Route("api/getAllWorkers")]
         public HttpResponseMessage GetAllWorkers()
         {
-
             //curl -X GET -v http://localhost:59628/api/getAllWorkers
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
@@ -139,13 +107,10 @@ Get - get all the details that the manager need to the report
             };
         }
 
- [HttpGet]
-
+        [HttpGet]
         [Route("api/getPresence")]
         public HttpResponseMessage GetPresence()
-
         {
-
             //curl -X GET -v http://localhost:59628/api/GetPresence
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
@@ -156,7 +121,6 @@ Get - get all the details that the manager need to the report
         [Route("api/getAllJobs")]
         public HttpResponseMessage GetAllJobs()
         {
-
             //curl -X GET -v http://localhost:59628/api/getAllWorkers
             return new HttpResponseMessage(HttpStatusCode.OK)
             {

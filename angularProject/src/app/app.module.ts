@@ -29,7 +29,6 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import 'hammerjs';
 import { WorkerChartComponent } from './components/worker-chart/worker-chart.component';
 import {MatButtonModule, MatCheckboxModule, MatNativeDateModule,MatTreeModule,MatIconModule} from '@angular/material';
-import 'hammerjs';
 import {MatDatepickerModule,MatFormFieldModule,MatInputModule,MatSelectModule,MatTableModule,MatPaginatorModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
@@ -38,7 +37,6 @@ const globalPath: string = "http://localhost:59628/api/";
 const routes: Routes = [
   { path: 'taskManagers/login', component: LoginComponent },
   { path: 'taskManagers/changePassword', component: ChangePasswordComponent },
-
   {
     path: 'taskManagers/home', component: HomeComponent, children: [
       { path: 'addProject', component: AddProjectComponent, canActivate: [AuthGuard] },
@@ -49,7 +47,6 @@ const routes: Routes = [
       { path: 'teamLeaderWorkers', component: TeamLeaderWorkersComponent, canActivate: [AuthGuard] },
       { path: 'homeWorker', component: HomeWorkerComponent, canActivate: [AuthGuard] },
       { path: 'workerChart', component: WorkerChartComponent, canActivate: [AuthGuard] },
-
     ]
   },
   { path: '**', component: LoginComponent },
@@ -111,7 +108,6 @@ const routes: Routes = [
   ],
   exports: [MatButtonModule,
      MatCheckboxModule],
-
   providers: [WorkerService],
   bootstrap: [AppComponent]
 })

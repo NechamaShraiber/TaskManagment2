@@ -3,7 +3,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ManagerService } from '../../shared/service/manager.service';
 import { validate } from '../../shared/validate';
-import sha256 from 'async-sha256';
 import { GlobalService } from '../../shared/service/global.service';
 import { Job } from '../../shared/models/job';
 
@@ -70,37 +69,40 @@ export class AddWorkerComponent implements OnInit {
   get f() { return this.addWorkerGroup.controls; }
 
   onSubmit() {
+    //If it for "ADD"
     if (this.managerService.isEdit == "Add") {
+      //Saves the id of manager and job
     this.addWorkerGroup.value["ManagerId"]?this.idManager =this.managerList.find(p=>p.Name==this.addWorkerGroup.value["ManagerId"]).Id:this.idManager=this.managerList[0].Id;
     this.addWorkerGroup.value["ManagerId"] = this.idManager;
     this.addWorkerGroup.value["JobId"]?this.idJob =this.jobList.find(p=>p.Name==this.addWorkerGroup.value["JobId"]).Id:this.idJob=this.jobList[0].Id;
     this.addWorkerGroup.value["JobId"] = this.idJob;
       this.managerService.addWorker(this.addWorkerGroup.value)
         .subscribe(worker => {
-          if (worker == null) {
             alert("The worker added succesfully")
             this.router.navigate(['taskManagers/home']);
-          }
-          else {
-            this.router.navigate(['taskManagers/login'])
-          }
-        })
-    }
+          },err=>
+          {
+            alert("Can not add the worker")
+            this.router.navigate(['taskManagers/home'])}
+          )}
+    
     else {
+      //If it for "EDIT"
      this.managerService.isEdit = "Add"
+     //Saves the id of manager and job
      this.addWorkerGroup.value["ManagerId"]?this.addWorkerGroup.value["ManagerId"]=this.managerList.find(p=>p.Name== this.addWorkerGroup.value["ManagerId"]).Id:this.addWorkerGroup.value["ManagerId"] =this.idManager;
      this.addWorkerGroup.value["JobId"]?this.addWorkerGroup.value["JobId"]=(this.jobList.find(p=>p.Name== this.addWorkerGroup.value.JobId).Id):this.addWorkerGroup.value["JobId"] =this.idJob;
       this.managerService.updateWorker(this.addWorkerGroup.value)
         .subscribe(worker => {
-          if (worker == null) {
             alert("The worker's details edited succesfully")
             this.managerService.workerToUpdate = null;
             this.router.navigate(['taskManagers/home']);
+          },err=>
+         {
+          alert("Can not edit the worker")
+            this.router.navigate(['taskManagers/home'])
           }
-          else {
-            this.router.navigate(['taskManagers/login'])
-          }
-        })
+        )
     }
   }
 }

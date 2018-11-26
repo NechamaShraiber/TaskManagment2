@@ -30,13 +30,9 @@ export class HomeComponent implements OnInit {
       .subscribe((isConfirmed) => {
         if (isConfirmed) {
           this.managerService.deleteWorker().subscribe(res => {
-            if (!res)
-              alert('The worker deleted')
-              else alert('Can not delete')
-          })
-        }
-        else {
-        }
+
+              alert('The worker deleted')},err=>
+               alert('Can not delete'))}
       });
     setTimeout(() => {
       disposable.unsubscribe();
@@ -52,8 +48,7 @@ export class HomeComponent implements OnInit {
           this.managerService.isEdit="Edit";
           this.router.navigate(['taskManagers/home/Addworker']);
         }
-        else {
-        }
+       
       });
     setTimeout(() => {
       disposable.unsubscribe();

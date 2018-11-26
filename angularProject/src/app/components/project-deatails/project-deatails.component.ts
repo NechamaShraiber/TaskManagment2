@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Route, ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { Project } from '../../shared/models/project';
 import { TeamLeaderService } from '../../shared/service/team-leader.service';
 import { DialogService, DialogComponent } from '../../../../node_modules/ng2-bootstrap-modal';

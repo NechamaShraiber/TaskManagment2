@@ -29,7 +29,6 @@ export class EditWorkerComponent extends DialogComponent<ConfirmModel, boolean> 
     this.managerService.getAllWorkers().subscribe(
       res=>{
         this.workerList=res;
-        console.log(this.workerList);
     })
   }
 

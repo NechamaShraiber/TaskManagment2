@@ -78,6 +78,7 @@
       {{worker.Name}}
     </option>
   </select> 
+
    <p>select workers to remove:</p>
   <select (change)="removeWorker($event.target.value)">
     <option></option>
@@ -85,6 +86,7 @@
       {{worker.Name}}
     </option>
   </select>
+
 </div>
 
 <button type="submit" class="button" [disabled]="addProjectGroup.invalid">Add</button>

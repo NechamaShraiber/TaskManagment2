@@ -4,6 +4,7 @@ import {Router } from '../../../../node_modules/@angular/router';
 import { DialogService } from '../../../../node_modules/ng2-bootstrap-modal';
 import { SendMsgComponent } from '../send-msg/send-msg.component';
 import { Worker } from '../../shared/models/worker';
+
 @Component({
   selector: 'app-home-worker',
   templateUrl: './home-worker.component.html',

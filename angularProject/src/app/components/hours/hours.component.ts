@@ -1,21 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { WorkerService } from '../../shared/service/worker.service';
 import { formatDate } from '../../../../node_modules/@angular/common';
-import { forEach } from '../../../../node_modules/@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-hours',
   templateUrl: './hours.component.html',
   styleUrls: ['../project/project.component.css', './hours.component.css']
 })
-export class HoursComponent implements OnInit {
+export class HoursComponent {
   @Input()
   private hour: any;
   @Input()
   private isProject: boolean = false;
   currectProject: any;
   isStart: boolean = true;
-  // btnValue: string = "start";
   t: any;
   timer;
   time: any;
@@ -23,9 +21,6 @@ export class HoursComponent implements OnInit {
   sumTime: any;
   constructor(private workerService: WorkerService) { }
 
-  ngOnInit() {
-    console.log(this.hour)
-  }
   updateHours() {
 
     if (this.workerService.projectStart != null && this.workerService.projectStart != this.hour) {
@@ -40,12 +35,9 @@ export class HoursComponent implements OnInit {
       this.currectProject = this.hour;
       this.workerService.projectStart = this.hour;
       this.startTask = new Date();
-      // this.btnValue = "end";
 
       this.timer = setInterval(() => {
-        console.log( this.startTask.getTime());
         var ttt=new Date().getTime();
-        console.log(ttt)
         this.t="00";
         this.t +=  ttt-this.startTask.getTime() ;
 

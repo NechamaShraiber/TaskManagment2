@@ -1,8 +1,13 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { ManagerService } from '../../shared/service/manager.service';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
+import { ActivatedRoute } from '../../../../node_modules/@angular/router';
+
+/**
+ * Json node data with nested structure. Each node has a filename and a value or a list of children
+ */
 export class FileNode {
   children: FileNode[];
   filename: string;
@@ -10,7 +15,7 @@ export class FileNode {
 }
 
 @Injectable()
- export class FileDatabase {
+ export class FileDatabase{
  
   presence: any[];
  // filterPresence: any[];
@@ -22,7 +27,17 @@ export class FileNode {
   projectNameAndHours: any[];
   dataChange = new BehaviorSubject<FileNode[]>([]);
   get data(): FileNode[] { return this.dataChange.value; }
-  constructor(private managerService: ManagerService) {
+  paramsId:any;
+  constructor(private managerService: ManagerService,private activatedRoute: ActivatedRoute) { 
+   
+    this.activatedRoute.params.subscribe(params => {
+      this.paramsId = params['id'];
+      if(this.paramsId==1)
+      this.filterByNamesThenProjects();
+      else if(this.paramsId==2)
+      this.filterByProjectsThenNames();
+      
+      });
     this.managerService.getPresence().subscribe(pre => {
       this.presence = pre;
      // this.filterPresence=pre;
@@ -65,9 +80,11 @@ export class FileNode {
         })
       });
        this.initialize();
-    this.filterByProjectsThenNames();
+    
   })
+    
 }
+
 filterByNamesThenProjects(){
   this.managerService.getPresence().subscribe(pre => {
     this.presence = pre;
@@ -197,9 +214,10 @@ export class ReportsComponent {
   searchByWorker:string;
   searchByProject:string;
   searchByMonth:string;
-  displayedColumns: string[] = ['WorkerName', 'ProjectName', 'Date', 'Start','End'];
-  dataSource;
-  filterDataSource;
+  //Params for basic table
+   displayedColumns: string[] = ['WorkerName', 'ProjectName', 'Date', 'Start','End'];
+   dataSource;
+   filterDataSource;
   nestedTreeControl: NestedTreeControl<FileNode>;
   nestedDataSource: MatTreeNestedDataSource<FileNode>;
   constructor(private database: FileDatabase, private managerService: ManagerService) {
@@ -234,6 +252,7 @@ search(){
     );
   }
 }
+
   hasNestedChild = (_: number, nodeData: FileNode) => !nodeData.type;
   private _getChildren = (node: FileNode) => node.children;
   }

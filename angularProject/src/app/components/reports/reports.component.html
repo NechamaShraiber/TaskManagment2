@@ -49,6 +49,8 @@
     </select>
     <input [(ngModel)]="searchBy" type="text">
     <button (click)="search()">search</button>
+
+<div *ngIf="paramsId>2">
 <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   
     <!-- Position Column -->
@@ -74,7 +76,6 @@
       <th mat-header-cell *matHeaderCellDef> Start </th>
       <td mat-cell *matCellDef="let element"> {{element.Start}} </td>
     </ng-container>
-
     
     <!-- Symbol Column -->
     <ng-container matColumnDef="End">
