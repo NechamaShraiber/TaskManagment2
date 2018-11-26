@@ -393,17 +393,21 @@ namespace TaskManagment.Forms
                     case 1:
                         {
                             SelectByWorkerName();
+                            lbl_report.Text = "report by worker";
                             break;
                         }
                     case 2:
                         {
                             SelectByProjectName();
+                            lbl_report.Text = "report by project";
 
                             break;
                         }
                     case 3:
                         {
                             ShowPresences();
+                            lbl_report.Text = "presences report";
+
                             break;
                         }
                 }
@@ -624,5 +628,7 @@ namespace TaskManagment.Forms
         {
             Global.LogOut();
         }
+
+        
     }
 }
