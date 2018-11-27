@@ -8,7 +8,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using TaskManagment.Models;
 
@@ -64,6 +63,7 @@ namespace TaskManagment.Forms
             data_start.CustomFormat = "yyyy-MM-dd";
             data_start.CustomFormat = "yyyy-MM-dd";
             manager = Global.GetManagers();
+            txt_team_name.Items.Clear();
             manager.ForEach(t => { txt_team_name.Items.Add(t.Name); });
             getAllWorkers();
         }
@@ -186,6 +186,7 @@ namespace TaskManagment.Forms
 
 
                     MessageBox.Show($"The project {proj.Name} added successfully");
+                    if(workerToAdd!=null &&workerToAdd.Count>0)
                     addWorkersToProject(proj.Name);
 
                 }
@@ -280,6 +281,7 @@ namespace TaskManagment.Forms
             cmb_job.DataSource = Global.jobs.Select(j => j.Name).ToList();
             manager = Global.GetManagers();
             cmb_manager.Items.Clear();
+            manager = Global.GetManagers();
             cmb_manager.Items.AddRange(manager.Select(m => m.Name).ToArray());
             this.isAdd = isAdd;
             lblTitle.Text = isAdd ? "add worker" : "edit worker";
@@ -361,6 +363,10 @@ namespace TaskManagment.Forms
                     var result = streamReader.ReadToEnd();
 
                     MessageBox.Show($"The worker {txt_name.Text} {(isAdd ? "added" : "changed")} successfully");
+                    cmb_manager.Items.Clear();
+                    manager = Global.GetManagers();
+                    cmb_manager.Items.AddRange(manager.Select(m => m.Name).ToArray());
+
                     //tab_manager.Controls.Remove(tab_workerDeatrails);
                 }
             }
@@ -603,6 +609,8 @@ namespace TaskManagment.Forms
         }
         private void addProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // getAllWorkers();
+            AddProject();
             ShowPanel(pnl_add_project);
         }
 
@@ -656,5 +664,24 @@ namespace TaskManagment.Forms
             Global.LogOut();
         }
 
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void pnl_report_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ManagerHome_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnl_add_project_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

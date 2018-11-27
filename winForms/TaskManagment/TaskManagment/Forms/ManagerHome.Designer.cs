@@ -119,6 +119,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(1149, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // addProjectToolStripMenuItem
             // 
@@ -244,6 +245,7 @@
             this.pnl_report.Size = new System.Drawing.Size(1085, 514);
             this.pnl_report.TabIndex = 6;
             this.pnl_report.Visible = false;
+            this.pnl_report.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_report_Paint);
             // 
             // pnl_search
             // 
@@ -369,7 +371,7 @@
             this.pnl_add_worker.Controls.Add(this.label14);
             this.pnl_add_worker.Controls.Add(this.label15);
             this.pnl_add_worker.Controls.Add(this.lblTitle);
-            this.pnl_add_worker.Location = new System.Drawing.Point(32, 47);
+            this.pnl_add_worker.Location = new System.Drawing.Point(32, 46);
             this.pnl_add_worker.Name = "pnl_add_worker";
             this.pnl_add_worker.Size = new System.Drawing.Size(1085, 498);
             this.pnl_add_worker.TabIndex = 44;
@@ -381,6 +383,7 @@
             this.txt_password.Name = "txt_password";
             this.txt_password.Size = new System.Drawing.Size(100, 20);
             this.txt_password.TabIndex = 65;
+            this.txt_password.TextChanged += new System.EventHandler(this.checkWorkerValidation);
             // 
             // txt_email
             // 
@@ -388,6 +391,7 @@
             this.txt_email.Name = "txt_email";
             this.txt_email.Size = new System.Drawing.Size(100, 20);
             this.txt_email.TabIndex = 61;
+            this.txt_email.TextChanged += new System.EventHandler(this.checkWorkerValidation);
             // 
             // txt_user_name
             // 
@@ -395,6 +399,7 @@
             this.txt_user_name.Name = "txt_user_name";
             this.txt_user_name.Size = new System.Drawing.Size(100, 20);
             this.txt_user_name.TabIndex = 60;
+            this.txt_user_name.TextChanged += new System.EventHandler(this.checkWorkerValidation);
             // 
             // txt_name
             // 
@@ -402,6 +407,7 @@
             this.txt_name.Name = "txt_name";
             this.txt_name.Size = new System.Drawing.Size(100, 20);
             this.txt_name.TabIndex = 59;
+            this.txt_name.TextChanged += new System.EventHandler(this.checkWorkerValidation);
             // 
             // lblPassword
             // 
@@ -435,6 +441,7 @@
             this.btn_Action.Size = new System.Drawing.Size(75, 23);
             this.btn_Action.TabIndex = 58;
             this.btn_Action.UseVisualStyleBackColor = true;
+            this.btn_Action.Click += new System.EventHandler(this.btn_add_Click);
             // 
             // label10
             // 
@@ -516,6 +523,7 @@
             this.pnl_add_project.Size = new System.Drawing.Size(1099, 519);
             this.pnl_add_project.TabIndex = 45;
             this.pnl_add_project.Visible = false;
+            this.pnl_add_project.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_add_project_Paint);
             // 
             // dgvAddWorkers
             // 
@@ -611,6 +619,7 @@
             this.txt_UIUX_hours.Name = "txt_UIUX_hours";
             this.txt_UIUX_hours.Size = new System.Drawing.Size(100, 20);
             this.txt_UIUX_hours.TabIndex = 33;
+            this.txt_UIUX_hours.TextChanged += new System.EventHandler(this.checkProjectValidation);
             // 
             // label6
             // 
@@ -627,6 +636,7 @@
             this.txt_developer_hours.Name = "txt_developer_hours";
             this.txt_developer_hours.Size = new System.Drawing.Size(100, 20);
             this.txt_developer_hours.TabIndex = 32;
+            this.txt_developer_hours.TextChanged += new System.EventHandler(this.checkProjectValidation);
             // 
             // label7
             // 
@@ -643,6 +653,7 @@
             this.txt_QI_houers.Name = "txt_QI_houers";
             this.txt_QI_houers.Size = new System.Drawing.Size(100, 20);
             this.txt_QI_houers.TabIndex = 31;
+            this.txt_QI_houers.TextChanged += new System.EventHandler(this.checkProjectValidation);
             // 
             // label8
             // 
@@ -659,6 +670,7 @@
             this.txt_customer_name.Name = "txt_customer_name";
             this.txt_customer_name.Size = new System.Drawing.Size(100, 20);
             this.txt_customer_name.TabIndex = 30;
+            this.txt_customer_name.TextChanged += new System.EventHandler(this.checkProjectValidation);
             // 
             // label9
             // 
@@ -675,6 +687,7 @@
             this.txt_projName.Name = "txt_projName";
             this.txt_projName.Size = new System.Drawing.Size(100, 20);
             this.txt_projName.TabIndex = 29;
+            this.txt_projName.TextChanged += new System.EventHandler(this.checkProjectValidation);
             // 
             // btn_addProject
             // 
@@ -684,6 +697,7 @@
             this.btn_addProject.TabIndex = 28;
             this.btn_addProject.Text = "ADD";
             this.btn_addProject.UseVisualStyleBackColor = true;
+            this.btn_addProject.Click += new System.EventHandler(this.btn_addProject_Click);
             // 
             // ManagerHome
             // 
@@ -691,12 +705,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1149, 592);
             this.Controls.Add(this.pnl_add_project);
-            this.Controls.Add(this.pnl_add_worker);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnl_report);
+            this.Controls.Add(this.pnl_add_worker);
             this.Controls.Add(this.pnl_delete);
+            this.Controls.Add(this.pnl_report);
             this.Name = "ManagerHome";
             this.Text = "Manager";
+            this.Load += new System.EventHandler(this.ManagerHome_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
