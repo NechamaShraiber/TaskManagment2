@@ -18,15 +18,11 @@ namespace BOL
         [Required]
         [MinLength(6), MaxLength(64)]
         public string Password { get; set; }
-        [ForeignKey("job")]
         public int JobId { get; set; }
         [Required]
         [MinLength(6), MaxLength(30)]
         public string EMail { get; set; }
-        [ForeignKey("Manager")]
         public int? ManagerId { get; set; }
 
-        //public  Job Job { get; set; }
-        //public Worker Manager { get; set; }
     }
 }

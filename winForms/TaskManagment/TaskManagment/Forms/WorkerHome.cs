@@ -16,7 +16,9 @@ namespace TaskManagment.Forms
         DateTime startdate;
         dynamic projectList;
         int projectId;
-
+        double allocatedHours;
+        string[] hours;
+        bool IsmoreThenAllocatedHours = false;
         public WorkerHome()
         {
             InitializeComponent();
@@ -67,6 +69,9 @@ namespace TaskManagment.Forms
                 try {
                  
                     projectId = int.Parse((String) dgv_task.SelectedRows[0].Cells[0].FormattedValue);
+                   allocatedHours = double.Parse((String) dgv_task.SelectedRows[0].Cells[2].FormattedValue);
+                   hours=((String)dgv_task.SelectedRows[0].Cells[3].FormattedValue).Split(':');
+                   
                     lbl_beginningTime.Text = startdate.ToString("hh:mm:ss tt");
                     btn_task.Text = "end Task";
                 }
@@ -83,6 +88,8 @@ namespace TaskManagment.Forms
                 btn_task.Text = "Start Task";
                 lbl_beginningTime.Text = "";
                 lbl_timer.Text = "";
+                IsmoreThenAllocatedHours = false;
+
                 
             }
             timer.Enabled = !timer.Enabled;
@@ -151,11 +158,7 @@ namespace TaskManagment.Forms
                 UpdateChart();
         }
 
-        private void timerClock_Tick(object sender, EventArgs e)
-        {
-            lblClock.Text = DateTime.Now.ToString("hh:mm:ss tt");
-        }
-
+       
         private void btn_task_Click(object sender, EventArgs e)
         {
             UpdateTime();
@@ -164,6 +167,30 @@ namespace TaskManagment.Forms
         private void timer_Tick(object sender, EventArgs e)
         {
             var d = (DateTime.Now - startdate);
+            int h=Convert.ToInt32( hours[0])+ d.Hours;
+            int m=Convert.ToInt32(hours[1]) + d.Minutes;
+            if(m>59)
+            {
+                m -= 60;
+                h++;
+            }
+            if (Convert.ToDouble(h + "." + m % 100) >= allocatedHours&&!IsmoreThenAllocatedHours)
+            {
+                timer.Enabled = false;
+
+                //MessageBox.Show("you worksdljfklsdja");
+                if (MessageBox.Show("you work more them allocated hours Are you whant continue?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    IsmoreThenAllocatedHours = true;
+                    timer.Enabled = true;
+                }
+                else
+                {
+                    timer.Enabled = true;
+                    UpdateTime();
+                }
+
+            }
             lbl_timer.Text = d.ToString(@"hh\:mm\:ss");
         }
 
