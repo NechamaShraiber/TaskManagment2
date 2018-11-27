@@ -1,4 +1,4 @@
-<div class="report container">
+<div *ngIf="paramsId<2" class="report container">
         <button (click)="exportToExcel()" class="btn_sign">Export to Excel</button>
 <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="example-tree">
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
