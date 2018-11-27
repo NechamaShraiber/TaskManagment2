@@ -220,7 +220,10 @@ export class ReportsComponent{
   filterDataSource;
   nestedTreeControl: NestedTreeControl<FileNode>;
   nestedDataSource: MatTreeNestedDataSource<FileNode>;
-  constructor(private database: FileDatabase, managerService: ManagerService) {
+  constructor(private database: FileDatabase, managerService: ManagerService,private activatedRoute:ActivatedRoute) {
+    this.activatedRoute.params.subscribe(params => {
+      this.paramsId = params['id'];
+    });
     this.nestedTreeControl = new NestedTreeControl<FileNode>(this._getChildren);
     this.nestedDataSource = new MatTreeNestedDataSource();
     database.dataChange.subscribe(data => this.nestedDataSource.data = data);

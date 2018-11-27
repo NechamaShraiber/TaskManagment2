@@ -1,3 +1,4 @@
+<button (click)="exportToExcel()" class="btn_sign">Export to Excel</button>
 <div *ngIf="paramsId<=2" class="report container">
   <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="example-tree">
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
@@ -24,7 +25,7 @@
     </mat-nested-tree-node>
   </mat-tree>
 </div>
-<div *ngIf="paramsId==3">
+<div class="tableDiv" *ngIf="paramsId==3">
   <p>
     <span class="input">
       <input type="text" placeholder="worker name" [(ngModel)]="searchByWorker" type="text">
@@ -90,4 +91,3 @@
   </table>
 </div>
 
-<button (click)="exportToExcel()" class="btn_sign">Export to Excel</button>

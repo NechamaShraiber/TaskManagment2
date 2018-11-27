@@ -56,7 +56,9 @@
         </div> 
       </div>
     </div>
-      <button type="submit" class="button col-md-offset-2 col-md-8" [disabled]="addWorkerGroup.invalid&&managerService.isEdit=='Add'">{{managerService.isEdit}}</button>
+      <button type="submit" class="button col-md-offset-2 col-md-8 submit" [disabled]="addWorkerGroup.invalid&&managerService.isEdit=='Add'">{{managerService.isEdit}}</button>
+      <button type="reset" class="button col-md-offset-2 col-md-8 reset">reset</button>
+<div class="aLink"><a href="taskManagers/home">Back to homePage</a></div>
     </form>
   </div>
   

@@ -5,6 +5,7 @@ import { ManagerService } from '../../shared/service/manager.service';
 import { validate } from '../../shared/validate';
 import { GlobalService } from '../../shared/service/global.service';
 import { Job } from '../../shared/models/job';
+import { Worker } from '../../shared/models/worker';
 
 @Component({
   selector: 'app-add-worker',
@@ -95,7 +96,7 @@ export class AddWorkerComponent implements OnInit {
       this.managerService.updateWorker(this.addWorkerGroup.value)
         .subscribe(worker => {
             alert("The worker's details edited succesfully")
-            this.managerService.workerToUpdate = null;
+            this.managerService.workerToUpdate = new Worker();
             this.router.navigate(['taskManagers/home']);
           },err=>
          {
