@@ -166,6 +166,9 @@ border-bottom: 2px solid linear-gradient(to right, #B06AB3, #4568DC);
 		justify-content: center;
 	  }
 	  
+	  div.element-container {
+		border: 1px solid #B06AB3;
+	  }
 	  div.element-container:hover {
 		border: 1px solid #b4b2b2;
 	  }
@@ -178,10 +181,14 @@ border-bottom: 2px solid linear-gradient(to right, #B06AB3, #4568DC);
 	  .cls-1,
 	  .cls-2 {
 		fill: none;
-		stroke: #554f4f;
+		stroke: #B06AB3;
 		stroke-linecap: round;
 		stroke-linejoin: round;
 	  }
 	  .cls-1 {
 		stroke-miterlimit: 10;
 	  }
+	  .logOut{
+		  color: white;
+	  }
+	 

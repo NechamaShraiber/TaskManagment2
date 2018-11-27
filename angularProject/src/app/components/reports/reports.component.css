@@ -35,7 +35,8 @@
     cursor: pointer;
 }
 table {
-    width: 100%;
+    width: 80%;
+    border-right: 10%;
   }
   
   .mat-form-field {
@@ -48,28 +49,28 @@ table {
   }
 
     .searchButton {
-    position: relative;
+    position: inherit;
     border: 0;
     padding: 0;
     cursor: pointer;
-    height: 40px;
+    height: 42px;
     width: 130px;
     font: 15px/40px 'Open Sans', 'trebuchet MS', 'Tahoma';
     color: #fff;
     text-transform: uppercase;
-    background:#b007f3;
+    background:#bd7ee7;
     border-radius: 0 3px 3px 0;
     box-shadow: rgba(0, 0, 0, 0.14902) 0px 0px 6px 0px;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
     }
        
     .searchButton:hover {     
-        background: #ba2ff1;
+        background: #bd7ee7;
     }   
        
     .searchButton:active,
     .searchButton:focus{   
-        background: #ba2ff1;
+        background: #bd7ee7;
         outline: 0;   
     }
      
@@ -78,29 +79,31 @@ table {
         position: absolute;
         border-width: 8px 8px 8px 0;
         border-style: solid solid solid none;
-        border-color: transparent #ba2ff1 transparent;
+        border-color: transparent #bd7ee7 transparent;
         top: 12px;
         left: -6px;
     }
      
     .searchButton:hover:before {
-        border-right-color: #ba2ff1;
+        border-right-color: #bd7ee7;
     }
      
     .searchButton:focus:before,
     .searchButton:active:before {
-            border-right-color: #ba2ff1;
+            border-right-color: #bd7ee7;
     } 
 
 
 
 
     .input {
-        position: relative;
+        position: inherit;
         font-size: 1.5em;
         background: linear-gradient(21deg, #bd7ee7, #5325f8);
         padding: 3px;
         display: inline-block;
+        margin: 20px;
+
         /* border-radius: 9999em; */
       }
       .input *:not(span) {
@@ -186,4 +189,5 @@ table {
         left: 0;
         top: 0;
       }
+  
       
