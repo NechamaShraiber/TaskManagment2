@@ -14,10 +14,11 @@ form {
 
 	.group {
 		position: relative;
-		text-align: left;
-		width: 80%;
+		text-align: center;
+		width: 119%;
 		margin: 0 10%;
-		margin-bottom: 5%;
+		margin-bottom: 0%;
+   
 	}
 	
 	.inputMaterial {
@@ -124,7 +125,8 @@ form {
 
 .login-container {
   background: #ebebeb;
-  padding: 12px;
+	padding: 12px;
+	height:60vh;
 }
 
 /* Every row inside .login-container is defined with p tags */
@@ -180,17 +182,31 @@ form {
 }
 .dates{
 	width: 31%;
-    float: right;
+     float: right; 
     margin-right: 17vh;
-    margin-top: -14vh;
+    margin-top: -20vh;
 }
 
-.button
+ .submit
 {
 	width: 11%;
-    float: right;
     background-color: thistle;
-    margin-top:-3vh; 
-    /* margin-top: -5vh; */
-
+		top: 30vh;
+    left: 44vh;
+} 
+.reset
+{
+	width: 12%;
+    background-color: thistle;
+		left: 28vh;
+    top: 30vh;
+}
+a {
+	color: thistle;
+	text-decoration: underline;
+	background-color: transparent;
+}
+.aLink{
+	margin-top: 27vh;
+	width: 14vh;
 }
