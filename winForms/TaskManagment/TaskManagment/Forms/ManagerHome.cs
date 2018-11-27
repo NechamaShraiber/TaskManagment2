@@ -29,7 +29,7 @@ namespace TaskManagment.Forms
             currentPanel.Visible = true;
         }
 
-        private  void onlyNumbers(object sender, KeyPressEventArgs e)
+        private void onlyNumbers(object sender, KeyPressEventArgs e)
         {
             Global.onlyNumbers(sender, e);
 
@@ -52,7 +52,7 @@ namespace TaskManagment.Forms
 
             }
         }
-       
+
         #region addProject
 
         public void AddProject()
@@ -67,10 +67,10 @@ namespace TaskManagment.Forms
             manager.ForEach(t => { txt_team_name.Items.Add(t.Name); });
             getAllWorkers();
         }
-      
+
         public void checkProjectValidation(object sender, EventArgs e)
         {
-               
+
             btn_addProject.Enabled =
                  Global.checkVaidationLength(2, 25, txt_projName) &&
                  Global.checkVaidationLength(2, 15, txt_customer_name) &&
@@ -317,12 +317,12 @@ namespace TaskManagment.Forms
         }
         public void checkWorkerValidation(object sender, EventArgs e)
         {
-            btn_Action.Enabled =Global.checkVaidationLength(2, 15, txt_name) &&
+            btn_Action.Enabled = Global.checkVaidationLength(2, 15, txt_name) &&
                 Global.checkVaidationLength(2, 10, txt_user_name) &&
                 (isAdd ? Global.checkVaidationLength(6, 10, txt_password) : true) &&
                 Global.checkVaidationLength(2, 30, txt_email) &&
                 Global.checkValidEmail(txt_email);
-        
+
         }
 
         private void btn_add_Click(object sender, EventArgs e)
@@ -340,7 +340,7 @@ namespace TaskManagment.Forms
             {
                 string json = "{" + (!isAdd ? "\"Id\":\"" + w.Id + "\"," : "") + "\"Name\":\"" + txt_name.Text + "\"," +
                    "\"UserName\":\"" + txt_user_name.Text + "\"," +
-                   "\"Password\":\"" + (txt_password.Text != "" ?Global.sha256(txt_password.Text) : "") + "\"," +
+                   "\"Password\":\"" + (txt_password.Text != "" ? Global.sha256(txt_password.Text) : "") + "\"," +
                     "\"JobId\":\"" + IdJob + "\"," +
                    "\"EMail\":\"" + txt_email.Text + "\"," +
                    "\"ManagerId\":\"" + IdManager +
@@ -370,7 +370,7 @@ namespace TaskManagment.Forms
             }
         }
 
-       
+
 
         #endregion
 
@@ -411,7 +411,7 @@ namespace TaskManagment.Forms
                             break;
                         }
                 }
-                 
+
 
             }
             else
@@ -522,7 +522,7 @@ namespace TaskManagment.Forms
 
 
         }
-        private void btnExportToExecl_Click(object sender, EventArgs e)
+        private void exportExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
             excel.Workbooks.Add();
@@ -566,15 +566,15 @@ namespace TaskManagment.Forms
                 workSheet = null;
                 GC.Collect();
             }
-
         }
+
         private void btn_search_Click(object sender, EventArgs e)
         {
             List<dynamic> FilterPrecences = presences;
             if (txt_workerName.Text != "")
             {
                 FilterPrecences = FilterPrecences.FindAll(f => f["WorkerName"].Value == txt_workerName.Text);
-               
+
             }
             if (txt_projectName.Text != "")
             {
@@ -586,10 +586,10 @@ namespace TaskManagment.Forms
             dgv_presence.DataSource = FilterPrecences;
 
         }
-     private int   month(dynamic date)
+        private int month(dynamic date)
         {
-           DateTime d= (DateTime)date;
-           
+            DateTime d = (DateTime)date;
+
             return d.Month;
         }
         #endregion
@@ -597,7 +597,7 @@ namespace TaskManagment.Forms
         private void ShowPanel(Panel p)
         {
             currentPanel.Visible = false;
-           p.Visible = true;
+            p.Visible = true;
             currentPanel = p;
 
         }
@@ -623,7 +623,7 @@ namespace TaskManagment.Forms
             GetPresences(3);
             ShowPanel(pnl_report);
         }
-      
+
 
         private void updateWorkerToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -656,6 +656,5 @@ namespace TaskManagment.Forms
             Global.LogOut();
         }
 
-      
     }
 }
