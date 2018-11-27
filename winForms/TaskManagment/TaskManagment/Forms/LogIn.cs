@@ -47,11 +47,14 @@ namespace TaskManagment
         {
             lbl_bad_request.Text = "";
             errorProvider1.Clear();
-            btn_logIn.Enabled = Global.checkVaidationLength(2, 10, txt_userName) &&
+                bool b=Global.checkVaidationLength(2, 10, txt_userName) &&
                 Global.checkVaidationLength(6, 10, txt_password);
+            btn_logIn.Enabled = b;
             btnChange.Enabled = Global.checkVaidationLength(6, 10, txtNewPassword) &&
                 Global.checkVaidationLength(6, 10, txtConfirmPassword) &&
              btn_logIn.Enabled;
+           
+
             if (txtConfirmPassword.Text != txtNewPassword.Text)
             {
                 errorProvider1.SetError(txtConfirmPassword, "confirm password must be same new password");
