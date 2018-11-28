@@ -13,11 +13,6 @@ namespace UIL.Controllers
 {
     public class WorkerController : ApiController
     {
-        /// <summary>
-        /// update hours
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
         [HttpPost]
         [Route("api/updateStartHour")]
         public HttpResponseMessage UpdateStartHour([FromBody]JObject data)
@@ -38,17 +33,13 @@ namespace UIL.Controllers
 
             return Global.ErrorList(ModelState);
         }
-
         [HttpPost]
         [Route("api/SendMsg")]
         public HttpResponseMessage SendMsg([FromBody] JObject data)
-
         {
             //curl -v -X POST -H "Content-type: application/json" -d "{\"email\":\"malky8895@gmail.com\"}"  http://localhost:59628/api/sendreq
-
             if (ModelState.IsValid)
             {
-             
                 return (WorkerLogic.SendMsg((string)data["sub"], (string)data["body"],(int)data["id"])) ?
                    new HttpResponseMessage(HttpStatusCode.OK) :
                    new HttpResponseMessage(HttpStatusCode.BadRequest)
@@ -59,7 +50,6 @@ namespace UIL.Controllers
             return Global.ErrorList(ModelState);
 
         }
-
         [HttpGet]
         [Route("api/getWorkerDetails/{id}")]
         public HttpResponseMessage GetWorkerDetails(int id)

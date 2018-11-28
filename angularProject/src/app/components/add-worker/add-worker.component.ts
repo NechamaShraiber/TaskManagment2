@@ -19,12 +19,11 @@ export class AddWorkerComponent implements OnInit {
   jobList: Job[] = [];
   idManager: number;
   manager: any;
-  idJob:any;
+  idJob:number;
   job:any;
   selectUndefinedOptionValue: any;
   objectHolder: typeof Object = Object;
   constructor(private router: Router, private managerService: ManagerService, private globalService:GlobalService) {
-
     let formGroupConfig = {
       Name: new FormControl(managerService.workerToUpdate.Name?managerService.workerToUpdate.Name:" ", validate.createValidatorArr("Name", 2, 15)),
       UserName: new FormControl(managerService.workerToUpdate.UserName, validate.createValidatorArr("UserName", 2, 10)),
@@ -47,6 +46,7 @@ export class AddWorkerComponent implements OnInit {
            res.forEach(p => {
                this.managerList.push(p);
            });
+           //for edit
            this.manager = this.managerList.find(p=>p.Id== this.managerService.workerToUpdate["ManagerId"]).Name;
            this.idManager = this.managerList.find(p=>p.Id== this.managerService.workerToUpdate["ManagerId"]).Id;
          });
@@ -73,8 +73,8 @@ export class AddWorkerComponent implements OnInit {
     //If it for "ADD"
     if (this.managerService.isEdit == "Add") {
       //Saves the id of manager and job
-    this.addWorkerGroup.value["ManagerId"]?this.idManager =this.managerList.find(p=>p.Name==this.addWorkerGroup.value["ManagerId"]).Id:this.idManager=this.managerList[0].Id;
-    this.addWorkerGroup.value["ManagerId"] = this.idManager;
+    this.addWorkerGroup.value["ManagerId"]?this.addWorkerGroup.value["ManagerId"] =this.managerList.find(p=>p.Name==this.addWorkerGroup.value["ManagerId"]).Id:this.addWorkerGroup.value["ManagerId"]=this.managerList[0].Id;
+    // this.addWorkerGroup.value["ManagerId"] = this.idManager;
     this.addWorkerGroup.value["JobId"]?this.idJob =this.jobList.find(p=>p.Name==this.addWorkerGroup.value["JobId"]).Id:this.idJob=this.jobList[0].Id;
     this.addWorkerGroup.value["JobId"] = this.idJob;
       this.managerService.addWorker(this.addWorkerGroup.value)
