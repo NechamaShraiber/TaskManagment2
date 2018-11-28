@@ -11,11 +11,6 @@ namespace UIL.Controllers
 {
     public class ManagerController : ApiController
     {
-        /// <summary>
-        /// add new project
-        /// </summary>
-        /// <param name="Project">Project deatails</param>
-        /// 
         [HttpPost]
         [Route("api/addProject")]
         public HttpResponseMessage AddProject([FromBody]Project value)
@@ -45,12 +40,6 @@ namespace UIL.Controllers
                          Content = new ObjectContent<String>("Can not update in Data Base", new JsonMediaTypeFormatter())
                      };
         }
-
-        /// <summary>
-        /// add new worker
-        /// </summary>
-        /// <param name="Project">Project deatails</param>
-        /// 
         [HttpPost]
         [Route("api/addWorker")]
         public HttpResponseMessage AddWorker([FromBody]Worker value)
@@ -68,12 +57,6 @@ namespace UIL.Controllers
             }
             return Global.ErrorList(ModelState);
         }
-
-        /// <summary>
-        /// edit worker's details
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
         [HttpPut]
         [Route("api/updateWorker")]
         public HttpResponseMessage UpdateWorker([FromBody]Worker value)
@@ -91,11 +74,6 @@ namespace UIL.Controllers
 
             return Global.ErrorList(ModelState);
         }
-        /// <summary>
-        /// get all workers
-        /// </summary>
-        /// <returns></returns>
-        /// 
         [HttpGet]
         [Route("api/getAllWorkers")]
         public HttpResponseMessage GetAllWorkers()
@@ -106,7 +84,6 @@ namespace UIL.Controllers
                 Content = new ObjectContent<List<Worker>>(ManagerLogic.GetAllWorkers(), new JsonMediaTypeFormatter())
             };
         }
-
         [HttpGet]
         [Route("api/getPresence")]
         public HttpResponseMessage GetPresence()
@@ -126,13 +103,7 @@ namespace UIL.Controllers
             {
                 Content = new ObjectContent<List<Job>>(ManagerLogic.GetAllJobs(), new JsonMediaTypeFormatter())
             };
-        }
-
-        /// <summary>
-        /// get all managers
-        /// </summary>
-        /// <returns></returns>
-        /// 
+        } 
         [HttpGet]
         [Route("api/getAllManagers")]
         public HttpResponseMessage GetAllManagers()
@@ -142,11 +113,6 @@ namespace UIL.Controllers
                 Content = new ObjectContent<List<Worker>>(ManagerLogic.GetAllManagers(), new JsonMediaTypeFormatter())
             };
         }
-        /// <summary>
-        /// delete worker
-        /// </summary>
-        /// <returns></returns>
-        /// 
         [HttpDelete]
         [Route("api/deleteWorker/{id}")]
         public HttpResponseMessage DeleteWorker(int id)
