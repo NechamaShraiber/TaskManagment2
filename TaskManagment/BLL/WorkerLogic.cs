@@ -88,7 +88,7 @@ namespace BLL
                 while (reader.Read())
                 {
                      string s=reader[2].ToString();
-                    int.TryParse(s,out int  x);
+                    float.TryParse(s,out float  x);
                     string s2;
                     try {
                         TimeSpan t = reader.GetTimeSpan(3);

@@ -13,7 +13,6 @@ namespace BOL
         [MinLength(2), MaxLength(25)]
         [UniqeName]
         public string Name { get; set; }
-        [ForeignKey("TeamLeader")]
         public int TeamLeaderId { get; set; }
         [Required]
         [MinLength(2), MaxLength(15)]
@@ -29,7 +28,6 @@ namespace BOL
      //   [RangeDate]
         [Required]
         public DateTime EndDate { get; set; }
-        //public Worker TeamLeader { get; set; }
     }
 }
 /*

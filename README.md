@@ -36,6 +36,9 @@
     * Project - `Project` type
     * AllocatedHours - int 
     * WorkHours - int
+* Job:
+     * Id - int
+     * Name - string
 
 ### Controllers
 * Home controller:
@@ -44,6 +47,12 @@
         * userName
         * password
     If the user is valid - we will check his status and navigate him to the currect main page, Else - we will return a matching error
+    * Post - change password
+    requierd data: 
+        * userName
+        * oldPassword
+        * newPassword
+    If the user want to change your password
 * Manager controller:
     * Post - add a new project   
     requierd data: 
@@ -55,7 +64,7 @@
         * UIUXHoures
         * StartDate 
         * EndDate 
-    If the project details is valid - we will add the project to the DB
+    If the project details is valid - we will add the project to the DB and also add all the workers that bellow to the team-leader to this projects
     * Post - add a new worker
     requierd data: 
           * Name
@@ -65,32 +74,44 @@
           * job 
           * Manager 
     * Get - get all the details that the manager need to the report
-    * Put - edit worker's details      
-    * Delete - the manager can delete worker
+    * Get - get all managers - to choose for each worker your manager
+    * Get - get all jobs - to choose for each worker your job type
+    * Get - get all workers
+    * Get - get presence- get the presence for each worker can be filter by month,project and name
+    * Put - edit worker's details 
+    requierd data: 
+          * Name
+          * UserName 
+          * Email 
+          * job 
+          * Manager 
+    The manager can not change the worker's password     
+    * Delete - the manager can delete worker - It possible to delete just a worker and not a team-leader
 * TeamLeader controller:
-    * Get - get the details and status of the current project that the teamLeader manage
+    * Get - get the details and status of the current project that the team-leader manage
+    * Get - get the details for each worker that bellow him
     * Get - get all the hours that used in this month 
     * Get - get worker's hours to each worker
-    * Put - update worker's hours
+    * Put - update worker's hours - The team-leader need to update for each worker
 * Worker controller:
-    * Put - update work hours
-    * Post - the worker can send massage to contact with the office
+    * Post - the worker can send massage to his team-leader
+    * Post - for update the hour that he started to work
     * Get - get the worker details
-    * Get - get the task that he need to do
-    * Get - get the hours that he worked this month
-
+    * Get - get the project that he work now
+    * Get - get all the hours that he worked
 ***
-## WinForms +  Angular
+## WinForms + Angular
 ### Manager page
 ![picture](step2.png)   
 ![picture](step3.png)   
 ![picture](step4.png)  
-### Manager page
+### Team-leader page
 ![picture](step5.png)   
 ![picture](step6.png)  
 ![picture](step7.png) 
-### Worker page  
-![picture](step8.png) 
-![picture](step9.png) 
+### Worker page
+![picture](step11.png) 
+![picture](step12.png) 
 ![picture](step10.png) 
+![picture](step13.png) 
 

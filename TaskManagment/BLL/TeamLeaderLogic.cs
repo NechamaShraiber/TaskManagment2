@@ -84,7 +84,7 @@ namespace BLL
                  
                     /////////////////
                     string s = reader[2].ToString();
-                    int.TryParse(s, out int x);
+                    float.TryParse(s, out float x);
                        string s2;
                     try
                     {
@@ -124,7 +124,7 @@ namespace BLL
                 {
 
                     string s = reader[2].ToString();
-                    int.TryParse(s, out int x);
+                    float.TryParse(s, out float x);
                     string s2 = reader[3].ToString();
                     unknowns.Add(new 
                     {

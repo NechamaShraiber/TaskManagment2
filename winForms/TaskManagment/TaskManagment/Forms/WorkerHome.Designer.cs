@@ -63,7 +63,6 @@
             // timerClock
             // 
             this.timerClock.Enabled = true;
-            this.timerClock.Tick += new System.EventHandler(this.timerClock_Tick);
             // 
             // label1
             // 
