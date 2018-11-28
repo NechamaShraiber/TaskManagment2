@@ -105,12 +105,13 @@
 ![picture](step2.png)   
 ![picture](step3.png)   
 ![picture](step4.png)  
-### Manager page
+### Team-leader page
 ![picture](step5.png)   
 ![picture](step6.png)  
 ![picture](step7.png) 
-### Worker page  
-![picture](step8.png) 
-![picture](step9.png) 
+### Worker page
+![picture](step11.png) 
+![picture](step12.png) 
 ![picture](step10.png) 
+![picture](step13.png) 
 
