@@ -14,7 +14,8 @@
           <div class="cont_centrar" *ngIf="projectId">
             <div>
               <p>enter allocate hours:</p>
-              <input type="number" [(ngModel)]="numHours">
+              <label>max:{{max}}</label>
+              <input type="number" max={{max}} [(ngModel)]="numHours">
             </div>
             <button class="btn_sign" (click)="changeHours()">change</button>
           </div>

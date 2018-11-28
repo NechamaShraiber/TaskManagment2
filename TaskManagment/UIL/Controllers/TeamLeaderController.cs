@@ -99,6 +99,19 @@ namespace UIL.Controllers
 
            
         }
+        /// <summary>
+        /// get the remaining hours
+        /// </summary>
+        /// <returns></returns>
+
+        [HttpGet]
+        [Route("api/getRemainingHours/{projectId}/{jobId}")]
+        public HttpResponseMessage GetRemainingHours(int projectId,int jobId) => new HttpResponseMessage(HttpStatusCode.OK)
+        {
+
+            //curl -X GET -v http://localhost:59628/api/getRemainingHours/
+            Content = new ObjectContent<string>(TeamLeaderLogic.GetRemainingHours(projectId,jobId), new JsonMediaTypeFormatter())
+        };
 
     }
 }

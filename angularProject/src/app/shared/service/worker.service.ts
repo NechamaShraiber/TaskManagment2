@@ -10,7 +10,6 @@ export class WorkerService {
 worker:Worker;
 subStr:string="";
 bodyStr:string="";
-subjectUpdateChart=new Subject();
 idJob:number;
 projectStart:any=null;
 

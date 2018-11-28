@@ -15,10 +15,6 @@ export class ChartComponent implements OnInit {
   chart: any;
  
   constructor(private workerService: WorkerService) {
-    this.workerService.subjectUpdateChart.subscribe(
-      {
-        next: () => alert("1")
-      });
   }
 
   ngOnInit() {

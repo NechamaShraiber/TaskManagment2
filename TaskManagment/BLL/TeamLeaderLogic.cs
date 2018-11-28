@@ -3,6 +3,7 @@ using DAL;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BLL
 {
@@ -139,6 +140,36 @@ namespace BLL
             };
             return DBAccess.RunReader(query, func);
 
+        }
+
+        public static string GetRemainingHours(int projectId, int jobId)
+        {
+            
+          string jobName= ManagerLogic.GetAllJobs().FirstOrDefault(j=>j.Id==jobId).Name;
+
+            switch (jobName)
+            {
+                case "developer":
+                    {
+                        jobName = "develop_houres";
+                        break;
+                    }
+                case "QA":
+                    {
+                        jobName = "qa_houres";
+                        break;
+                    }
+                case "UxUi":
+                    {
+                        jobName = "ui_ux_houres";
+                        break;
+                    }
+            }
+ 
+            string query = $" SELECT {jobName} - SUM(allocated_hours)" +
+$" FROM projects P JOIN  project_workers PW ON P.project_id = PW.project_id JOIN workers W ON W.worker_id = PW.worker_id" +
+$" WHERE PW.project_worker_id = {projectId} AND W.job = {jobId}";
+            return DBAccess.RunScalar(query).ToString();
         }
 
         public static bool UpdateWorkerHours(int projectWorkerId, int numHours)

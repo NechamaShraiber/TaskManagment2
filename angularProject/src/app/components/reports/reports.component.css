@@ -35,12 +35,13 @@
 }
 table {
     width: 60%;
-    max-height: 70vh;
-    overflow-y: scroll;
+   
   }
   .tableDiv{
   width: 70%;
     margin-left: 20%;
+    max-height: 70vh;
+    overflow-y: scroll;
   }
   .mat-form-field {
     font-size: 14px;
