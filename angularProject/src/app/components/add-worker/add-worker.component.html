@@ -22,8 +22,16 @@
             <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['Password'].errors)" class="myAlert">{{err}}</p>
           </div>
         </div>
+        <div class="group">
+          <input type="email" id="EMail" class="inputMaterial" formControlName="EMail" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+          <label >E-mail</label>
+           <div *ngIf="addWorkerGroup.controls['EMail']&&addWorkerGroup.controls['EMail'].errors&&addWorkerGroup.controls['EMail'].touched">
+            <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['EMail'].errors)" class="myAlert">The e-mail adress is not in a correct syntax</p>
+          </div> 
+        </div>
       </div>
-      <div class="dates">
+
+      <div class="dates" *ngIf="managerService.isEdit=='Add'">
       <div>
           <select formControlName="JobId" (change)="manag()" [value]="job">
                 <option></option>  
@@ -36,14 +44,7 @@
           <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['JobId'].errors)" class="myAlert">{{err}}</p>
         </div> 
       </div>
-      <div class="group">
-        <input type="email" id="EMail" class="inputMaterial" formControlName="EMail" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
-        <label >E-mail</label>
-         <div *ngIf="addWorkerGroup.controls['EMail']&&addWorkerGroup.controls['EMail'].errors&&addWorkerGroup.controls['EMail'].touched">
-          <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['EMail'].errors)" class="myAlert">The e-mail adress is not in a correct syntax</p>
-        </div> 
-      </div>
-
+  
       <div class="group">
           <select formControlName="ManagerId" [value]="manager">
               <option *ngFor="let manager1 of managerList">

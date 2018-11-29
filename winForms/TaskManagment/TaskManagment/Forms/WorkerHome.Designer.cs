@@ -130,9 +130,9 @@
             // dgv_task
             // 
             this.dgv_task.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_task.Location = new System.Drawing.Point(326, 27);
+            this.dgv_task.Location = new System.Drawing.Point(304, 27);
             this.dgv_task.Name = "dgv_task";
-            this.dgv_task.Size = new System.Drawing.Size(462, 191);
+            this.dgv_task.Size = new System.Drawing.Size(484, 189);
             this.dgv_task.TabIndex = 4;
             // 
             // chart1
@@ -141,7 +141,7 @@
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(28, 222);
+            this.chart1.Location = new System.Drawing.Point(36, 223);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
@@ -151,7 +151,7 @@
             series2.Name = "worked hours";
             this.chart1.Series.Add(series1);
             this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(349, 184);
+            this.chart1.Size = new System.Drawing.Size(433, 226);
             this.chart1.TabIndex = 5;
             this.chart1.Text = "chart1";
             // 
