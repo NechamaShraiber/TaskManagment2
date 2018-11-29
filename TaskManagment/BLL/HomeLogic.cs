@@ -85,14 +85,22 @@ namespace BLL
    
         public static void OnStart(object sender, ElapsedEventArgs args)
         {
-        
-            string query = $"SELECT w.email, p.name ,p.end_date" +
-            $" FROM workers w JOIN project_workers pw ON W.worker_id = pw.worker_id JOIN projects p" +
-            $" ON p.project_id = pw.project_id" +
-            $" WHERE p.end_date <= NOW() + INTERVAL 1 DAY" +
-             $" UNION SELECT w.email, p.name ,p.end_date" +
-            $" FROM workers w JOIN projects p ON p.team_leader = W.worker_id" +
-             $" WHERE p.end_date <= NOW() + INTERVAL 1 DAY";
+
+            string query = $"SELECT DISTINCT w.email, p.name ,p.end_date" +
+          $"  FROM workers w JOIN project_workers pw ON W.worker_id = pw.worker_id JOIN projects p" +
+          $"  ON p.project_id = pw.project_id JOIN work_hours wh ON pw.project_worker_id = wh.project_work_id" +
+          $"  WHERE p.end_date <= NOW() + INTERVAL 1 DAY" +
+          $"  GROUP BY w.email, p.name ,p.end_date, pw.allocated_hours" +
+          $"  HAVING pw.allocated_hours > HOUR(SEC_TO_TIME(SUM(TIME_TO_SEC(wh.end) - TIME_TO_SEC(wh.start)))) + (MINUTE(SEC_TO_TIME(SUM(TIME_TO_SEC(wh.end) - TIME_TO_SEC(wh.start))))) / 100" +
+          $"  UNION SELECT w.email, p.name ,p.end_date" +
+          $"  FROM workers w JOIN projects p ON p.team_leader = W.worker_id" +
+          $"   WHERE p.end_date <= NOW() + INTERVAL 1 DAY AND p.name IN(" +
+          $"   SELECT p1.name" +
+          $"  FROM workers w1 JOIN project_workers pw1 ON W1.worker_id = pw1.worker_id JOIN projects p1" +
+          $"  ON p1.project_id = pw1.project_id JOIN work_hours wh1 ON pw1.project_worker_id= wh1.project_work_id" +
+          $"  WHERE p1.end_date <= NOW() + INTERVAL 1 DAY" +
+          $"  GROUP BY w1.email, p1.name ,p1.end_date,pw1.allocated_hours" +
+          $" HAVING pw1.allocated_hours > HOUR(SEC_TO_TIME(SUM(TIME_TO_SEC(wh1.end) - TIME_TO_SEC(wh1.start)))) + (MINUTE(SEC_TO_TIME(SUM(TIME_TO_SEC(wh1.end) - TIME_TO_SEC(wh1.start))))) / 100)";
 
             Func<MySqlDataReader, List<object>> func = (reader) => {
                 List<object> objects = new List<object>();

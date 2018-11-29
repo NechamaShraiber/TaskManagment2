@@ -13,7 +13,9 @@ namespace TaskManagment.Forms
     {
         int numHours = 0;
         public Worker worker;
-       dynamic hoursList;
+        dynamic hoursList;
+        float maxHours;
+        Button confirmation;
         public TeamLeaderWorkers(Worker w)
         {
             InitializeComponent();
@@ -47,6 +49,7 @@ namespace TaskManagment.Forms
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
             }
         }
+
         /// <summary>
         /// shou worker deatails
         /// </summary>
@@ -58,23 +61,21 @@ namespace TaskManagment.Forms
             lbl_job.Text = Global.jobs.Find(j => j.Id == worker.JobId).Name;
         }
 
-        /// <summary>
-        /// validation for txtNumHours
-        /// </summary>
-        private void txtNumHours_TextChanged(object sender, EventArgs e)
+        ///validation to numHours
+        private void onlyNumbers(object sender, KeyPressEventArgs e)
         {
-            lblMessage.Text = "";
-            if (!int.TryParse(txt_numHours.Text, out numHours))
-            {
-                lblMessage.Text = "hours must be number";
+            Global.onlyNumbers(sender, e);
+        }
+        public void checkNumHours(object sender, EventArgs e)
+        {
+            float.TryParse((sender as TextBox).Text, out float f);
+            if (f > maxHours + numHours)
+            confirmation.Enabled = false;
+            else   confirmation.Enabled = true;
 
-            }
         }
 
-        /// <summary>
-        /// change allocated Hours
-        /// </summary>
-        public static string ShowDialog(string text, string caption)
+        public int ShowDialog(string text, string caption)
         {
             Form prompt = new Form()
             {
@@ -84,58 +85,81 @@ namespace TaskManagment.Forms
                 Text = caption,
                 StartPosition = FormStartPosition.CenterScreen
             };
-            Label textLabel = new Label() { Left = 50, Top = 20, Text = text };
-            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 400 };
-            Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
-            confirmation.Click += (sender, e) => { prompt.Close(); };
+            Label textLabel = new Label() { Left = 50, Top = 20, Width = 400, Text = $" {text} (max hours: {maxHours + numHours}):" };
+            Label textLabelMessege = new Label() { Left = 50, Top = 65, Width = 400 };
+            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 50, Text = numHours.ToString() };
+            textBox.KeyPress += onlyNumbers;
+            textBox.TextChanged += checkNumHours;
+            confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
+            confirmation.Click += (sender, e) =>
+            {
+                prompt.Close();
+            };
             prompt.Controls.Add(textBox);
             prompt.Controls.Add(confirmation);
             prompt.Controls.Add(textLabel);
+            prompt.Controls.Add(textLabelMessege);
             prompt.AcceptButton = confirmation;
-
-            return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
+            return prompt.ShowDialog() == DialogResult.OK ? Convert.ToInt32(textBox.Text) : numHours;
         }
-        private void btn_change_Click(object sender, EventArgs e)
+        
+        //get maximum hours for the project 
+        private void GetRemainingHours(int projectWorkerId)
         {
-            ShowDialog("gfsdg", "gfsdgsdg");
-            lblMessage.Text = "";
-            int index;
-            try {
-                index = dgv_workerHours.SelectedRows[0].Index;
-            int workerId = Convert.ToInt32(hoursList[index]["Id"].Value);
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(Global.path + "updateWorkerHours");
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "PUT";
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(Global.path);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = client.GetAsync($"getRemainingHours/{projectWorkerId}/{worker.JobId}").Result;
+            if (response.IsSuccessStatusCode)
             {
-                string json = "{\"projectWorkerId\":\"" + workerId + "\"," +
-                   "\"numHours\":\"" + numHours + "\"}";
-                streamWriter.Write(json);
-                streamWriter.Flush();
-                streamWriter.Close();
+                var result = response.Content.ReadAsStringAsync().Result;
+                maxHours = JsonConvert.DeserializeObject<float>(result);
             }
-            try
+            else
             {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+        }
 
-                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+        private void dgv_workerHours_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            numHours = Convert.ToInt32(hoursList[e.RowIndex]["AllocatedHours"].Value);
+            int projectWorkerId = Convert.ToInt32(hoursList[e.RowIndex]["Id"].Value);
+            GetRemainingHours(projectWorkerId);
+            numHours = ShowDialog("enter allocate hours", "change allocate hours");
+            //update in dataBase
+            if (numHours != Convert.ToInt32(hoursList[e.RowIndex]["AllocatedHours"].Value))
+            {
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(Global.path + "updateWorkerHours");
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "PUT";
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
-                        hoursList[index]["AllocatedHours"].Value = numHours;
-                    var result = streamReader.ReadToEnd();
-                    dynamic obj = JsonConvert.DeserializeObject<Worker>(result);
-                    dgv_workerHours.DataSource = hoursList;
+                    string json = "{\"projectWorkerId\":\"" + projectWorkerId + "\"," +
+                       "\"numHours\":\"" + numHours + "\"}";
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+                try
+                {
+                    var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                    {
+                        hoursList[e.RowIndex]["AllocatedHours"].Value = numHours;
+                        var result = streamReader.ReadToEnd();
+                        dynamic obj = JsonConvert.DeserializeObject<Worker>(result);
+                        dgv_workerHours.DataSource = hoursList;
+                    }
+                }
+                catch (WebException ex)
+                {
+
                 }
             }
-            catch (WebException ex)
-            {
-
-            }
-            }
-            catch
-            {
-                lblMessage.Text = "choose project to edit allocated hours";
-            }
         }
-
     }
+
 }
+
+

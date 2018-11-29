@@ -119,7 +119,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(1149, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // addProjectToolStripMenuItem
             // 
@@ -245,7 +244,6 @@
             this.pnl_report.Size = new System.Drawing.Size(1085, 514);
             this.pnl_report.TabIndex = 6;
             this.pnl_report.Visible = false;
-            this.pnl_report.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_report_Paint);
             // 
             // pnl_search
             // 
@@ -523,7 +521,6 @@
             this.pnl_add_project.Size = new System.Drawing.Size(1099, 519);
             this.pnl_add_project.TabIndex = 45;
             this.pnl_add_project.Visible = false;
-            this.pnl_add_project.Paint += new System.Windows.Forms.PaintEventHandler(this.pnl_add_project_Paint);
             // 
             // dgvAddWorkers
             // 
@@ -620,6 +617,7 @@
             this.txt_UIUX_hours.Size = new System.Drawing.Size(100, 20);
             this.txt_UIUX_hours.TabIndex = 33;
             this.txt_UIUX_hours.TextChanged += new System.EventHandler(this.checkProjectValidation);
+            this.txt_UIUX_hours.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onlyNumbers);
             // 
             // label6
             // 
@@ -637,6 +635,7 @@
             this.txt_developer_hours.Size = new System.Drawing.Size(100, 20);
             this.txt_developer_hours.TabIndex = 32;
             this.txt_developer_hours.TextChanged += new System.EventHandler(this.checkProjectValidation);
+            this.txt_developer_hours.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onlyNumbers);
             // 
             // label7
             // 
@@ -654,6 +653,7 @@
             this.txt_QI_houers.Size = new System.Drawing.Size(100, 20);
             this.txt_QI_houers.TabIndex = 31;
             this.txt_QI_houers.TextChanged += new System.EventHandler(this.checkProjectValidation);
+            this.txt_QI_houers.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onlyNumbers);
             // 
             // label8
             // 
@@ -711,7 +711,6 @@
             this.Controls.Add(this.pnl_report);
             this.Name = "ManagerHome";
             this.Text = "Manager";
-            this.Load += new System.EventHandler(this.ManagerHome_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

@@ -36,15 +36,9 @@ namespace TaskManagment.Forms.Work
             }
             catch (WebException ex)
             {
-            
-               
             }
             this.Close();
         }
 
-        private void WorkEmail_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

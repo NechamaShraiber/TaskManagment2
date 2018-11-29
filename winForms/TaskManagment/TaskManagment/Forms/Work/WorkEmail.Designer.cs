@@ -51,7 +51,7 @@
             // 
             // btn_send
             // 
-            this.btn_send.Location = new System.Drawing.Point(446, 298);
+            this.btn_send.Location = new System.Drawing.Point(482, 314);
             this.btn_send.Name = "btn_send";
             this.btn_send.Size = new System.Drawing.Size(110, 46);
             this.btn_send.TabIndex = 3;
@@ -61,7 +61,7 @@
             // 
             // txt_contact
             // 
-            this.txt_contact.Location = new System.Drawing.Point(97, 68);
+            this.txt_contact.Location = new System.Drawing.Point(97, 84);
             this.txt_contact.Multiline = true;
             this.txt_contact.Name = "txt_contact";
             this.txt_contact.Size = new System.Drawing.Size(376, 224);
@@ -71,14 +71,14 @@
             // 
             this.txt_subject.Location = new System.Drawing.Point(96, 32);
             this.txt_subject.Name = "txt_subject";
-            this.txt_subject.Size = new System.Drawing.Size(338, 20);
+            this.txt_subject.Size = new System.Drawing.Size(377, 20);
             this.txt_subject.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label2.Location = new System.Drawing.Point(33, 69);
+            this.label2.Location = new System.Drawing.Point(98, 64);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 17);
             this.label2.TabIndex = 0;
@@ -88,7 +88,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label1.Location = new System.Drawing.Point(33, 31);
+            this.label1.Location = new System.Drawing.Point(98, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 17);
             this.label1.TabIndex = 0;
@@ -102,7 +102,6 @@
             this.Controls.Add(this.panel1);
             this.Name = "WorkEmail";
             this.Text = "WorkEmail";
-            this.Load += new System.EventHandler(this.WorkEmail_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
