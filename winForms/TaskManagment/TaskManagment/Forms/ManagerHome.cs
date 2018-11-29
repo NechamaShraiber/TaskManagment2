@@ -31,7 +31,6 @@ namespace TaskManagment.Forms
         private void onlyNumbers(object sender, KeyPressEventArgs e)
         {
             Global.onlyNumbers(sender, e);
-
         }
 
         public void getAllWorkers()
@@ -80,52 +79,26 @@ namespace TaskManagment.Forms
 
         }
 
-        private void data_start_ValueChanged(object sender, EventArgs e)
-        {
-
-            data_end.MinDate = (sender as DateTimePicker).Value;
-        }
-        private void txt_team_name_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            getAllWorkers();
-            int id = manager.Where(m => m.Name == txt_team_name.SelectedItem.ToString()).FirstOrDefault().Id;
-            workerToSelect = new List<Worker>();
-            workerToAdd = new List<Worker>();
-            workerList.ForEach(w =>
-            {
-                if (w.ManagerId != null && w.JobId > 2 && w.ManagerId != id)
-                    workerToSelect.Add(w);
-            });
-            dgvAddWorkers.DataSource = workerToSelect;
-            dgvAddWorkers.Columns["Id"].Visible = false;
-        }
-
         private void dgvAddWorkers_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (dgvAddWorkers.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.Beige)
             {
                 dgvAddWorkers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.DarkGray;
-
                 workerToAdd.Remove(workerToSelect[e.RowIndex]);
-
             }
             else
             {
                 dgvAddWorkers.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Beige;
                 workerToAdd.Add(workerToSelect[e.RowIndex]);
             }
-
         }
 
         public void addWorkersToProject(string name)
         {
-
             var httpWebRequest = (HttpWebRequest)WebRequest.Create($"{Global.path}addWorkersToProject/{name}");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
             dynamic credential;
-
             try
             {
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
@@ -136,7 +109,6 @@ namespace TaskManagment.Forms
                     streamWriter.Flush();
                     streamWriter.Close();
                 }
-
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
@@ -156,7 +128,6 @@ namespace TaskManagment.Forms
             httpWebRequest.Method = "POST";
             dynamic credential;
             int id = manager.Where(m => m.Name == txt_team_name.SelectedItem.ToString()).FirstOrDefault().Id;
-
             Project proj = new Project()
             {
                 Name = txt_projName.Text,
@@ -178,17 +149,13 @@ namespace TaskManagment.Forms
                     streamWriter.Flush();
                     streamWriter.Close();
                 }
-
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
                     var result = streamReader.ReadToEnd();
-
-
                     MessageBox.Show($"The project {proj.Name} added successfully");
                     if(workerToAdd!=null &&workerToAdd.Count>0)
                     addWorkersToProject(proj.Name);
-
                 }
             }
             catch (WebException ex)
@@ -223,7 +190,6 @@ namespace TaskManagment.Forms
             panelControlls.Controls.Add(l);
             panelControlls.Controls.Add(lbl_close);
             panelControlls.Controls.Add(btn_delete_edit);
-            btn_delete_edit.Click += new EventHandler(btn_delete_edit_Click);
             lbl_close.Click += new EventHandler(lbl_close_click);
         }
 
@@ -232,38 +198,6 @@ namespace TaskManagment.Forms
         {
             panelControlls.Controls.Clear();
             panelControlls.BorderStyle = BorderStyle.None;
-        }
-
-        void btn_delete_edit_Click(object sender, EventArgs e)
-        {
-            Worker w1 = new Worker();
-            int id = workerList.FirstOrDefault(w => w.UserName == (panelControlls.Controls["cbWorkers"] as ComboBox).Text).Id;
-            w1 = workerList.FirstOrDefault(w => w.Id == id);
-            if ((sender as Button).Text == "delete")
-            {
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri(Global.path);
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage response = client.DeleteAsync($"deleteWorker/{id}").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    Console.WriteLine("Success");
-                    workerList.Remove(w1);
-                    (panelControlls.Controls["cbWorkers"] as ComboBox).Items.Clear();
-                    (panelControlls.Controls["cbWorkers"] as ComboBox).Text = "";
-                    (panelControlls.Controls["cbWorkers"] as ComboBox).Items.AddRange(workerList.Select(w => w.UserName).ToArray());
-
-
-
-                }
-            }
-            else
-            {
-                lbl_close_click(sender, e);
-                ShowPanel(pnl_add_worker);
-                WorkerDeatails(false, w1);
-            }
-
         }
 
 
@@ -303,7 +237,6 @@ namespace TaskManagment.Forms
                     }
                 }
             }
-
         }
 
         private void fillWorkerDeatails()
@@ -315,7 +248,6 @@ namespace TaskManagment.Forms
             txt_user_name.Text = w.UserName;
             cmb_job.SelectedItem = Global.jobs.Find(j => j.Id == w.JobId).Name;
             cmb_manager.SelectedItem = manager.FirstOrDefault(m => m.Id == w.ManagerId).Name;
-
         }
         public void checkWorkerValidation(object sender, EventArgs e)
         {
@@ -324,20 +256,15 @@ namespace TaskManagment.Forms
                 (isAdd ? Global.checkVaidationLength(6, 10, txt_password) : true) &&
                 Global.checkVaidationLength(2, 30, txt_email) &&
                 Global.checkValidEmail(txt_email);
-
         }
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-
             int IdJob = Global.jobs.Find(j => j.Name == cmb_job.SelectedValue.ToString()).Id;
             int IdManager = manager.FirstOrDefault(m => m.Name == cmb_manager.Text).Id; //SelectedIndex
-
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(Global.path + (isAdd ? "addWorker" : "updateWorker"));
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = isAdd ? "POST" : "PUT";
-
-
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 string json = "{" + (!isAdd ? "\"Id\":\"" + w.Id + "\"," : "") + "\"Name\":\"" + txt_name.Text + "\"," +
@@ -347,27 +274,20 @@ namespace TaskManagment.Forms
                    "\"EMail\":\"" + txt_email.Text + "\"," +
                    "\"ManagerId\":\"" + IdManager +
                    "\"}";
-
                 streamWriter.Write(json);
                 streamWriter.Flush();
                 streamWriter.Close();
             }
             try
             {
-
-
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
-
                     var result = streamReader.ReadToEnd();
-
                     MessageBox.Show($"The worker {txt_name.Text} {(isAdd ? "added" : "changed")} successfully");
                     cmb_manager.Items.Clear();
                     manager = Global.GetManagers();
                     cmb_manager.Items.AddRange(manager.Select(m => m.Name).ToArray());
-
-                    //tab_manager.Controls.Remove(tab_workerDeatrails);
                 }
             }
             catch (WebException ex)
@@ -605,11 +525,9 @@ namespace TaskManagment.Forms
             currentPanel.Visible = false;
             p.Visible = true;
             currentPanel = p;
-
         }
         private void addProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // getAllWorkers();
             AddProject();
             ShowPanel(pnl_add_project);
         }
@@ -618,7 +536,6 @@ namespace TaskManagment.Forms
         {
             GetPresences(1);
             ShowPanel(pnl_report);
-
         }
 
         private void byProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -654,34 +571,10 @@ namespace TaskManagment.Forms
             WorkerDeatails(true, null);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Global.LogOut();
         }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void pnl_report_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void ManagerHome_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnl_add_project_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+       
     }
 }

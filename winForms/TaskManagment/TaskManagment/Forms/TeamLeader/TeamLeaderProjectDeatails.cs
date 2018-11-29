@@ -19,7 +19,6 @@ namespace TaskManagment.Forms
             this.Text = $"{Global.CurrentWorker.Name}: {project.Name}";
             UpdateProjectDeatails();
             getWorkersHours();
-
         }
 
         private void ProjectDeatails_Load(object sender, EventArgs e)
@@ -63,7 +62,6 @@ namespace TaskManagment.Forms
             lbl_projectUxUiHours.Text = project.UiUxHours.ToString();
             lbl_projectStartDate.Text = project.StartDate.ToString();
             lbl_projectEndDate.Text = project.EndDate.ToString();
-
         }
 
       
@@ -86,8 +84,6 @@ namespace TaskManagment.Forms
                         workedHours.Add(float.Parse(t[0]) + (float.Parse(t[1]) / 100));
                     }
                     else workedHours.Add(0);
-
-
                 }
                 chart1.Series[0].Points.DataBindXY(allocatedHours.Keys, allocatedHours.Values);
                 chart1.Series[1].Points.DataBindXY(allocatedHours.Keys, workedHours);

@@ -13,14 +13,11 @@ namespace TaskManagment.Forms
     {
         List<Project> projectList;
         List<Worker> workerList;
-
         public TeamLeaderHome()
         {
             InitializeComponent();
             this.Text = Global.CurrentWorker.Name;
             getProject();
-          
-
         }
         
         /// <summary>
@@ -49,7 +46,6 @@ namespace TaskManagment.Forms
                 dgv_Deatails.RowHeaderMouseClick -= dgv_projects_RowHeaderMouseClick;
                 dgv_Deatails.RowHeaderMouseClick -= dgv_Deatails_RowHeaderMouseClick;
                 dgv_Deatails.RowHeaderMouseClick += dgv_Deatails_RowHeaderMouseClick;
-
             }
             else
             {
@@ -82,7 +78,6 @@ namespace TaskManagment.Forms
             {
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
             }
-
         }
 
         private void dgv_projects_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -104,7 +99,6 @@ namespace TaskManagment.Forms
 
         private void workersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             getWorkers();
         }
 

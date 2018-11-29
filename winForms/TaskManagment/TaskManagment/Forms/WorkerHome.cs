@@ -38,15 +38,12 @@ namespace TaskManagment.Forms
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-
                 projectList = JsonConvert.DeserializeObject(result);
                 if (projectList != null)
                 {
                     dgv_task.DataSource = projectList;
                     dgv_task.Columns["Id"].Visible = false;
-                    // dgv_task.Columns["Date"].Visible = false;
                 }
-
             }
             else
             {
@@ -65,13 +62,10 @@ namespace TaskManagment.Forms
             if (isBegin)
             {
                 startdate = DateTime.Now;
-                
                 try {
-                 
                     projectId = int.Parse((String) dgv_task.SelectedRows[0].Cells[0].FormattedValue);
                    allocatedHours = double.Parse((String) dgv_task.SelectedRows[0].Cells[2].FormattedValue);
                    hours=((String)dgv_task.SelectedRows[0].Cells[3].FormattedValue).Split(':');
-                   
                     lbl_beginningTime.Text = startdate.ToString("hh:mm:ss tt");
                     btn_task.Text = "end Task";
                 }
@@ -80,7 +74,6 @@ namespace TaskManagment.Forms
                     lbl_message.Text = "choose project to start";
                     return;
                 }
-             
             }
             //if is finish
             else
@@ -89,8 +82,6 @@ namespace TaskManagment.Forms
                 lbl_beginningTime.Text = "";
                 lbl_timer.Text = "";
                 IsmoreThenAllocatedHours = false;
-
-                
             }
             timer.Enabled = !timer.Enabled;
             var httpWebRequest = (HttpWebRequest)WebRequest.Create($"{Global.path}updateStartHour");
@@ -101,7 +92,6 @@ namespace TaskManagment.Forms
                 string json = "{\"hour\":\"" + time + "\"," +
                 "\"idProjectWorker\":\"" + projectId + "\"," +
                 "\"isFirst\":\"" + isBegin + "\"}";
-
                 streamWriter.Write(json);
                 streamWriter.Flush();
                 streamWriter.Close();
@@ -117,12 +107,10 @@ namespace TaskManagment.Forms
                         if (projectList != null)
                             UpdateChart();
                     }
-
                     isBegin = !isBegin;
                 }
             }
             catch { }
-
         }
 
         /// <summary>
@@ -130,14 +118,10 @@ namespace TaskManagment.Forms
         /// </summary>
         void UpdateChart()
         {
-
             Dictionary<string, int> allocatedHours = new Dictionary<string, int>();
             List<float> workedHours = new List<float>();
-
             foreach (var item in projectList)
             {
-             
-
                     allocatedHours.Add((String)item["Name"].Value, (Int32)item["AllocatedHours"].Value);
                 if (item.Hours != "")
                 {
@@ -146,10 +130,8 @@ namespace TaskManagment.Forms
                 }
                 else workedHours.Add(0);
             }
-
             chart1.Series[0].Points.DataBindXY(allocatedHours.Keys, allocatedHours.Values);
             chart1.Series[1].Points.DataBindXY(allocatedHours.Keys, workedHours);
-
         }
 
         private void WorkerHome_Load(object sender, EventArgs e)
@@ -177,8 +159,6 @@ namespace TaskManagment.Forms
             if (Convert.ToDouble(h + "." + m % 100) >= allocatedHours&&!IsmoreThenAllocatedHours)
             {
                 timer.Enabled = false;
-
-                //MessageBox.Show("you worksdljfklsdja");
                 if (MessageBox.Show("you work more them allocated hours Are you whant continue?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     IsmoreThenAllocatedHours = true;
@@ -189,7 +169,6 @@ namespace TaskManagment.Forms
                     timer.Enabled = true;
                     UpdateTime();
                 }
-
             }
             lbl_timer.Text = d.ToString(@"hh\:mm\:ss");
         }

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_job = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.lbl_workerEmail = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.lbl_workerUserName = new System.Windows.Forms.Label();
@@ -39,13 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dgv_workerHours = new System.Windows.Forms.DataGridView();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txt_numHours = new System.Windows.Forms.TextBox();
-            this.lblMessage = new System.Windows.Forms.Label();
-            this.btn_change = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.lbl_job = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_workerHours)).BeginInit();
             this.SuspendLayout();
@@ -66,6 +62,26 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(248, 172);
             this.panel1.TabIndex = 5;
+            // 
+            // lbl_job
+            // 
+            this.lbl_job.AutoSize = true;
+            this.lbl_job.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lbl_job.Location = new System.Drawing.Point(132, 78);
+            this.lbl_job.Name = "lbl_job";
+            this.lbl_job.Size = new System.Drawing.Size(12, 17);
+            this.lbl_job.TabIndex = 3;
+            this.lbl_job.Text = " ";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.label9.Location = new System.Drawing.Point(14, 77);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(31, 17);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "job:";
             // 
             // lbl_workerEmail
             // 
@@ -162,45 +178,7 @@
             this.dgv_workerHours.Name = "dgv_workerHours";
             this.dgv_workerHours.Size = new System.Drawing.Size(430, 149);
             this.dgv_workerHours.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label4.Location = new System.Drawing.Point(28, 217);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(160, 17);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "change allocated hours:";
-            // 
-            // txt_numHours
-            // 
-            this.txt_numHours.Location = new System.Drawing.Point(193, 217);
-            this.txt_numHours.Name = "txt_numHours";
-            this.txt_numHours.Size = new System.Drawing.Size(100, 20);
-            this.txt_numHours.TabIndex = 10;
-            this.txt_numHours.Text = "0";
-            this.txt_numHours.TextChanged += new System.EventHandler(this.txtNumHours_TextChanged);
-            // 
-            // lblMessage
-            // 
-            this.lblMessage.AutoSize = true;
-            this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lblMessage.Location = new System.Drawing.Point(26, 240);
-            this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(12, 17);
-            this.lblMessage.TabIndex = 11;
-            this.lblMessage.Text = " ";
-            // 
-            // btn_change
-            // 
-            this.btn_change.Location = new System.Drawing.Point(309, 217);
-            this.btn_change.Name = "btn_change";
-            this.btn_change.Size = new System.Drawing.Size(108, 49);
-            this.btn_change.TabIndex = 12;
-            this.btn_change.Text = "change";
-            this.btn_change.UseVisualStyleBackColor = true;
-            this.btn_change.Click += new System.EventHandler(this.btn_change_Click);
+            this.dgv_workerHours.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_workerHours_RowHeaderMouseClick);
             // 
             // label5
             // 
@@ -211,36 +189,12 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "choose project:";
             // 
-            // lbl_job
-            // 
-            this.lbl_job.AutoSize = true;
-            this.lbl_job.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lbl_job.Location = new System.Drawing.Point(132, 78);
-            this.lbl_job.Name = "lbl_job";
-            this.lbl_job.Size = new System.Drawing.Size(12, 17);
-            this.lbl_job.TabIndex = 3;
-            this.lbl_job.Text = " ";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label9.Location = new System.Drawing.Point(14, 77);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(31, 17);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "job:";
-            // 
             // TeamLeaderWorkers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.btn_change);
-            this.Controls.Add(this.lblMessage);
-            this.Controls.Add(this.txt_numHours);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dgv_workerHours);
             this.Controls.Add(this.panel1);
@@ -266,10 +220,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgv_workerHours;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txt_numHours;
-        private System.Windows.Forms.Label lblMessage;
-        private System.Windows.Forms.Button btn_change;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lbl_job;
         private System.Windows.Forms.Label label9;

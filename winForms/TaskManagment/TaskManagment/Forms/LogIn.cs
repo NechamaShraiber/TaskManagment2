@@ -38,7 +38,7 @@ namespace TaskManagment
                     OpenCurrectPage();
                 }
             }
-           }
+        }  
             catch { }
         }
 
@@ -53,27 +53,21 @@ namespace TaskManagment
             btnChange.Enabled = Global.checkVaidationLength(6, 10, txtNewPassword) &&
                 Global.checkVaidationLength(6, 10, txtConfirmPassword) &&
              btn_logIn.Enabled;
-           
-
             if (txtConfirmPassword.Text != txtNewPassword.Text)
             {
                 errorProvider1.SetError(txtConfirmPassword, "confirm password must be same new password");
                 btnChange.Enabled = false;
             }
-
         }
 
         #endregion
         private void btn_logIn_Click(object sender, EventArgs e)
         {
-
-           
             try
             {
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(Global.path + "login");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
-
                 using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
                     string json = "{\"userName\":\"" + txt_userName.Text + "\"," +
@@ -82,9 +76,6 @@ namespace TaskManagment
                     streamWriter.Flush();
                     streamWriter.Close();
                 }
-
-
-
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 try
                 {
@@ -92,13 +83,8 @@ namespace TaskManagment
                     {
                         var result = streamReader.ReadToEnd();
                         Global.CurrentWorker = JsonConvert.DeserializeObject<Worker>(result);
-                        new XDocument(
-    new XElement("root",
-        new XElement("CurrentWorker", Global.CurrentWorker.Id)
-    )
-)
-.Save("user.xml");
-                        //  new XDocument(new XElement("CurrentWorker",Global.CurrentWorker.Id)).Save("user.xml");
+                        new XDocument(new XElement("root",new XElement
+                            ("CurrentWorker", Global.CurrentWorker.Id))).Save("user.xml");
                         OpenCurrectPage();
                     }
                 }
