@@ -30,9 +30,9 @@
           </div> 
         </div>
       </div>
-
-      <div class="dates" *ngIf="managerService.isEdit=='Add'">
-      <div>
+<!-- 
+      <div class="dates"> -->
+      <div  *ngIf="managerService.isEdit=='Add'">
           <select formControlName="JobId" (change)="manag()" [value]="job">
                 <option></option>  
               <option *ngFor="let job1 of jobList">
@@ -56,7 +56,7 @@
           <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['ManagerId'].errors)" class="myAlert">{{err}}</p>
         </div> 
       </div>
-    </div>
+    <!-- </div> -->
       <button type="submit" class="button col-md-offset-2 col-md-8 submit" [disabled]="addWorkerGroup.invalid&&managerService.isEdit=='Add'">{{managerService.isEdit}}</button>
       <button type="reset" class="button col-md-offset-2 col-md-8 reset">reset</button>
 <div class="aLink"><a href="taskManagers/home">Back to homePage</a></div>
