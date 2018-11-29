@@ -2155,7 +2155,6 @@ l.com","ManagerId":21}]* Connection #0 to host localhost left intact
 ![picture](step6.png)  
 ![picture](step7.png) 
 ### Worker page
-![picture](step11.png) 
 ![picture](step12.png) 
 ![picture](step10.png) 
 ![picture](step13.png)

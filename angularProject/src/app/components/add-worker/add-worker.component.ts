@@ -41,15 +41,15 @@ export class AddWorkerComponent implements OnInit {
         this.jobList = res;
         this.job = this.jobList.find(p => p.Id == this.managerService.workerToUpdate["JobId"]).Name;
         this.idJob = this.jobList.find(p => p.Id == this.managerService.workerToUpdate["JobId"]).Id;
-        this.managerService.getAllManagers().subscribe(res => {
-          this.managerList= [];
-           res.forEach(p => {
-               this.managerList.push(p);
-           });
+         this.managerService.getAllManagers().subscribe(res => {
+           this.managerList= [];
+            res.forEach(p => {
+                this.managerList.push(p);
+            });
            //for edit
-           this.manager = this.managerList.find(p=>p.Id== this.managerService.workerToUpdate["ManagerId"]).Name;
-           this.idManager = this.managerList.find(p=>p.Id== this.managerService.workerToUpdate["ManagerId"]).Id;
-         });
+          // this.manager = this.managerList.find(p=>p.Id== this.managerService.workerToUpdate["ManagerId"]).Name;
+           //this.idManager = this.managerList.find(p=>p.Id== this.managerService.workerToUpdate["ManagerId"]).Id;
+          });
       });
   }
 
