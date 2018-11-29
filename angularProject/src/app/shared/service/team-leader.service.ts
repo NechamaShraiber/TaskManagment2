@@ -7,6 +7,7 @@ import { GlobalService } from './global.service';
   providedIn: 'root'
 })
 export class TeamLeaderService {
+  
 currentProject:Project;
 currentWorker:Worker;
   constructor(private http: HttpClient) { }
@@ -31,5 +32,9 @@ currentWorker:Worker;
       "numHours":numHours,
       "projectWorkerId":id
     });
+  }
+  getRemainingHours(projectId: number): any {
+    return this.http.get(GlobalService.path+"getRemainingHours/"+projectId+"/"+this.currentWorker.JobId);
+    
   }
 }

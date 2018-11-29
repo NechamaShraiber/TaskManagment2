@@ -101,10 +101,17 @@
     * Get - get all the hours that he worked
 ***
 ## WinForms + Angular
+### Home page
+![picture](step2.png)
+![picture](step2.1.png)   
 ### Manager page
-![picture](step2.png)   
 ![picture](step3.png)   
-![picture](step4.png)  
+![picture](step4.png) 
+![picture](step4.1.png)  
+![picture](step4.2.png)  
+![picture](step4.3.png)  
+![picture](step4.4.png)  
+![picture](step4.5.png)  
 ### Team-leader page
 ![picture](step5.png)   
 ![picture](step6.png)  
@@ -113,5 +120,94 @@
 ![picture](step11.png) 
 ![picture](step12.png) 
 ![picture](step10.png) 
-![picture](step13.png) 
+![picture](step13.png)
+
+# Test api with `curl`
+
+### Get Request
+```
+
+```
+
+### Post Request (not valid data)
+```
+curl -v -X POST -H "Content-type: application/json" -d "{\"UserName\":\"DDD\", \"Password\":\"444444\"}"  http://localhost:59628/api/login
+```
+```
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying ::1...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 59628 (#0)
+> POST /api/login HTTP/1.1
+> Host: localhost:59628
+> User-Agent: curl/7.61.0
+> Accept: */*
+> Content-type: application/json
+> Content-Length: 39
+>
+* upload completely sent off: 39 out of 39 bytes
+< HTTP/1.1 400 Bad Request
+< Cache-Control: no-cache
+< Pragma: no-cache
+< Content-Type: application/json; charset=utf-8
+< Expires: -1
+< Server: Microsoft-IIS/10.0
+< X-AspNet-Version: 4.0.30319
+< X-SourceFiles: =?UTF-8?B?QzpcVXNlcnNcc2VsZGF0XERvY3VtZW50c1xHaXRIdWJcVGFza01hb
+mFnbWVudDJcVGFza01hbmFnbWVudFxVSUxcYXBpXGxvZ2lu?=
+< X-Powered-By: ASP.NET
+< Date: Wed, 28 Nov 2018 09:50:14 GMT
+< Content-Length: 16
+<
+"Can not log in"* Connection #0 to host localhost left intact
+```
+```
+curl -v -X POST -H "Content-type: application/json" -d "{\"Name\":\"tryProject\", \"Customer\":\"nnn\",\"TeamLeaderId\":\"11\" , \"DevelopHours\":\"300\",\"QAHours\":\"250\", \"UiUxHours\":\"100\",\"StartDate\":\"2018-02-02\",\"EndDate\":\"2018-07-07\"}"  http://localhost:59628/api/addProject
+```
+```
+
+```
+
+
+
+
+
+
+
+
+### Post Request (valid data)
+```
+curl-7.61.0-win64-mingw\bin>curl -v -X POST -H "Content-type: application/json" -d "{\"UserName\":\"mm\", \"Password\":\"6773ea887f0e3f1c34b01936aaf9687b16a04c6f9e65e4afbfce7bb7f76b0857\"}"  http://localhost:59628/api/login
+```
+```
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying ::1...
+* TCP_NODELAY set
+* Connected to localhost (::1) port 59628 (#0)
+> POST /api/login HTTP/1.1
+> Host: localhost:59628
+> User-Agent: curl/7.61.0
+> Accept: */*
+> Content-type: application/json
+> Content-Length: 96
+>
+* upload completely sent off: 96 out of 96 bytes
+< HTTP/1.1 200 OK
+< Cache-Control: no-cache
+< Pragma: no-cache
+< Content-Type: application/json; charset=utf-8
+< Expires: -1
+< Server: Microsoft-IIS/10.0
+< X-AspNet-Version: 4.0.30319
+< X-SourceFiles: =?UTF-8?B?QzpcVXNlcnNcc2VsZGF0XERvY3VtZW50c1xHaXRIdWJcVGFza01hb
+mFnbWVudDJcVGFza01hbmFnbWVudFxVSUxcYXBpXGxvZ2lu?=
+< X-Powered-By: ASP.NET
+< Date: Wed, 28 Nov 2018 09:55:38 GMT
+< Content-Length: 108
+<
+{"Id":1,"Name":"manager","UserName":"mm","Password":"","JobId":1,"EMail":"manag@
+gmail.com","ManagerId":null}* Connection #0 to host localhost left intact
+```
+
+
 

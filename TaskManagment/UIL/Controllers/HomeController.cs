@@ -14,7 +14,7 @@ namespace UIL.Controllers
     {
         [EnableCors("*", "*", "*")]
         // POST api/<controller>
-        //curl -v -X POST -H "Content-type: application/json" -d "{\"UserName\":\"DDD\", \"Password\":\"444444\"}"  http://localhost:59628/api/login
+        //curl -v -X POST -H "Content-type: application/json" -d "{\"UserName\":\"mm\", \"Password\":\"mmm123\"}"  http://localhost:59628/api/login
         [HttpPost]
         [Route("api/login")]
         public HttpResponseMessage Login([FromBody]Worker worker)

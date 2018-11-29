@@ -15,19 +15,21 @@ export interface ConfirmModel {
 export class WorkerDeatailsComponent extends DialogComponent<ConfirmModel, boolean> implements ConfirmModel, OnInit {
   title: string;
   message: string;
-  private projectsHours: any[];
-  private worker: Worker;
-  private currentWorker: Worker;
-  private numHours: number = 0;
-  private projectId: number;
+   projectsHours: any[];
+  // worker: Worker;
+   currentWorker: Worker;
+   numHours: number = 0;
+   projectId: number;
+  RemainingHours:number;
+max:number;
   constructor(dialogService: DialogService, private route: ActivatedRoute, private teamLeaderService: TeamLeaderService) {
     super(dialogService);
   }
   ngOnInit() {
     this.currentWorker = JSON.parse(localStorage.getItem('currentUser'));
-    this.route.queryParams.subscribe(params => {
-      this.worker = JSON.parse(params["worker"]);
-    });
+    // this.route.queryParams.subscribe(params => {
+    //   this.worker = JSON.parse(params["worker"]);
+    // });
 
     this.teamLeaderService.getProjectsHours(this.currentWorker.Id, this.teamLeaderService.currentWorker["Id"]).subscribe(
       res => {
@@ -36,7 +38,7 @@ export class WorkerDeatailsComponent extends DialogComponent<ConfirmModel, boole
   }
 
   changeHours(){
-    if(this.numHours!=this.projectsHours.find(p=>p.Id==this.projectId).AllocatedHours)
+    if(this.numHours!=this.projectsHours.find(p=>p.Id==this.projectId).AllocatedHours&&this.numHours<=this.max)
      this.teamLeaderService.setAlloactedHours(this.numHours,this.projectId).subscribe(
       res => {
        this.projectsHours.find(p=>p.Id==this.projectId).AllocatedHours=this.numHours;
@@ -49,6 +51,13 @@ export class WorkerDeatailsComponent extends DialogComponent<ConfirmModel, boole
   setAllocatedHours(id: number) {
     this.projectId = id;
     this.numHours = this.projectsHours.find(p => p.Id == id).AllocatedHours;
+    this.teamLeaderService.getRemainingHours(id).subscribe(
+      res=>{
+this.RemainingHours=res;
+this.max=this.RemainingHours+this.numHours;
+      }
+    )
+    
   }
   confirm() {
     this.result = true;
