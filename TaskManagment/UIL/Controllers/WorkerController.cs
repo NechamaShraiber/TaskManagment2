@@ -17,7 +17,7 @@ namespace UIL.Controllers
         [Route("api/updateStartHour")]
         public HttpResponseMessage UpdateStartHour([FromBody]JObject data)
         {
-            //curl -v -X PUT -H "Content-type: application/json" -d "{\"Id\":\"7\",\"hour\":\"8\"}"  http://localhost:59628/api/updateHours
+            //curl -v -X POST -H "Content-type: application/json" -d "{\"Id\":\"7\",\"hour\":\"8\"}"  http://localhost:59628/api/updateStartHour
             if (ModelState.IsValid)
             {
                 bool isFirst = (bool)data["isFirst"];
@@ -37,7 +37,7 @@ namespace UIL.Controllers
         [Route("api/SendMsg")]
         public HttpResponseMessage SendMsg([FromBody] JObject data)
         {
-            //curl -v -X POST -H "Content-type: application/json" -d "{\"email\":\"malky8895@gmail.com\"}"  http://localhost:59628/api/sendreq
+            //curl -v -X POST -H "Content-type: application/json" -d "{\"sub\":\"malky8895\",\"body\":\"ddd\",\"id\":\"22\"}"  http://localhost:59628/api/SendMsg
             if (ModelState.IsValid)
             {
                 return (WorkerLogic.SendMsg((string)data["sub"], (string)data["body"],(int)data["id"])) ?
