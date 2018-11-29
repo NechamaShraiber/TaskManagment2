@@ -46,9 +46,6 @@ export class AddWorkerComponent implements OnInit {
             res.forEach(p => {
                 this.managerList.push(p);
             });
-           //for edit
-          // this.manager = this.managerList.find(p=>p.Id== this.managerService.workerToUpdate["ManagerId"]).Name;
-           //this.idManager = this.managerList.find(p=>p.Id== this.managerService.workerToUpdate["ManagerId"]).Id;
           });
       });
   }
@@ -74,7 +71,6 @@ export class AddWorkerComponent implements OnInit {
     if (this.managerService.isEdit == "Add") {
       //Saves the id of manager and job
     this.addWorkerGroup.value["ManagerId"]?this.addWorkerGroup.value["ManagerId"] =this.managerList.find(p=>p.Name==this.addWorkerGroup.value["ManagerId"]).Id:this.addWorkerGroup.value["ManagerId"]=this.managerList[0].Id;
-    // this.addWorkerGroup.value["ManagerId"] = this.idManager;
     this.addWorkerGroup.value["JobId"]?this.idJob =this.jobList.find(p=>p.Name==this.addWorkerGroup.value["JobId"]).Id:this.idJob=this.jobList[0].Id;
     this.addWorkerGroup.value["JobId"] = this.idJob;
       this.managerService.addWorker(this.addWorkerGroup.value)

@@ -78,21 +78,7 @@
     .circle:hover {
       background: #7667c7;
     }
-    /* .circle:active {
-      background: #4394CA;
-    }
-     */
-    /* .start {
-      height: 0;
-      width: 0;
-      border-left: 11px solid transparent;
-      border-right: 11px solid transparent;
-      border-top: 15px solid #FFF;
-      margin: 7px 2px;
-      position: absolute;
-      -webkit-transform: rotate(-90deg);
-      transform: rotate(-90deg);
-    } */
+  
     .deatails{
       width: 13px;
       height: 19px;
@@ -110,6 +96,10 @@
     color: white;
     margin-top: -2px;
    }
+   .status{
+     color: red;
+   }
+
   
     
   
