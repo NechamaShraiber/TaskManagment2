@@ -1,4 +1,4 @@
-import { Component,  Input } from '@angular/core';
+import { Component,  Input, OnInit } from '@angular/core';
 import { Project } from '../../shared/models/project';
 import { DialogService } from '../../../../node_modules/ng2-bootstrap-modal';
 import { Router, NavigationExtras } from '../../../../node_modules/@angular/router';
@@ -10,9 +10,15 @@ import { ProjectDeatailsComponent } from '../project-deatails/project-deatails.c
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.css']
 })
-export class ProjectComponent  {
+export class ProjectComponent implements OnInit  {
+  ngOnInit() {
+    if(new Date(this.project["EndDate"])<new Date())
+     this.status=true;
+     else this.status=false;
+  }
   @Input() project:Project;
-  constructor(private teamLeaderService: TeamLeaderService, private router: Router, private dialogService:DialogService) { }
+  status:boolean;
+  constructor(private teamLeaderService: TeamLeaderService, private router: Router, private dialogService:DialogService) {}
 
   openProjectDeatails() {
     let navigationExtras: NavigationExtras = {
