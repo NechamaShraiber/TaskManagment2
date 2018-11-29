@@ -1,8 +1,7 @@
-<div [ngClass]="status? 'blog-card status':'blog-card'">
+<div [ngClass]="status=='finished'? 'blog-card status':'blog-card'">
     <div class="description">
         <div class="wrap"  > 
             <h1>{{project.Name}}</h1>
-            
               <div  class="circle" title="more deatails"  (click)="openProjectDeatails()"  >
                <div><h2>+</h2></div> 
               </div>
@@ -21,9 +20,7 @@
  <br>
 <label>start date:</label><label>{{project.StartDate| date: 'dd/MM/yyyy '}}</label>
 <br>
-<div *ngIf="status">
-<label>status:</label><label>finished</label>
-</div>
+<label>status:</label><label>{{status}}</label>
     </div>
 </div>
 

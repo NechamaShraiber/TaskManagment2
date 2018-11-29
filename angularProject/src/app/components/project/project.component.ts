@@ -13,11 +13,11 @@ import { ProjectDeatailsComponent } from '../project-deatails/project-deatails.c
 export class ProjectComponent implements OnInit  {
   ngOnInit() {
     if(new Date(this.project["EndDate"])<new Date())
-     this.status=true;
-     else this.status=false;
+     this.status="finished";
+     else this.status="active";
   }
   @Input() project:Project;
-  status:boolean;
+  status:string;
   constructor(private teamLeaderService: TeamLeaderService, private router: Router, private dialogService:DialogService) {}
 
   openProjectDeatails() {
