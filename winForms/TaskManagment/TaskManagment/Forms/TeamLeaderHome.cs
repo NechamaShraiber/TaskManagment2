@@ -13,6 +13,8 @@ namespace TaskManagment.Forms
     {
         List<Project> projectList;
         List<Worker> workerList;
+        private string status="Status";
+
         public TeamLeaderHome()
         {
             InitializeComponent();
@@ -71,7 +73,6 @@ namespace TaskManagment.Forms
                 dgv_Deatails.DataSource = projectList;
                 dgv_Deatails.Columns["Id"].Visible = false;
                 dgv_Deatails.Columns["TeamLeaderId"].Visible = false;
-                dgv_Deatails.Rows.Add(r);‏
                 dgv_Deatails.RowHeaderMouseClick -= dgv_Deatails_RowHeaderMouseClick;
                 dgv_Deatails.RowHeaderMouseClick -= dgv_projects_RowHeaderMouseClick;
                 dgv_Deatails.RowHeaderMouseClick += dgv_projects_RowHeaderMouseClick;
