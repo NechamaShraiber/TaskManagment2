@@ -1,0 +1,65 @@
+<div class="login">
+    <form class="login-container" [formGroup]="addWorkerGroup" (ngSubmit)="onSubmit()">
+      <div class="details">
+      <div class="group">
+        <input id="Name" class="inputMaterial" formControlName="Name">
+        <label> Name</label>
+         <div *ngIf="addWorkerGroup.controls['Name']&&addWorkerGroup.controls['Name'].errors&&addWorkerGroup.controls['Name'].touched">
+          <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['Name'].errors)" class="myAlert">{{err}}</p>
+        </div> 
+      </div>
+      <div class="group">
+        <input id="UserName" class="inputMaterial" formControlName="UserName">
+        <label>User Name</label>
+         <div *ngIf="addWorkerGroup.controls['UserName']&&addWorkerGroup.controls['UserName'].errors&&addWorkerGroup.controls['UserName'].touched">
+          <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['UserName'].errors)" class="myAlert">{{err}}</p>
+        </div>
+      </div>
+      <div *ngIf="managerService.isEdit=='Add'" class="group">
+          <input id="Password" type="password" class="inputMaterial" formControlName="Password">
+          <label>Password </label>
+           <div *ngIf="addWorkerGroup.controls['Password']&&addWorkerGroup.controls['Password'].errors&&addWorkerGroup.controls['Password'].touched">
+            <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['Password'].errors)" class="myAlert">{{err}}</p>
+          </div>
+        </div>
+        <div class="group">
+          <input type="email" id="EMail" class="inputMaterial" formControlName="EMail" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+          <label >E-mail</label>
+           <div *ngIf="addWorkerGroup.controls['EMail']&&addWorkerGroup.controls['EMail'].errors&&addWorkerGroup.controls['EMail'].touched">
+            <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['EMail'].errors)" class="myAlert">The e-mail adress is not in a correct syntax</p>
+          </div> 
+        </div>
+      </div>
+
+      <div class="dates">
+      <div  *ngIf="managerService.isEdit=='Add'">
+          <select formControlName="JobId" (change)="manag()" [value]="job">
+                <option></option>  
+              <option *ngFor="let job1 of jobList">
+                {{job1["Name"]}}
+              </option>
+            </select>
+        <label>choose job type </label>
+         <div *ngIf="addWorkerGroup.controls['JobId']&&addWorkerGroup.controls['JobId'].errors&&addWorkerGroup.controls['JobId'].touched">
+          <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['JobId'].errors)" class="myAlert">{{err}}</p>
+        </div> 
+      </div>
+      <div class="group">
+          <select formControlName="ManagerId" [value]="manager">
+              <option *ngFor="let manager1 of managerList">
+                {{manager1["Name"]}}
+              </option>
+            </select>
+        <label> choose manager  </label>
+         <div *ngIf="addWorkerGroup.controls['ManagerId']&&addWorkerGroup.controls['ManagerId'].errors&&addWorkerGroup.controls['ManagerId'].touched">
+          <p *ngFor="let err of objectHolder.values(addWorkerGroup.controls['ManagerId'].errors)" class="myAlert">{{err}}</p>
+        </div> 
+      </div>
+     </div> 
+      <button type="submit" class="button col-md-offset-2 col-md-8 submit" [disabled]="addWorkerGroup.invalid&&managerService.isEdit=='Add'">{{managerService.isEdit}}</button>
+      <button type="reset" class="button col-md-offset-2 col-md-8 reset">reset</button>
+<div class="aLink"><a href="taskManagers/home">Back to homePage</a></div>
+    </form>
+  </div>
+  
+  

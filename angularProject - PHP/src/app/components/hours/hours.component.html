@@ -1,0 +1,28 @@
+<div class="blog-card">
+  <div class="description">
+     <div class="wrap"  > 
+      <h1>{{hour.Name}}</h1>
+        <div *ngIf="isProject" class="circle" title="start the task"  (click)="updateHours()"  [ngClass]="isStart ? 'startColor' : 'stopColor'">
+         <div  [ngClass]="isStart ? 'start' : 'stop'"></div> 
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div [ngClass]="t ? 'col-md-6' : ''">
+      <label>worked hours:</label>
+      <label>{{hour.Hours}}</label>
+      <br>
+      <label>allocated hours:</label>
+      <label>{{hour.AllocatedHours}}</label>
+      <br>
+    </div>
+      <div *ngIf="t" class="col-md-6 statrWork">
+          <label>start:</label>
+          <label> {{startTask | date:'hh:mm:ss a '}}</label>
+          <br>
+          <label>you work:</label>
+          <label> {{ t | date:'hh:mm:ss '}}</label>
+        </div>
+      </div>
+    </div> 
+</div>

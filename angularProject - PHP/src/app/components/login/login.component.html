@@ -1,0 +1,24 @@
+<div class="login">
+  <div class="login-triangle"></div>
+  <h2 class="login-header">Log in</h2>
+  <form class="login-container" [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()">
+    <p>
+        <input formControlName="userName" id="userName" name="user" placeholder="UserName" (keyup)="isExistUser = true">
+        <label for="username" [ngClass]="{'label':true,'full':userName.value!=''}"></label>
+    </p>
+     <div *ngIf="userName.errors&& userName.touched">
+          <p *ngFor="let err of objectHolder.values(userName.errors)" class="myAlert">{{err}}</p>
+        </div>
+    <p> 
+      <input type="password" name="pass" placeholder="Password" formControlName="password" id="password" (keyup)="isExistUser = true">
+      <label for="password" [ngClass]="{'label':true,'full':password.value!=''}"></label>
+      
+    </p>
+    <div *ngIf="password.errors&& password.touched">
+        <p *ngFor="let err of objectHolder.values(password.errors)" class="myAlert">{{err}}</p>
+      </div>
+     <p *ngIf="!isExistUser" class="myAlert">user name or password is not correct</p>
+    <p><input type="submit" value="Log in" [disabled]="loginFormGroup.invalid"></p>
+    <a (click)="changePassword()">change password</a>
+  </form>
+</div>

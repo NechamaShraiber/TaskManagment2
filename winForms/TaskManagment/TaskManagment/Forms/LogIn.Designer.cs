@@ -50,7 +50,7 @@
             // 
             // txt_userName
             // 
-            this.txt_userName.Location = new System.Drawing.Point(510, 78);
+            this.txt_userName.Location = new System.Drawing.Point(299, 69);
             this.txt_userName.Name = "txt_userName";
             this.txt_userName.Size = new System.Drawing.Size(100, 20);
             this.txt_userName.TabIndex = 0;
@@ -59,7 +59,7 @@
             // 
             // txt_password
             // 
-            this.txt_password.Location = new System.Drawing.Point(510, 112);
+            this.txt_password.Location = new System.Drawing.Point(299, 103);
             this.txt_password.Name = "txt_password";
             this.txt_password.Size = new System.Drawing.Size(100, 20);
             this.txt_password.TabIndex = 1;
@@ -69,7 +69,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(642, 78);
+            this.label1.Location = new System.Drawing.Point(431, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 2;
@@ -78,7 +78,7 @@
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(642, 119);
+            this.lblPassword.Location = new System.Drawing.Point(431, 110);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(53, 13);
             this.lblPassword.TabIndex = 3;
@@ -86,7 +86,7 @@
             // 
             // btn_logIn
             // 
-            this.btn_logIn.Location = new System.Drawing.Point(121, 144);
+            this.btn_logIn.Location = new System.Drawing.Point(195, 147);
             this.btn_logIn.Name = "btn_logIn";
             this.btn_logIn.Size = new System.Drawing.Size(75, 23);
             this.btn_logIn.TabIndex = 4;
@@ -105,7 +105,7 @@
             // lbl_bad_request
             // 
             this.lbl_bad_request.AutoSize = true;
-            this.lbl_bad_request.Location = new System.Drawing.Point(510, 195);
+            this.lbl_bad_request.Location = new System.Drawing.Point(299, 186);
             this.lbl_bad_request.Name = "lbl_bad_request";
             this.lbl_bad_request.Size = new System.Drawing.Size(0, 13);
             this.lbl_bad_request.TabIndex = 5;
@@ -113,7 +113,7 @@
             // lblChangePassword
             // 
             this.lblChangePassword.AutoSize = true;
-            this.lblChangePassword.Location = new System.Drawing.Point(118, 128);
+            this.lblChangePassword.Location = new System.Drawing.Point(192, 131);
             this.lblChangePassword.Name = "lblChangePassword";
             this.lblChangePassword.Size = new System.Drawing.Size(91, 13);
             this.lblChangePassword.TabIndex = 6;
@@ -122,7 +122,7 @@
             // 
             // txtNewPassword
             // 
-            this.txtNewPassword.Location = new System.Drawing.Point(510, 144);
+            this.txtNewPassword.Location = new System.Drawing.Point(299, 135);
             this.txtNewPassword.Name = "txtNewPassword";
             this.txtNewPassword.Size = new System.Drawing.Size(100, 20);
             this.txtNewPassword.TabIndex = 1;
@@ -133,7 +133,7 @@
             // lblNewPassword
             // 
             this.lblNewPassword.AutoSize = true;
-            this.lblNewPassword.Location = new System.Drawing.Point(642, 150);
+            this.lblNewPassword.Location = new System.Drawing.Point(431, 141);
             this.lblNewPassword.Name = "lblNewPassword";
             this.lblNewPassword.Size = new System.Drawing.Size(75, 13);
             this.lblNewPassword.TabIndex = 3;
@@ -142,7 +142,7 @@
             // 
             // txtConfirmPassword
             // 
-            this.txtConfirmPassword.Location = new System.Drawing.Point(510, 174);
+            this.txtConfirmPassword.Location = new System.Drawing.Point(299, 165);
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.Size = new System.Drawing.Size(100, 20);
             this.txtConfirmPassword.TabIndex = 1;
@@ -153,7 +153,7 @@
             // lblConfirmPassword
             // 
             this.lblConfirmPassword.AutoSize = true;
-            this.lblConfirmPassword.Location = new System.Drawing.Point(642, 181);
+            this.lblConfirmPassword.Location = new System.Drawing.Point(431, 172);
             this.lblConfirmPassword.Name = "lblConfirmPassword";
             this.lblConfirmPassword.Size = new System.Drawing.Size(89, 13);
             this.lblConfirmPassword.TabIndex = 3;
@@ -163,7 +163,7 @@
             // btnChange
             // 
             this.btnChange.Enabled = false;
-            this.btnChange.Location = new System.Drawing.Point(513, 218);
+            this.btnChange.Location = new System.Drawing.Point(302, 209);
             this.btnChange.Name = "btnChange";
             this.btnChange.Size = new System.Drawing.Size(75, 23);
             this.btnChange.TabIndex = 4;
@@ -175,7 +175,7 @@
             // lbl_closeChangePasswod
             // 
             this.lbl_closeChangePasswod.AutoSize = true;
-            this.lbl_closeChangePasswod.Location = new System.Drawing.Point(451, 50);
+            this.lbl_closeChangePasswod.Location = new System.Drawing.Point(240, 41);
             this.lbl_closeChangePasswod.Name = "lbl_closeChangePasswod";
             this.lbl_closeChangePasswod.Size = new System.Drawing.Size(12, 13);
             this.lbl_closeChangePasswod.TabIndex = 7;
@@ -187,7 +187,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(614, 331);
             this.Controls.Add(this.lbl_closeChangePasswod);
             this.Controls.Add(this.lblChangePassword);
             this.Controls.Add(this.lbl_bad_request);

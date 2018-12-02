@@ -1,0 +1,35 @@
+
+  .start {
+    height: 0;
+    width: 0;
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-top: 15px solid #FFF;
+    margin: 7px 2px;
+    position: absolute;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+  }
+  .stop{
+    width: 13px;
+    height: 19px;
+    margin: 5px 8px;
+    position: absolute;
+    border-left: 4px solid white;
+    border-right: 4px solid white;
+  }
+ 
+ .startColor{
+
+background-color:green;
+border-color: green;
+ }
+ .stopColor{
+    background-color:red;
+    border-color: red;
+ }
+
+        
+.statrWork{
+  border-left: 1px solid black;
+}
