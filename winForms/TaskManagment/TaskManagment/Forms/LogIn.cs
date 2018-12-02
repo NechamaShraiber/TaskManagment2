@@ -143,6 +143,7 @@ namespace TaskManagment
             btn_logIn.Visible = !b;
             btnChange.Visible = b;
             lbl_closeChangePasswod.Visible = b;
+            lblChangePassword.Visible = !b;
         }
 
         /// <summary>

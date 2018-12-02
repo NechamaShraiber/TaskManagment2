@@ -1,0 +1,25 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+       <div class="modal-header">
+          <h4>{{title || 'Confirm'}}</h4>
+         <button type="button" class="close" (click)="close()" >&times;</button>
+       </div>
+       <div class="modal-body">
+         <p>{{message || 'Are you sure?'}}</p>
+         <div class="group">
+            <select (change)="onChange($event.target.value)">
+                <option disabled hidden [value]="selectUndefinedOptionValue">-- select --</option>
+                <option *ngFor="let worker of workerList">
+                  {{worker["UserName"]}}
+                </option>
+              </select>
+          <span class="highlight"></span>
+          <span class="bar"></span> 
+        </div>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-primary btn_sign" (click)="confirm()">OK</button>
+         <button type="button" class="btn btn-default" (click)="close()" >Cancel</button>
+       </div>
+     </div>
+  </div>

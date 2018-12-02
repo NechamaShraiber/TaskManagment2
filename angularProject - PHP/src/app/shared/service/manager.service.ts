@@ -14,7 +14,7 @@ export class ManagerService {
   isEdit: string = "Add";
   str:string;
   ids:number[];
-
+  URLPHPUSERS: string = "http://localhost/TaskManagment/UIL/index.php"
 
   constructor(private http: HttpClient) {
     this.workerToUpdate = new Worker;
@@ -24,7 +24,7 @@ export class ManagerService {
     return this.http.post(GlobalService.path+"addProject/", JSON.parse(JSON.stringify(project)))
   }
   getAllManagers(): any {
-    return this.http.get(GlobalService.path+"getAllManagers");
+   return this.http.get(this.URLPHPUSERS+"?funcation=getAllManagers");
 
   }
   
@@ -33,7 +33,8 @@ export class ManagerService {
       return this.http.post(GlobalService.path+"addWorker/", JSON.parse(JSON.stringify(worker)))
 }
   getAllWorkers(): any {
-   return this.http.get(GlobalService.path+"getAllWorkers");
+     return this.http.get(this.URLPHPUSERS+"?funcation=getAllWorkers");
+
   }
   deleteWorker() {
     return this.http.delete(GlobalService.path+"deleteWorker/" + this.idWorkerToDelete)

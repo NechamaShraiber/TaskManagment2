@@ -65,11 +65,13 @@ namespace TaskManagment.Forms
             HttpResponseMessage response = client.GetAsync($"getProjectDeatails/{Global.CurrentWorker.Id}").Result;
             if (response.IsSuccessStatusCode)
             {
+                string[] r = new string[] { "1", "hh", "jj" };
                 var result = response.Content.ReadAsStringAsync().Result;
                 projectList = JsonConvert.DeserializeObject<List<Project>>(result);
                 dgv_Deatails.DataSource = projectList;
                 dgv_Deatails.Columns["Id"].Visible = false;
                 dgv_Deatails.Columns["TeamLeaderId"].Visible = false;
+                dgv_Deatails.Rows.Add(r);‏
                 dgv_Deatails.RowHeaderMouseClick -= dgv_Deatails_RowHeaderMouseClick;
                 dgv_Deatails.RowHeaderMouseClick -= dgv_projects_RowHeaderMouseClick;
                 dgv_Deatails.RowHeaderMouseClick += dgv_projects_RowHeaderMouseClick;
