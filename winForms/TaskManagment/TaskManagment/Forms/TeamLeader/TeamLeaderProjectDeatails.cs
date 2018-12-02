@@ -89,5 +89,10 @@ namespace TaskManagment.Forms
                 chart1.Series[1].Points.DataBindXY(allocatedHours.Keys, workedHours);
             }
         }
+
+        private void dgv_workersHours_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
