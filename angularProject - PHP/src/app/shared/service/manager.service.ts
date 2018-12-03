@@ -22,6 +22,8 @@ export class ManagerService {
 
   addProject(project): any {
     return this.http.post(GlobalService.path+"addProject/", JSON.parse(JSON.stringify(project)))
+    //return this.http.post(this.URLPHPUSERS,data: JSON.parse(JSON.stringify(project)));
+
   }
   getAllManagers(): any {
    return this.http.get(this.URLPHPUSERS+"?funcation=getAllManagers");

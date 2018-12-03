@@ -25,7 +25,9 @@ URLPHPUSERS: string = "http://localhost/TaskManagment/UIL/index.php"
 
 sendMsg():any {
   let data = { body: this.bodyStr, sub: this.subStr ,id:JSON.parse(localStorage.getItem('currentUser')).ManagerId};
-  return this.http.post(GlobalService.path+"sendMsg", data)
+  //return this.http.post(GlobalService.path+"sendMsg", data)
+  let funcation  ="sendMsg"; 
+  return this.http.post(this.URLPHPUSERS,funcation);
 }
 updateStartHour(time:number, id:number, isFirst:boolean):any {
   let data = { hour:time , idProjectWorker:id,isFirst:isFirst };
