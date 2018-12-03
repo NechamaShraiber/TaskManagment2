@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as CanvasJS from '../../../canvasjs.min.js';
 import { WorkerService } from '../../shared/service/worker.service.js';
+import { parse } from 'querystring';
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
@@ -18,13 +19,15 @@ export class ChartComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.projects);
     this.creatChart();
+    
   }
   creatChart() {
     for (let index = 0; index < this.projects.length; index++) {
       var r = this.projects[index].Hours;
       this.projectDeatails.push({
-        y: this.projects[index].AllocatedHours, label: this.projects[index].Name
+        y:parseFloat(this.projects[index].AllocatedHours) , label: this.projects[index].Name
       })
       var t = this.projects[index].Hours.split(":");
       this.projectDeatails2.push({

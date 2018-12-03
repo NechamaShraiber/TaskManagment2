@@ -12,14 +12,15 @@ subStr:string="";
 bodyStr:string="";
 idJob:number;
 projectStart:any=null;
-
+URLPHPUSERS: string = "http://localhost/TaskManagment/UIL/index.php"
   constructor(private http: HttpClient, private router: Router) {
     this.worker=null;
  }
 
 
  getProject(id:number):any{
-   return this.http.get(GlobalService.path+"getProject/"+id)
+ // return this.http.get(GlobalService.path+"getProject/"+id)
+  return this.http.get(this.URLPHPUSERS+"?funcation=getProject&id="+id);
  }
 
 sendMsg():any {

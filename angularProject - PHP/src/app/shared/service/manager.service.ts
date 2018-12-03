@@ -41,8 +41,8 @@ export class ManagerService {
   }
   updateWorker(worker): any {
     worker.Id = this.workerToUpdate.Id;
-    //return this.http.put(GlobalService.path+"updateWorker/")
-   return this.http.get(this.URLPHPUSERS+"?funcation=updateWorker", JSON.parse(JSON.stringify(worker)));
+    return this.http.put(GlobalService.path+"updateWorker/", JSON.parse(JSON.stringify(worker)))
+ 
 
   }
   addWorkersToProject(workers:Worker[],name):any{
@@ -56,7 +56,9 @@ export class ManagerService {
   }
  
   getPresence():any{
-     return this.http.get(GlobalService.path+"getPresence");
+   //  return this.http.get(GlobalService.path+"getPresence");
+     return this.http.get(this.URLPHPUSERS+"?funcation=getPresence");
+
   }
  static toExportFileName(excelFileName: string):string
   {

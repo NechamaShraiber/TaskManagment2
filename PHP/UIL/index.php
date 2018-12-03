@@ -12,11 +12,11 @@ switch ($funcation) {
     case "getAllManagers":
         getAllManagers();
         break;
+   
     case "updateWorker":
-            updateWorker();
+        getAllManagers();
         break;
-    
-    
+   
     ///
     case "getAllTeamLeaders":
 
